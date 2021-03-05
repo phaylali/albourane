@@ -13,9 +13,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_core/firebase_core.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy();
   await Firebase.initializeApp();
   runApp(Start());
 }
