@@ -29,7 +29,7 @@ class DocumentPage extends StatelessWidget {
             DocumentSnapshot? d = snapshot.data;
 
             if (d!.exists) {
-              //Map<String?, dynamic>? data = d.data();
+              Map<String?, dynamic>? data = d.data()!;
               return SafeArea(
                 child: Scaffold(
                   body: Center(
@@ -50,7 +50,7 @@ class DocumentPage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        '${d['name']}',
+                                        '${data['name']}',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 30,
@@ -127,7 +127,7 @@ class DocumentPage extends StatelessWidget {
                                       child: InteractiveViewer(
                                         child: Center(
                                             child: Image.network(
-                                                '${d['preview']}')),
+                                                '${data['preview']}')),
                                       ),
                                     ))
                                 : null,
@@ -140,7 +140,7 @@ class DocumentPage extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(20.0),
                               child: Center(
-                                  child: Image.network('${d['preview']}')),
+                                  child: Image.network('${data['preview']}')),
                             )),
                         SizedBox(
                           height: 10,
@@ -205,7 +205,7 @@ class DocumentPage extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    '${d['description']}',
+                                    '${data['description']}',
                                     style: TextStyle(
                                         fontSize: 25,
                                         fontWeight: FontWeight.bold),
