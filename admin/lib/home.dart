@@ -48,7 +48,7 @@ class HomePage extends GetWidget<AuthController> {
                       SizedBox(
                         height: 40,
                         width: 60,
-                        child: ElevatedButton(
+                        child: OutlinedButton(
                           child: Icon(Feather.arrow_left),
                           onPressed: () {
                             Get.back();
@@ -61,7 +61,7 @@ class HomePage extends GetWidget<AuthController> {
                       SizedBox(
                         height: 40,
                         width: 60,
-                        child: ElevatedButton(
+                        child: OutlinedButton(
                           child: Icon(Feather.home),
                           onPressed: () {
                             //showLicensePage(context: context);
@@ -89,11 +89,11 @@ class HomePage extends GetWidget<AuthController> {
                           SizedBox(
                             width: 300,
                             height: 300,
-                            child: ElevatedButton(
+                            child: OutlinedButton(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Feather.log_out),
+                                  Icon(Feather.paperclip),
                                   SizedBox(
                                     width: 20,
                                   ),
@@ -117,24 +117,22 @@ class HomePage extends GetWidget<AuthController> {
                           SizedBox(
                             width: 300,
                             height: 300,
-                            child: ElevatedButton(
+                            child: OutlinedButton(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Feather.log_out),
+                                  Icon(Feather.navigation),
                                   SizedBox(
                                     width: 20,
                                   ),
                                   Text(
-                                    'Sign Out 2',
+                                    'Boats',
                                     textScaleFactor: 1.5,
                                   )
                                 ],
                               ),
                               onPressed: () {
-                                //showLicensePage(context: context);
-                                controller.signOut();
-                                Get.toNamed('/');
+                                Get.toNamed('/Boats');
                               },
                               style: ButtonStyle(
                                   shape:
@@ -147,7 +145,7 @@ class HomePage extends GetWidget<AuthController> {
                           SizedBox(
                             width: 300,
                             height: 300,
-                            child: ElevatedButton(
+                            child: OutlinedButton(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -177,7 +175,7 @@ class HomePage extends GetWidget<AuthController> {
                           SizedBox(
                             width: 300,
                             height: 300,
-                            child: ElevatedButton(
+                            child: OutlinedButton(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

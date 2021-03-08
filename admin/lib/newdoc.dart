@@ -77,7 +77,7 @@ class NewDocument extends StatelessWidget {
                           SizedBox(
                             height: 40,
                             width: 60,
-                            child: ElevatedButton(
+                            child: OutlinedButton(
                               child: Icon(Feather.user),
                               onPressed: () {
                                 Get.toNamed('/profile');
@@ -90,7 +90,7 @@ class NewDocument extends StatelessWidget {
                           SizedBox(
                             height: 40,
                             width: 60,
-                            child: ElevatedButton(
+                            child: OutlinedButton(
                               child: Icon(Feather.shopping_cart),
                               onPressed: () {
                                 Get.toNamed('/cart');

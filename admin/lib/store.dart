@@ -53,7 +53,7 @@ class Store extends StatelessWidget {
                           SizedBox(
                             height: 40,
                             width: 60,
-                            child: ElevatedButton(
+                            child: OutlinedButton(
                               child: Icon(Feather.user),
                               onPressed: () {
                                 Get.toNamed('/profile');
@@ -66,7 +66,7 @@ class Store extends StatelessWidget {
                           SizedBox(
                             height: 40,
                             width: 60,
-                            child: ElevatedButton(
+                            child: OutlinedButton(
                               child: Icon(Feather.shopping_cart),
                               onPressed: () {
                                 Get.toNamed('/cart');
@@ -79,7 +79,7 @@ class Store extends StatelessWidget {
                           SizedBox(
                             height: 40,
                             width: 60,
-                            child: ElevatedButton(
+                            child: OutlinedButton(
                               child: Icon(Feather.filter),
                               onPressed: () {
                                 Get.defaultDialog(
@@ -157,7 +157,7 @@ class Store extends StatelessWidget {
                                               SizedBox(
                                                 width: 500,
                                                 height: 40,
-                                                child: ElevatedButton(
+                                                child: OutlinedButton(
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -223,7 +223,7 @@ class Store extends StatelessWidget {
                                 child: SizedBox(
                                   height: 120,
                                   width: 300,
-                                  child: ElevatedButton(
+                                  child: OutlinedButton(
                                     onPressed: () {
                                       final String id = pC.products[index].id;
                                       Get.toNamed(

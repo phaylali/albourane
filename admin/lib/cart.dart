@@ -51,7 +51,7 @@ class ShoppingCart extends StatelessWidget {
                         SizedBox(
                           height: 40,
                           width: 60,
-                          child: ElevatedButton(
+                          child: OutlinedButton(
                             child: Icon(Feather.arrow_left),
                             onPressed: () {
                               Get.back();

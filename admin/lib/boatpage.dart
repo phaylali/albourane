@@ -10,16 +10,14 @@ import 'package:flutter_icons/flutter_icons.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:get/get.dart';
 
-import 'package:url_launcher/url_launcher.dart';
-
-class DocumentPage extends StatelessWidget {
+class BoatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String id = Get.parameters['id']!;
     final FirebaseFirestore firestoro = FirebaseFirestore.instance;
 
     return FutureBuilder<DocumentSnapshot>(
-        future: firestoro.collection('documents').doc(id).get(),
+        future: firestoro.collection('boats').doc(id).get(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Text("Something went wrong");
@@ -59,7 +57,7 @@ class DocumentPage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        '${d.id}',
+                                        '${data['reference']}',
                                       ),
                                     ),
                                   ],
@@ -108,7 +106,7 @@ class DocumentPage extends StatelessWidget {
                                       child: InteractiveViewer(
                                         child: Center(
                                             child: Image.network(
-                                                '${data['preview']}')),
+                                                '${data['image']}')),
                                       ),
                                     ))
                                 : null,
@@ -121,7 +119,7 @@ class DocumentPage extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(20.0),
                               child: Center(
-                                  child: Image.network('${data['preview']}')),
+                                  child: Image.network('${data['image']}')),
                             )),
                         SizedBox(
                           height: 10,
@@ -154,18 +152,17 @@ class DocumentPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      'Attachment : ',
+                                      'Owner : ',
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    IconButton(
-                                      icon: Icon(Feather.file),
-                                      onPressed: () {
-                                        launch(
-                                            'http://www.africau.edu/images/default/sample.pdf');
-                                      },
-                                    )
+                                    Text(
+                                      '${data['owner']}',
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ],
                                 ),
                                 SizedBox(
@@ -174,7 +171,13 @@ class DocumentPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      'Description : ',
+                                      'Owner CIN : ',
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      '${data['ownerCIN']}',
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
@@ -184,13 +187,21 @@ class DocumentPage extends StatelessWidget {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Expanded(
-                                  child: Text(
-                                    '${data['description']}',
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Region: ',
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      '${data['region']}',
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
                                 ),
                               ],
                             )),

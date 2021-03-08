@@ -1,9 +1,13 @@
 import 'package:admin/adminsignin.dart';
 import 'package:admin/auth.dart';
+import 'package:admin/boatController.dart';
+import 'package:admin/boatpage.dart';
+import 'package:admin/boats.dart';
 import 'package:admin/docs.dart';
 import 'package:admin/documentPage.dart';
 import 'package:admin/error404.dart';
 import 'package:admin/home.dart';
+import 'package:admin/newboat.dart';
 import 'package:admin/newdoc.dart';
 import 'package:admin/profile.dart';
 import 'package:admin/themes.dart';
@@ -18,6 +22,7 @@ import 'package:url_strategy/url_strategy.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
+  Get.put(BoatsController);
   await Firebase.initializeApp();
   runApp(Start());
 }
@@ -36,14 +41,20 @@ class Start extends StatelessWidget {
                     title: 'New Document',
                     subtitle: 'something',
                   )),
+          GetPage(name: '/NewBoat', page: () => NewBoat()),
           GetPage(
               name: '/Documents',
               page: () => DocsLibrary(
-                    title: 'ALBOURANE ADMIN',
-                    subtitle: 'Control Center',
+                    title: 'Documents',
+                  )),
+          GetPage(
+              name: '/Boats',
+              page: () => BoatsLibrary(
+                    title: 'Boats',
                   )),
           GetPage(name: '/Profile', page: () => Profile()),
           GetPage(name: '/Document', page: () => DocumentPage()),
+          GetPage(name: '/Boat', page: () => BoatPage()),
         ],
         unknownRoute: GetPage(name: '/Error404', page: () => ERROR404()),
         theme: omniLightBlueTheme(),

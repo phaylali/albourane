@@ -9,9 +9,11 @@ import 'package:get/get.dart';
 
 class DocsLibrary extends StatelessWidget {
   final fC = Get.put(DocumentsController());
-  DocsLibrary({required this.title, required this.subtitle});
+  DocsLibrary({
+    required this.title,
+  });
   final String title;
-  final String subtitle;
+
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
 
   @override
@@ -21,7 +23,7 @@ class DocsLibrary extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           child: Icon(Feather.file_plus),
           onPressed: () {
-            Get.toNamed("/NewDocument");
+            Get.toNamed("/NewBoat");
           },
         ),
         body: Center(
@@ -45,12 +47,6 @@ class DocsLibrary extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                subtitle,
-                              ),
-                            ),
                           ],
                         ),
                       ),
@@ -60,7 +56,7 @@ class DocsLibrary extends StatelessWidget {
                           SizedBox(
                             height: 40,
                             width: 60,
-                            child: ElevatedButton(
+                            child: OutlinedButton(
                               child: Icon(Feather.user),
                               onPressed: () {
                                 Get.toNamed('/profile');
@@ -73,7 +69,7 @@ class DocsLibrary extends StatelessWidget {
                           SizedBox(
                             height: 40,
                             width: 60,
-                            child: ElevatedButton(
+                            child: OutlinedButton(
                               child: Icon(Feather.shopping_cart),
                               onPressed: () {
                                 Get.toNamed('/cart');
@@ -109,7 +105,7 @@ class DocsLibrary extends StatelessWidget {
                                     itemBuilder: (context, index) {
                                       return SizedBox(
                                         height: 200,
-                                        child: ElevatedButton(
+                                        child: OutlinedButton(
                                           onPressed: () {
                                             final String id = d.docs[index].id;
                                             Get.toNamed(

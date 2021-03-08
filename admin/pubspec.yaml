@@ -15,6 +15,7 @@ dependencies:
   flutter_icons:
   url_launcher:
   url_strategy:
+  search_choices: 
 
   # Firebase Packages
   firebase_auth: 1.0.0

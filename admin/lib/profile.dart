@@ -48,7 +48,7 @@ class Profile extends GetWidget<AuthController> {
                       SizedBox(
                         height: 40,
                         width: 60,
-                        child: ElevatedButton(
+                        child: OutlinedButton(
                           child: Icon(Feather.arrow_left),
                           onPressed: () {
                             Get.back();
@@ -61,7 +61,7 @@ class Profile extends GetWidget<AuthController> {
                       SizedBox(
                         height: 40,
                         width: 60,
-                        child: ElevatedButton(
+                        child: OutlinedButton(
                           child: Icon(Feather.home),
                           onPressed: () {
                             //showLicensePage(context: context);
@@ -117,7 +117,7 @@ class Profile extends GetWidget<AuthController> {
                           SizedBox(
                             width: 600,
                             height: 50,
-                            child: ElevatedButton(
+                            child: OutlinedButton(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

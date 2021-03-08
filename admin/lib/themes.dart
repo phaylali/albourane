@@ -17,6 +17,12 @@ ThemeData omniLightRedTheme() => ThemeData.light().copyWith(
             foregroundColor:
                 MaterialStateColor.resolveWith(getLightRedOverlayColor),
             shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()))),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateColor.resolveWith(getLightRedColor),
+            foregroundColor:
+                MaterialStateColor.resolveWith(getLightRedOverlayColor),
+            shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()))),
     dialogBackgroundColor: Colors.red[100]);
 ThemeData omniDarkRedTheme() => ThemeData.dark().copyWith(
     brightness: Brightness.dark,
@@ -30,6 +36,12 @@ ThemeData omniDarkRedTheme() => ThemeData.dark().copyWith(
           color: Colors.red[100], fontSize: 15, fontWeight: FontWeight.bold),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateColor.resolveWith(getDarkRedColor),
+            foregroundColor:
+                MaterialStateColor.resolveWith(getDarkRedOverlayColor),
+            shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()))),
+    outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
             backgroundColor: MaterialStateColor.resolveWith(getDarkRedColor),
             foregroundColor:
@@ -102,6 +114,12 @@ ThemeData omniLightBlueTheme() => ThemeData.light().copyWith(
             foregroundColor:
                 MaterialStateColor.resolveWith(getLightBlueOverlayColor),
             shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()))),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateColor.resolveWith(getLightBlueColor),
+            foregroundColor:
+                MaterialStateColor.resolveWith(getLightBlueOverlayColor),
+            shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()))),
     dialogBackgroundColor: Colors.blue[100]);
 ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
     brightness: Brightness.dark,
@@ -115,6 +133,12 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
           color: Colors.blue[100], fontSize: 15, fontWeight: FontWeight.bold),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateColor.resolveWith(getDarkBlueColor),
+            foregroundColor:
+                MaterialStateColor.resolveWith(getDarkBlueOverlayColor),
+            shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()))),
+    outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
             backgroundColor: MaterialStateColor.resolveWith(getDarkBlueColor),
             foregroundColor:

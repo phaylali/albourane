@@ -43,7 +43,7 @@ class ProductPage extends StatelessWidget {
                         ),
                         SizedBox(
                           height: 100,
-                          child: ElevatedButton(
+                          child: OutlinedButton(
                             onPressed: () {},
                             style: ButtonStyle(
                                 shape:
@@ -62,7 +62,7 @@ class ProductPage extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
-                        ElevatedButton(
+                        OutlinedButton(
                           onPressed: () => GetPlatform.isMobile
                               ? Get.defaultDialog(
                                   title: 'Zoom In Product',
@@ -86,7 +86,7 @@ class ProductPage extends StatelessWidget {
                         ),
                         SizedBox(
                           height: 100,
-                          child: ElevatedButton(
+                          child: OutlinedButton(
                             onPressed: () {},
                             style: ButtonStyle(
                                 shape:
@@ -147,7 +147,7 @@ class ProductPage extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        ElevatedButton(
+                                        OutlinedButton(
                                           style: ButtonStyle(
                                               shape: MaterialStateProperty.all<
                                                       OutlinedBorder>(
@@ -186,7 +186,7 @@ class ProductPage extends StatelessWidget {
                         ),
                         SizedBox(
                           height: 500,
-                          child: ElevatedButton(
+                          child: OutlinedButton(
                             onPressed: () {},
                             style: ButtonStyle(
                                 shape:

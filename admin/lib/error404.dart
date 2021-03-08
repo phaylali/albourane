@@ -49,7 +49,7 @@ class ERROR404 extends StatelessWidget {
                       SizedBox(
                         height: 40,
                         width: 60,
-                        child: ElevatedButton(
+                        child: OutlinedButton(
                           child: Icon(Feather.arrow_left),
                           onPressed: () {
                             Get.back();
@@ -62,7 +62,7 @@ class ERROR404 extends StatelessWidget {
                       SizedBox(
                         height: 40,
                         width: 60,
-                        child: ElevatedButton(
+                        child: OutlinedButton(
                           child: Icon(Feather.home),
                           onPressed: () {
                             Get.toNamed('/');
@@ -129,7 +129,7 @@ class NoProduct extends StatelessWidget {
                       SizedBox(
                         height: 40,
                         width: 60,
-                        child: ElevatedButton(
+                        child: OutlinedButton(
                           child: Icon(Feather.arrow_left),
                           onPressed: () {
                             Get.back();
@@ -142,7 +142,7 @@ class NoProduct extends StatelessWidget {
                       SizedBox(
                         height: 40,
                         width: 60,
-                        child: ElevatedButton(
+                        child: OutlinedButton(
                           child: Icon(Feather.home),
                           onPressed: () {
                             Get.toNamed('/');
