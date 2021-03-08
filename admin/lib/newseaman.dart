@@ -6,15 +6,15 @@ import 'package:flutter_icons/flutter_icons.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:get/get.dart';
 
-class NewBoat extends StatelessWidget {
+class NewSeaman extends StatelessWidget {
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController referenceController = TextEditingController();
   final TextEditingController attachmentController = TextEditingController();
   final TextEditingController idController = TextEditingController();
-  final TextEditingController ownerController = TextEditingController();
-  final TextEditingController ownerCINController = TextEditingController();
-  final TextEditingController regionController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController cinController = TextEditingController();
+  final TextEditingController cnssController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,28 +33,25 @@ class NewBoat extends StatelessWidget {
                   snackPosition: SnackPosition.TOP);
             } else if (referenceController.text.isEmpty ||
                 !referenceController.text.contains(RegExp(r'[0-9]')) ||
-                referenceController.text.contains(RegExp(r'[A-Z]')) ||
-                referenceController.text.contains(RegExp(r'[a-z]')) ||
-                !referenceController.text.contains('/') ||
                 !referenceController.text.contains('-')) {
               Get.snackbar("Error",
-                  "Reference is empty or invalid, please type the reference like 3/1-1200",
+                  "Reference is empty or invalid, please type the reference like 3/1-D1200",
                   backgroundColor: Colors.red,
                   snackPosition: SnackPosition.TOP);
-            } else if (ownerController.text.isEmpty ||
-                ownerController.text.isNumericOnly ||
-                ownerController.text.contains(RegExp(r'[0-9]'))) {
-              Get.snackbar("Error", "Owner Name is empty or Invalid",
+            } else if (phoneController.text.isEmpty ||
+                !phoneController.text.isPhoneNumber) {
+              Get.snackbar("Error", "Phone Number is empty or Invalid",
                   backgroundColor: Colors.red,
                   snackPosition: SnackPosition.TOP);
-            } else if (ownerCINController.text.isEmpty ||
-                ownerCINController.text.isNumericOnly) {
-              Get.snackbar("Error", "Owner CIN is empty or Invalid",
+            } else if (cinController.text.isEmpty ||
+                cinController.text.isNumericOnly) {
+              Get.snackbar("Error", "Seaman's CIN is empty or Invalid",
                   backgroundColor: Colors.red,
                   snackPosition: SnackPosition.TOP);
-            } else if (regionController.text.isEmpty ||
-                regionController.text.contains(RegExp(r'[0-9]'))) {
-              Get.snackbar("Error", "Region is empty or Invalid",
+            } else if (cnssController.text.isEmpty ||
+                !cnssController.text.contains(RegExp(r'[0-9]')) ||
+                !cnssController.text.length.isEqual(9)) {
+              Get.snackbar("Error", "Seaman's CNSS is empty or Invalid",
                   backgroundColor: Colors.red,
                   snackPosition: SnackPosition.TOP);
             } else {
@@ -64,15 +61,15 @@ class NewBoat extends StatelessWidget {
                 backgroundColor: Colors.green,
               );
               firestoro
-                  .collection('boats')
+                  .collection('seamen')
                   .doc(referenceController.text.replaceAll('/', '-'))
                   .set({
-                    'name': nameController.text.toUpperCase(),
-                    'reference': referenceController.text,
-                    'image': attachmentController.text,
-                    'owner': ownerController.text.toUpperCase(),
-                    'ownerCIN': ownerCINController.text.toUpperCase(),
-                    'region': regionController.text.toUpperCase(),
+                    'name': nameController.text.toUpperCase().toString(),
+                    'reference': referenceController.text.toString(),
+                    'image': attachmentController.text.toString(),
+                    'phone': phoneController.text.toUpperCase().toString(),
+                    'cin': cinController.text.toUpperCase().toString(),
+                    'cnss': cnssController.text.toUpperCase().toString(),
                   })
                   .then((value) => print("Boat Added"))
                   .catchError((error) => print("Failed to add boat: $error"));
@@ -81,9 +78,9 @@ class NewBoat extends StatelessWidget {
             print("Image Link is:  " + attachmentController.text);
             print("Reference is:  " + referenceController.text);
             print("ID is:  " + referenceController.text.replaceAll('/', '-'));
-            print("Owner is:  " + ownerController.text.toUpperCase());
-            print("Owner CIN is:  " + ownerCINController.text.toUpperCase());
-            print("Region is:  " + regionController.text.toUpperCase());
+            print("Phone is:  " + phoneController.text.toUpperCase());
+            print("CIN is:  " + cinController.text.toUpperCase());
+            print("CNSS is:  " + cnssController.text.toUpperCase());
           },
         ),
         body: Center(
@@ -100,7 +97,7 @@ class NewBoat extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                "New Boat",
+                                "New Seaman",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 30,
@@ -156,7 +153,6 @@ class NewBoat extends StatelessWidget {
                             ),
                             Expanded(
                               child: ListView(
-                                //direction: Axis.vertical,
                                 children: [
                                   SizedBox(
                                     height: 20,
@@ -172,7 +168,7 @@ class NewBoat extends StatelessWidget {
                                     controller: nameController,
                                     decoration: InputDecoration(
                                       hintText: 'Name',
-                                      suffixIcon: Icon(Feather.edit),
+                                      suffixIcon: Icon(Feather.user),
                                       border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(20.0),
@@ -193,7 +189,7 @@ class NewBoat extends StatelessWidget {
                                     controller: attachmentController,
                                     decoration: InputDecoration(
                                       hintText: 'Image Link',
-                                      suffixIcon: Icon(Feather.file),
+                                      suffixIcon: Icon(Feather.image),
                                       border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(20.0),
@@ -214,7 +210,7 @@ class NewBoat extends StatelessWidget {
                                     controller: referenceController,
                                     decoration: InputDecoration(
                                       hintText: 'Reference',
-                                      suffixIcon: Icon(Feather.code),
+                                      suffixIcon: Icon(Feather.anchor),
                                       border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(20.0),
@@ -230,12 +226,12 @@ class NewBoat extends StatelessWidget {
                                             .textTheme
                                             .bodyText1!
                                             .color),
-                                    keyboardType: TextInputType.name,
+                                    keyboardType: TextInputType.phone,
                                     maxLines: 3,
-                                    controller: ownerController,
+                                    controller: phoneController,
                                     decoration: InputDecoration(
-                                      hintText: 'Owner Name',
-                                      suffixIcon: Icon(Feather.user),
+                                      hintText: 'Phone Number',
+                                      suffixIcon: Icon(Feather.phone),
                                       border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(20.0),
@@ -251,11 +247,11 @@ class NewBoat extends StatelessWidget {
                                             .textTheme
                                             .bodyText1!
                                             .color),
-                                    keyboardType: TextInputType.name,
+                                    keyboardType: TextInputType.text,
                                     maxLines: 3,
-                                    controller: ownerCINController,
+                                    controller: cinController,
                                     decoration: InputDecoration(
-                                      hintText: 'Owner CIN',
+                                      hintText: 'CIN',
                                       suffixIcon: Icon(Feather.image),
                                       border: OutlineInputBorder(
                                         borderRadius:
@@ -272,12 +268,12 @@ class NewBoat extends StatelessWidget {
                                             .textTheme
                                             .bodyText1!
                                             .color),
-                                    keyboardType: TextInputType.name,
+                                    keyboardType: TextInputType.number,
                                     maxLines: 3,
-                                    controller: regionController,
+                                    controller: cnssController,
                                     decoration: InputDecoration(
-                                      hintText: 'Region',
-                                      suffixIcon: Icon(Feather.compass),
+                                      hintText: 'CNSS',
+                                      suffixIcon: Icon(Feather.octagon),
                                       border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(20.0),

@@ -7,9 +7,7 @@ import 'package:get/get.dart';
 
 class NewDocument extends StatelessWidget {
   //final fC = Get.put(DocumentsController());
-  NewDocument({required this.title, required this.subtitle});
-  final String title;
-  final String subtitle;
+
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController attachmentController = TextEditingController();
@@ -55,17 +53,11 @@ class NewDocument extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                title,
+                                "New Document",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 30,
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                subtitle,
                               ),
                             ),
                           ],
@@ -78,9 +70,9 @@ class NewDocument extends StatelessWidget {
                             height: 40,
                             width: 60,
                             child: OutlinedButton(
-                              child: Icon(Feather.user),
+                              child: Icon(Feather.home),
                               onPressed: () {
-                                Get.toNamed('/profile');
+                                Get.toNamed('/');
                               },
                             ),
                           ),
@@ -91,9 +83,9 @@ class NewDocument extends StatelessWidget {
                             height: 40,
                             width: 60,
                             child: OutlinedButton(
-                              child: Icon(Feather.shopping_cart),
+                              child: Icon(Feather.arrow_left),
                               onPressed: () {
-                                Get.toNamed('/cart');
+                                Get.back();
                               },
                             ),
                           ),
@@ -141,102 +133,6 @@ class NewDocument extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Expanded(
-                              child: FutureBuilder<QuerySnapshot>(
-                                  future:
-                                      firestoro.collection('documents').get(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasError) {
-                                      return Text("Something went wrong");
-                                    }
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.done) {
-                                      QuerySnapshot? d = snapshot.data;
-
-                                      if (d!.docs.isNotEmpty) {
-                                        int h = d.docs.length + 1;
-
-                                        return TextFormField(
-                                          readOnly: true,
-                                          maxLines: 1,
-                                          initialValue: "DOC" +
-                                              h
-                                                  .toString()
-                                                  .padLeft(3, '0')
-                                                  .toString(),
-                                          //h.toString(),
-                                          controller: idController,
-                                          //keyboardType: TextInputType.number,
-                                          decoration: InputDecoration(
-                                            //hintText: 'Number',
-                                            suffixIcon: Icon(Feather.file),
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.0),
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                    }
-
-                                    return SafeArea(
-                                      child: Scaffold(
-                                        body: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Center(
-                                              child:
-                                                  CircularProgressIndicator()),
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                            ),
-                            /*FutureBuilder<QuerySnapshot>(
-                                future: firestoro.collection('documents').get(),
-                                builder: (context, snapshot) {
-                                  QuerySnapshot? d = snapshot.data;
-                                  if (snapshot.connectionState ==
-                                          ConnectionState.done &&
-                                      d != null) {
-                                    int h = d.docs.length + 1;
-                                    return TextFormField(
-                                      readOnly: true,
-                                      maxLines: 1,
-                                      initialValue: "hy",
-                                      //h.toString(),
-                                      //controller: attachmentController,
-                                      //keyboardType: TextInputType.number,
-                                      decoration: InputDecoration(
-                                        //hintText: 'Number',
-                                        suffixIcon: Icon(Feather.file),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
-                                      ),
-                                    );
-                                  } else {
-                                    return TextFormField(
-                                      readOnly: true,
-                                      maxLines: 1,
-                                      initialValue:
-                                          "Something wrong, i can feel it",
-                                      //controller: attachmentController,
-                                      keyboardType: TextInputType.number,
-                                      decoration: InputDecoration(
-                                        //hintText: 'Number',
-                                        suffixIcon: Icon(Feather.file),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                }),*/
                             SizedBox(
                               height: 20,
                             ),

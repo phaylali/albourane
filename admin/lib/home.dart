@@ -49,9 +49,9 @@ class HomePage extends GetWidget<AuthController> {
                         height: 40,
                         width: 60,
                         child: OutlinedButton(
-                          child: Icon(Feather.arrow_left),
+                          child: Icon(Feather.home),
                           onPressed: () {
-                            Get.back();
+                            Get.toNamed('/');
                           },
                         ),
                       ),
@@ -62,10 +62,10 @@ class HomePage extends GetWidget<AuthController> {
                         height: 40,
                         width: 60,
                         child: OutlinedButton(
-                          child: Icon(Feather.home),
+                          child: Icon(Feather.log_out),
                           onPressed: () {
                             //showLicensePage(context: context);
-                            Get.toNamed('/');
+                            controller.signOut();
                           },
                         ),
                       ),
@@ -154,7 +154,7 @@ class HomePage extends GetWidget<AuthController> {
                                     width: 20,
                                   ),
                                   Text(
-                                    'Sign Out 3',
+                                    'Seamen',
                                     textScaleFactor: 1.5,
                                   )
                                 ],
@@ -166,39 +166,7 @@ class HomePage extends GetWidget<AuthController> {
                                               borderRadius:
                                                   BorderRadius.circular(30)))),
                               onPressed: () {
-                                //showLicensePage(context: context);
-                                controller.signOut();
-                                Get.toNamed('/');
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            width: 300,
-                            height: 300,
-                            child: OutlinedButton(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Feather.log_out),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
-                                    'Sign Out 4',
-                                    textScaleFactor: 1.5,
-                                  )
-                                ],
-                              ),
-                              style: ButtonStyle(
-                                  shape:
-                                      MaterialStateProperty.all<OutlinedBorder>(
-                                          RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30)))),
-                              onPressed: () {
-                                //showLicensePage(context: context);
-                                controller.signOut();
-                                Get.toNamed('/');
+                                Get.toNamed('/Seamen');
                               },
                             ),
                           ),

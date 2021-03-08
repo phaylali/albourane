@@ -9,7 +9,10 @@ import 'package:admin/error404.dart';
 import 'package:admin/home.dart';
 import 'package:admin/newboat.dart';
 import 'package:admin/newdoc.dart';
+import 'package:admin/newseaman.dart';
 import 'package:admin/profile.dart';
+import 'package:admin/seamanPage.dart';
+import 'package:admin/seamen.dart';
 import 'package:admin/themes.dart';
 
 import 'package:flutter/material.dart';
@@ -35,13 +38,9 @@ class Start extends StatelessWidget {
         getPages: [
           GetPage(name: '/', page: () => Root()),
           GetPage(name: '/SignIn', page: () => AdminSignIn()),
-          GetPage(
-              name: '/NewDocument',
-              page: () => NewDocument(
-                    title: 'New Document',
-                    subtitle: 'something',
-                  )),
+          GetPage(name: '/NewDocument', page: () => NewDocument()),
           GetPage(name: '/NewBoat', page: () => NewBoat()),
+          GetPage(name: '/NewSeaman', page: () => NewSeaman()),
           GetPage(
               name: '/Documents',
               page: () => DocsLibrary(
@@ -52,9 +51,15 @@ class Start extends StatelessWidget {
               page: () => BoatsLibrary(
                     title: 'Boats',
                   )),
+          GetPage(
+              name: '/Seamen',
+              page: () => SeamenLibrary(
+                    title: 'Seamen',
+                  )),
           GetPage(name: '/Profile', page: () => Profile()),
           GetPage(name: '/Document', page: () => DocumentPage()),
           GetPage(name: '/Boat', page: () => BoatPage()),
+          GetPage(name: '/Seaman', page: () => SeamanPage()),
         ],
         unknownRoute: GetPage(name: '/Error404', page: () => ERROR404()),
         theme: omniLightBlueTheme(),

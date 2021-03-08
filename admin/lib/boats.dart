@@ -70,7 +70,7 @@ class BoatsLibrary extends StatelessWidget {
                             height: 40,
                             width: 60,
                             child: OutlinedButton(
-                              child: Icon(Feather.arrow_right),
+                              child: Icon(Feather.arrow_left),
                               onPressed: () {
                                 Get.back();
                               },

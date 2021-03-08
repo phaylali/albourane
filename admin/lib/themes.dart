@@ -102,6 +102,7 @@ ThemeData omniLightBlueTheme() => ThemeData.light().copyWith(
     scaffoldBackgroundColor: Colors.blue[100],
     appBarTheme: AppBarTheme(color: Colors.blue[100]),
     accentColor: Colors.blue[400],
+    //primaryColor: Colors.blue[400],
     textTheme: TextTheme(
       bodyText2: TextStyle(color: Colors.blue[400], fontSize: 20),
       bodyText1: TextStyle(
@@ -126,6 +127,7 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
     scaffoldBackgroundColor: Colors.blueGrey[900],
     appBarTheme: AppBarTheme(color: Colors.blue[900]),
     accentColor: Colors.blue[400],
+    //primaryColor: Colors.blue[100],
     textTheme: TextTheme(
       headline6: TextStyle(color: Colors.blue[100], fontSize: 30),
       bodyText2: TextStyle(color: Colors.blue[100], fontSize: 20),

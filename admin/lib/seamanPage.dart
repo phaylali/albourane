@@ -10,14 +10,14 @@ import 'package:flutter_icons/flutter_icons.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:get/get.dart';
 
-class BoatPage extends StatelessWidget {
+class SeamanPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String id = Get.parameters['id']!;
     final FirebaseFirestore firestoro = FirebaseFirestore.instance;
 
     return FutureBuilder<DocumentSnapshot>(
-        future: firestoro.collection('boats').doc(id).get(),
+        future: firestoro.collection('seamen').doc(id).get(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Text("Something went wrong");
@@ -152,13 +152,13 @@ class BoatPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      'Owner : ',
+                                      'CNSS : ',
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     SelectableText(
-                                      '${data['owner']}',
+                                      '${data['cnss']}',
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
@@ -171,13 +171,13 @@ class BoatPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      'Owner CIN : ',
+                                      'CIN : ',
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     SelectableText(
-                                      '${data['ownerCIN']}',
+                                      '${data['cin']}',
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
@@ -190,13 +190,13 @@ class BoatPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      'Region: ',
+                                      'Phone: ',
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     SelectableText(
-                                      '${data['region']}',
+                                      '${data['phone']}',
                                       style: TextStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold),
@@ -214,7 +214,8 @@ class BoatPage extends StatelessWidget {
               );
             } else {
               return NoProduct(
-                title: "There Is No Boat With This ID, Or The Boat Is Removed",
+                title:
+                    "There Is No Seaman With This ID, Or The Seaman Is Removed",
                 subtitle: "Check The Url For Errors Or Go To The Home Page",
               );
             }

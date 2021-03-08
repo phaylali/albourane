@@ -73,9 +73,9 @@ class DocumentPage extends StatelessWidget {
                                     height: 40,
                                     width: 60,
                                     child: OutlinedButton(
-                                      child: Icon(Feather.user),
+                                      child: Icon(Feather.home),
                                       onPressed: () {
-                                        Get.toNamed('/profile');
+                                        Get.toNamed('/');
                                       },
                                     ),
                                   ),
@@ -86,9 +86,9 @@ class DocumentPage extends StatelessWidget {
                                     height: 40,
                                     width: 60,
                                     child: OutlinedButton(
-                                      child: Icon(Feather.shopping_cart),
+                                      child: Icon(Feather.arrow_left),
                                       onPressed: () {
-                                        Get.toNamed('/cart');
+                                        Get.back();
                                       },
                                     ),
                                   ),

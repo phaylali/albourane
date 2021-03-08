@@ -1,5 +1,3 @@
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:admin/docsController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -7,9 +5,8 @@ import 'package:flutter_icons/flutter_icons.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:get/get.dart';
 
-class DocsLibrary extends StatelessWidget {
-  final fC = Get.put(DocumentsController());
-  DocsLibrary({
+class SeamenLibrary extends StatelessWidget {
+  SeamenLibrary({
     required this.title,
   });
   final String title;
@@ -23,7 +20,7 @@ class DocsLibrary extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           child: Icon(Feather.file_plus),
           onPressed: () {
-            Get.toNamed("/NewDocument");
+            Get.toNamed("/NewSeaman");
           },
         ),
         body: Center(
@@ -82,15 +79,16 @@ class DocsLibrary extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: Flex(
-                    direction: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
                         width: 20,
                       ),
-                      Expanded(
+                      SizedBox(
+                        width: 300,
                         child: FutureBuilder<QuerySnapshot>(
-                            future: firestoro.collection('documents').get(),
+                            future: firestoro.collection('seamen').get(),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
                                 return Text("Something went wrong");
@@ -100,16 +98,77 @@ class DocsLibrary extends StatelessWidget {
                                 QuerySnapshot? d = snapshot.data;
 
                                 if (d!.docs.isNotEmpty) {
-                                  return ListView.builder(
+                                  return Center(
+                                    child: Wrap(
+                                      spacing: 20,
+                                      runSpacing: 20,
+                                      children: d.docs
+                                          .map((item) => SizedBox(
+                                                height: 100,
+                                                width: 300,
+                                                child: OutlinedButton(
+                                                  onPressed: () {
+                                                    final String id = item.id;
+                                                    Get.toNamed(
+                                                      "/Seaman?id=$id",
+                                                    );
+                                                  },
+                                                  style: ButtonStyle(
+                                                      shape: MaterialStateProperty.all<
+                                                              OutlinedBorder>(
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          30)))),
+                                                  child: Flex(
+                                                    direction: Axis.horizontal,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 100,
+                                                        child: Center(
+                                                            child: Text(
+                                                          "${item['reference']}",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                      ),
+                                                      Expanded(
+                                                        child: Center(
+                                                            child: Text(
+                                                          "${item['name']}",
+                                                          style: TextStyle(
+                                                              fontSize: 15,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        )),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ))
+                                          .toList()
+                                          .cast<Widget>(),
+                                    ),
+                                  );
+                                  /*ListView.builder(
                                     itemCount: d.docs.length,
                                     itemBuilder: (context, index) {
                                       return SizedBox(
-                                        height: 200,
+                                        height: 100,
+                                        width: 300,
                                         child: OutlinedButton(
                                           onPressed: () {
                                             final String id = d.docs[index].id;
                                             Get.toNamed(
-                                              "/Document?id=$id",
+                                              "/Boat?id=$id",
                                             );
                                           },
                                           style: ButtonStyle(
@@ -121,50 +180,36 @@ class DocsLibrary extends StatelessWidget {
                                                               30)))),
                                           child: Flex(
                                             direction: Axis.horizontal,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               SizedBox(
                                                 width: 100,
                                                 child: Center(
-                                                    child: Image.network(
-                                                        "${d.docs[index]['preview']}")),
+                                                    child: Text(
+                                                  "${d.docs[index]['reference']}",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
                                               ),
                                               Expanded(
-                                                child: Flex(
-                                                  direction: Axis.vertical,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    SizedBox(
-                                                      height: 50,
-                                                      child: Text(
-                                                        "${d.docs[index].id}",
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        textScaleFactor: 2,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Center(
-                                                          child: Text(
-                                                        "${d.docs[index]['name']}",
-                                                        textScaleFactor: 1.5,
-                                                      )),
-                                                    ),
-                                                  ],
-                                                ),
+                                                child: Center(
+                                                    child: Text(
+                                                  "${d.docs[index]['name']}",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
                                               ),
                                             ],
                                           ),
                                         ),
                                       );
                                     },
-                                  );
+                                  );*/
                                 }
                               }
 

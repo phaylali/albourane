@@ -1,4 +1,5 @@
 import 'package:admin/auth.dart';
+import 'package:admin/passwordController.dart';
 import 'package:flutter/material.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_icons/flutter_icons.dart';
@@ -11,6 +12,7 @@ class AdminSignIn extends GetWidget<AuthController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(PasswordController());
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -91,6 +93,11 @@ class AdminSignIn extends GetWidget<AuthController> {
                             width: 600,
                             child: TextFormField(
                               controller: emailController,
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .color),
                               decoration: InputDecoration(
                                 hintText: 'Email',
                                 suffixIcon: Icon(Feather.mail),
@@ -105,16 +112,32 @@ class AdminSignIn extends GetWidget<AuthController> {
                           ),
                           SizedBox(
                             width: 600,
-                            child: TextFormField(
-                              controller: passwordController,
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                hintText: 'Password',
-                                suffixIcon: Icon(Feather.eye_off),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                              ),
+                            child: GetX<PasswordController>(
+                              init: PasswordController(),
+                              builder: (p) {
+                                return TextFormField(
+                                  controller: passwordController,
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .color),
+                                  obscuringCharacter: '*',
+                                  obscureText: p.hidden.value,
+                                  decoration: InputDecoration(
+                                    hintText: 'Password',
+                                    suffixIcon: InkWell(
+                                      child: p.hidden.isTrue
+                                          ? Icon(Feather.eye_off)
+                                          : Icon(Feather.eye),
+                                      onTap: () => p.change(),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                           SizedBox(
