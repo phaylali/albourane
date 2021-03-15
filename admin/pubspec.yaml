@@ -16,6 +16,7 @@ dependencies:
   url_launcher:
   url_strategy:
   search_choices: 
+  google_fonts:
 
   # Firebase Packages
   firebase_auth: 1.0.0

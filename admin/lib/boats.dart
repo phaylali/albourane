@@ -89,7 +89,7 @@ class BoatsLibrary extends StatelessWidget {
                         width: 20,
                       ),
                       SizedBox(
-                        width: 300,
+                        width: 350,
                         child: FutureBuilder<QuerySnapshot>(
                             future: firestoro.collection('boats').get(),
                             builder: (context, snapshot) {
@@ -103,12 +103,14 @@ class BoatsLibrary extends StatelessWidget {
                                 if (d!.docs.isNotEmpty) {
                                   return Center(
                                     child: Wrap(
-                                      spacing: 20,
-                                      runSpacing: 20,
+                                      spacing: 10,
+                                      runSpacing: 10,
+                                      //direction: Axis.vertical,
+
                                       children: d.docs
                                           .map((item) => SizedBox(
                                                 height: 100,
-                                                width: 300,
+                                                width: 350,
                                                 child: OutlinedButton(
                                                   onPressed: () {
                                                     final String id = item.id;

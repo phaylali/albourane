@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ThemeData omniLightRedTheme() => ThemeData.light().copyWith(
     brightness: Brightness.light,
@@ -6,10 +7,10 @@ ThemeData omniLightRedTheme() => ThemeData.light().copyWith(
     appBarTheme: AppBarTheme(color: Colors.red[100]),
     accentColor: Colors.red[400],
     textTheme: TextTheme(
-      bodyText2: TextStyle(color: Colors.red[400], fontSize: 20),
-      bodyText1: TextStyle(
+      bodyText2: GoogleFonts.tajawal(color: Colors.red[400], fontSize: 20),
+      bodyText1: GoogleFonts.tajawal(
           color: Colors.red[400], fontSize: 15, fontWeight: FontWeight.bold),
-      headline6: TextStyle(color: Colors.red[400], fontSize: 30),
+      headline6: GoogleFonts.tajawal(color: Colors.red[400], fontSize: 30),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
@@ -30,9 +31,9 @@ ThemeData omniDarkRedTheme() => ThemeData.dark().copyWith(
     appBarTheme: AppBarTheme(color: Colors.red[900]),
     accentColor: Colors.red[400],
     textTheme: TextTheme(
-      headline6: TextStyle(color: Colors.red[100], fontSize: 30),
-      bodyText2: TextStyle(color: Colors.red[100], fontSize: 20),
-      bodyText1: TextStyle(
+      headline6: GoogleFonts.tajawal(color: Colors.red[100], fontSize: 30),
+      bodyText2: GoogleFonts.tajawal(color: Colors.red[100], fontSize: 20),
+      bodyText1: GoogleFonts.tajawal(
           color: Colors.red[100], fontSize: 15, fontWeight: FontWeight.bold),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -104,10 +105,10 @@ ThemeData omniLightBlueTheme() => ThemeData.light().copyWith(
     accentColor: Colors.blue[400],
     //primaryColor: Colors.blue[400],
     textTheme: TextTheme(
-      bodyText2: TextStyle(color: Colors.blue[400], fontSize: 20),
-      bodyText1: TextStyle(
+      bodyText2: GoogleFonts.tajawal(color: Colors.blue[400], fontSize: 20),
+      bodyText1: GoogleFonts.tajawal(
           color: Colors.blue[400], fontSize: 15, fontWeight: FontWeight.bold),
-      headline6: TextStyle(color: Colors.blue[400], fontSize: 30),
+      headline6: GoogleFonts.tajawal(color: Colors.blue[400], fontSize: 30),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
@@ -129,9 +130,9 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
     accentColor: Colors.blue[400],
     //primaryColor: Colors.blue[100],
     textTheme: TextTheme(
-      headline6: TextStyle(color: Colors.blue[100], fontSize: 30),
-      bodyText2: TextStyle(color: Colors.blue[100], fontSize: 20),
-      bodyText1: TextStyle(
+      headline6: GoogleFonts.tajawal(color: Colors.blue[100], fontSize: 30),
+      bodyText2: GoogleFonts.tajawal(color: Colors.blue[100], fontSize: 20),
+      bodyText1: GoogleFonts.tajawal(
           color: Colors.blue[100], fontSize: 15, fontWeight: FontWeight.bold),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(

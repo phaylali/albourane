@@ -14,8 +14,10 @@ import 'package:admin/profile.dart';
 import 'package:admin/seamanPage.dart';
 import 'package:admin/seamen.dart';
 import 'package:admin/themes.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:get/get.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -27,6 +29,10 @@ void main() async {
   setPathUrlStrategy();
   Get.put(BoatsController);
   await Firebase.initializeApp();
+  LicenseRegistry.addLicense(() async* {
+    final license = await rootBundle.loadString('google_fonts/OFL.txt');
+    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+  });
   runApp(Start());
 }
 
