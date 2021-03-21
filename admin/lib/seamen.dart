@@ -6,11 +6,6 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 
 class SeamenLibrary extends StatelessWidget {
-  SeamenLibrary({
-    required this.title,
-  });
-  final String title;
-
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
 
   @override
@@ -37,7 +32,7 @@ class SeamenLibrary extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                title,
+                                "بحار جديد",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 30,

@@ -8,11 +8,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 
 class DocsLibrary extends StatelessWidget {
-  final fC = Get.put(DocumentsController());
-  DocsLibrary({
-    required this.title,
-  });
-  final String title;
+//  final fC = Get.put(DocumentsController());
 
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
 
@@ -40,7 +36,7 @@ class DocsLibrary extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                title,
+                                "الوثائق",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 30,
