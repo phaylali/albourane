@@ -1,212 +1,11 @@
 import 'dart:ui';
-
 import 'package:admin/error404.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_icons/flutter_icons.dart';
-
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:get/get.dart';
-
-class OldBoatPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final String id = Get.parameters['id']!;
-    final FirebaseFirestore firestoro = FirebaseFirestore.instance;
-
-    return FutureBuilder<DocumentSnapshot>(
-        future: firestoro.collection('boats').doc(id).get(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Scaffold(body: Center(child: Text("Something went wrong")));
-          }
-          if (snapshot.connectionState == ConnectionState.done) {
-            DocumentSnapshot? d = snapshot.data;
-
-            if (d!.exists) {
-              Map<String?, dynamic>? data = d.data()!;
-              return SafeArea(
-                child: Scaffold(
-                  body: Center(
-                      child: Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: ListView(
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: SelectableText(
-                                        '${data['name']}',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 30,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: SelectableText(
-                                        '${data['reference']}',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  SizedBox(
-                                    height: 40,
-                                    width: 60,
-                                    child: OutlinedButton(
-                                      child: Icon(Feather.home),
-                                      onPressed: () {
-                                        Get.toNamed('/');
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  SizedBox(
-                                    height: 40,
-                                    width: 60,
-                                    child: OutlinedButton(
-                                      child: Icon(Feather.arrow_left),
-                                      onPressed: () {
-                                        Get.back();
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          height: 500,
-                          child: OutlinedButton(
-                            onPressed: () {},
-                            style: ButtonStyle(
-                                shape:
-                                    MaterialStateProperty.all<OutlinedBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30)))),
-                            child: Center(
-                                child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  'More Details',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Owner : ',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SelectableText(
-                                      '${data['owner']}',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Owner CIN : ',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SelectableText(
-                                      '${data['ownerCIN']}',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Region: ',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SelectableText(
-                                      '${data['region']}',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )),
-                ),
-              );
-            } else {
-              return NoProduct(
-                title: "There Is No Boat With This ID, Or The Boat Is Removed",
-                subtitle: "Check The Url For Errors Or Go To The Home Page",
-              );
-            }
-          }
-          return SafeArea(
-            child: Scaffold(
-              body: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(child: CircularProgressIndicator()),
-              ),
-            ),
-          );
-        });
-  }
-}
 
 class BoatPage extends StatelessWidget {
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
@@ -221,7 +20,7 @@ class BoatPage extends StatelessWidget {
             future: firestoro.collection('boats').doc(id).get(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
-                return Center(child: Text("Something went wrong"));
+                return Center(child: Text("هناك مشكل ما"));
               }
               if (snapshot.connectionState == ConnectionState.done) {
                 DocumentSnapshot? d = snapshot.data;
@@ -392,8 +191,7 @@ class BoatPage extends StatelessWidget {
                                                   onPressed: () => GetPlatform
                                                           .isMobile
                                                       ? Get.defaultDialog(
-                                                          title:
-                                                              'Zoom In Document',
+                                                          title: 'كبر الصورة',
                                                           content: Expanded(
                                                             child:
                                                                 InteractiveViewer(
@@ -787,9 +585,8 @@ class BoatPage extends StatelessWidget {
                   );
                 } else {
                   return NoProduct(
-                    title:
-                        "There Is No Boat With This ID, Or The Boat Is Removed",
-                    subtitle: "Check The Url For Errors Or Go To The Home Page",
+                    title: "لا يوجد قارب في هذا الرابط",
+                    subtitle: "صحح الرابط او عد الى الصفحة الرئيسية",
                   );
                 }
               }
