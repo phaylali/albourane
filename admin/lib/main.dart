@@ -15,12 +15,9 @@ import 'package:admin/seamanPage.dart';
 import 'package:admin/seamen.dart';
 import 'package:admin/themes.dart';
 import 'package:flutter/foundation.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:get/get.dart';
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_core/firebase_core.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -60,7 +57,7 @@ class Start extends StatelessWidget {
 
         theme: omniDarkBlueTheme(),
         navigatorKey: Get.key,
-        themeMode: ThemeMode.system,
+        //themeMode: ThemeMode.system,
         title: "ALBOURANE ADMIN",
         debugShowCheckedModeBanner: false,
         home: Root());

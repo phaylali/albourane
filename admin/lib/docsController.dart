@@ -1,10 +1,6 @@
 import 'dart:async';
-
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:admin/document.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:get/get.dart';
 
 class DocumentsController extends GetxController {

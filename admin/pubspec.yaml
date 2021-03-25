@@ -12,11 +12,11 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.0.0-nullsafety.2
-  flutter_icons:
+  flutter_vector_icons:
   url_launcher:
   url_strategy:
   search_choices: 
-  google_fonts:
+  
 
   # Firebase Packages
   firebase_auth: ^1.0.1
@@ -31,8 +31,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: Tajawal
+      fonts: 
+        - asset: google_fonts/Tajawal-Regular.ttf
+        - asset: google_fonts/Tajawal-Bold.ttf
+        - asset: google_fonts/Tajawal-Medium.ttf
+        - asset: google_fonts/Tajawal-Light.ttf
 
-  assets:
-    - google_fonts/
 
 

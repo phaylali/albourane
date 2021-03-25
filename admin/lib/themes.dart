@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
+/*
 ThemeData omniLightRedTheme() => ThemeData.light().copyWith(
+  
     brightness: Brightness.light,
     scaffoldBackgroundColor: Colors.red[100],
     appBarTheme: AppBarTheme(color: Colors.red[100]),
     accentColor: Colors.red[400],
+    
     textTheme: TextTheme(
+      
       bodyText2: GoogleFonts.tajawal(
           color: Colors.red[400], fontSize: 20, fontWeight: FontWeight.bold),
       bodyText1: GoogleFonts.tajawal(
@@ -26,8 +29,8 @@ ThemeData omniLightRedTheme() => ThemeData.light().copyWith(
             foregroundColor:
                 MaterialStateColor.resolveWith(getLightRedOverlayColor),
             shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()))),
-    dialogBackgroundColor: Colors.red[100]);
-ThemeData omniDarkRedTheme() => ThemeData.dark().copyWith(
+    dialogBackgroundColor: Colors.red[100]);*/
+/*ThemeData omniDarkRedTheme() => ThemeData.dark().copyWith(
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Colors.blueGrey[900],
     appBarTheme: AppBarTheme(color: Colors.red[900]),
@@ -53,7 +56,8 @@ ThemeData omniDarkRedTheme() => ThemeData.dark().copyWith(
                 MaterialStateColor.resolveWith(getDarkRedOverlayColor),
             shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()))),
     dialogBackgroundColor: Colors.blueGrey[900]);
-
+*/
+/*
 Color getLightRedColor(Set<MaterialState> states) {
   const Set<MaterialState> interactiveStates = <MaterialState>{
     MaterialState.pressed,
@@ -101,7 +105,8 @@ Color getDarkRedOverlayColor(Set<MaterialState> states) {
   }
   return Colors.red[100]!;
 }
-
+*/
+/*
 ThemeData omniLightBlueTheme() => ThemeData.light().copyWith(
     brightness: Brightness.light,
     scaffoldBackgroundColor: Colors.blue[100],
@@ -131,7 +136,7 @@ ThemeData omniLightBlueTheme() => ThemeData.light().copyWith(
             foregroundColor:
                 MaterialStateColor.resolveWith(getLightBlueOverlayColor),
             shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()))),
-    dialogBackgroundColor: Colors.blue[100]);
+    dialogBackgroundColor: Colors.blue[100]);*/
 ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Colors.blueGrey[900],
@@ -139,28 +144,61 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
     accentColor: Colors.blue[400],
     primaryColor: Colors.blue[100],
     textTheme: TextTheme(
-      headline1: GoogleFonts.tajawal(
-          color: Colors.blue[100], fontSize: 5, fontWeight: FontWeight.bold),
-      headline2: GoogleFonts.tajawal(
-          color: Colors.blue[100], fontSize: 10, fontWeight: FontWeight.bold),
-      headline3: GoogleFonts.tajawal(
-          color: Colors.blue[100], fontSize: 15, fontWeight: FontWeight.bold),
-      headline4: GoogleFonts.tajawal(
-          color: Colors.blue[100], fontSize: 20, fontWeight: FontWeight.bold),
-      headline5: GoogleFonts.tajawal(
-          color: Colors.blue[100], fontSize: 25, fontWeight: FontWeight.bold),
-      headline6: GoogleFonts.tajawal(
-          color: Colors.blue[100], fontSize: 30, fontWeight: FontWeight.bold),
-      bodyText2: GoogleFonts.tajawal(
-          color: Colors.blue[100], fontSize: 25, fontWeight: FontWeight.normal),
-      bodyText1: GoogleFonts.tajawal(
-          color: Colors.blue[100], fontSize: 20, fontWeight: FontWeight.normal),
-      subtitle2: GoogleFonts.tajawal(
-          color: Colors.blue[300], fontSize: 15, fontWeight: FontWeight.normal),
-      subtitle1: GoogleFonts.tajawal(
-          color: Colors.blue[300], fontSize: 10, fontWeight: FontWeight.normal),
-      caption: GoogleFonts.tajawal(
-          color: Colors.grey[700], fontSize: 20, fontWeight: FontWeight.normal),
+      headline1: TextStyle(
+          fontFamily: 'Tajawal',
+          color: Colors.blue[100],
+          fontSize: 5,
+          fontWeight: FontWeight.bold),
+      headline2: TextStyle(
+          fontFamily: 'Tajawal',
+          color: Colors.blue[100],
+          fontSize: 10,
+          fontWeight: FontWeight.bold),
+      headline3: TextStyle(
+          fontFamily: 'Tajawal',
+          color: Colors.blue[100],
+          fontSize: 15,
+          fontWeight: FontWeight.bold),
+      headline4: TextStyle(
+          fontFamily: 'Tajawal',
+          color: Colors.blue[100],
+          fontSize: 20,
+          fontWeight: FontWeight.bold),
+      headline5: TextStyle(
+          fontFamily: 'Tajawal',
+          color: Colors.blue[100],
+          fontSize: 25,
+          fontWeight: FontWeight.bold),
+      headline6: TextStyle(
+          fontFamily: 'Tajawal',
+          color: Colors.blue[100],
+          fontSize: 30,
+          fontWeight: FontWeight.bold),
+      bodyText2: TextStyle(
+          fontFamily: 'Tajawal',
+          color: Colors.blue[100],
+          fontSize: 25,
+          fontWeight: FontWeight.normal),
+      bodyText1: TextStyle(
+          fontFamily: 'Tajawal',
+          color: Colors.blue[100],
+          fontSize: 20,
+          fontWeight: FontWeight.normal),
+      subtitle2: TextStyle(
+          fontFamily: 'Tajawal',
+          color: Colors.blue[300],
+          fontSize: 15,
+          fontWeight: FontWeight.normal),
+      subtitle1: TextStyle(
+          fontFamily: 'Tajawal',
+          color: Colors.blue[300],
+          fontSize: 10,
+          fontWeight: FontWeight.normal),
+      caption: TextStyle(
+          fontFamily: 'Tajawal',
+          color: Colors.grey[700],
+          fontSize: 20,
+          fontWeight: FontWeight.normal),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
@@ -175,7 +213,7 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
                 MaterialStateColor.resolveWith(getDarkBlueOverlayColor),
             shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()))),
     dialogBackgroundColor: Colors.blueGrey[900]);
-
+/*
 Color getLightBlueColor(Set<MaterialState> states) {
   const Set<MaterialState> interactiveStates = <MaterialState>{
     MaterialState.pressed,
@@ -199,7 +237,7 @@ Color getLightBlueOverlayColor(Set<MaterialState> states) {
   }
   return Colors.blue[400]!;
 }
-
+*/
 Color getDarkBlueColor(Set<MaterialState> states) {
   const Set<MaterialState> interactiveStates = <MaterialState>{
     MaterialState.pressed,
