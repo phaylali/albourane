@@ -47,29 +47,18 @@ class Start extends StatelessWidget {
           GetPage(name: '/NewDocument', page: () => NewDocument()),
           GetPage(name: '/NewBoat', page: () => NewBoat()),
           GetPage(name: '/NewSeaman', page: () => NewSeaman()),
-          GetPage(
-              name: '/Documents',
-              page: () => DocsLibrary(
-                    title: 'Documents',
-                  )),
-          GetPage(
-              name: '/Boats',
-              page: () => BoatsLibrary(
-                    title: 'Boats',
-                  )),
-          GetPage(
-              name: '/Seamen',
-              page: () => SeamenLibrary(
-                    title: 'Seamen',
-                  )),
+          GetPage(name: '/Documents', page: () => DocsLibrary()),
+          GetPage(name: '/Boats', page: () => BoatsLibrary()),
+          GetPage(name: '/Seamen', page: () => SeamenLibrary()),
           GetPage(name: '/Profile', page: () => Profile()),
           GetPage(name: '/Document', page: () => DocumentPage()),
           GetPage(name: '/Boat', page: () => BoatPage()),
           GetPage(name: '/Seaman', page: () => SeamanPage()),
         ],
         unknownRoute: GetPage(name: '/Error404', page: () => ERROR404()),
-        theme: omniLightBlueTheme(),
-        darkTheme: omniDarkBlueTheme(),
+        //theme: omniLightBlueTheme(),
+
+        theme: omniDarkBlueTheme(),
         navigatorKey: Get.key,
         themeMode: ThemeMode.system,
         title: "ALBOURANE ADMIN",

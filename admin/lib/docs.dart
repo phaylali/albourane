@@ -1,5 +1,3 @@
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:admin/docsController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -8,11 +6,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 
 class DocsLibrary extends StatelessWidget {
-  final fC = Get.put(DocumentsController());
-  DocsLibrary({
-    required this.title,
-  });
-  final String title;
+//  final fC = Get.put(DocumentsController());
 
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
 
@@ -40,7 +34,7 @@ class DocsLibrary extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                title,
+                                "الوثائق",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 30,

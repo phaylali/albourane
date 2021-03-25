@@ -1,18 +1,14 @@
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:admin/docsController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_icons/flutter_icons.dart';
+
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:get/get.dart';
 
 class BoatsLibrary extends StatelessWidget {
-  final fC = Get.put(DocumentsController());
-  BoatsLibrary({
-    required this.title,
-  });
-  final String title;
+  // final fC = Get.put(DocumentsController());
 
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
 
@@ -39,13 +35,9 @@ class BoatsLibrary extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                title,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 30,
-                                ),
-                              ),
+                              child: Text("القوارب",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.headline6),
                             ),
                           ],
                         ),
@@ -88,13 +80,13 @@ class BoatsLibrary extends StatelessWidget {
                       SizedBox(
                         width: 20,
                       ),
-                      SizedBox(
-                        width: 350,
+                      Expanded(
                         child: FutureBuilder<QuerySnapshot>(
                             future: firestoro.collection('boats').get(),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
-                                return Text("Something went wrong");
+                                return Center(
+                                    child: Text("Something went wrong"));
                               }
                               if (snapshot.connectionState ==
                                   ConnectionState.done) {
@@ -102,122 +94,98 @@ class BoatsLibrary extends StatelessWidget {
 
                                 if (d!.docs.isNotEmpty) {
                                   return Center(
-                                    child: Wrap(
-                                      spacing: 10,
-                                      runSpacing: 10,
-                                      //direction: Axis.vertical,
-
-                                      children: d.docs
-                                          .map((item) => SizedBox(
-                                                height: 100,
-                                                width: 350,
-                                                child: OutlinedButton(
-                                                  onPressed: () {
-                                                    final String id = item.id;
-                                                    Get.toNamed(
-                                                      "/Boat?id=$id",
-                                                    );
-                                                  },
-                                                  style: ButtonStyle(
-                                                      shape: MaterialStateProperty.all<
-                                                              OutlinedBorder>(
-                                                          RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          30)))),
-                                                  child: Flex(
-                                                    direction: Axis.horizontal,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 100,
-                                                        child: Center(
-                                                            child: Text(
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: DataTable(
+                                        sortAscending: true,
+                                        sortColumnIndex: 0,
+                                        columns: [
+                                          DataColumn(
+                                            label: Text('اللوحة',
+                                                textAlign: TextAlign.center,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1),
+                                          ),
+                                          DataColumn(
+                                            label: Text('الاسم',
+                                                textAlign: TextAlign.center,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1),
+                                          ),
+                                          DataColumn(
+                                            label: Text('المسؤول',
+                                                textAlign: TextAlign.center,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1),
+                                          ),
+                                          DataColumn(
+                                            label: Text('بطاقة المسؤول',
+                                                textAlign: TextAlign.center,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1),
+                                          ),
+                                          DataColumn(
+                                            label: Text('المنطقة',
+                                                textAlign: TextAlign.center,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText1),
+                                          ),
+                                        ],
+                                        rows: d.docs
+                                            .map(
+                                              ((item) => DataRow(
+                                                    cells: <DataCell>[
+                                                      DataCell(
+                                                        Text(
                                                           "${item['reference']}",
-                                                          style: TextStyle(
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        )),
-                                                      ),
-                                                      Expanded(
-                                                        child: Center(
-                                                            child: Text(
+                                                        ),
+                                                        onTap: () {
+                                                          final String id =
+                                                              item.id;
+                                                          Get.toNamed(
+                                                            "/Boat?id=$id",
+                                                          );
+                                                        },
+                                                      ), //Extracting from Map element the value
+                                                      DataCell(
+                                                        Text(
                                                           "${item['name']}",
-                                                          style: TextStyle(
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        )),
+                                                        ),
+                                                        onTap: () {
+                                                          final String id =
+                                                              item.id;
+                                                          Get.toNamed(
+                                                            "/Boat?id=$id",
+                                                          );
+                                                        },
+                                                      ),
+                                                      DataCell(Text(
+                                                        "${item['owner']}",
+                                                      )),
+                                                      DataCell(
+                                                        Text(
+                                                          "${item['ownerCIN']}",
+                                                        ),
+                                                      ),
+                                                      DataCell(
+                                                        Text(
+                                                          "${item['region']}",
+                                                        ),
                                                       ),
                                                     ],
-                                                  ),
-                                                ),
-                                              ))
-                                          .toList()
-                                          .cast<Widget>(),
+                                                  )),
+                                            )
+                                            .toList(),
+                                      ),
                                     ),
                                   );
-                                  /*ListView.builder(
-                                    itemCount: d.docs.length,
-                                    itemBuilder: (context, index) {
-                                      return SizedBox(
-                                        height: 100,
-                                        width: 300,
-                                        child: OutlinedButton(
-                                          onPressed: () {
-                                            final String id = d.docs[index].id;
-                                            Get.toNamed(
-                                              "/Boat?id=$id",
-                                            );
-                                          },
-                                          style: ButtonStyle(
-                                              shape: MaterialStateProperty.all<
-                                                      OutlinedBorder>(
-                                                  RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30)))),
-                                          child: Flex(
-                                            direction: Axis.horizontal,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              SizedBox(
-                                                width: 100,
-                                                child: Center(
-                                                    child: Text(
-                                                  "${d.docs[index]['reference']}",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                              ),
-                                              Expanded(
-                                                child: Center(
-                                                    child: Text(
-                                                  "${d.docs[index]['name']}",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );*/
                                 }
                               }
-
                               return SafeArea(
                                 child: Scaffold(
                                   body: Padding(

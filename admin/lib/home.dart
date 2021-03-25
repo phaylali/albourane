@@ -23,20 +23,18 @@ class HomePage extends GetWidget<AuthController> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "WELCOME TO ALBOURANE ADMIN",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 30,
-                            ),
-                          ),
+                          child: Text("لوحة التحكم",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.headline6),
                         ),
                         Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: GetX<UserController>(
                               builder: (_) {
                                 var x = _.user.name;
-                                return Text("Welcome" + '  $x');
+                                return Text("مرحبا" + '  $x',
+                                    style:
+                                        Theme.of(context).textTheme.headline5);
                               },
                             )),
                       ],
@@ -97,10 +95,10 @@ class HomePage extends GetWidget<AuthController> {
                                   SizedBox(
                                     width: 20,
                                   ),
-                                  Text(
-                                    'Documents',
-                                    textScaleFactor: 1.5,
-                                  )
+                                  Text('الوثائق',
+                                      textScaleFactor: 1.5,
+                                      style:
+                                          Theme.of(context).textTheme.bodyText2)
                                 ],
                               ),
                               onPressed: () {
@@ -125,10 +123,10 @@ class HomePage extends GetWidget<AuthController> {
                                   SizedBox(
                                     width: 20,
                                   ),
-                                  Text(
-                                    'Boats',
-                                    textScaleFactor: 1.5,
-                                  )
+                                  Text('القوارب',
+                                      textScaleFactor: 1.5,
+                                      style:
+                                          Theme.of(context).textTheme.bodyText2)
                                 ],
                               ),
                               onPressed: () {
@@ -153,10 +151,10 @@ class HomePage extends GetWidget<AuthController> {
                                   SizedBox(
                                     width: 20,
                                   ),
-                                  Text(
-                                    'Seamen',
-                                    textScaleFactor: 1.5,
-                                  )
+                                  Text('البحارة',
+                                      textScaleFactor: 1.5,
+                                      style:
+                                          Theme.of(context).textTheme.bodyText2)
                                 ],
                               ),
                               style: ButtonStyle(

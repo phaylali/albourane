@@ -7,10 +7,12 @@ ThemeData omniLightRedTheme() => ThemeData.light().copyWith(
     appBarTheme: AppBarTheme(color: Colors.red[100]),
     accentColor: Colors.red[400],
     textTheme: TextTheme(
-      bodyText2: GoogleFonts.tajawal(color: Colors.red[400], fontSize: 20),
+      bodyText2: GoogleFonts.tajawal(
+          color: Colors.red[400], fontSize: 20, fontWeight: FontWeight.bold),
       bodyText1: GoogleFonts.tajawal(
           color: Colors.red[400], fontSize: 15, fontWeight: FontWeight.bold),
-      headline6: GoogleFonts.tajawal(color: Colors.red[400], fontSize: 30),
+      headline6: GoogleFonts.tajawal(
+          color: Colors.red[400], fontSize: 30, fontWeight: FontWeight.bold),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
@@ -31,8 +33,10 @@ ThemeData omniDarkRedTheme() => ThemeData.dark().copyWith(
     appBarTheme: AppBarTheme(color: Colors.red[900]),
     accentColor: Colors.red[400],
     textTheme: TextTheme(
-      headline6: GoogleFonts.tajawal(color: Colors.red[100], fontSize: 30),
-      bodyText2: GoogleFonts.tajawal(color: Colors.red[100], fontSize: 20),
+      headline6: GoogleFonts.tajawal(
+          color: Colors.red[100], fontSize: 30, fontWeight: FontWeight.bold),
+      bodyText2: GoogleFonts.tajawal(
+          color: Colors.red[100], fontSize: 20, fontWeight: FontWeight.bold),
       bodyText1: GoogleFonts.tajawal(
           color: Colors.red[100], fontSize: 15, fontWeight: FontWeight.bold),
     ),
@@ -105,10 +109,15 @@ ThemeData omniLightBlueTheme() => ThemeData.light().copyWith(
     accentColor: Colors.blue[400],
     //primaryColor: Colors.blue[400],
     textTheme: TextTheme(
-      bodyText2: GoogleFonts.tajawal(color: Colors.blue[400], fontSize: 20),
+      bodyText2: GoogleFonts.tajawal(
+        color: Colors.blue[400],
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
       bodyText1: GoogleFonts.tajawal(
           color: Colors.blue[400], fontSize: 15, fontWeight: FontWeight.bold),
-      headline6: GoogleFonts.tajawal(color: Colors.blue[400], fontSize: 30),
+      headline6: GoogleFonts.tajawal(
+          color: Colors.blue[400], fontSize: 30, fontWeight: FontWeight.bold),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
@@ -128,12 +137,30 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
     scaffoldBackgroundColor: Colors.blueGrey[900],
     appBarTheme: AppBarTheme(color: Colors.blue[900]),
     accentColor: Colors.blue[400],
-    //primaryColor: Colors.blue[100],
+    primaryColor: Colors.blue[100],
     textTheme: TextTheme(
-      headline6: GoogleFonts.tajawal(color: Colors.blue[100], fontSize: 30),
-      bodyText2: GoogleFonts.tajawal(color: Colors.blue[100], fontSize: 20),
-      bodyText1: GoogleFonts.tajawal(
+      headline1: GoogleFonts.tajawal(
+          color: Colors.blue[100], fontSize: 5, fontWeight: FontWeight.bold),
+      headline2: GoogleFonts.tajawal(
+          color: Colors.blue[100], fontSize: 10, fontWeight: FontWeight.bold),
+      headline3: GoogleFonts.tajawal(
           color: Colors.blue[100], fontSize: 15, fontWeight: FontWeight.bold),
+      headline4: GoogleFonts.tajawal(
+          color: Colors.blue[100], fontSize: 20, fontWeight: FontWeight.bold),
+      headline5: GoogleFonts.tajawal(
+          color: Colors.blue[100], fontSize: 25, fontWeight: FontWeight.bold),
+      headline6: GoogleFonts.tajawal(
+          color: Colors.blue[100], fontSize: 30, fontWeight: FontWeight.bold),
+      bodyText2: GoogleFonts.tajawal(
+          color: Colors.blue[100], fontSize: 25, fontWeight: FontWeight.normal),
+      bodyText1: GoogleFonts.tajawal(
+          color: Colors.blue[100], fontSize: 20, fontWeight: FontWeight.normal),
+      subtitle2: GoogleFonts.tajawal(
+          color: Colors.blue[300], fontSize: 15, fontWeight: FontWeight.normal),
+      subtitle1: GoogleFonts.tajawal(
+          color: Colors.blue[300], fontSize: 10, fontWeight: FontWeight.normal),
+      caption: GoogleFonts.tajawal(
+          color: Colors.grey[700], fontSize: 20, fontWeight: FontWeight.normal),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
