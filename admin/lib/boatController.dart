@@ -15,7 +15,7 @@ class BoatsController extends GetxController {
     "chbak",
   ].obs;
   Rx<List<BoatModel>> boatsList = Rx<List<BoatModel>>();
-  List<BoatModel> get boats => boatsList.value;
+  List<BoatModel>? get boats => boatsList.value;
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
 
   onInit() {

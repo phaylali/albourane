@@ -72,7 +72,7 @@ class UserController extends GetxController {
   String? email;
   Rx<UserModel> _userModel = UserModel().obs;
 
-  UserModel get user => _userModel.value;
+  UserModel get user => _userModel.value!;
 
   set user(UserModel value) => this._userModel.value = value;
 
@@ -90,6 +90,7 @@ class AuthController extends GetxController {
   @override
   onInit() {
     _firebaseUser.bindStream(_auth.authStateChanges());
+
     super.onInit();
   }
 

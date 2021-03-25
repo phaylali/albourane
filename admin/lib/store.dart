@@ -208,7 +208,7 @@ class Store extends StatelessWidget {
                 GetX<ProductsController>(builder: (ProductsController pC) {
                   return Expanded(
                     child: GridView.builder(
-                      itemCount: pC.products.length,
+                      itemCount: pC.products!.length,
                       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                           maxCrossAxisExtent: 300,
                           mainAxisSpacing: 10,
@@ -225,7 +225,7 @@ class Store extends StatelessWidget {
                                   width: 300,
                                   child: OutlinedButton(
                                     onPressed: () {
-                                      final String id = pC.products[index].id;
+                                      final String id = pC.products![index].id;
                                       Get.toNamed(
                                         "/Product?id=$id",
                                       );
@@ -235,7 +235,7 @@ class Store extends StatelessWidget {
                                             OutlinedBorder>(StadiumBorder())),
                                     child: Center(
                                         child: Image.network(
-                                            pC.products[index].image)),
+                                            pC.products![index].image)),
                                   ),
                                 ),
                               ),

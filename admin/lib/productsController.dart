@@ -13,7 +13,7 @@ class ProductsController extends GetxController {
   final earrings = true.obs;
   final List<String> filters = ["necklace", "braclet", "ring", "earrings"].obs;
   Rx<List<ProductModel>> productsList = Rx<List<ProductModel>>();
-  List<ProductModel> get products => productsList.value;
+  List<ProductModel>? get products => productsList.value;
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
 
   onInit() {

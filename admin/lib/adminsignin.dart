@@ -123,11 +123,11 @@ class AdminSignIn extends GetWidget<AuthController> {
                                           .bodyText1!
                                           .color),
                                   obscuringCharacter: '*',
-                                  obscureText: p.hidden.value,
+                                  obscureText: p.hidden.value!,
                                   decoration: InputDecoration(
                                     hintText: 'Password',
                                     suffixIcon: InkWell(
-                                      child: p.hidden.isTrue
+                                      child: p.hidden.isTrue!
                                           ? Icon(Feather.eye_off)
                                           : Icon(Feather.eye),
                                       onTap: () => p.change(),

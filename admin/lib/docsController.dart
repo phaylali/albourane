@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 
 class DocumentsController extends GetxController {
   Rx<List<DocumentModel>> documentsList = Rx<List<DocumentModel>>();
-  List<DocumentModel> get documents => documentsList.value;
+  List<DocumentModel>? get documents => documentsList.value;
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
 
   onInit() {
