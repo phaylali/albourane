@@ -151,58 +151,6 @@ class SeamenLibrary extends StatelessWidget {
                                           .cast<Widget>(),
                                     ),
                                   );
-                                  /*ListView.builder(
-                                    itemCount: d.docs.length,
-                                    itemBuilder: (context, index) {
-                                      return SizedBox(
-                                        height: 100,
-                                        width: 300,
-                                        child: OutlinedButton(
-                                          onPressed: () {
-                                            final String id = d.docs[index].id;
-                                            Get.toNamed(
-                                              "/Boat?id=$id",
-                                            );
-                                          },
-                                          style: ButtonStyle(
-                                              shape: MaterialStateProperty.all<
-                                                      OutlinedBorder>(
-                                                  RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30)))),
-                                          child: Flex(
-                                            direction: Axis.horizontal,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              SizedBox(
-                                                width: 100,
-                                                child: Center(
-                                                    child: Text(
-                                                  "${d.docs[index]['reference']}",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                              ),
-                                              Expanded(
-                                                child: Center(
-                                                    child: Text(
-                                                  "${d.docs[index]['name']}",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );*/
                                 }
                               }
 

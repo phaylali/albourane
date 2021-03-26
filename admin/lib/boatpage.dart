@@ -104,7 +104,6 @@ class BoatPage extends StatelessWidget {
                                         ),
                                         Expanded(
                                           child: ListView(
-                                            //direction: Axis.vertical,
                                             children: [
                                               Center(
                                                 child: Text("معلومات",

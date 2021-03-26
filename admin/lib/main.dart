@@ -1,4 +1,4 @@
-import 'package:admin/adminsignin.dart';
+import 'package:admin/login.dart';
 import 'package:admin/auth.dart';
 import 'package:admin/boatController.dart';
 import 'package:admin/boatpage.dart';
@@ -10,7 +10,6 @@ import 'package:admin/home.dart';
 import 'package:admin/newboat.dart';
 import 'package:admin/newdoc.dart';
 import 'package:admin/newseaman.dart';
-import 'package:admin/profile.dart';
 import 'package:admin/seamanPage.dart';
 import 'package:admin/seamen.dart';
 import 'package:admin/themes.dart';
@@ -20,6 +19,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,53 +30,88 @@ void main() async {
     final license = await rootBundle.loadString('google_fonts/OFL.txt');
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);
   });
-  runApp(Start());
+  SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarColor: Colors.black));
+  runApp(ProviderScope(child: Start()));
 }
 
 class Start extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        initialBinding: AuthBinding(),
-        getPages: [
-          GetPage(name: '/', page: () => Root()),
-          GetPage(name: '/SignIn', page: () => AdminSignIn()),
-          GetPage(name: '/NewDocument', page: () => NewDocument()),
-          GetPage(name: '/NewBoat', page: () => NewBoat()),
-          GetPage(name: '/NewSeaman', page: () => NewSeaman()),
-          GetPage(name: '/Documents', page: () => DocsLibrary()),
-          GetPage(name: '/Boats', page: () => BoatsLibrary()),
-          GetPage(name: '/Seamen', page: () => SeamenLibrary()),
-          GetPage(name: '/Profile', page: () => Profile()),
-          GetPage(name: '/Document', page: () => DocumentPage()),
-          GetPage(name: '/Boat', page: () => BoatPage()),
-          GetPage(name: '/Seaman', page: () => SeamanPage()),
-        ],
-        unknownRoute: GetPage(name: '/Error404', page: () => ERROR404()),
-        //theme: omniLightBlueTheme(),
-
-        theme: omniDarkBlueTheme(),
-        navigatorKey: Get.key,
-        //themeMode: ThemeMode.system,
-        title: "ALBOURANE ADMIN",
-        debugShowCheckedModeBanner: false,
-        home: Root());
+      getPages: [
+        GetPage(name: '/', page: () => Root()),
+        GetPage(name: '/SignIn', page: () => AdminSignIn()),
+        GetPage(name: '/NewDocument', page: () => NewDocument()),
+        GetPage(name: '/NewBoat', page: () => NewBoat()),
+        GetPage(name: '/NewSeaman', page: () => NewSeaman()),
+        GetPage(name: '/Documents', page: () => DocsLibrary()),
+        GetPage(name: '/Boats', page: () => BoatsLibrary()),
+        GetPage(name: '/Seamen', page: () => SeamenLibrary()),
+        GetPage(name: '/Document', page: () => DocumentPage()),
+        GetPage(name: '/Boat', page: () => BoatPage()),
+        GetPage(name: '/Seaman', page: () => SeamanPage()),
+      ],
+      unknownRoute: GetPage(name: '/Error404', page: () => ERROR404()),
+      theme: omniDarkBlueTheme(),
+      navigatorKey: Get.key,
+      title: "ALBOURANE ADMIN",
+      debugShowCheckedModeBanner: false,
+      home: Root(),
+    );
   }
 }
 
-class Root extends GetWidget<AuthController> {
+class Root extends StatelessWidget {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
-    return GetX(
-      initState: (_) async {
-        Get.put<UserController>(UserController());
-        Get.put<AuthController>(AuthController());
-        Database().getCurrentUser();
+    return FutureBuilder(
+      future: _initialization,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Center(
+            child: Text("Something Went wrong"),
+          );
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          return AuthChecker();
+        }
+
+        return Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
       },
-      builder: (_) {
-        return (Get.find<AuthController>().user != null)
-            ? HomePage()
-            : AdminSignIn();
+    );
+  }
+}
+
+class AuthChecker extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    final _authState = watch(authStateProvider);
+    return _authState.when(
+      data: (value) {
+        if (value != null) {
+          return HomePage();
+        }
+        return AdminSignIn();
+      },
+      loading: () {
+        return Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
+      error: (_, __) {
+        return Scaffold(
+          body: Center(
+            child: Text("OOPS"),
+          ),
+        );
       },
     );
   }

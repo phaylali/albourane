@@ -1,11 +1,19 @@
+import 'package:admin/login.dart';
 import 'package:admin/auth.dart';
+//import 'package:admin/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class HomePage extends GetWidget<AuthController> {
+class HomePage extends ConsumerWidget {
+  final String x = FirebaseAuth.instance.currentUser!.uid;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    FirebaseFirestore fb = FirebaseFirestore.instance;
+    //final _auth = watch(authServicesProvider);
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -26,15 +34,31 @@ class HomePage extends GetWidget<AuthController> {
                               style: Theme.of(context).textTheme.headline6),
                         ),
                         Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GetX<UserController>(
-                              builder: (_) {
-                                var x = _.user.name;
-                                return Text("مرحبا" + '  $x',
-                                    style:
-                                        Theme.of(context).textTheme.headline5);
-                              },
-                            )),
+                          padding: const EdgeInsets.all(8.0),
+                          child: FutureBuilder<DocumentSnapshot>(
+                            future: getDoc(x),
+                            builder: (BuildContext context, snapshot) {
+                              if (snapshot.hasData) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else {
+                                  DocumentSnapshot? item = snapshot.data;
+                                  return Center(
+                                      // here only return is missing
+                                      child: Text(
+                                    "مرحبا ${item!['name']}",
+                                  ));
+                                }
+                              } else if (snapshot.hasError) {
+                                Text('no data');
+                              }
+                              return CircularProgressIndicator();
+                            },
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -59,9 +83,17 @@ class HomePage extends GetWidget<AuthController> {
                         width: 60,
                         child: OutlinedButton(
                           child: Icon(Feather.log_out),
-                          onPressed: () {
-                            //showLicensePage(context: context);
-                            controller.signOut();
+                          onPressed: () async {
+                            //await
+                            /*Get.snackbar(
+                              "يتم التحميل",
+                              "المرجو الإنتظار",
+                            );
+                            Future.delayed(
+                                Duration(seconds: 3), () => _auth.signout());
+*/
+                            Get.to(GotToHome());
+                            //Get.to(Root());
                           },
                         ),
                       ),
@@ -179,6 +211,32 @@ class HomePage extends GetWidget<AuthController> {
           ],
         )),
       ),
+    );
+  }
+}
+
+class GotToHome extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    final _auth = watch(authServicesProvider);
+    return FutureBuilder(
+      future: _auth.signout(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Center(
+            child: Text("Something Went wrong"),
+          );
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          return AdminSignIn();
+        }
+        //loading
+        return Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
     );
   }
 }

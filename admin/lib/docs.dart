@@ -4,8 +4,6 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 
 class DocsLibrary extends StatelessWidget {
-//  final fC = Get.put(DocumentsController());
-
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
 
   @override

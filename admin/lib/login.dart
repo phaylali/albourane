@@ -1,16 +1,24 @@
 import 'package:admin/auth.dart';
+import 'package:admin/home.dart';
 import 'package:admin/passwordController.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 
-class AdminSignIn extends GetWidget<AuthController> {
+class AdminSignIn extends ConsumerWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  void updateEmail(BuildContext context, String email) {
+    context.read(emailProvider).state = email;
+  }
+
+  void updatePassword(BuildContext context, String pass) {
+    context.read(passwordProvider).state = pass;
+  }
 
   @override
-  Widget build(BuildContext context) {
-    Get.put(PasswordController());
+  Widget build(BuildContext context, ScopedReader watch) {
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -27,7 +35,7 @@ class AdminSignIn extends GetWidget<AuthController> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "SIGN IN",
+                            "الدخول",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 30,
@@ -37,7 +45,7 @@ class AdminSignIn extends GetWidget<AuthController> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "Welcome Admin",
+                            "مرحبا",
                           ),
                         ),
                       ],
@@ -89,15 +97,16 @@ class AdminSignIn extends GetWidget<AuthController> {
                           ),
                           SizedBox(
                             width: 600,
-                            child: TextFormField(
-                              controller: emailController,
-                              style: TextStyle(
+                            child: TextField(
+                              onChanged: (value) => updateEmail(context, value),
+                              /*style: TextStyle(
                                   color: Theme.of(context)
                                       .textTheme
                                       .bodyText1!
-                                      .color),
+                                      .color),*/
                               decoration: InputDecoration(
-                                hintText: 'Email',
+                                hintText: 'البريد الالكتروني',
+                                hintTextDirection: TextDirection.rtl,
                                 suffixIcon: Icon(Feather.mail),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20.0),
@@ -113,17 +122,15 @@ class AdminSignIn extends GetWidget<AuthController> {
                             child: GetX<PasswordController>(
                               init: PasswordController(),
                               builder: (p) {
-                                return TextFormField(
-                                  controller: passwordController,
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1!
-                                          .color),
+                                return TextField(
+                                  onChanged: (value) =>
+                                      updatePassword(context, value),
+                                  //style: Theme.of(context).textTheme.
                                   obscuringCharacter: '*',
                                   obscureText: p.hidden.value!,
                                   decoration: InputDecoration(
-                                    hintText: 'Password',
+                                    hintText: 'كلمة السر',
+                                    hintTextDirection: TextDirection.rtl,
                                     suffixIcon: InkWell(
                                       child: p.hidden.isTrue!
                                           ? Icon(Feather.eye_off)
@@ -152,15 +159,14 @@ class AdminSignIn extends GetWidget<AuthController> {
                                   SizedBox(
                                     width: 20,
                                   ),
-                                  Text(
-                                    'Sign In',
-                                    textScaleFactor: 1.5,
-                                  )
+                                  Text('الدخول',
+                                      textScaleFactor: 1.5,
+                                      style:
+                                          Theme.of(context).textTheme.bodyText2)
                                 ],
                               ),
-                              onPressed: () {
-                                controller.login(emailController.text,
-                                    passwordController.text);
+                              onPressed: () async {
+                                Get.to(GotToProfile());
                               },
                             ),
                           ),
@@ -177,6 +183,43 @@ class AdminSignIn extends GetWidget<AuthController> {
           ],
         )),
       ),
+    );
+  }
+}
+
+class GotToProfile extends ConsumerWidget {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  void updateEmail(BuildContext context, String email) {
+    context.read(emailProvider).state = email;
+  }
+
+  void updatePassword(BuildContext context, String pass) {
+    context.read(passwordProvider).state = pass;
+  }
+
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    final email = watch(emailProvider).state;
+    final pass = watch(passwordProvider).state;
+    final _auth = watch(authServicesProvider);
+    return FutureBuilder(
+      future: _auth.signIn(email: email, password: pass),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Center(
+            child: Text("Something Went wrong"),
+          );
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          return HomePage();
+        }
+        return Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
     );
   }
 }

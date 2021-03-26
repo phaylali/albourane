@@ -675,7 +675,6 @@ class NewBoat extends StatelessWidget {
       DataCell(
         TextFormField(
           style: Theme.of(context).textTheme.bodyText1,
-          //textDirection: TextDirection.rtl,
           keyboardType: TextInputType.name,
           maxLines: 3,
           controller: wrtCon,
@@ -689,7 +688,6 @@ class NewBoat extends StatelessWidget {
       DataCell(
         TextFormField(
           style: Theme.of(context).textTheme.bodyText1,
-          //textDirection: TextDirection.rtl,
           keyboardType: TextInputType.name,
           maxLines: 3,
           controller: wrtIdCon,
