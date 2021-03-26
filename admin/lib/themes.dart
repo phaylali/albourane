@@ -10,32 +10,32 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
       headline1: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[100],
-          fontSize: 5,
+          fontSize: 15,
           fontWeight: FontWeight.bold),
       headline2: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[100],
-          fontSize: 10,
+          fontSize: 20,
           fontWeight: FontWeight.bold),
       headline3: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[100],
-          fontSize: 15,
+          fontSize: 25,
           fontWeight: FontWeight.bold),
       headline4: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[100],
-          fontSize: 20,
+          fontSize: 30,
           fontWeight: FontWeight.bold),
       headline5: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[100],
-          fontSize: 25,
+          fontSize: 35,
           fontWeight: FontWeight.bold),
       headline6: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[100],
-          fontSize: 30,
+          fontSize: 40,
           fontWeight: FontWeight.bold),
       bodyText2: TextStyle(
           fontFamily: 'Tajawal',
@@ -58,6 +58,16 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
           fontSize: 20,
           fontWeight: FontWeight.normal),
       caption: TextStyle(
+          fontFamily: 'Tajawal',
+          color: Colors.grey[700],
+          fontSize: 20,
+          fontWeight: FontWeight.normal),
+      button: TextStyle(
+          fontFamily: 'Tajawal',
+          color: Colors.grey[700],
+          fontSize: 20,
+          fontWeight: FontWeight.normal),
+      overline: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.grey[700],
           fontSize: 20,

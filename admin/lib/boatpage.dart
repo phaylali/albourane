@@ -105,15 +105,6 @@ class BoatPage extends StatelessWidget {
                                         Expanded(
                                           child: ListView(
                                             children: [
-                                              Center(
-                                                child: Text("معلومات",
-                                                    textAlign: TextAlign.center,
-                                                    textDirection:
-                                                        TextDirection.rtl,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyText2),
-                                              ),
                                               DataTable(columns: [
                                                 DataColumn(label: Container()),
                                                 DataColumn(label: Container()),
@@ -122,20 +113,12 @@ class BoatPage extends StatelessWidget {
                                                   DataCell(
                                                     Text(
                                                       'المسؤول',
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyText1,
                                                       maxLines: 3,
                                                     ),
                                                   ),
                                                   DataCell(
                                                     Text(
                                                       '${data['owner']}',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyText1,
                                                       maxLines: 3,
                                                     ),
                                                   ),
@@ -144,18 +127,12 @@ class BoatPage extends StatelessWidget {
                                                   DataCell(
                                                     Text(
                                                       'بطاقة المسؤول',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyText1,
                                                       maxLines: 3,
                                                     ),
                                                   ),
                                                   DataCell(
                                                     Text(
                                                       '${data['ownerCIN']}',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyText1,
                                                       maxLines: 3,
                                                     ),
                                                   ),
@@ -164,18 +141,12 @@ class BoatPage extends StatelessWidget {
                                                   DataCell(
                                                     Text(
                                                       'المنطقة',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyText1,
                                                       maxLines: 3,
                                                     ),
                                                   ),
                                                   DataCell(
                                                     Text(
                                                       '${data['region']}',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyText1,
                                                       maxLines: 3,
                                                     ),
                                                   ),
@@ -219,33 +190,24 @@ class BoatPage extends StatelessWidget {
                                                 height: 20,
                                               ),
                                               Center(
-                                                child: Text("المالكون",
-                                                    textAlign: TextAlign.center,
-                                                    textDirection:
-                                                        TextDirection.rtl,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyText2),
+                                                child: Text(
+                                                  "المالكون",
+                                                  textScaleFactor: 2,
+                                                ),
                                               ),
                                               DataTable(columns: [
                                                 DataColumn(
                                                   label: Center(
-                                                    child: Text('الاسم',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .subtitle2),
+                                                    child: Text(
+                                                      'الاسم',
+                                                    ),
                                                   ),
                                                 ),
                                                 DataColumn(
                                                   label: Center(
-                                                    child: Text('رقم البطاقة',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .subtitle2),
+                                                    child: Text(
+                                                      'رقم البطاقة',
+                                                    ),
                                                   ),
                                                 ),
                                               ], rows: [
@@ -269,14 +231,11 @@ class BoatPage extends StatelessWidget {
                                                 height: 20,
                                               ),
                                               Center(
-                                                child: Text("الورثة",
-                                                    textAlign: TextAlign.center,
-                                                    textDirection:
-                                                        TextDirection.rtl,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyText2),
-                                              ),
+                                                  child: Text(
+                                                "الورثة",
+                                                textAlign: TextAlign.center,
+                                                textScaleFactor: 2,
+                                              )),
                                               SizedBox(
                                                 height: 20,
                                               ),
@@ -524,27 +483,21 @@ class BoatPage extends StatelessWidget {
                                                             DataColumn(
                                                               label: Center(
                                                                 child: Text(
-                                                                    'الاسم',
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .center,
-                                                                    style: Theme.of(
-                                                                            context)
-                                                                        .textTheme
-                                                                        .subtitle2),
+                                                                  'الاسم',
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                ),
                                                               ),
                                                             ),
                                                             DataColumn(
                                                               label: Center(
                                                                 child: Text(
-                                                                    'رقم البطاقة',
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .center,
-                                                                    style: Theme.of(
-                                                                            context)
-                                                                        .textTheme
-                                                                        .subtitle2),
+                                                                  'رقم البطاقة',
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                ),
                                                               ),
                                                             ),
                                                           ],
@@ -608,14 +561,12 @@ class BoatPage extends StatelessWidget {
       DataCell(
         Text(
           "$wrtName",
-          style: Theme.of(context).textTheme.bodyText1,
           maxLines: 3,
         ),
       ),
       DataCell(
         Text(
           "$wrtID",
-          style: Theme.of(context).textTheme.bodyText1,
           maxLines: 3,
         ),
       ),

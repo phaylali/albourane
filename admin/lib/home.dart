@@ -12,8 +12,6 @@ class HomePage extends ConsumerWidget {
   final String x = FirebaseAuth.instance.currentUser!.uid;
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    FirebaseFirestore fb = FirebaseFirestore.instance;
-    //final _auth = watch(authServicesProvider);
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -84,16 +82,7 @@ class HomePage extends ConsumerWidget {
                         child: OutlinedButton(
                           child: Icon(Feather.log_out),
                           onPressed: () async {
-                            //await
-                            /*Get.snackbar(
-                              "يتم التحميل",
-                              "المرجو الإنتظار",
-                            );
-                            Future.delayed(
-                                Duration(seconds: 3), () => _auth.signout());
-*/
                             Get.to(GotToHome());
-                            //Get.to(Root());
                           },
                         ),
                       ),
@@ -125,10 +114,10 @@ class HomePage extends ConsumerWidget {
                                   SizedBox(
                                     width: 20,
                                   ),
-                                  Text('الوثائق',
-                                      textScaleFactor: 1.5,
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2)
+                                  Text(
+                                    'الوثائق',
+                                    textScaleFactor: 2,
+                                  )
                                 ],
                               ),
                               onPressed: () {
@@ -153,10 +142,10 @@ class HomePage extends ConsumerWidget {
                                   SizedBox(
                                     width: 20,
                                   ),
-                                  Text('القوارب',
-                                      textScaleFactor: 1.5,
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2)
+                                  Text(
+                                    'القوارب',
+                                    textScaleFactor: 2,
+                                  )
                                 ],
                               ),
                               onPressed: () {
@@ -181,10 +170,10 @@ class HomePage extends ConsumerWidget {
                                   SizedBox(
                                     width: 20,
                                   ),
-                                  Text('البحارة',
-                                      textScaleFactor: 1.5,
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2)
+                                  Text(
+                                    'البحارة',
+                                    textScaleFactor: 2,
+                                  )
                                 ],
                               ),
                               style: ButtonStyle(

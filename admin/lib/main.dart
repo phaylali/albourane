@@ -71,7 +71,7 @@ class Root extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Center(
-            child: Text("Something Went wrong"),
+            child: Text("هناك خطأ ما في قاعدة البيانات"),
           );
         }
         if (snapshot.connectionState == ConnectionState.done) {
@@ -109,7 +109,7 @@ class AuthChecker extends ConsumerWidget {
       error: (_, __) {
         return Scaffold(
           body: Center(
-            child: Text("OOPS"),
+            child: Text("هناك خطأ ما في التوثيق"),
           ),
         );
       },

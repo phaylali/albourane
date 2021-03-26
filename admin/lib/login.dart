@@ -34,13 +34,9 @@ class AdminSignIn extends ConsumerWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "الدخول",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 30,
-                            ),
-                          ),
+                          child: Text("الدخول",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.headline6),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -99,11 +95,6 @@ class AdminSignIn extends ConsumerWidget {
                             width: 600,
                             child: TextField(
                               onChanged: (value) => updateEmail(context, value),
-                              /*style: TextStyle(
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .color),*/
                               decoration: InputDecoration(
                                 hintText: 'البريد الالكتروني',
                                 hintTextDirection: TextDirection.rtl,
@@ -125,7 +116,6 @@ class AdminSignIn extends ConsumerWidget {
                                 return TextField(
                                   onChanged: (value) =>
                                       updatePassword(context, value),
-                                  //style: Theme.of(context).textTheme.
                                   obscuringCharacter: '*',
                                   obscureText: p.hidden.value!,
                                   decoration: InputDecoration(
@@ -159,10 +149,9 @@ class AdminSignIn extends ConsumerWidget {
                                   SizedBox(
                                     width: 20,
                                   ),
-                                  Text('الدخول',
-                                      textScaleFactor: 1.5,
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2)
+                                  Text(
+                                    'الدخول',
+                                  )
                                 ],
                               ),
                               onPressed: () async {

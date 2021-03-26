@@ -331,29 +331,7 @@ class NewBoat extends StatelessWidget {
                                   ], rows: [
                                     DataRow(cells: [
                                       DataCell(
-                                        TextFormField(
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1,
-                                          keyboardType: TextInputType.name,
-                                          maxLines: 3,
-                                          controller: nameController,
-                                          decoration: InputDecoration(
-                                              hintText: 'الاسم',
-                                              hintTextDirection:
-                                                  TextDirection.rtl,
-                                              hintStyle: TextStyle(
-                                                  fontSize: Theme.of(context)
-                                                      .textTheme
-                                                      .subtitle2!
-                                                      .fontSize)),
-                                        ),
-                                      ),
-                                      DataCell(
-                                        TextFormField(
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1,
+                                        TextField(
                                           maxLines: 3,
                                           keyboardType: TextInputType.number,
                                           controller: refController,
@@ -361,92 +339,70 @@ class NewBoat extends StatelessWidget {
                                             hintText: 'رقم اللوحة',
                                             hintTextDirection:
                                                 TextDirection.rtl,
-                                            hintStyle: TextStyle(
-                                                fontSize: Theme.of(context)
-                                                    .textTheme
-                                                    .subtitle2!
-                                                    .fontSize),
                                           ),
                                         ),
-                                      )
+                                      ),
+                                      DataCell(
+                                        TextField(
+                                          keyboardType: TextInputType.name,
+                                          maxLines: 3,
+                                          controller: nameController,
+                                          decoration: InputDecoration(
+                                            hintText: 'اسم القارب',
+                                            hintTextDirection:
+                                                TextDirection.rtl,
+                                          ),
+                                        ),
+                                      ),
                                     ]),
                                     DataRow(cells: [
                                       DataCell(
-                                        TextFormField(
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1,
+                                        TextField(
+                                            keyboardType: TextInputType.name,
+                                            maxLines: 3,
+                                            controller: respIdController,
+                                            decoration: InputDecoration(
+                                              hintText: 'رقم بطاقة المسؤول',
+                                              hintTextDirection:
+                                                  TextDirection.rtl,
+                                            )),
+                                      ),
+                                      DataCell(
+                                        TextField(
                                           keyboardType: TextInputType.name,
                                           maxLines: 3,
                                           controller: respController,
                                           decoration: InputDecoration(
-                                              hintText: 'اسم المسؤول',
-                                              hintTextDirection:
-                                                  TextDirection.rtl,
-                                              hintStyle: TextStyle(
-                                                  fontSize: Theme.of(context)
-                                                      .textTheme
-                                                      .subtitle2!
-                                                      .fontSize)),
-                                        ),
-                                      ),
-                                      DataCell(
-                                        TextFormField(
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1,
-                                          keyboardType: TextInputType.name,
-                                          maxLines: 3,
-                                          controller: respIdController,
-                                          decoration: InputDecoration(
-                                              hintText: 'رقم بطاقته',
-                                              hintTextDirection:
-                                                  TextDirection.rtl,
-                                              hintStyle: TextStyle(
-                                                  fontSize: Theme.of(context)
-                                                      .textTheme
-                                                      .subtitle2!
-                                                      .fontSize)),
+                                            hintText: 'اسم المسؤول',
+                                            hintTextDirection:
+                                                TextDirection.rtl,
+                                          ),
                                         ),
                                       ),
                                     ]),
                                     DataRow(cells: [
                                       DataCell(
-                                        TextFormField(
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1,
+                                        TextField(
                                           keyboardType: TextInputType.name,
                                           maxLines: 3,
                                           controller: regionController,
                                           decoration: InputDecoration(
-                                              hintText: 'المنطقة',
-                                              hintTextDirection:
-                                                  TextDirection.rtl,
-                                              hintStyle: TextStyle(
-                                                  fontSize: Theme.of(context)
-                                                      .textTheme
-                                                      .subtitle2!
-                                                      .fontSize)),
+                                            hintText: 'المنطقة',
+                                            hintTextDirection:
+                                                TextDirection.rtl,
+                                          ),
                                         ),
                                       ),
                                       DataCell(
-                                        TextFormField(
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1,
+                                        TextField(
                                           keyboardType: TextInputType.url,
                                           maxLines: 3,
                                           controller: attachmentController,
                                           decoration: InputDecoration(
-                                              hintText: 'رابط الصورة',
-                                              hintTextDirection:
-                                                  TextDirection.rtl,
-                                              hintStyle: TextStyle(
-                                                  fontSize: Theme.of(context)
-                                                      .textTheme
-                                                      .subtitle2!
-                                                      .fontSize)),
+                                            hintText: 'رابط الصورة',
+                                            hintTextDirection:
+                                                TextDirection.rtl,
+                                          ),
                                         ),
                                       ),
                                     ]),
@@ -455,30 +411,26 @@ class NewBoat extends StatelessWidget {
                                     height: 20,
                                   ),
                                   Center(
-                                    child: Text("المالكون",
-                                        textAlign: TextAlign.center,
-                                        textDirection: TextDirection.rtl,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText2),
+                                    child: Text(
+                                      "المالكون",
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ),
                                   DataTable(columns: [
                                     DataColumn(
-                                      label: Center(
-                                        child: Text('الاسم',
-                                            textAlign: TextAlign.center,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle2),
+                                      label: Expanded(
+                                        child: Text(
+                                          'رقم البطاقة',
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
                                     ),
                                     DataColumn(
-                                      label: Center(
-                                        child: Text('رقم البطاقة',
-                                            textAlign: TextAlign.center,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .subtitle2),
+                                      label: Expanded(
+                                        child: Text(
+                                          'الاسم',
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
                                     ),
                                   ], rows: [
@@ -490,27 +442,14 @@ class NewBoat extends StatelessWidget {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Center(
-                                    child: Text("الورثة",
-                                        textAlign: TextAlign.center,
-                                        textDirection: TextDirection.rtl,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText2),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
                                   ExpansionTile(
                                     collapsedBackgroundColor:
                                         Theme.of(context).primaryColor,
-                                    title: Center(
-                                      child: Text("لائحة الورثة",
-                                          textAlign: TextAlign.center,
-                                          textDirection: TextDirection.rtl,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .caption),
+                                    title: Expanded(
+                                      child: Text(
+                                        "لائحة الورثة",
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ),
                                     children: [
                                       Row(
@@ -614,23 +553,21 @@ class NewBoat extends StatelessWidget {
                                               ],
                                               columns: [
                                                 DataColumn(
-                                                  label: Center(
-                                                    child: Text('الاسم',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .subtitle2),
+                                                  label: Expanded(
+                                                    child: Text(
+                                                      'رقم البطاقة',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
                                                   ),
                                                 ),
                                                 DataColumn(
-                                                  label: Center(
-                                                    child: Text('رقم البطاقة',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .subtitle2),
+                                                  label: Expanded(
+                                                    child: Text(
+                                                      'الاسم',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -673,29 +610,25 @@ class NewBoat extends StatelessWidget {
       TextEditingController wrtIdCon) {
     return DataRow(cells: [
       DataCell(
-        TextFormField(
-          style: Theme.of(context).textTheme.bodyText1,
-          keyboardType: TextInputType.name,
-          maxLines: 3,
-          controller: wrtCon,
-          decoration: InputDecoration(
-              hintText: 'اسم المالك $wrtNo ',
-              hintTextDirection: TextDirection.rtl,
-              hintStyle: TextStyle(
-                  fontSize: Theme.of(context).textTheme.subtitle2!.fontSize)),
-        ),
-      ),
-      DataCell(
-        TextFormField(
-          style: Theme.of(context).textTheme.bodyText1,
+        TextField(
           keyboardType: TextInputType.name,
           maxLines: 3,
           controller: wrtIdCon,
           decoration: InputDecoration(
-              hintText: 'رقم بطاقة المالك $wrtNo',
-              hintTextDirection: TextDirection.rtl,
-              hintStyle: TextStyle(
-                  fontSize: Theme.of(context).textTheme.subtitle2!.fontSize)),
+            hintText: 'رقم بطاقة المالك $wrtNo',
+            hintTextDirection: TextDirection.rtl,
+          ),
+        ),
+      ),
+      DataCell(
+        TextField(
+          keyboardType: TextInputType.name,
+          maxLines: 3,
+          controller: wrtCon,
+          decoration: InputDecoration(
+            hintText: 'اسم المالك $wrtNo ',
+            hintTextDirection: TextDirection.rtl,
+          ),
         ),
       ),
     ]);

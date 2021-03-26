@@ -29,13 +29,9 @@ class DocsLibrary extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "الوثائق",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 30,
-                                ),
-                              ),
+                              child: Text("الوثائق",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.headline6),
                             ),
                           ],
                         ),
@@ -83,7 +79,7 @@ class DocsLibrary extends StatelessWidget {
                             future: firestoro.collection('documents').get(),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
-                                return Text("Something went wrong");
+                                return Text("هناك خطأ ما");
                               }
                               if (snapshot.connectionState ==
                                   ConnectionState.done) {
