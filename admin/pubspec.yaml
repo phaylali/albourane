@@ -11,15 +11,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  get: ^4.0.0-nullsafety.2
+  
+  get: 
   flutter_vector_icons:
   url_launcher:
   url_strategy:
+  native_pdf_view: 
 
   # Firebase Packages
-  firebase_auth: ^1.0.1
-  cloud_firestore: ^1.0.1
-  firebase_core: ^1.0.1
+  firebase_auth: 
+  cloud_firestore: 
+  firebase_core: 
 
   flutter_riverpod: 
 

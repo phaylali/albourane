@@ -1,6 +1,5 @@
 import 'package:admin/auth.dart';
-//import 'package:admin/home.dart';
-import 'package:admin/main.dart';
+import 'package:admin/checker.dart';
 import 'package:admin/passwordController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -123,12 +122,12 @@ class AdminSignIn extends ConsumerWidget {
                                   onChanged: (value) =>
                                       updatePassword(context, value),
                                   obscuringCharacter: '*',
-                                  obscureText: p.hidden.value!,
+                                  obscureText: p.hidden.value,
                                   decoration: InputDecoration(
                                     hintText: 'كلمة السر',
                                     hintTextDirection: TextDirection.rtl,
                                     suffixIcon: InkWell(
-                                      child: p.hidden.isTrue!
+                                      child: p.hidden.isTrue
                                           ? Icon(Feather.eye_off)
                                           : Icon(Feather.eye),
                                       onTap: () => p.change(),
@@ -330,12 +329,12 @@ class AdminSignInFix extends ConsumerWidget {
                                   onChanged: (value) =>
                                       updatePassword(context, value),
                                   obscuringCharacter: '*',
-                                  obscureText: p.hidden.value!,
+                                  obscureText: p.hidden.value,
                                   decoration: InputDecoration(
                                     hintText: 'كلمة السر',
                                     hintTextDirection: TextDirection.rtl,
                                     suffixIcon: InkWell(
-                                      child: p.hidden.isTrue!
+                                      child: p.hidden.isTrue
                                           ? Icon(Feather.eye_off)
                                           : Icon(Feather.eye),
                                       onTap: () => p.change(),

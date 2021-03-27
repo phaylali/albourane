@@ -1,6 +1,5 @@
-import 'package:admin/login.dart';
+import 'package:admin/checker.dart';
 import 'package:admin/auth.dart';
-//import 'package:admin/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -200,32 +199,6 @@ class HomePage extends ConsumerWidget {
           ],
         )),
       ),
-    );
-  }
-}
-
-class GotToHome extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final _auth = watch(authServicesProvider);
-    return FutureBuilder(
-      future: _auth.signout(),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Center(
-            child: Text("Something Went wrong"),
-          );
-        }
-        if (snapshot.connectionState == ConnectionState.done) {
-          return AdminSignIn();
-        }
-        //loading
-        return Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
-      },
     );
   }
 }

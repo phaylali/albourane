@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 class DocsLibrary extends StatelessWidget {
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -178,12 +179,14 @@ class DocsLibrary extends StatelessWidget {
 
                                                       DataCell(
                                                           Text(
-                                                            "${item['date']}",
-                                                          ), onLongPress: () {
+                                                              "${item['date'].toDate().toString().split(" ").first}"
+                                                              //"${item['date']}",
+                                                              ),
+                                                          onLongPress: () {
                                                         Clipboard.setData(
                                                             ClipboardData(
                                                                 text:
-                                                                    "${item['date']}"));
+                                                                    "${item['date'].toDate().toString().split(" ").first}"));
                                                         Get.snackbar("", "",
                                                             titleText: Text(
                                                               "تم نسخ التاريخ",

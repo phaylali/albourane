@@ -68,7 +68,6 @@ class AuthenticationService {
 }
 
 Future<DocumentSnapshot> getDoc(x) async {
-  //String _email = (await FirebaseAuth.instance.currentUser!.).email;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   return await _firestore.collection('users').doc(x).get();
 }
