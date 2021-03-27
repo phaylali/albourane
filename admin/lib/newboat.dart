@@ -1,3 +1,4 @@
+//import 'package:admin/themes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -61,9 +62,19 @@ class NewBoat extends StatelessWidget {
           child: Icon(Feather.save),
           onPressed: () {
             if (!attachmentController.text.isURL) {
-              Get.snackbar("Error", "Image link is empty or not a link",
-                  backgroundColor: Colors.red,
-                  snackPosition: SnackPosition.TOP);
+              Get.snackbar("", "",
+                  overlayColor: Colors.red,
+                  messageText: Text(
+                    "خطأ رابط الصورة",
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.center,
+                  ),
+                  titleText: Text(
+                    "الرابط فارغ او ليس برابط",
+                    textScaleFactor: 0.7,
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.center,
+                  ));
             } else if (nameController.text.isEmpty ||
                 nameController.text.isNumericOnly) {
               Get.snackbar("Error", "Name is empty or Invalid",
@@ -407,15 +418,6 @@ class NewBoat extends StatelessWidget {
                                       ),
                                     ]),
                                   ]),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      "المالكون",
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
                                   DataTable(columns: [
                                     DataColumn(
                                       label: Expanded(
@@ -444,7 +446,7 @@ class NewBoat extends StatelessWidget {
                                   ),
                                   ExpansionTile(
                                     collapsedBackgroundColor:
-                                        Theme.of(context).primaryColor,
+                                        Theme.of(context).secondaryHeaderColor,
                                     title: Expanded(
                                       child: Text(
                                         "لائحة الورثة",

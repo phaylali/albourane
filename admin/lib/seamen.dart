@@ -4,182 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 
-class OldSeamenLibrary extends StatelessWidget {
-  final FirebaseFirestore firestoro = FirebaseFirestore.instance;
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Feather.file_plus),
-          onPressed: () {
-            Get.toNamed("/NewSeaman");
-          },
-        ),
-        body: Center(
-          child: Container(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "بحار جديد",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 30,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SizedBox(
-                            height: 40,
-                            width: 60,
-                            child: OutlinedButton(
-                              child: Icon(Feather.home),
-                              onPressed: () {
-                                Get.toNamed('/');
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            height: 40,
-                            width: 60,
-                            child: OutlinedButton(
-                              child: Icon(Feather.arrow_left),
-                              onPressed: () {
-                                Get.back();
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 20,
-                      ),
-                      SizedBox(
-                        width: 300,
-                        child: FutureBuilder<QuerySnapshot>(
-                            future: firestoro.collection('seamen').get(),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasError) {
-                                return Text("Something went wrong");
-                              }
-                              if (snapshot.connectionState ==
-                                  ConnectionState.done) {
-                                QuerySnapshot? d = snapshot.data;
-
-                                if (d!.docs.isNotEmpty) {
-                                  return Center(
-                                    child: Wrap(
-                                      spacing: 20,
-                                      runSpacing: 20,
-                                      children: d.docs
-                                          .map((item) => SizedBox(
-                                                height: 100,
-                                                width: 300,
-                                                child: OutlinedButton(
-                                                  onPressed: () {
-                                                    final String id = item.id;
-                                                    Get.toNamed(
-                                                      "/Seaman?id=$id",
-                                                    );
-                                                  },
-                                                  style: ButtonStyle(
-                                                      shape: MaterialStateProperty.all<
-                                                              OutlinedBorder>(
-                                                          RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          30)))),
-                                                  child: Flex(
-                                                    direction: Axis.horizontal,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 100,
-                                                        child: Center(
-                                                            child: Text(
-                                                          "${item['reference']}",
-                                                          style: TextStyle(
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        )),
-                                                      ),
-                                                      Expanded(
-                                                        child: Center(
-                                                            child: Text(
-                                                          "${item['name']}",
-                                                          style: TextStyle(
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        )),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ))
-                                          .toList()
-                                          .cast<Widget>(),
-                                    ),
-                                  );
-                                }
-                              }
-
-                              return SafeArea(
-                                child: Scaffold(
-                                  body: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Center(
-                                        child: CircularProgressIndicator()),
-                                  ),
-                                ),
-                              );
-                            }),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class SeamenLibrary extends StatelessWidget {
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
   @override
@@ -337,6 +161,16 @@ class SeamenLibrary extends StatelessWidget {
                                                             ClipboardData(
                                                                 text:
                                                                     "${item['reference']}"));
+                                                        Get.snackbar("", "",
+                                                            titleText: Text(
+                                                              "تم نسخ الرقم البحري",
+                                                              textDirection:
+                                                                  TextDirection
+                                                                      .rtl,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ));
                                                       }), //Extracting from Map element the value
                                                       DataCell(
                                                           Text(
@@ -346,6 +180,16 @@ class SeamenLibrary extends StatelessWidget {
                                                             ClipboardData(
                                                                 text:
                                                                     "${item['name']}"));
+                                                        Get.snackbar("", "",
+                                                            titleText: Text(
+                                                              "تم نسخ الاسم",
+                                                              textDirection:
+                                                                  TextDirection
+                                                                      .rtl,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ));
                                                       }),
 
                                                       DataCell(
@@ -356,6 +200,16 @@ class SeamenLibrary extends StatelessWidget {
                                                             ClipboardData(
                                                                 text:
                                                                     "${item['cnss']}"));
+                                                        Get.snackbar("", "",
+                                                            titleText: Text(
+                                                              "تم نسخ رقم الضمان الجتماعي",
+                                                              textDirection:
+                                                                  TextDirection
+                                                                      .rtl,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ));
                                                       }),
                                                       DataCell(
                                                           Text(
@@ -365,6 +219,16 @@ class SeamenLibrary extends StatelessWidget {
                                                             ClipboardData(
                                                                 text:
                                                                     "${item['cin']}"));
+                                                        Get.snackbar("", "",
+                                                            titleText: Text(
+                                                              "تم نسخ رقم البطاقة",
+                                                              textDirection:
+                                                                  TextDirection
+                                                                      .rtl,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ));
                                                       }),
                                                       DataCell(
                                                           Text(
@@ -374,14 +238,40 @@ class SeamenLibrary extends StatelessWidget {
                                                             ClipboardData(
                                                                 text:
                                                                     "${item['phone']}"));
+                                                        Get.snackbar("", "",
+                                                            titleText: Text(
+                                                              "تم نسخ الهاتف",
+                                                              textDirection:
+                                                                  TextDirection
+                                                                      .rtl,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ));
                                                       }),
-                                                      DataCell(SizedBox(
-                                                        height: 50,
-                                                        width: 50,
-                                                        child: Image.network(
-                                                          "${item['image']}",
-                                                        ),
-                                                      )),
+                                                      DataCell(
+                                                          SizedBox(
+                                                            height: 50,
+                                                            width: 50,
+                                                            child:
+                                                                Image.network(
+                                                              "${item['image']}",
+                                                              height: 50,
+                                                              width: 50,
+                                                            ),
+                                                          ), onTap: () {
+                                                        Get.defaultDialog(
+                                                            title: 'كبر الصورة',
+                                                            content: Expanded(
+                                                              child:
+                                                                  InteractiveViewer(
+                                                                child: Center(
+                                                                    child: Image
+                                                                        .network(
+                                                                            '${item['image']}')),
+                                                              ),
+                                                            ));
+                                                      }),
                                                     ],
                                                   )),
                                             )

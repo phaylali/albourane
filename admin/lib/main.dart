@@ -116,3 +116,32 @@ class AuthChecker extends ConsumerWidget {
     );
   }
 }
+
+class AuthCheckerAuth extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    final _authState = watch(authStateProvider);
+    return _authState.when(
+      data: (value) {
+        if (value != null) {
+          return HomePage();
+        }
+        return AdminSignInFix();
+      },
+      loading: () {
+        return Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
+      error: (_, __) {
+        return Scaffold(
+          body: Center(
+            child: Text("هناك خطأ ما في التوثيق"),
+          ),
+        );
+      },
+    );
+  }
+}

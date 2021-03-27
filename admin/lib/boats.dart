@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 class BoatsLibrary extends StatelessWidget {
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -76,7 +77,11 @@ class BoatsLibrary extends StatelessWidget {
                       ),
                       Expanded(
                         child: FutureBuilder<QuerySnapshot>(
-                            future: firestoro.collection('boats').get(),
+                            future: firestoro
+                                .collection('boats')
+                                .orderBy("reference")
+                                .limit(10)
+                                .get(),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
                                 return Center(
@@ -134,6 +139,14 @@ class BoatsLibrary extends StatelessWidget {
                                               ),
                                             ),
                                           ),
+                                          DataColumn(
+                                            label: Expanded(
+                                              child: Text(
+                                                'الصورة',
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                         rows: d.docs
                                             .map(
@@ -153,6 +166,16 @@ class BoatsLibrary extends StatelessWidget {
                                                             ClipboardData(
                                                                 text:
                                                                     "${item['reference']}"));
+                                                        Get.snackbar("", "",
+                                                            titleText: Text(
+                                                              "تم نسخ رقم لوحة القارب",
+                                                              textDirection:
+                                                                  TextDirection
+                                                                      .rtl,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ));
                                                       }), //Extracting from Map element the value
                                                       DataCell(
                                                           Text(
@@ -168,6 +191,16 @@ class BoatsLibrary extends StatelessWidget {
                                                             ClipboardData(
                                                                 text:
                                                                     "${item['name']}"));
+                                                        Get.snackbar("", "",
+                                                            titleText: Text(
+                                                              "تم نسخ اسم القارب",
+                                                              textDirection:
+                                                                  TextDirection
+                                                                      .rtl,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ));
                                                       }),
                                                       DataCell(
                                                           Text(
@@ -176,7 +209,17 @@ class BoatsLibrary extends StatelessWidget {
                                                         Clipboard.setData(
                                                             ClipboardData(
                                                                 text:
-                                                                    "${item['name']}"));
+                                                                    "${item['owner']}"));
+                                                        Get.snackbar("", "",
+                                                            titleText: Text(
+                                                              "تم نسخ اسم المسؤول",
+                                                              textDirection:
+                                                                  TextDirection
+                                                                      .rtl,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ));
                                                       }),
                                                       DataCell(
                                                           Text(
@@ -186,6 +229,16 @@ class BoatsLibrary extends StatelessWidget {
                                                             ClipboardData(
                                                                 text:
                                                                     "${item['ownerCIN']}"));
+                                                        Get.snackbar("", "",
+                                                            titleText: Text(
+                                                              "تم نسخ بطاقة المسؤول",
+                                                              textDirection:
+                                                                  TextDirection
+                                                                      .rtl,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ));
                                                       }),
                                                       DataCell(
                                                           Text(
@@ -195,6 +248,40 @@ class BoatsLibrary extends StatelessWidget {
                                                             ClipboardData(
                                                                 text:
                                                                     "${item['region']}"));
+                                                        Get.snackbar("", "",
+                                                            titleText: Text(
+                                                              "تم نسخ المنطقة",
+                                                              textDirection:
+                                                                  TextDirection
+                                                                      .rtl,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ));
+                                                      }),
+                                                      DataCell(
+                                                          SizedBox(
+                                                            height: 50,
+                                                            width: 50,
+                                                            child:
+                                                                Image.network(
+                                                              "${item['image']}",
+                                                            ),
+                                                          ), onTap: () {
+                                                        Get.defaultDialog(
+                                                            title: 'كبر الصورة',
+                                                            content: Expanded(
+                                                              child:
+                                                                  InteractiveViewer(
+                                                                child: Center(
+                                                                    child: Image
+                                                                        .network(
+                                                                  '${item['image']}',
+                                                                  height: 50,
+                                                                  width: 50,
+                                                                )),
+                                                              ),
+                                                            ));
                                                       }),
                                                     ],
                                                   )),

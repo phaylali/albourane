@@ -7,11 +7,10 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DocumentPage extends StatelessWidget {
+  final String id = Get.parameters['id']!;
+  final FirebaseFirestore firestoro = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
-    final String id = Get.parameters['id']!;
-    final FirebaseFirestore firestoro = FirebaseFirestore.instance;
-
     return FutureBuilder<DocumentSnapshot>(
         future: firestoro.collection('documents').doc(id).get(),
         builder: (context, snapshot) {

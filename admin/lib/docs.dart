@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 
 class DocsLibrary extends StatelessWidget {
   final FirebaseFirestore firestoro = FirebaseFirestore.instance;
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -68,8 +68,8 @@ class DocsLibrary extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: Flex(
-                    direction: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
                         width: 20,
@@ -79,81 +79,154 @@ class DocsLibrary extends StatelessWidget {
                             future: firestoro.collection('documents').get(),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
-                                return Text("هناك خطأ ما");
+                                return Center(
+                                    child: Text("هناك خطأ في قاعدة البيانات"));
                               }
                               if (snapshot.connectionState ==
                                   ConnectionState.done) {
                                 QuerySnapshot? d = snapshot.data;
 
                                 if (d!.docs.isNotEmpty) {
-                                  return ListView.builder(
-                                    itemCount: d.docs.length,
-                                    itemBuilder: (context, index) {
-                                      return SizedBox(
-                                        height: 200,
-                                        child: OutlinedButton(
-                                          onPressed: () {
-                                            final String id = d.docs[index].id;
-                                            Get.toNamed(
-                                              "/Document?id=$id",
-                                            );
-                                          },
-                                          style: ButtonStyle(
-                                              shape: MaterialStateProperty.all<
-                                                      OutlinedBorder>(
-                                                  RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30)))),
-                                          child: Flex(
-                                            direction: Axis.horizontal,
-                                            children: [
-                                              SizedBox(
-                                                width: 100,
-                                                child: Center(
-                                                    child: Image.network(
-                                                        "${d.docs[index]['preview']}")),
+                                  return Center(
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: DataTable(
+                                        sortAscending: true,
+                                        sortColumnIndex: 0,
+                                        columns: [
+                                          DataColumn(
+                                            label: Expanded(
+                                              child: Text(
+                                                'الرقم',
+                                                textAlign: TextAlign.center,
                                               ),
-                                              Expanded(
-                                                child: Flex(
-                                                  direction: Axis.vertical,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    SizedBox(
-                                                      height: 50,
-                                                      child: Text(
-                                                        "${d.docs[index].id}",
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        textScaleFactor: 2,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Center(
-                                                          child: Text(
-                                                        "${d.docs[index]['name']}",
-                                                        textScaleFactor: 1.5,
-                                                      )),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    },
+                                          DataColumn(
+                                            label: Expanded(
+                                              child: Text(
+                                                'الاسم',
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                          DataColumn(
+                                            label: Expanded(
+                                              child: Text(
+                                                'التاريخ',
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                          DataColumn(
+                                            label: Expanded(
+                                              child: Text(
+                                                'مقتطف من الوثيقة',
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                        rows: d.docs
+                                            .map(
+                                              ((item) => DataRow(
+                                                    cells: <DataCell>[
+                                                      DataCell(
+                                                          Text(
+                                                            "${item.id}",
+                                                          ), onTap: () {
+                                                        final String id =
+                                                            item.id;
+                                                        Get.toNamed(
+                                                          "/Document?id=$id",
+                                                        );
+                                                      }, onLongPress: () {
+                                                        Clipboard.setData(
+                                                            ClipboardData(
+                                                                text:
+                                                                    "${item.id}"));
+                                                        Get.snackbar("", "",
+                                                            titleText: Text(
+                                                              "تم نسخ الرقم",
+                                                              textDirection:
+                                                                  TextDirection
+                                                                      .rtl,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ));
+                                                      }), //Extracting from Map element the value
+                                                      DataCell(
+                                                          Text(
+                                                            "${item['name']}",
+                                                          ), onLongPress: () {
+                                                        Clipboard.setData(
+                                                            ClipboardData(
+                                                                text:
+                                                                    "${item['name']}"));
+                                                        Get.snackbar("", "",
+                                                            titleText: Text(
+                                                              "تم نسخ الاسم",
+                                                              textDirection:
+                                                                  TextDirection
+                                                                      .rtl,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ));
+                                                      }),
+
+                                                      DataCell(
+                                                          Text(
+                                                            "${item['date']}",
+                                                          ), onLongPress: () {
+                                                        Clipboard.setData(
+                                                            ClipboardData(
+                                                                text:
+                                                                    "${item['date']}"));
+                                                        Get.snackbar("", "",
+                                                            titleText: Text(
+                                                              "تم نسخ التاريخ",
+                                                              textDirection:
+                                                                  TextDirection
+                                                                      .rtl,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                            ));
+                                                      }),
+                                                      DataCell(
+                                                          SizedBox(
+                                                            height: 50,
+                                                            width: 50,
+                                                            child:
+                                                                Image.network(
+                                                              "${item['preview']}",
+                                                              height: 50,
+                                                              width: 50,
+                                                            ),
+                                                          ), onTap: () {
+                                                        Get.defaultDialog(
+                                                            title: 'كبر الصورة',
+                                                            content: Expanded(
+                                                              child:
+                                                                  InteractiveViewer(
+                                                                child: Center(
+                                                                    child: Image
+                                                                        .network(
+                                                                            '${item['preview']}')),
+                                                              ),
+                                                            ));
+                                                      }),
+                                                    ],
+                                                  )),
+                                            )
+                                            .toList(),
+                                      ),
+                                    ),
                                   );
                                 }
                               }
-
                               return SafeArea(
                                 child: Scaffold(
                                   body: Padding(

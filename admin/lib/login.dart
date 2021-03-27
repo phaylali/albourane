@@ -1,5 +1,6 @@
 import 'package:admin/auth.dart';
-import 'package:admin/home.dart';
+//import 'package:admin/home.dart';
+import 'package:admin/main.dart';
 import 'package:admin/passwordController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,6 +20,9 @@ class AdminSignIn extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    final email = watch(emailProvider).state;
+    final pass = watch(passwordProvider).state;
+    final _auth = watch(authServicesProvider);
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -94,6 +98,7 @@ class AdminSignIn extends ConsumerWidget {
                           SizedBox(
                             width: 600,
                             child: TextField(
+                              controller: emailController,
                               onChanged: (value) => updateEmail(context, value),
                               decoration: InputDecoration(
                                 hintText: 'البريد الالكتروني',
@@ -114,6 +119,7 @@ class AdminSignIn extends ConsumerWidget {
                               init: PasswordController(),
                               builder: (p) {
                                 return TextField(
+                                  controller: passwordController,
                                   onChanged: (value) =>
                                       updatePassword(context, value),
                                   obscuringCharacter: '*',
@@ -154,8 +160,40 @@ class AdminSignIn extends ConsumerWidget {
                                   )
                                 ],
                               ),
-                              onPressed: () async {
-                                Get.to(GotToProfile());
+                              onPressed: () {
+                                if (emailController.text.isEmpty ||
+                                    !emailController.text.isEmail) {
+                                  Get.snackbar("", "",
+                                      overlayColor: Colors.red,
+                                      titleText: Text(
+                                        "خطأ في البريد الاكتروني",
+                                        textDirection: TextDirection.rtl,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      messageText: Text(
+                                        "البريد الالكتروني غير صحيح او فارغ",
+                                        textScaleFactor: 0.7,
+                                        textDirection: TextDirection.rtl,
+                                        textAlign: TextAlign.center,
+                                      ));
+                                } else if (passwordController.text.isEmpty) {
+                                  Get.snackbar("", "",
+                                      overlayColor: Colors.red,
+                                      titleText: Text(
+                                        "خطأ في كلمة السر",
+                                        textDirection: TextDirection.rtl,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      messageText: Text(
+                                        "كلمة السر فارغة",
+                                        textScaleFactor: 0.7,
+                                        textDirection: TextDirection.rtl,
+                                        textAlign: TextAlign.center,
+                                      ));
+                                } else {
+                                  _auth.signIn(email: email, password: pass);
+                                  Get.to(AuthCheckerAuth());
+                                }
                               },
                             ),
                           ),
@@ -176,7 +214,7 @@ class AdminSignIn extends ConsumerWidget {
   }
 }
 
-class GotToProfile extends ConsumerWidget {
+class AdminSignInFix extends ConsumerWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   void updateEmail(BuildContext context, String email) {
@@ -192,23 +230,193 @@ class GotToProfile extends ConsumerWidget {
     final email = watch(emailProvider).state;
     final pass = watch(passwordProvider).state;
     final _auth = watch(authServicesProvider);
-    return FutureBuilder(
-      future: _auth.signIn(email: email, password: pass),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Center(
-            child: Text("Something Went wrong"),
-          );
-        }
-        if (snapshot.connectionState == ConnectionState.done) {
-          return HomePage();
-        }
-        return Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
-      },
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+            child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+                child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("المعلومات غير صحيحة",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.headline6),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "المرجو تصحيح البريد الالكتروني او كلمة السر",
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        height: 40,
+                        width: 60,
+                        child: OutlinedButton(
+                          child: Icon(Feather.arrow_left),
+                          onPressed: () {
+                            Get.back();
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 40,
+                        width: 60,
+                        child: OutlinedButton(
+                          child: Icon(Feather.home),
+                          onPressed: () {
+                            Get.toNamed('/');
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )),
+            SliverToBoxAdapter(
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          SizedBox(
+                            width: 600,
+                            child: TextField(
+                              controller: emailController,
+                              onChanged: (value) => updateEmail(context, value),
+                              decoration: InputDecoration(
+                                hintText: 'البريد الالكتروني',
+                                hintTextDirection: TextDirection.rtl,
+                                suffixIcon: Icon(Feather.mail),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          SizedBox(
+                            width: 600,
+                            child: GetX<PasswordController>(
+                              init: PasswordController(),
+                              builder: (p) {
+                                return TextField(
+                                  controller: passwordController,
+                                  onChanged: (value) =>
+                                      updatePassword(context, value),
+                                  obscuringCharacter: '*',
+                                  obscureText: p.hidden.value!,
+                                  decoration: InputDecoration(
+                                    hintText: 'كلمة السر',
+                                    hintTextDirection: TextDirection.rtl,
+                                    suffixIcon: InkWell(
+                                      child: p.hidden.isTrue!
+                                          ? Icon(Feather.eye_off)
+                                          : Icon(Feather.eye),
+                                      onTap: () => p.change(),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          SizedBox(
+                            width: 600,
+                            height: 50,
+                            child: OutlinedButton(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Feather.log_in),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Text(
+                                    'الدخول',
+                                  )
+                                ],
+                              ),
+                              onPressed: () {
+                                if (emailController.text.isEmpty ||
+                                    !emailController.text.isEmail) {
+                                  Get.snackbar("", "",
+                                      overlayColor: Colors.red,
+                                      titleText: Text(
+                                        "خطأ في البريد الاكتروني",
+                                        textDirection: TextDirection.rtl,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      messageText: Text(
+                                        "البريد الالكتروني غير صحيح او فارغ",
+                                        textScaleFactor: 0.7,
+                                        textDirection: TextDirection.rtl,
+                                        textAlign: TextAlign.center,
+                                      ));
+                                } else if (passwordController.text.isEmpty) {
+                                  Get.snackbar("", "",
+                                      overlayColor: Colors.red,
+                                      titleText: Text(
+                                        "خطأ في كلمة السر",
+                                        textDirection: TextDirection.rtl,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      messageText: Text(
+                                        "كلمة السر فارغة",
+                                        textScaleFactor: 0.7,
+                                        textDirection: TextDirection.rtl,
+                                        textAlign: TextAlign.center,
+                                      ));
+                                } else {
+                                  _auth.signIn(email: email, password: pass);
+                                  Get.to(AuthCheckerAuth());
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                ],
+              ),
+            )
+          ],
+        )),
+      ),
     );
   }
 }
