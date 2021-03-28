@@ -22,18 +22,20 @@ dependencies:
   firebase_auth: 
   cloud_firestore: 
   firebase_core: 
-
   flutter_riverpod: 
+  flutter_svg: ^0.21.0-nullsafety.0
 
 flutter:
   uses-material-design: true
+  assets:
+    - res/icons/
   fonts:
     - family: Tajawal
       fonts: 
-        - asset: google_fonts/Tajawal-Regular.ttf
-        - asset: google_fonts/Tajawal-Bold.ttf
-        - asset: google_fonts/Tajawal-Medium.ttf
-        - asset: google_fonts/Tajawal-Light.ttf
+        - asset: res/google_fonts/Tajawal-Regular.ttf
+        - asset: res/google_fonts/Tajawal-Bold.ttf
+        - asset: res/google_fonts/Tajawal-Medium.ttf
+        - asset: res/google_fonts/Tajawal-Light.ttf
 
 
 

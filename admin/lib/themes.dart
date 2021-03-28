@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+    focusColor: Colors.blue[400],
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Colors.blueGrey[900],
     appBarTheme: AppBarTheme(color: Colors.blue[900]),

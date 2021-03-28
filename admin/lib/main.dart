@@ -36,26 +36,31 @@ void main() async {
 class Start extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      getPages: [
-        GetPage(name: '/', page: () => Root()),
-        GetPage(name: '/SignIn', page: () => AdminSignIn()),
-        GetPage(name: '/NewDocument', page: () => NewDocument()),
-        GetPage(name: '/NewBoat', page: () => NewBoat()),
-        GetPage(name: '/NewSeaman', page: () => NewSeaman()),
-        GetPage(name: '/Documents', page: () => DocsLibrary()),
-        GetPage(name: '/Boats', page: () => BoatsLibrary()),
-        GetPage(name: '/Seamen', page: () => SeamenLibrary()),
-        GetPage(name: '/Document', page: () => DocumentPage()),
-        GetPage(name: '/Boat', page: () => BoatPage()),
-        GetPage(name: '/Seaman', page: () => SeamanPage()),
-      ],
-      unknownRoute: GetPage(name: '/Error404', page: () => ERROR404()),
-      theme: omniDarkBlueTheme(),
-      navigatorKey: Get.key,
-      title: "ALBOURANE ADMIN",
-      debugShowCheckedModeBanner: false,
-      home: Root(),
+    return Shortcuts(
+      shortcuts: <LogicalKeySet, Intent>{
+        LogicalKeySet(LogicalKeyboardKey.select): ActivateIntent(),
+      },
+      child: GetMaterialApp(
+        getPages: [
+          GetPage(name: '/', page: () => Root()),
+          GetPage(name: '/SignIn', page: () => AdminSignIn()),
+          GetPage(name: '/NewDocument', page: () => NewDocument()),
+          GetPage(name: '/NewBoat', page: () => NewBoat()),
+          GetPage(name: '/NewSeaman', page: () => NewSeaman()),
+          GetPage(name: '/Documents', page: () => DocsLibrary()),
+          GetPage(name: '/Boats', page: () => BoatsLibrary()),
+          GetPage(name: '/Seamen', page: () => SeamenLibrary()),
+          GetPage(name: '/Document', page: () => DocumentPage()),
+          GetPage(name: '/Boat', page: () => BoatPage()),
+          GetPage(name: '/Seaman', page: () => SeamanPage()),
+        ],
+        unknownRoute: GetPage(name: '/Error404', page: () => ERROR404()),
+        theme: omniDarkBlueTheme(),
+        navigatorKey: Get.key,
+        title: "ALBOURANE ADMIN",
+        debugShowCheckedModeBanner: false,
+        home: Root(),
+      ),
     );
   }
 }

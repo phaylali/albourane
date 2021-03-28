@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 
-class SeamanPage extends StatelessWidget {
+class OldSeamanPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String id = Get.parameters['id']!;
@@ -224,5 +224,281 @@ class SeamanPage extends StatelessWidget {
             ),
           );
         });
+  }
+}
+
+class SeamanPage extends StatelessWidget {
+  final FirebaseFirestore firestoro = FirebaseFirestore.instance;
+  final String id = Get.parameters['id']!;
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        floatingActionButton:
+            FloatingActionButton(child: Icon(Feather.save), onPressed: () {}),
+        body: FutureBuilder<DocumentSnapshot>(
+            future: firestoro.collection('seamen').doc(id).get(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(child: Text("هناك مشكل ما"));
+              }
+              if (snapshot.connectionState == ConnectionState.done) {
+                DocumentSnapshot? d = snapshot.data;
+
+                if (d!.exists) {
+                  Map<String?, dynamic>? data = d.data()!;
+                  return SafeArea(
+                    child: Scaffold(
+                        body: Center(
+                      child: Container(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text('${data['name']}',
+                                              textAlign: TextAlign.center,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline6),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text('${data['reference']}',
+                                              textAlign: TextAlign.center,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline6),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      SizedBox(
+                                        height: 40,
+                                        width: 60,
+                                        child: OutlinedButton(
+                                          child: Icon(Feather.home),
+                                          onPressed: () {
+                                            Get.toNamed('/');
+                                          },
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                        width: 60,
+                                        child: OutlinedButton(
+                                          child: Icon(Feather.arrow_left),
+                                          onPressed: () {
+                                            Get.back();
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Expanded(
+                                    child: Flex(
+                                      direction: Axis.vertical,
+                                      children: [
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Expanded(
+                                          child: ListView(
+                                            children: [
+                                              Center(
+                                                child: SingleChildScrollView(
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  child: DataTable(columns: [
+                                                    DataColumn(
+                                                        label: Container()),
+                                                    DataColumn(
+                                                        label: Container()),
+                                                  ], rows: [
+                                                    DataRow(cells: [
+                                                      DataCell(
+                                                        Center(
+                                                          child: Text(
+                                                            '${data['name']}',
+                                                            maxLines: 3,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      DataCell(Center(
+                                                        child: Text(
+                                                          'الاسم',
+                                                          maxLines: 3,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                        ),
+                                                      )),
+                                                    ]),
+                                                    DataRow(cells: [
+                                                      DataCell(
+                                                        Center(
+                                                          child: Text(
+                                                            '${data['cin']}',
+                                                            maxLines: 3,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      DataCell(
+                                                        Center(
+                                                          child: Text(
+                                                            'رقم البطاقة',
+                                                            maxLines: 3,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ]),
+                                                    DataRow(cells: [
+                                                      DataCell(
+                                                        Center(
+                                                          child: Text(
+                                                            '${data['phone']}',
+                                                            maxLines: 3,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      DataCell(
+                                                        Center(
+                                                          child: Text(
+                                                            'رقم الهاتف',
+                                                            maxLines: 3,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ]),
+                                                    DataRow(cells: [
+                                                      DataCell(
+                                                        Center(
+                                                          child: Text(
+                                                            '${data['cnss']}',
+                                                            maxLines: 3,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      DataCell(
+                                                        Center(
+                                                          child: Text(
+                                                            'الضمان الاجتماعي',
+                                                            maxLines: 3,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ]),
+                                                  ]),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                              OutlinedButton(
+                                                  onPressed: () =>
+                                                      Get.defaultDialog(
+                                                          title: 'كبر الصورة',
+                                                          content: Container(
+                                                            child:
+                                                                InteractiveViewer(
+                                                              child: Center(
+                                                                  child: Image
+                                                                      .network(
+                                                                          '${data['image']}')),
+                                                            ),
+                                                          )),
+                                                  style: ButtonStyle(
+                                                      shape: MaterialStateProperty.all<
+                                                              OutlinedBorder>(
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          30)))),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            20.0),
+                                                    child: Center(
+                                                        child: Image.network(
+                                                            '${data['image']}')),
+                                                  )),
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )),
+                  );
+                } else {
+                  return NoProduct(
+                    title: "لا يوجد بحار في هذا الرابط",
+                    subtitle: "صحح الرابط او عد الى الصفحة الرئيسية",
+                  );
+                }
+              }
+
+              return SafeArea(
+                child: Scaffold(
+                  body: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(child: CircularProgressIndicator()),
+                  ),
+                ),
+              );
+            }),
+      ),
+    );
   }
 }
