@@ -12,7 +12,7 @@ class DocsLibrary extends StatelessWidget {
     return MainBody(
       title: "الوثائق",
       subtitle: Text("مكتبة الوثائق"),
-      mainwidget: FutureBuilder<QuerySnapshot>(
+      child: FutureBuilder<QuerySnapshot>(
           future: firestoro.collection('documents').get(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {

@@ -11,7 +11,7 @@ class BoatsLibrary extends StatelessWidget {
     return MainBody(
       title: "القوارب",
       subtitle: Text("قاعدة بيانات القوارب"),
-      mainwidget: FutureBuilder<QuerySnapshot>(
+      child: FutureBuilder<QuerySnapshot>(
           future: firestoro.collection('boats').get(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {

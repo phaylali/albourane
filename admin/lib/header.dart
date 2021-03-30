@@ -9,12 +9,12 @@ import 'package:get/get.dart';
 class MainBody extends StatelessWidget {
   final String? title;
   final Widget? subtitle;
-  final Widget? mainwidget;
+  final Widget? child;
 
   MainBody({
     this.title,
     this.subtitle,
-    this.mainwidget,
+    this.child,
   });
   //GlobalKey<ScaffoldState>? drawerKey = GlobalKey();
   @override
@@ -66,7 +66,7 @@ class MainBody extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    Expanded(child: mainwidget!),
+                    Expanded(child: child!),
                     Center(
                         child: context.responsiveValue(
                             desktop: CustomDrawer(), tablet: CustomDrawer()))

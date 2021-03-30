@@ -1,3 +1,4 @@
+import 'package:admin/header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -11,8 +12,11 @@ class NewDocument extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return MainBody(
+      title: "وثيقة جديدة",
+      subtitle: Text("أدخل معلومات الوثيقة الجديدة"),
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         floatingActionButton: FloatingActionButton(
           child: Icon(Feather.save),
           onPressed: () {
@@ -39,57 +43,6 @@ class NewDocument extends StatelessWidget {
           child: Container(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "New Document",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 30,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SizedBox(
-                            height: 40,
-                            width: 60,
-                            child: OutlinedButton(
-                              child: Icon(Feather.home),
-                              onPressed: () {
-                                Get.toNamed('/');
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            height: 40,
-                            width: 60,
-                            child: OutlinedButton(
-                              child: Icon(Feather.arrow_left),
-                              onPressed: () {
-                                Get.back();
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
                 Expanded(
                   child: Flex(
                     direction: Axis.horizontal,

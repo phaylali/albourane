@@ -11,7 +11,7 @@ class SeamenLibrary extends StatelessWidget {
     return MainBody(
       title: "البحارة",
       subtitle: Text("قاعدة بيانات البحارة"),
-      mainwidget: FutureBuilder<QuerySnapshot>(
+      child: FutureBuilder<QuerySnapshot>(
           future: firestoro.collection('seamen').get(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {

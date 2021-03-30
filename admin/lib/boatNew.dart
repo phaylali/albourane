@@ -1,3 +1,4 @@
+import 'package:admin/header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -55,20 +56,22 @@ class NewBoat extends StatelessWidget {
   final TextEditingController wrt20IdController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return MainBody(
+      title: "قارب جديد",
+      subtitle: Text("أدخل معلومات القارب الجديد"),
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         floatingActionButton: FloatingActionButton(
           child: Icon(Feather.save),
           onPressed: () {
             if (!attachmentController.text.isURL) {
               Get.snackbar("", "",
-                  overlayColor: Colors.red,
-                  messageText: Text(
+                  titleText: Text(
                     "خطأ رابط الصورة",
                     textDirection: TextDirection.rtl,
                     textAlign: TextAlign.center,
                   ),
-                  titleText: Text(
+                  messageText: Text(
                     "الرابط فارغ او ليس برابط",
                     textScaleFactor: 0.7,
                     textDirection: TextDirection.rtl,
@@ -76,35 +79,79 @@ class NewBoat extends StatelessWidget {
                   ));
             } else if (nameController.text.isEmpty ||
                 nameController.text.isNumericOnly) {
-              Get.snackbar("Error", "Name is empty or Invalid",
-                  backgroundColor: Colors.red,
-                  snackPosition: SnackPosition.TOP);
+              Get.snackbar("", "",
+                  titleText: Text(
+                    "خطأ في الاسم",
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.center,
+                  ),
+                  messageText: Text(
+                    "الاسم فارغ او عدد فقط",
+                    textScaleFactor: 0.7,
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.center,
+                  ));
             } else if (refController.text.isEmpty ||
                 !refController.text.contains(RegExp(r'[0-9]')) ||
                 refController.text.contains(RegExp(r'[A-Z]')) ||
                 refController.text.contains(RegExp(r'[a-z]')) ||
                 !refController.text.contains('/') ||
                 !refController.text.contains('-')) {
-              Get.snackbar("Error",
-                  "Reference is empty or invalid, please type the reference like 3/1-1200",
-                  backgroundColor: Colors.red,
-                  snackPosition: SnackPosition.TOP);
+              Get.snackbar("", "",
+                  titleText: Text(
+                    "خطأ في رقم اللوحة",
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.center,
+                  ),
+                  messageText: Text(
+                    "رقم اللوحة فارغ او غير صحيح، المرجو كتابته على شكل 1200-3/1",
+                    textScaleFactor: 0.7,
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.center,
+                  ));
             } else if (respController.text.isEmpty ||
                 respController.text.isNumericOnly ||
                 respController.text.contains(RegExp(r'[0-9]'))) {
-              Get.snackbar("Error", "Owner Name is empty or Invalid",
-                  backgroundColor: Colors.red,
-                  snackPosition: SnackPosition.TOP);
+              Get.snackbar("", "",
+                  titleText: Text(
+                    "خطأ في اسم المسؤول",
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.center,
+                  ),
+                  messageText: Text(
+                    "اسم المسؤول فارغ او غير صحيح",
+                    textScaleFactor: 0.7,
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.center,
+                  ));
             } else if (respIdController.text.isEmpty ||
                 respIdController.text.isNumericOnly) {
-              Get.snackbar("Error", "Owner CIN is empty or Invalid",
-                  backgroundColor: Colors.red,
-                  snackPosition: SnackPosition.TOP);
+              Get.snackbar("", "",
+                  titleText: Text(
+                    "خطأ في رقم البطاقة الوطنية",
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.center,
+                  ),
+                  messageText: Text(
+                    "رقم البطاقة الوطنية للمسؤول فارغ او غير صحيح",
+                    textScaleFactor: 0.7,
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.center,
+                  ));
             } else if (regionController.text.isEmpty ||
                 regionController.text.contains(RegExp(r'[0-9]'))) {
               Get.snackbar("Error", "Region is empty or Invalid",
-                  backgroundColor: Colors.red,
-                  snackPosition: SnackPosition.TOP);
+                  titleText: Text(
+                    "خطأ في المنطقة",
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.center,
+                  ),
+                  messageText: Text(
+                    "اسم المنطقة فارغ او غير صحيح",
+                    textScaleFactor: 0.7,
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.center,
+                  ));
             } else if (firestoro
                 .collection('boats')
                 .doc(refController.text.replaceAll('/', '-'))
@@ -268,53 +315,6 @@ class NewBoat extends StatelessWidget {
           child: Container(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text("قارب جديد",
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context).textTheme.headline6),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SizedBox(
-                            height: 40,
-                            width: 60,
-                            child: OutlinedButton(
-                              child: Icon(Feather.home),
-                              onPressed: () {
-                                Get.toNamed('/');
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            height: 40,
-                            width: 60,
-                            child: OutlinedButton(
-                              child: Icon(Feather.arrow_left),
-                              onPressed: () {
-                                Get.back();
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
                 Expanded(
                   child: Row(
                     children: [

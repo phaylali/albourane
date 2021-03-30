@@ -35,7 +35,7 @@ class HomePage extends ConsumerWidget {
           return CircularProgressIndicator();
         },
       ),
-      mainwidget: Center(
+      child: Center(
         child: SingleChildScrollView(
           child: Wrap(
             spacing: 20,

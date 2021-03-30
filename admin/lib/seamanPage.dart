@@ -1,504 +1,198 @@
 import 'dart:ui';
 import 'package:admin/error404.dart';
+import 'package:admin/header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 
-class OldSeamanPage extends StatelessWidget {
+Future<DocumentSnapshot> getSeamanDoc(x) async {
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  return await _firestore.collection('seamen').doc(x).get();
+}
+
+class SeamanPage extends StatelessWidget {
+  final String id = Get.parameters['id']!;
   @override
   Widget build(BuildContext context) {
-    final String id = Get.parameters['id']!;
-    final FirebaseFirestore firestoro = FirebaseFirestore.instance;
-
-    return FutureBuilder<DocumentSnapshot>(
-        future: firestoro.collection('seamen').doc(id).get(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text("Something went wrong");
+    return MainBody(
+      title: "صفحة البحار",
+      subtitle: FutureBuilder<DocumentSnapshot>(
+        future: getSeamanDoc(id),
+        builder: (BuildContext context, snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              DocumentSnapshot? item = snapshot.data;
+              return Center(
+                  // here only return is missing
+                  child: Text(
+                "${item!['name']}" + "     " + "${item['reference']}",
+              ));
+            }
+          } else if (snapshot.hasError) {
+            Text('no data');
           }
-          if (snapshot.connectionState == ConnectionState.done) {
-            DocumentSnapshot? d = snapshot.data;
+          return CircularProgressIndicator();
+        },
+      ),
+      child: FutureBuilder<DocumentSnapshot>(
+          future: getSeamanDoc(id),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(child: Text("هناك مشكل ما"));
+            }
+            if (snapshot.connectionState == ConnectionState.done) {
+              DocumentSnapshot? d = snapshot.data;
 
-            if (d!.exists) {
-              Map<String?, dynamic>? data = d.data()!;
-              return SafeArea(
-                child: Scaffold(
-                  body: Center(
-                      child: Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: ListView(
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: SelectableText(
-                                        '${data['name']}',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 30,
+              if (d!.exists) {
+                Map<String?, dynamic>? data = d.data()!;
+                return SafeArea(
+                  child: Scaffold(
+                    body: Center(
+                      child: Container(
+                        child: ListView(
+                          children: [
+                            Center(
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: DataTable(columns: [
+                                  DataColumn(label: Container()),
+                                  DataColumn(label: Container()),
+                                ], rows: [
+                                  DataRow(cells: [
+                                    DataCell(
+                                      Center(
+                                        child: Text(
+                                          '${data['name']}',
+                                          maxLines: 3,
+                                          textAlign: TextAlign.center,
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: SelectableText(
-                                        '${data['reference']}',
+                                    DataCell(Center(
+                                      child: Text(
+                                        'الاسم',
+                                        maxLines: 3,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )),
+                                  ]),
+                                  DataRow(cells: [
+                                    DataCell(
+                                      Center(
+                                        child: Text(
+                                          '${data['cin']}',
+                                          maxLines: 3,
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  SizedBox(
-                                    height: 40,
-                                    width: 60,
-                                    child: OutlinedButton(
-                                      child: Icon(Feather.home),
-                                      onPressed: () {
-                                        Get.toNamed('/');
-                                      },
+                                    DataCell(
+                                      Center(
+                                        child: Text(
+                                          'رقم البطاقة',
+                                          maxLines: 3,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  SizedBox(
-                                    height: 40,
-                                    width: 60,
-                                    child: OutlinedButton(
-                                      child: Icon(Feather.arrow_left),
-                                      onPressed: () {
-                                        Get.back();
-                                      },
+                                  ]),
+                                  DataRow(cells: [
+                                    DataCell(
+                                      Center(
+                                        child: Text(
+                                          '${data['phone']}',
+                                          maxLines: 3,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    DataCell(
+                                      Center(
+                                        child: Text(
+                                          'رقم الهاتف',
+                                          maxLines: 3,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                  ]),
+                                  DataRow(cells: [
+                                    DataCell(
+                                      Center(
+                                        child: Text(
+                                          '${data['cnss']}',
+                                          maxLines: 3,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                    DataCell(
+                                      Center(
+                                        child: Text(
+                                          'الضمان الاجتماعي',
+                                          maxLines: 3,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                  ]),
+                                ]),
                               ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        OutlinedButton(
-                            onPressed: () => GetPlatform.isMobile
-                                ? Get.defaultDialog(
-                                    title: 'Zoom In Document',
-                                    content: Expanded(
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            OutlinedButton(
+                                onPressed: () => Get.defaultDialog(
+                                    title: 'كبر الصورة',
+                                    content: Container(
                                       child: InteractiveViewer(
                                         child: Center(
                                             child: Image.network(
                                                 '${data['image']}')),
                                       ),
-                                    ))
-                                : null,
-                            style: ButtonStyle(
-                                shape:
-                                    MaterialStateProperty.all<OutlinedBorder>(
+                                    )),
+                                style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<
+                                            OutlinedBorder>(
                                         RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(30)))),
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Center(
-                                  child: Image.network('${data['image']}')),
-                            )),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          height: 500,
-                          child: OutlinedButton(
-                            onPressed: () {},
-                            style: ButtonStyle(
-                                shape:
-                                    MaterialStateProperty.all<OutlinedBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30)))),
-                            child: Center(
-                                child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  'More Details',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'CNSS : ',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SelectableText(
-                                      '${data['cnss']}',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'CIN : ',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SelectableText(
-                                      '${data['cin']}',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Phone: ',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SelectableText(
-                                      '${data['phone']}',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )),
-                ),
-              );
-            } else {
-              return NoProduct(
-                title:
-                    "There Is No Seaman With This ID, Or The Seaman Is Removed",
-                subtitle: "Check The Url For Errors Or Go To The Home Page",
-              );
-            }
-          }
-          return SafeArea(
-            child: Scaffold(
-              body: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(child: CircularProgressIndicator()),
-              ),
-            ),
-          );
-        });
-  }
-}
-
-class SeamanPage extends StatelessWidget {
-  final FirebaseFirestore firestoro = FirebaseFirestore.instance;
-  final String id = Get.parameters['id']!;
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        floatingActionButton:
-            FloatingActionButton(child: Icon(Feather.save), onPressed: () {}),
-        body: FutureBuilder<DocumentSnapshot>(
-            future: firestoro.collection('seamen').doc(id).get(),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Center(child: Text("هناك مشكل ما"));
-              }
-              if (snapshot.connectionState == ConnectionState.done) {
-                DocumentSnapshot? d = snapshot.data;
-
-                if (d!.exists) {
-                  Map<String?, dynamic>? data = d.data()!;
-                  return SafeArea(
-                    child: Scaffold(
-                        body: Center(
-                      child: Container(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text('${data['name']}',
-                                              textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline6),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text('${data['reference']}',
-                                              textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline6),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      SizedBox(
-                                        height: 40,
-                                        width: 60,
-                                        child: OutlinedButton(
-                                          child: Icon(Feather.home),
-                                          onPressed: () {
-                                            Get.toNamed('/');
-                                          },
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      SizedBox(
-                                        height: 40,
-                                        width: 60,
-                                        child: OutlinedButton(
-                                          child: Icon(Feather.arrow_left),
-                                          onPressed: () {
-                                            Get.back();
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Expanded(
-                                    child: Flex(
-                                      direction: Axis.vertical,
-                                      children: [
-                                        SizedBox(
-                                          width: 20,
-                                        ),
-                                        Expanded(
-                                          child: ListView(
-                                            children: [
-                                              Center(
-                                                child: SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  child: DataTable(columns: [
-                                                    DataColumn(
-                                                        label: Container()),
-                                                    DataColumn(
-                                                        label: Container()),
-                                                  ], rows: [
-                                                    DataRow(cells: [
-                                                      DataCell(
-                                                        Center(
-                                                          child: Text(
-                                                            '${data['name']}',
-                                                            maxLines: 3,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      DataCell(Center(
-                                                        child: Text(
-                                                          'الاسم',
-                                                          maxLines: 3,
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                        ),
-                                                      )),
-                                                    ]),
-                                                    DataRow(cells: [
-                                                      DataCell(
-                                                        Center(
-                                                          child: Text(
-                                                            '${data['cin']}',
-                                                            maxLines: 3,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      DataCell(
-                                                        Center(
-                                                          child: Text(
-                                                            'رقم البطاقة',
-                                                            maxLines: 3,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                    DataRow(cells: [
-                                                      DataCell(
-                                                        Center(
-                                                          child: Text(
-                                                            '${data['phone']}',
-                                                            maxLines: 3,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      DataCell(
-                                                        Center(
-                                                          child: Text(
-                                                            'رقم الهاتف',
-                                                            maxLines: 3,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                    DataRow(cells: [
-                                                      DataCell(
-                                                        Center(
-                                                          child: Text(
-                                                            '${data['cnss']}',
-                                                            maxLines: 3,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      DataCell(
-                                                        Center(
-                                                          child: Text(
-                                                            'الضمان الاجتماعي',
-                                                            maxLines: 3,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                  ]),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              OutlinedButton(
-                                                  onPressed: () =>
-                                                      Get.defaultDialog(
-                                                          title: 'كبر الصورة',
-                                                          content: Container(
-                                                            child:
-                                                                InteractiveViewer(
-                                                              child: Center(
-                                                                  child: Image
-                                                                      .network(
-                                                                          '${data['image']}')),
-                                                            ),
-                                                          )),
-                                                  style: ButtonStyle(
-                                                      shape: MaterialStateProperty.all<
-                                                              OutlinedBorder>(
-                                                          RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          30)))),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            20.0),
-                                                    child: Center(
-                                                        child: Image.network(
-                                                            '${data['image']}')),
-                                                  )),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 20,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                ],
-                              ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Center(
+                                      child: Image.network('${data['image']}')),
+                                )),
+                            SizedBox(
+                              height: 20,
                             ),
                           ],
                         ),
                       ),
-                    )),
-                  );
-                } else {
-                  return NoProduct(
-                    title: "لا يوجد بحار في هذا الرابط",
-                    subtitle: "صحح الرابط او عد الى الصفحة الرئيسية",
-                  );
-                }
-              }
-
-              return SafeArea(
-                child: Scaffold(
-                  body: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(child: CircularProgressIndicator()),
+                    ),
                   ),
+                );
+              } else {
+                return NoProduct(
+                  title: "لا يوجد بحار في هذا الرابط",
+                  subtitle: "صحح الرابط او عد الى الصفحة الرئيسية",
+                );
+              }
+            }
+
+            return SafeArea(
+              child: Scaffold(
+                body: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(child: CircularProgressIndicator()),
                 ),
-              );
-            }),
-      ),
+              ),
+            );
+          }),
     );
   }
 }
