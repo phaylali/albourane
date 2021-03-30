@@ -9,6 +9,8 @@ class NewDocument extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController attachmentController = TextEditingController();
   final TextEditingController idController = TextEditingController();
+  final TextEditingController dateController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +46,7 @@ class NewDocument extends StatelessWidget {
             child: Column(
               children: [
                 Expanded(
-                  child: Flex(
-                    direction: Axis.horizontal,
+                  child: Row(
                     children: [
                       SizedBox(
                         width: 20,
@@ -55,35 +56,77 @@ class NewDocument extends StatelessWidget {
                           direction: Axis.vertical,
                           children: [
                             SizedBox(
-                              height: 20,
+                              width: 20,
                             ),
-                            TextFormField(
-                              maxLines: 3,
-                              controller: nameController,
-                              decoration: InputDecoration(
-                                hintText: 'Name',
-                                suffixIcon: Icon(Feather.edit),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
+                            Expanded(
+                              child: ListView(
+                                //direction: Axis.vertical,
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  DataTable(columns: [
+                                    DataColumn(label: Container()),
+                                    DataColumn(label: Container()),
+                                  ], rows: [
+                                    DataRow(cells: [
+                                      DataCell(
+                                        TextField(
+                                          keyboardType: TextInputType.name,
+                                          maxLines: 3,
+                                          controller: nameController,
+                                          decoration: InputDecoration(
+                                            hintText: 'اسم الوئيقة',
+                                            hintTextDirection:
+                                                TextDirection.rtl,
+                                          ),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        TextField(
+                                          keyboardType: TextInputType.url,
+                                          maxLines: 3,
+                                          controller: attachmentController,
+                                          decoration: InputDecoration(
+                                            hintText: 'رابط الصورة',
+                                            hintTextDirection:
+                                                TextDirection.rtl,
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
+                                    DataRow(cells: [
+                                      DataCell(
+                                        TextField(
+                                          keyboardType: TextInputType.name,
+                                          maxLines: 3,
+                                          controller: dateController,
+                                          decoration: InputDecoration(
+                                            hintText: 'التاريخ',
+                                            hintTextDirection:
+                                                TextDirection.rtl,
+                                          ),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        TextField(
+                                          keyboardType: TextInputType.url,
+                                          maxLines: 3,
+                                          controller: idController,
+                                          decoration: InputDecoration(
+                                            hintText: 'الرقم',
+                                            hintTextDirection:
+                                                TextDirection.rtl,
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
+                                  ]),
+                                ],
                               ),
                             ),
                             SizedBox(
-                              height: 20,
-                            ),
-                            TextFormField(
-                              maxLines: 3,
-                              controller: attachmentController,
-                              decoration: InputDecoration(
-                                hintText: 'Attachment Link',
-                                suffixIcon: Icon(Feather.file),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
+                              width: 20,
                             ),
                           ],
                         ),

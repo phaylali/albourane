@@ -112,6 +112,8 @@ class CustomDrawer extends StatelessWidget {
                   leading:
                       SizedBox(height: 40, width: 40, child: OmniIcons().back),
                   onTap: () {
+                    if (context.isPhone) Get.back();
+
                     Get.back();
                   },
                 ),
