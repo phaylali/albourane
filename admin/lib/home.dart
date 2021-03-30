@@ -1,5 +1,5 @@
-import 'package:admin/checker.dart';
 import 'package:admin/auth.dart';
+import 'package:admin/header.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,193 +11,117 @@ class HomePage extends ConsumerWidget {
   final String x = FirebaseAuth.instance.currentUser!.uid;
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
-            child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-                child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("لوحة التحكم",
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.headline6),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: FutureBuilder<DocumentSnapshot>(
-                            future: getDoc(x),
-                            builder: (BuildContext context, snapshot) {
-                              if (snapshot.hasData) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                } else {
-                                  DocumentSnapshot? item = snapshot.data;
-                                  return Center(
-                                      // here only return is missing
-                                      child: Text(
-                                    "مرحبا ${item!['name']}",
-                                  ));
-                                }
-                              } else if (snapshot.hasError) {
-                                Text('no data');
-                              }
-                              return CircularProgressIndicator();
-                            },
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return MainBody(
+      title: "لوحة التحكم",
+      subtitle: FutureBuilder<DocumentSnapshot>(
+        future: getDoc(x),
+        builder: (BuildContext context, snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              DocumentSnapshot? item = snapshot.data;
+              return Center(
+                  // here only return is missing
+                  child: Text(
+                "مرحبا ${item!['name']}",
+              ));
+            }
+          } else if (snapshot.hasError) {
+            Text('no data');
+          }
+          return CircularProgressIndicator();
+        },
+      ),
+      mainwidget: Center(
+        child: SingleChildScrollView(
+          child: Wrap(
+            spacing: 20,
+            runSpacing: 20,
+            children: [
+              SizedBox(
+                width: 300,
+                height: 300,
+                child: OutlinedButton(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Icon(Feather.paperclip),
                       SizedBox(
-                        height: 40,
-                        width: 60,
-                        child: OutlinedButton(
-                          child: Icon(Feather.home),
-                          onPressed: () {
-                            Get.toNamed('/');
-                          },
-                        ),
+                        width: 20,
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 40,
-                        width: 60,
-                        child: OutlinedButton(
-                          child: Icon(Feather.log_out),
-                          onPressed: () async {
-                            Get.to(GotToHome());
-                          },
-                        ),
-                      ),
+                      Text(
+                        'الوثائق',
+                        textScaleFactor: 2,
+                      )
                     ],
                   ),
-                ],
+                  onPressed: () {
+                    Get.toNamed('/Documents');
+                  },
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)))),
+                ),
               ),
-            )),
-            SliverToBoxAdapter(
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Wrap(
-                        spacing: 20,
-                        runSpacing: 20,
-                        children: [
-                          SizedBox(
-                            width: 300,
-                            height: 300,
-                            child: OutlinedButton(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Feather.paperclip),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
-                                    'الوثائق',
-                                    textScaleFactor: 2,
-                                  )
-                                ],
-                              ),
-                              onPressed: () {
-                                Get.toNamed('/Documents');
-                              },
-                              style: ButtonStyle(
-                                  shape:
-                                      MaterialStateProperty.all<OutlinedBorder>(
-                                          RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30)))),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 300,
-                            height: 300,
-                            child: OutlinedButton(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Feather.navigation),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
-                                    'القوارب',
-                                    textScaleFactor: 2,
-                                  )
-                                ],
-                              ),
-                              onPressed: () {
-                                Get.toNamed('/Boats');
-                              },
-                              style: ButtonStyle(
-                                  shape:
-                                      MaterialStateProperty.all<OutlinedBorder>(
-                                          RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30)))),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 300,
-                            height: 300,
-                            child: OutlinedButton(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Feather.log_out),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
-                                    'البحارة',
-                                    textScaleFactor: 2,
-                                  )
-                                ],
-                              ),
-                              style: ButtonStyle(
-                                  shape:
-                                      MaterialStateProperty.all<OutlinedBorder>(
-                                          RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30)))),
-                              onPressed: () {
-                                Get.toNamed('/Seamen');
-                              },
-                            ),
-                          ),
-                        ],
+              SizedBox(
+                width: 300,
+                height: 300,
+                child: OutlinedButton(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Feather.navigation),
+                      SizedBox(
+                        width: 20,
                       ),
-                    ),
+                      Text(
+                        'القوارب',
+                        textScaleFactor: 2,
+                      )
+                    ],
                   ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                ],
+                  onPressed: () {
+                    Get.toNamed('/Boats');
+                  },
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)))),
+                ),
               ),
-            )
-          ],
-        )),
+              SizedBox(
+                width: 300,
+                height: 300,
+                child: OutlinedButton(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Feather.log_out),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        'البحارة',
+                        textScaleFactor: 2,
+                      )
+                    ],
+                  ),
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)))),
+                  onPressed: () {
+                    Get.toNamed('/Seamen');
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
