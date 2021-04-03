@@ -1,43 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="0" y1="257.9995" x2="512" y2="257.9995" gradientTransform="matrix(1 0 0 -1 0 513.9995)">
-	<stop  offset="0" style="stop-color:#80D8FF"/>
-	<stop  offset="1" style="stop-color:#EA80FC"/>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1_1_" x="0px" y="0px" viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve" width="512" height="512">
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="32" y1="63" x2="32" y2="0.5859">
+	<stop offset="0" style="stop-color:#9F2FFF"/>
+	<stop offset="1" style="stop-color:#0BB1D3"/>
 </linearGradient>
-<path style="fill:url(#SVGID_1_);" d="M332,128H196V44c0-7.376-4.06-14.153-10.563-17.633s-14.394-3.099-20.531,0.992l-156,104
-	C3.342,135.068,0,141.313,0,148s3.342,12.932,8.906,16.641l156,104c6.146,4.097,14.037,4.468,20.531,0.992
-	C191.94,266.153,196,259.376,196,252v-84h136c77.196,0,140,62.804,140,140s-62.804,140-140,140c-11.046,0-20,8.954-20,20
-	s8.954,20,20,20c99.252,0,180-80.748,180-180S431.252,128,332,128z M156,214.63L56.056,148L156,81.37V214.63z"/>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
+<path style="fill:url(#SVGID_1_);" d="M34,26.805L44.887,20L34,13.195V17h-7c-1.654,0-3,1.346-3,3v12h6v-9h4V26.805z M28,21v9h-2V20  c0-0.552,0.448-1,1-1h9v-2.195L41.113,20L36,23.195V21H28z M44.721,55H36V41.414L54.414,23L32,0.586L9.586,23L28,41.414V55h-8.721  l-2,6H5v2h54v-2H46.72L44.721,55z M32,3.414L51.586,23L32,42.586L12.414,23L32,3.414z M32,45.414l2-2V51h-4v-7.586L32,45.414z   M30,53h4v2h-4V53z M20.721,57H28h8h7.279l1.334,4H19.387L20.721,57z M61,61h2v2h-2V61z M1,61h2v2H1V61z M32.707,38.707  l-1.414-1.414l15-15l1.414,1.414L32.707,38.707z M32.707,8.707l-15,15l-1.414-1.414l15-15L32.707,8.707z"/>
 </svg>

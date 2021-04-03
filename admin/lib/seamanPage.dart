@@ -49,131 +49,53 @@ class SeamanPage extends StatelessWidget {
 
               if (d!.exists) {
                 Map<String?, dynamic>? data = d.data()!;
-                return SafeArea(
-                  child: Scaffold(
-                    body: Center(
-                      child: Container(
-                        child: ListView(
+                return Center(
+                  child: Container(
+                    child: context.responsiveValue(
+                        mobile: Row(
                           children: [
-                            Center(
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: DataTable(columns: [
-                                  DataColumn(label: Container()),
-                                  DataColumn(label: Container()),
-                                ], rows: [
-                                  DataRow(cells: [
-                                    DataCell(
-                                      Center(
-                                        child: Text(
-                                          '${data['name']}',
-                                          maxLines: 3,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                    DataCell(Center(
-                                      child: Text(
-                                        'الاسم',
-                                        maxLines: 3,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    )),
-                                  ]),
-                                  DataRow(cells: [
-                                    DataCell(
-                                      Center(
-                                        child: Text(
-                                          '${data['cin']}',
-                                          maxLines: 3,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                    DataCell(
-                                      Center(
-                                        child: Text(
-                                          'رقم البطاقة',
-                                          maxLines: 3,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                                  DataRow(cells: [
-                                    DataCell(
-                                      Center(
-                                        child: Text(
-                                          '${data['phone']}',
-                                          maxLines: 3,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                    DataCell(
-                                      Center(
-                                        child: Text(
-                                          'رقم الهاتف',
-                                          maxLines: 3,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                                  DataRow(cells: [
-                                    DataCell(
-                                      Center(
-                                        child: Text(
-                                          '${data['cnss']}',
-                                          maxLines: 3,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                    DataCell(
-                                      Center(
-                                        child: Text(
-                                          'الضمان الاجتماعي',
-                                          maxLines: 3,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                  ]),
-                                ]),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            OutlinedButton(
-                                onPressed: () => Get.defaultDialog(
-                                    title: 'كبر الصورة',
-                                    content: Container(
-                                      child: InteractiveViewer(
-                                        child: Center(
-                                            child: Image.network(
-                                                '${data['image']}')),
-                                      ),
-                                    )),
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            OutlinedBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30)))),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Center(
-                                      child: Image.network('${data['image']}')),
-                                )),
-                            SizedBox(
-                              height: 20,
-                            ),
+                            Expanded(
+                                child: ListView(
+                              children: [
+                                Center(
+                                  child: SeamanInfo(data: data),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Center(child: ImageOfSeaman(data: data)),
+                              ],
+                            ))
                           ],
                         ),
-                      ),
-                    ),
+                        tablet: Row(
+                          children: [
+                            Expanded(
+                                child: ListView(
+                              children: [
+                                Center(
+                                  child: SeamanInfo(data: data),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Center(child: ImageOfSeaman(data: data)),
+                              ],
+                            ))
+                          ],
+                        ),
+                        desktop: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Center(
+                              child: SeamanInfo(data: data),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(child: ImageOfSeaman(data: data)),
+                          ],
+                        )),
                   ),
                 );
               } else {
@@ -193,6 +115,134 @@ class SeamanPage extends StatelessWidget {
               ),
             );
           }),
+    );
+  }
+}
+
+class ImageOfSeaman extends StatelessWidget {
+  const ImageOfSeaman({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
+
+  final Map<String?, dynamic>? data;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+        onPressed: () => Get.defaultDialog(
+            title: 'كبر الصورة',
+            content: Expanded(
+              child: InteractiveViewer(
+                child: Center(child: Image.network('${data!['image']}')),
+              ),
+            )),
+        style: ButtonStyle(
+            shape: MaterialStateProperty.all<OutlinedBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)))),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Center(child: Image.network('${data!['image']}')),
+        ));
+  }
+}
+
+class SeamanInfo extends StatelessWidget {
+  const SeamanInfo({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
+
+  final Map<String?, dynamic>? data;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: DataTable(columns: [
+        DataColumn(label: Container()),
+        DataColumn(label: Container()),
+      ], rows: [
+        DataRow(cells: [
+          DataCell(
+            Center(
+              child: Text(
+                '${data!['name']}',
+                maxLines: 3,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          DataCell(Center(
+            child: Text(
+              'الاسم',
+              maxLines: 3,
+              textAlign: TextAlign.center,
+            ),
+          )),
+        ]),
+        DataRow(cells: [
+          DataCell(
+            Center(
+              child: Text(
+                '${data!['cin']}',
+                maxLines: 3,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          DataCell(
+            Center(
+              child: Text(
+                'رقم البطاقة',
+                maxLines: 3,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ]),
+        DataRow(cells: [
+          DataCell(
+            Center(
+              child: Text(
+                '${data!['phone']}',
+                maxLines: 3,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          DataCell(
+            Center(
+              child: Text(
+                'رقم الهاتف',
+                maxLines: 3,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ]),
+        DataRow(cells: [
+          DataCell(
+            Center(
+              child: Text(
+                '${data!['cnss']}',
+                maxLines: 3,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          DataCell(
+            Center(
+              child: Text(
+                'الضمان الاجتماعي',
+                maxLines: 3,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ]),
+      ]),
     );
   }
 }

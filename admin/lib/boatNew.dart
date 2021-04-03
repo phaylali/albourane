@@ -335,111 +335,90 @@ class NewBoat extends StatelessWidget {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  DataTable(columns: [
-                                    DataColumn(label: Container()),
-                                    DataColumn(label: Container()),
-                                  ], rows: [
-                                    DataRow(cells: [
-                                      DataCell(
-                                        TextField(
-                                          maxLines: 3,
-                                          keyboardType: TextInputType.number,
-                                          controller: refController,
-                                          decoration: InputDecoration(
-                                            hintText: 'رقم اللوحة',
-                                            hintTextDirection:
-                                                TextDirection.rtl,
-                                          ),
-                                        ),
-                                      ),
-                                      DataCell(
-                                        TextField(
-                                          keyboardType: TextInputType.name,
-                                          maxLines: 3,
-                                          controller: nameController,
-                                          decoration: InputDecoration(
-                                            hintText: 'اسم القارب',
-                                            hintTextDirection:
-                                                TextDirection.rtl,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                                    DataRow(cells: [
-                                      DataCell(
-                                        TextField(
-                                            keyboardType: TextInputType.name,
-                                            maxLines: 3,
-                                            controller: respIdController,
-                                            decoration: InputDecoration(
-                                              hintText: 'رقم بطاقة المسؤول',
-                                              hintTextDirection:
-                                                  TextDirection.rtl,
-                                            )),
-                                      ),
-                                      DataCell(
-                                        TextField(
-                                          keyboardType: TextInputType.name,
-                                          maxLines: 3,
-                                          controller: respController,
-                                          decoration: InputDecoration(
-                                            hintText: 'اسم المسؤول',
-                                            hintTextDirection:
-                                                TextDirection.rtl,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                                    DataRow(cells: [
-                                      DataCell(
-                                        TextField(
-                                          keyboardType: TextInputType.name,
-                                          maxLines: 3,
-                                          controller: regionController,
-                                          decoration: InputDecoration(
-                                            hintText: 'المنطقة',
-                                            hintTextDirection:
-                                                TextDirection.rtl,
-                                          ),
-                                        ),
-                                      ),
-                                      DataCell(
-                                        TextField(
-                                          keyboardType: TextInputType.url,
-                                          maxLines: 3,
-                                          controller: attachmentController,
-                                          decoration: InputDecoration(
-                                            hintText: 'رابط الصورة',
-                                            hintTextDirection:
-                                                TextDirection.rtl,
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                                  ]),
-                                  DataTable(columns: [
-                                    DataColumn(
-                                      label: Expanded(
-                                        child: Text(
-                                          'رقم البطاقة',
-                                          textAlign: TextAlign.center,
-                                        ),
+                                  ListTile(
+                                    title: TextField(
+                                      keyboardType: TextInputType.name,
+                                      maxLines: 1,
+                                      controller: nameController,
+                                      decoration: InputDecoration(
+                                        hintText: 'اسم القارب',
+                                        hintTextDirection: TextDirection.rtl,
                                       ),
                                     ),
-                                    DataColumn(
-                                      label: Expanded(
-                                        child: Text(
-                                          'الاسم',
-                                          textAlign: TextAlign.center,
-                                        ),
+                                  ),
+                                  ListTile(
+                                    title: TextField(
+                                      maxLines: 1,
+                                      keyboardType: TextInputType.number,
+                                      controller: refController,
+                                      decoration: InputDecoration(
+                                        hintText: 'رقم اللوحة',
+                                        hintTextDirection: TextDirection.rtl,
                                       ),
                                     ),
-                                  ], rows: [
-                                    wrt(context, "1", wrt1Controller,
-                                        wrt1IdController),
-                                    wrt(context, "2", wrt2Controller,
-                                        wrt2IdController),
-                                  ]),
+                                  ),
+                                  ListTile(
+                                    title: TextField(
+                                      keyboardType: TextInputType.name,
+                                      maxLines: 1,
+                                      controller: respController,
+                                      decoration: InputDecoration(
+                                        hintText: 'اسم المسؤول',
+                                        hintTextDirection: TextDirection.rtl,
+                                      ),
+                                    ),
+                                  ),
+                                  ListTile(
+                                    title: TextField(
+                                        keyboardType: TextInputType.name,
+                                        maxLines: 1,
+                                        controller: respIdController,
+                                        decoration: InputDecoration(
+                                          hintText: 'رقم بطاقة المسؤول',
+                                          hintTextDirection: TextDirection.rtl,
+                                        )),
+                                  ),
+                                  ListTile(
+                                    title: TextField(
+                                      keyboardType: TextInputType.name,
+                                      maxLines: 1,
+                                      controller: regionController,
+                                      decoration: InputDecoration(
+                                        hintText: 'المنطقة',
+                                        hintTextDirection: TextDirection.rtl,
+                                      ),
+                                    ),
+                                  ),
+                                  ListTile(
+                                    title: TextField(
+                                      keyboardType: TextInputType.url,
+                                      maxLines: 1,
+                                      controller: attachmentController,
+                                      decoration: InputDecoration(
+                                        hintText: 'رابط الصورة',
+                                        hintTextDirection: TextDirection.rtl,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  ExpansionTile(
+                                    collapsedBackgroundColor:
+                                        Theme.of(context).secondaryHeaderColor,
+                                    title: Expanded(
+                                      child: Text(
+                                        "لائحة المالكين",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    children: [
+                                      wrt(context, "1", wrt3Controller,
+                                          wrt3IdController),
+                                      wrt(context, "2", wrt4Controller,
+                                          wrt4IdController),
+                                    ],
+                                  ),
                                   SizedBox(
                                     height: 20,
                                   ),
@@ -453,132 +432,42 @@ class NewBoat extends StatelessWidget {
                                       ),
                                     ),
                                     children: [
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Expanded(
-                                            child: DataTable(
-                                              rows: [
-                                                wrt(
-                                                    context,
-                                                    "3",
-                                                    wrt3Controller,
-                                                    wrt3IdController),
-                                                wrt(
-                                                    context,
-                                                    "4",
-                                                    wrt4Controller,
-                                                    wrt4IdController),
-                                                wrt(
-                                                    context,
-                                                    "5",
-                                                    wrt5Controller,
-                                                    wrt5IdController),
-                                                wrt(
-                                                    context,
-                                                    "6",
-                                                    wrt6Controller,
-                                                    wrt6IdController),
-                                                wrt(
-                                                    context,
-                                                    "7",
-                                                    wrt7Controller,
-                                                    wrt7IdController),
-                                                wrt(
-                                                    context,
-                                                    "8",
-                                                    wrt8Controller,
-                                                    wrt8IdController),
-                                                wrt(
-                                                    context,
-                                                    "9",
-                                                    wrt9Controller,
-                                                    wrt9IdController),
-                                                wrt(
-                                                    context,
-                                                    "10",
-                                                    wrt10Controller,
-                                                    wrt10IdController),
-                                                wrt(
-                                                    context,
-                                                    "11",
-                                                    wrt11Controller,
-                                                    wrt11IdController),
-                                                wrt(
-                                                    context,
-                                                    "12",
-                                                    wrt12Controller,
-                                                    wrt12IdController),
-                                                wrt(
-                                                    context,
-                                                    "13",
-                                                    wrt13Controller,
-                                                    wrt13IdController),
-                                                wrt(
-                                                    context,
-                                                    "14",
-                                                    wrt14Controller,
-                                                    wrt14IdController),
-                                                wrt(
-                                                    context,
-                                                    "15",
-                                                    wrt15Controller,
-                                                    wrt15IdController),
-                                                wrt(
-                                                    context,
-                                                    "16",
-                                                    wrt16Controller,
-                                                    wrt16IdController),
-                                                wrt(
-                                                    context,
-                                                    "17",
-                                                    wrt17Controller,
-                                                    wrt17IdController),
-                                                wrt(
-                                                    context,
-                                                    "18",
-                                                    wrt18Controller,
-                                                    wrt18IdController),
-                                                wrt(
-                                                    context,
-                                                    "19",
-                                                    wrt19Controller,
-                                                    wrt19IdController),
-                                                wrt(
-                                                    context,
-                                                    "20",
-                                                    wrt20Controller,
-                                                    wrt20IdController),
-                                              ],
-                                              columns: [
-                                                DataColumn(
-                                                  label: Expanded(
-                                                    child: Text(
-                                                      'رقم البطاقة',
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    ),
-                                                  ),
-                                                ),
-                                                DataColumn(
-                                                  label: Expanded(
-                                                    child: Text(
-                                                      'الاسم',
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                        ],
-                                      ),
+                                      wrt(context, "3", wrt3Controller,
+                                          wrt3IdController),
+                                      wrt(context, "4", wrt4Controller,
+                                          wrt4IdController),
+                                      wrt(context, "5", wrt5Controller,
+                                          wrt5IdController),
+                                      wrt(context, "6", wrt6Controller,
+                                          wrt6IdController),
+                                      wrt(context, "7", wrt7Controller,
+                                          wrt7IdController),
+                                      wrt(context, "8", wrt8Controller,
+                                          wrt8IdController),
+                                      wrt(context, "9", wrt9Controller,
+                                          wrt9IdController),
+                                      wrt(context, "10", wrt10Controller,
+                                          wrt10IdController),
+                                      wrt(context, "11", wrt11Controller,
+                                          wrt11IdController),
+                                      wrt(context, "12", wrt12Controller,
+                                          wrt12IdController),
+                                      wrt(context, "13", wrt13Controller,
+                                          wrt13IdController),
+                                      wrt(context, "14", wrt14Controller,
+                                          wrt14IdController),
+                                      wrt(context, "15", wrt15Controller,
+                                          wrt15IdController),
+                                      wrt(context, "16", wrt16Controller,
+                                          wrt16IdController),
+                                      wrt(context, "17", wrt17Controller,
+                                          wrt17IdController),
+                                      wrt(context, "18", wrt18Controller,
+                                          wrt18IdController),
+                                      wrt(context, "19", wrt19Controller,
+                                          wrt19IdController),
+                                      wrt(context, "20", wrt20Controller,
+                                          wrt20IdController),
                                     ],
                                   ),
                                   SizedBox(
@@ -607,27 +496,27 @@ class NewBoat extends StatelessWidget {
     );
   }
 
-  DataRow wrt(BuildContext context, String wrtNo, TextEditingController wrtCon,
+  Column wrt(BuildContext context, String wrtNo, TextEditingController wrtCon,
       TextEditingController wrtIdCon) {
-    return DataRow(cells: [
-      DataCell(
-        TextField(
+    return Column(children: [
+      ListTile(
+        title: TextField(
           keyboardType: TextInputType.name,
-          maxLines: 3,
-          controller: wrtIdCon,
+          maxLines: 1,
+          controller: wrtCon,
           decoration: InputDecoration(
-            hintText: 'رقم بطاقة المالك $wrtNo',
+            hintText: 'اسم المالك $wrtNo ',
             hintTextDirection: TextDirection.rtl,
           ),
         ),
       ),
-      DataCell(
-        TextField(
+      ListTile(
+        title: TextField(
           keyboardType: TextInputType.name,
-          maxLines: 3,
-          controller: wrtCon,
+          maxLines: 1,
+          controller: wrtIdCon,
           decoration: InputDecoration(
-            hintText: 'اسم المالك $wrtNo ',
+            hintText: 'رقم بطاقة المالك $wrtNo',
             hintTextDirection: TextDirection.rtl,
           ),
         ),
