@@ -3,7 +3,6 @@ import 'package:admin/error404.dart';
 import 'package:admin/header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -17,7 +16,7 @@ class DocumentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainBody(
-      title: "صفحة وثيقة",
+      title: "صفحة الوثيقة",
       subtitle: FutureBuilder<DocumentSnapshot>(
         future: getDocDoc(id),
         builder: (BuildContext context, snapshot) {
@@ -31,7 +30,7 @@ class DocumentPage extends StatelessWidget {
               return Center(
                   // here only return is missing
                   child: Text(
-                "${item!['name']}" + "     " + "${item.id}",
+                "${item!.id}",
               ));
             }
           } else if (snapshot.hasError) {
@@ -44,7 +43,7 @@ class DocumentPage extends StatelessWidget {
           future: getDocDoc(id),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return Text("Something went wrong");
+              return Center(child: Text("هناك مشكل ما"));
             }
             if (snapshot.connectionState == ConnectionState.done) {
               DocumentSnapshot? d = snapshot.data;
@@ -52,112 +51,62 @@ class DocumentPage extends StatelessWidget {
               if (d!.exists) {
                 Map<String?, dynamic>? data = d.data()!;
                 return Center(
-                  child: ListView(
-                    children: [
-                      OutlinedButton(
-                          onPressed: () => GetPlatform.isMobile
-                              ? Get.defaultDialog(
-                                  title: 'Zoom In Document',
-                                  content: Expanded(
-                                    child: InteractiveViewer(
-                                      child: Center(
-                                          child: Image.network(
-                                              '${data['preview']}')),
-                                    ),
-                                  ))
-                              : null,
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<OutlinedBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(30)))),
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Center(
-                                child: Image.network('${data['preview']}')),
-                          )),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 500,
-                        child: OutlinedButton(
-                          onPressed: () {},
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<OutlinedBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(30)))),
-                          child: Center(
-                              child: Column(
-                            children: [
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'More Details',
-                                style: TextStyle(
-                                    fontSize: 25, fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Attachment : ',
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  IconButton(
-                                    icon: Icon(Feather.file),
-                                    onPressed: () {
-                                      launch(
-                                          'http://www.africau.edu/images/default/sample.pdf');
-                                    },
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Description : ',
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Expanded(
-                                child: Text(
-                                  '${data['description']}',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold),
+                  child: Container(
+                    child: context.responsiveValue(
+                        mobile: Row(
+                          children: [
+                            Expanded(
+                                child: ListView(
+                              children: [
+                                Expanded(
+                                  child: DocumentInfo(data: data),
                                 ),
-                              ),
-                            ],
-                          )),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Expanded(child: PreviewOfDocument(data: data)),
+                              ],
+                            ))
+                          ],
                         ),
-                      ),
-                    ],
+                        tablet: Row(
+                          children: [
+                            Expanded(
+                                child: ListView(
+                              children: [
+                                Expanded(
+                                  child: DocumentInfo(data: data),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Expanded(child: PreviewOfDocument(data: data)),
+                              ],
+                            ))
+                          ],
+                        ),
+                        desktop: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: DocumentInfo(data: data),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(child: PreviewOfDocument(data: data)),
+                          ],
+                        )),
                   ),
                 );
               } else {
                 return NoProduct(
-                  title:
-                      "There Is No Document With This ID, Or The Document Is Removed",
-                  subtitle: "Check The Url For Errors Or Go To The Home Page",
+                  title: "لا يوجد وثيقة في هذا الرابط",
+                  subtitle: "صحح الرابط او عد الى الصفحة الرئيسية",
                 );
               }
             }
+
             return SafeArea(
               child: Scaffold(
                 body: Padding(
@@ -167,6 +116,92 @@ class DocumentPage extends StatelessWidget {
               ),
             );
           }),
+    );
+  }
+}
+
+class PreviewOfDocument extends StatelessWidget {
+  const PreviewOfDocument({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
+
+  final Map<String?, dynamic>? data;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+        onPressed: () => Get.defaultDialog(
+            title: 'كبر الصورة',
+            content: Expanded(
+              child: InteractiveViewer(
+                child: Center(child: Image.network('${data!['preview']}')),
+              ),
+            )),
+        style: ButtonStyle(
+            shape: MaterialStateProperty.all<OutlinedBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)))),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Center(child: Image.network('${data!['preview']}')),
+        ));
+  }
+}
+
+class DocumentInfo extends StatelessWidget {
+  const DocumentInfo({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
+
+  final Map<String?, dynamic>? data;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          ListTile(
+            trailing: Text("الاسم"),
+            title: Center(
+              child: Text(
+                '${data!['name']}',
+                maxLines: 3,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          ListTile(
+            trailing: Text("التاريخ"),
+            title: Center(
+              child: Text(
+                '${data!['date'].toDate().toString().split(" ").first}',
+                maxLines: 3,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          ListTile(
+            trailing: Text("المرفقات"),
+            onTap: () {
+              launch("${data!['attachment']}");
+            },
+            title: Text(
+              "اضغط هنا",
+              maxLines: 3,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          ListTile(
+            trailing: Text("الوصف"),
+            title: Text(
+              "${data!['description']}",
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

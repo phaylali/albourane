@@ -27,9 +27,8 @@ class SeamanPage extends StatelessWidget {
             } else {
               DocumentSnapshot? item = snapshot.data;
               return Center(
-                  // here only return is missing
                   child: Text(
-                "${item!['name']}" + "     " + "${item['reference']}",
+                "${item!['reference']}",
               ));
             }
           } else if (snapshot.hasError) {
@@ -57,13 +56,13 @@ class SeamanPage extends StatelessWidget {
                             Expanded(
                                 child: ListView(
                               children: [
-                                Center(
+                                Expanded(
                                   child: SeamanInfo(data: data),
                                 ),
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Center(child: ImageOfSeaman(data: data)),
+                                Expanded(child: ImageOfSeaman(data: data)),
                               ],
                             ))
                           ],
@@ -73,13 +72,13 @@ class SeamanPage extends StatelessWidget {
                             Expanded(
                                 child: ListView(
                               children: [
-                                Center(
+                                Expanded(
                                   child: SeamanInfo(data: data),
                                 ),
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Center(child: ImageOfSeaman(data: data)),
+                                Expanded(child: ImageOfSeaman(data: data)),
                               ],
                             ))
                           ],
@@ -87,7 +86,7 @@ class SeamanPage extends StatelessWidget {
                         desktop: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Center(
+                            Expanded(
                               child: SeamanInfo(data: data),
                             ),
                             SizedBox(
@@ -159,90 +158,52 @@ class SeamanInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: DataTable(columns: [
-        DataColumn(label: Container()),
-        DataColumn(label: Container()),
-      ], rows: [
-        DataRow(cells: [
-          DataCell(
-            Center(
-              child: Text(
-                '${data!['name']}',
-                maxLines: 3,
-                textAlign: TextAlign.center,
+      child: Center(
+        child: Column(
+          children: [
+            ListTile(
+              trailing: Text("الاسم"),
+              title: Center(
+                child: Text(
+                  '${data!['name']}',
+                  maxLines: 3,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-          ),
-          DataCell(Center(
-            child: Text(
-              'الاسم',
-              maxLines: 3,
-              textAlign: TextAlign.center,
-            ),
-          )),
-        ]),
-        DataRow(cells: [
-          DataCell(
-            Center(
-              child: Text(
-                '${data!['cin']}',
-                maxLines: 3,
-                textAlign: TextAlign.center,
+            ListTile(
+              trailing: Text("البطاقة"),
+              title: Center(
+                child: Text(
+                  '${data!['cin']}',
+                  maxLines: 3,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-          ),
-          DataCell(
-            Center(
-              child: Text(
-                'رقم البطاقة',
-                maxLines: 3,
-                textAlign: TextAlign.center,
+            ListTile(
+              trailing: Text("الضمان"),
+              title: Center(
+                child: Text(
+                  '${data!['cnss']}',
+                  maxLines: 3,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-          ),
-        ]),
-        DataRow(cells: [
-          DataCell(
-            Center(
-              child: Text(
-                '${data!['phone']}',
-                maxLines: 3,
-                textAlign: TextAlign.center,
+            ListTile(
+              trailing: Text("الهاتف"),
+              title: Center(
+                child: Text(
+                  '${data!['phone']}',
+                  maxLines: 3,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-          ),
-          DataCell(
-            Center(
-              child: Text(
-                'رقم الهاتف',
-                maxLines: 3,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-        ]),
-        DataRow(cells: [
-          DataCell(
-            Center(
-              child: Text(
-                '${data!['cnss']}',
-                maxLines: 3,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          DataCell(
-            Center(
-              child: Text(
-                'الضمان الاجتماعي',
-                maxLines: 3,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-        ]),
-      ]),
+          ],
+        ),
+      ),
     );
   }
 }

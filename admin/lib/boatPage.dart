@@ -3,6 +3,7 @@ import 'package:admin/error404.dart';
 import 'package:admin/header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 Future<DocumentSnapshot> getBoatDoc(x) async {
@@ -19,21 +20,19 @@ class BoatPage extends StatelessWidget {
       subtitle: FutureBuilder<DocumentSnapshot>(
         future: getBoatDoc(id),
         builder: (BuildContext context, snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            DocumentSnapshot? d = snapshot.data;
+            if (d!.exists) {
+              Map<String?, dynamic>? item = d.data()!;
+
               return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              DocumentSnapshot? item = snapshot.data;
-              return Center(
-                  // here only return is missing
                   child: Text(
-                "${item!['name']}" + "     " + "${item['reference']}",
+                "${item['reference']}",
               ));
-            }
+            } else
+              return Text("لا يوجد هذا القارب");
           } else if (snapshot.hasError) {
-            Text('no data');
+            return Center(child: Text("هناك مشكل ما"));
           }
           return CircularProgressIndicator();
         },
@@ -43,8 +42,7 @@ class BoatPage extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(child: Text("هناك مشكل ما"));
-            }
-            if (snapshot.connectionState == ConnectionState.done) {
+            } else if (snapshot.connectionState == ConnectionState.done) {
               DocumentSnapshot? d = snapshot.data;
 
               if (d!.exists) {
@@ -55,84 +53,56 @@ class BoatPage extends StatelessWidget {
                         mobile: Row(
                           children: [
                             Expanded(
-                              child: ListView(
-                                children: [
-                                  Center(
-                                    child: BoatInfo(
-                                      data: data,
-                                    ),
-                                  ),
-                                  Center(child: ListOfOwners(data: data)),
-                                  Center(child: ListOfWarata(data: data)),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Center(child: ImageOfBoat(data: data))
-                                ],
-                              ),
-                            ),
+                                child: ListView(
+                              children: [
+                                Expanded(
+                                  child: BoatInfo(data: data),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Expanded(child: ImageOfBoat(data: data)),
+                              ],
+                            ))
                           ],
                         ),
                         tablet: Row(
                           children: [
                             Expanded(
-                              child: ListView(
-                                children: [
-                                  Center(
-                                    child: BoatInfo(
-                                      data: data,
-                                    ),
-                                  ),
-                                  Center(child: ListOfOwners(data: data)),
-                                  Center(child: ListOfWarata(data: data)),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Center(child: ImageOfBoat(data: data))
-                                ],
-                              ),
-                            ),
+                                child: ListView(
+                              children: [
+                                Expanded(
+                                  child: BoatInfo(data: data),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Expanded(child: ImageOfBoat(data: data)),
+                              ],
+                            ))
                           ],
                         ),
-                        desktop: ListView(
+                        desktop: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Expanded(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Column(
-                                    children: [
-                                      BoatInfo(data: data),
-                                      ListOfOwners(data: data),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Expanded(child: ImageOfBoat(data: data)),
-                                ],
-                              ),
+                              child: BoatInfo(data: data),
                             ),
                             SizedBox(
-                              height: 20,
+                              width: 20,
                             ),
-                            Expanded(
-                              child: ListOfWarata(data: data),
-                            )
+                            Expanded(child: ImageOfBoat(data: data)),
                           ],
                         )),
                   ),
                 );
               } else {
-                return NoProduct(
-                  title: "لا يوجد قارب في هذا الرابط",
-                  subtitle: "صحح الرابط او عد الى الصفحة الرئيسية",
+                return Center(
+                  child: Text("لا يوجد قارب في هذا الرابط"),
                 );
               }
             }
 
-            // return
             return SafeArea(
               child: Scaffold(
                 body: Padding(
@@ -142,48 +112,6 @@ class BoatPage extends StatelessWidget {
               ),
             );
           }),
-    );
-  }
-}
-
-class ListOfOwners extends StatelessWidget {
-  const ListOfOwners({
-    Key? key,
-    required this.data,
-  }) : super(key: key);
-
-  final Map<String?, dynamic>? data;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: DataTable(columns: [
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'اسم المالك',
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'رقم البطاقة',
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-      ], rows: [
-        wrt(context, "1", '${data!['warit1']}', '${data!['warit1ID']}'),
-        wrt(
-          context,
-          "2",
-          data!['warit2'] == null ? "لايوجد" : '${data!['warit2']}',
-          data!['warit2ID'] == null ? "لايوجد" : '${data!['warit2ID']}',
-        ),
-      ]),
     );
   }
 }
@@ -217,276 +145,6 @@ class ImageOfBoat extends StatelessWidget {
   }
 }
 
-DataRow wrt(BuildContext context, String wrtNo, String wrtName, String wrtID) {
-  return DataRow(cells: [
-    DataCell(
-      Container(
-        child: Center(
-          child: Text(
-            "$wrtName",
-            maxLines: 3,
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
-    ),
-    DataCell(
-      Container(
-        child: Center(
-          child: Text(
-            "$wrtID",
-            maxLines: 3,
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
-    ),
-  ]);
-}
-
-class ListOfWarata extends StatelessWidget {
-  const ListOfWarata({
-    Key? key,
-    required this.data,
-  }) : super(key: key);
-
-  final Map<String?, dynamic>? data;
-
-  @override
-  Widget build(BuildContext context) {
-    return ExpansionTile(
-      collapsedBackgroundColor: Theme.of(context).primaryColor,
-      title: Center(
-        child: Text("لائحة الورثة",
-            textAlign: TextAlign.center,
-            textDirection: TextDirection.rtl,
-            style: Theme.of(context).textTheme.caption),
-      ),
-      children: [
-        Row(
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: Center(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    rows: [
-                      wrt(
-                        context,
-                        "3",
-                        data!['warit3'] == null
-                            ? "لايوجد"
-                            : '${data!['warit3']}',
-                        data!['warit3ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit3ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "4",
-                        data!['warit4'] == null
-                            ? "لايوجد"
-                            : '${data!['warit4']}',
-                        data!['warit4ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit4ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "5",
-                        data!['warit5'] == null
-                            ? "لايوجد"
-                            : '${data!['warit5']}',
-                        data!['warit5ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit5ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "6",
-                        data!['warit6'] == null
-                            ? "لايوجد"
-                            : '${data!['warit6']}',
-                        data!['warit6ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit6ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "7",
-                        data!['warit7'] == null
-                            ? "لايوجد"
-                            : '${data!['warit7']}',
-                        data!['warit7ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit7ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "8",
-                        data!['warit8'] == null
-                            ? "لايوجد"
-                            : '${data!['warit8']}',
-                        data!['warit8ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit8ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "9",
-                        data!['warit9'] == null
-                            ? "لايوجد"
-                            : '${data!['warit9']}',
-                        data!['warit9ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit9ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "10",
-                        data!['warit10'] == null
-                            ? "لايوجد"
-                            : '${data!['warit10']}',
-                        data!['warit10ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit10ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "11",
-                        data!['warit11'] == null
-                            ? "لايوجد"
-                            : '${data!['warit11']}',
-                        data!['warit11ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit11ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "12",
-                        data!['warit12'] == null
-                            ? "لايوجد"
-                            : '${data!['warit12']}',
-                        data!['warit12ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit12ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "13",
-                        data!['warit13'] == null
-                            ? "لايوجد"
-                            : '${data!['warit13']}',
-                        data!['warit13ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit13ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "14",
-                        data!['warit14'] == null
-                            ? "لايوجد"
-                            : '${data!['warit14']}',
-                        data!['warit14ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit14ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "15",
-                        data!['warit15'] == null
-                            ? "لايوجد"
-                            : '${data!['warit15']}',
-                        data!['warit15ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit15ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "16",
-                        data!['warit16'] == null
-                            ? "لايوجد"
-                            : '${data!['warit16']}',
-                        data!['warit16ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit16ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "17",
-                        data!['warit17'] == null
-                            ? "لايوجد"
-                            : '${data!['warit17']}',
-                        data!['warit17ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit17ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "18",
-                        data!['warit18'] == null
-                            ? "لايوجد"
-                            : '${data!['warit18']}',
-                        data!['warit18ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit18ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "19",
-                        data!['warit19'] == null
-                            ? "لايوجد"
-                            : '${data!['warit19']}',
-                        data!['warit19ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit19ID']}',
-                      ),
-                      wrt(
-                        context,
-                        "20",
-                        data!['warit20'] == null
-                            ? "لايوجد"
-                            : '${data!['warit20']}',
-                        data!['warit20ID'] == null
-                            ? "لايوجد"
-                            : '${data!['warit20ID']}',
-                      ),
-                    ],
-                    columns: [
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'اسم الوارث',
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'رقم البطاقة',
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
 class BoatInfo extends StatelessWidget {
   const BoatInfo({
     Key? key,
@@ -498,70 +156,510 @@ class BoatInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: DataTable(columns: [
-        DataColumn(label: Container()),
-        DataColumn(label: Container()),
-      ], rows: [
-        DataRow(cells: [
-          DataCell(
-            Center(
-              child: Text(
-                '${data!['owner']}',
-                maxLines: 3,
-                textAlign: TextAlign.center,
+      child: Center(
+        child: Column(
+          children: [
+            ListTileBoat(
+              data: data,
+              title: '${data!['name']}',
+              trailing: "الاسم",
+              message: "تم نسخ اسم القارب",
+            ),
+            ListTileBoat(
+              data: data,
+              title: '${data!['reference']}',
+              trailing: "اللوحة",
+              message: "تم نسخ رقم لوحة القارب",
+            ),
+            ListTileBoat(
+              data: data,
+              title: '${data!['region']}',
+              trailing: "المنطقة",
+              message: "تم نسخ المنطقة",
+            ),
+            ListTileBoat(
+              data: data,
+              title: '${data!['owner']}',
+              trailing: "المسؤول",
+              message: "تم نسخ اسم المسؤول",
+            ),
+            ListTileBoat(
+              data: data,
+              title: '${data!['ownerCIN']}',
+              trailing: "بطاقته",
+              message: "تم نسخ بطاقة المسؤول",
+            ),
+            ListTileBoat(
+              data: data,
+              title: data!['warit1'],
+              trailing: "المالك 1",
+              message: "تم نسخ اسم المالك رقم 1",
+            ),
+            ListTileBoat(
+              data: data,
+              title: data!['warit1ID'],
+              trailing: "بطاقتة",
+              message: "تم نسخ بطاقة المالك رقم 1",
+            ),
+            ListTileBoat(
+              data: data,
+              title: data!['warit2'],
+              trailing: "المالك 2",
+              message: "تم نسخ اسم المالك رقم 2",
+            ),
+            ListTileBoat(
+              data: data,
+              title: data!['warit2ID'],
+              trailing: "بطاقته",
+              message: "تم نسخ بطاقة المالك رقم 2",
+            ),
+            ExpansionTile(
+              collapsedBackgroundColor: Theme.of(context).primaryColor,
+              title: Center(
+                child: Text("لائحة الورثة",
+                    textAlign: TextAlign.center,
+                    textDirection: TextDirection.rtl,
+                    style: Theme.of(context).textTheme.caption),
               ),
+              children: [
+                ListTile(
+                  trailing: Text("المالك 3"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit3']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 3"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit3ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 4"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit4']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 4"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit4ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 5"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit5']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 5"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit5ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 6"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit6']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 6"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit6ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 7"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit7']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 7"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit7ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 8"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit8']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 8"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit8ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 9"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit9']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 9"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit9ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 10"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit10']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 10"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit10ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 10"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit10']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 10"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit10ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 11"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit11']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 11"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit11ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 12"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit12']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 12"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit12ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 13"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit13']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 13"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit13ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 14"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit14']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 14"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit14ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 15"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit15']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 15"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit15ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 16"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit16']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 16"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit16ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 17"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit17']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 17"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit17ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 18"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit18']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 18"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit18ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 19"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit19']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 19"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit19ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("المالك 20"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit20']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  trailing: Text("البطاقة 20"),
+                  title: Center(
+                    child: Text(
+                      '${data!['warit20ID']}',
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-          DataCell(Center(
-            child: Text(
-              'المسؤول',
-              maxLines: 3,
-              textAlign: TextAlign.center,
-            ),
-          )),
-        ]),
-        DataRow(cells: [
-          DataCell(
-            Center(
-              child: Text(
-                '${data!['ownerCIN']}',
-                maxLines: 3,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          DataCell(
-            Center(
-              child: Text(
-                'بطاقة المسؤول',
-                maxLines: 3,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-        ]),
-        DataRow(cells: [
-          DataCell(
-            Center(
-              child: Text(
-                '${data!['region']}',
-                maxLines: 3,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          DataCell(
-            Center(
-              child: Text(
-                'المنطقة',
-                maxLines: 3,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-        ]),
-      ]),
+          ],
+        ),
+      ),
     );
+  }
+}
+
+class ListTileBoat extends StatelessWidget {
+  const ListTileBoat({
+    Key? key,
+    required this.data,
+    this.trailing,
+    this.title,
+    this.message,
+  }) : super(key: key);
+
+  final Map<String?, dynamic>? data;
+  final String? trailing;
+  final String? title;
+  final String? message;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+        trailing: SizedBox(
+          child: Text(
+            trailing!,
+            textDirection: TextDirection.rtl,
+          ),
+          width: 100,
+        ),
+        title: Center(
+          child: Text(
+            title != null ? title! : "لايوجد",
+            maxLines: 3,
+            textAlign: TextAlign.center,
+          ),
+        ),
+        onTap: () {
+          Clipboard.setData(ClipboardData(text: title!));
+          if (title != null) {
+            Clipboard.setData(ClipboardData(text: title!));
+            Get.snackbar("", "",
+                titleText: Text(
+                  message!,
+                  textDirection: TextDirection.rtl,
+                  textAlign: TextAlign.center,
+                ));
+          } else {
+            Get.snackbar("", "",
+                titleText: Text(
+                  "لم يتم النسخ، الخانة فارخة",
+                  textDirection: TextDirection.rtl,
+                  textAlign: TextAlign.center,
+                ));
+          }
+        });
   }
 }
