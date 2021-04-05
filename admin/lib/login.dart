@@ -1,9 +1,9 @@
 import 'package:admin/auth.dart';
 import 'package:admin/checker.dart';
+import 'package:admin/icons.dart';
 import 'package:admin/passwordController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 
 class AdminSignInFix extends ConsumerWidget {
@@ -57,7 +57,7 @@ class AdminSignInFix extends ConsumerWidget {
                         height: 40,
                         width: 60,
                         child: OutlinedButton(
-                          child: Icon(Feather.arrow_left),
+                          child: OmniIcons().back,
                           onPressed: () {
                             Get.back();
                           },
@@ -70,7 +70,7 @@ class AdminSignInFix extends ConsumerWidget {
                         height: 40,
                         width: 60,
                         child: OutlinedButton(
-                          child: Icon(Feather.home),
+                          child: OmniIcons().home,
                           onPressed: () {
                             Get.toNamed('/');
                           },
@@ -102,7 +102,7 @@ class AdminSignInFix extends ConsumerWidget {
                               decoration: InputDecoration(
                                 hintText: 'البريد الالكتروني',
                                 hintTextDirection: TextDirection.rtl,
-                                suffixIcon: Icon(Feather.mail),
+                                suffixIcon: OmniIcons().email,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
@@ -128,8 +128,8 @@ class AdminSignInFix extends ConsumerWidget {
                                     hintTextDirection: TextDirection.rtl,
                                     suffixIcon: InkWell(
                                       child: p.hidden.isTrue
-                                          ? Icon(Feather.eye_off)
-                                          : Icon(Feather.eye),
+                                          ? OmniIcons().password_hide
+                                          : OmniIcons().password_show,
                                       onTap: () => p.change(),
                                     ),
                                     border: OutlineInputBorder(
@@ -150,7 +150,7 @@ class AdminSignInFix extends ConsumerWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Feather.log_in),
+                                  OmniIcons().login,
                                   SizedBox(
                                     width: 20,
                                   ),
@@ -262,7 +262,7 @@ class AdminSignIn extends ConsumerWidget {
                           decoration: InputDecoration(
                             hintText: 'البريد الالكتروني',
                             hintTextDirection: TextDirection.rtl,
-                            suffixIcon: Icon(Feather.mail),
+                            suffixIcon: OmniIcons().email,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20.0),
                             ),
@@ -283,13 +283,17 @@ class AdminSignIn extends ConsumerWidget {
                                   updatePassword(context, value),
                               obscuringCharacter: '*',
                               obscureText: p.hidden.value,
+                              onSubmitted: (value) {
+                                submit(emailController, passwordController,
+                                    _auth, email, pass);
+                              },
                               decoration: InputDecoration(
                                 hintText: 'كلمة السر',
                                 hintTextDirection: TextDirection.rtl,
                                 suffixIcon: InkWell(
                                   child: p.hidden.isTrue
-                                      ? Icon(Feather.eye_off)
-                                      : Icon(Feather.eye),
+                                      ? OmniIcons().password_hide
+                                      : OmniIcons().password_show,
                                   onTap: () => p.change(),
                                 ),
                                 border: OutlineInputBorder(
@@ -310,7 +314,7 @@ class AdminSignIn extends ConsumerWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Feather.log_in),
+                              OmniIcons().login,
                               SizedBox(
                                 width: 20,
                               ),
@@ -320,51 +324,8 @@ class AdminSignIn extends ConsumerWidget {
                             ],
                           ),
                           onPressed: () {
-                            if (emailController.text.isEmpty ||
-                                !emailController.text.isEmail) {
-                              Get.snackbar("", "",
-                                  overlayColor: Colors.red,
-                                  titleText: Text(
-                                    "خطأ في البريد الاكتروني",
-                                    textDirection: TextDirection.rtl,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  messageText: Text(
-                                    "البريد الالكتروني غير صحيح او فارغ",
-                                    textScaleFactor: 0.7,
-                                    textDirection: TextDirection.rtl,
-                                    textAlign: TextAlign.center,
-                                  ));
-                            } else if (passwordController.text.isEmpty) {
-                              Get.snackbar("", "",
-                                  overlayColor: Colors.red,
-                                  titleText: Text(
-                                    "خطأ في كلمة السر",
-                                    textDirection: TextDirection.rtl,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  messageText: Text(
-                                    "كلمة السر فارغة",
-                                    textScaleFactor: 0.7,
-                                    textDirection: TextDirection.rtl,
-                                    textAlign: TextAlign.center,
-                                  ));
-                            } else {
-                              _auth
-                                  .signIn(email: email, password: pass)
-                                  .then((value) => Get.snackbar("", "",
-                                      titleText: Text(
-                                        "ملاحظة",
-                                        textDirection: TextDirection.rtl,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      messageText: Text(
-                                        value,
-                                        textScaleFactor: 0.7,
-                                        textDirection: TextDirection.rtl,
-                                        textAlign: TextAlign.center,
-                                      )));
-                            }
+                            submit(emailController, passwordController, _auth,
+                                email, pass);
                           },
                         ),
                       ),
@@ -394,5 +355,52 @@ class LoadingScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+void submit(emailController, passwordController, _auth, email, pass) {
+  if (emailController.text.isEmpty || !emailController.text.isEmail) {
+    Get.snackbar("", "",
+        overlayColor: Colors.red,
+        titleText: Text(
+          "خطأ في البريد الاكتروني",
+          textDirection: TextDirection.rtl,
+          textAlign: TextAlign.center,
+        ),
+        messageText: Text(
+          "البريد الالكتروني غير صحيح او فارغ",
+          textScaleFactor: 0.7,
+          textDirection: TextDirection.rtl,
+          textAlign: TextAlign.center,
+        ));
+  } else if (passwordController.text.isEmpty) {
+    Get.snackbar("", "",
+        overlayColor: Colors.red,
+        titleText: Text(
+          "خطأ في كلمة السر",
+          textDirection: TextDirection.rtl,
+          textAlign: TextAlign.center,
+        ),
+        messageText: Text(
+          "كلمة السر فارغة",
+          textScaleFactor: 0.7,
+          textDirection: TextDirection.rtl,
+          textAlign: TextAlign.center,
+        ));
+  } else {
+    _auth
+        .signIn(email: email, password: pass)
+        .then((value) => Get.snackbar("", "",
+            titleText: Text(
+              "ملاحظة",
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.center,
+            ),
+            messageText: Text(
+              value,
+              textScaleFactor: 0.7,
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.center,
+            )));
   }
 }

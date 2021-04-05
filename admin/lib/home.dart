@@ -1,9 +1,9 @@
 import 'package:admin/auth.dart';
 import 'package:admin/header.dart';
+import 'package:admin/icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -48,7 +48,7 @@ class HomePage extends ConsumerWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Feather.paperclip),
+                      OmniIcons().document,
                       SizedBox(
                         width: 20,
                       ),
@@ -74,7 +74,7 @@ class HomePage extends ConsumerWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Feather.navigation),
+                      OmniIcons().boat,
                       SizedBox(
                         width: 20,
                       ),
@@ -100,7 +100,7 @@ class HomePage extends ConsumerWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Feather.log_out),
+                      OmniIcons().logout,
                       SizedBox(
                         width: 20,
                       ),

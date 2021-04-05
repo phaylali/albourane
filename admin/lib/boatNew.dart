@@ -1,8 +1,8 @@
 import 'package:admin/header.dart';
+import 'package:admin/icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 
 class NewBoat extends StatelessWidget {
@@ -62,7 +62,7 @@ class NewBoat extends StatelessWidget {
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         floatingActionButton: FloatingActionButton(
-          child: Icon(Feather.save),
+          child: OmniIcons().save,
           onPressed: () {
             if (!attachmentController.text.isURL) {
               Get.snackbar("", "",

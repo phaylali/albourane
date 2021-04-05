@@ -1,8 +1,8 @@
 import 'package:admin/header.dart';
+import 'package:admin/icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 
 class NewSeaman extends StatelessWidget {
@@ -22,7 +22,7 @@ class NewSeaman extends StatelessWidget {
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         floatingActionButton: FloatingActionButton(
-          child: Icon(Feather.save),
+          child: OmniIcons().save,
           onPressed: () {
             if (!attachmentController.text.isURL) {
               Get.snackbar("Error", "Image link is empty or not a link",
@@ -119,7 +119,6 @@ class NewSeaman extends StatelessWidget {
                                     controller: nameController,
                                     decoration: InputDecoration(
                                       hintText: 'Name',
-                                      suffixIcon: Icon(Feather.user),
                                       border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(20.0),
@@ -140,7 +139,6 @@ class NewSeaman extends StatelessWidget {
                                     controller: attachmentController,
                                     decoration: InputDecoration(
                                       hintText: 'Image Link',
-                                      suffixIcon: Icon(Feather.image),
                                       border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(20.0),
@@ -161,7 +159,6 @@ class NewSeaman extends StatelessWidget {
                                     controller: referenceController,
                                     decoration: InputDecoration(
                                       hintText: 'Reference',
-                                      suffixIcon: Icon(Feather.anchor),
                                       border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(20.0),
@@ -182,7 +179,6 @@ class NewSeaman extends StatelessWidget {
                                     controller: phoneController,
                                     decoration: InputDecoration(
                                       hintText: 'Phone Number',
-                                      suffixIcon: Icon(Feather.phone),
                                       border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(20.0),
@@ -203,7 +199,6 @@ class NewSeaman extends StatelessWidget {
                                     controller: cinController,
                                     decoration: InputDecoration(
                                       hintText: 'CIN',
-                                      suffixIcon: Icon(Feather.image),
                                       border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(20.0),
@@ -224,7 +219,6 @@ class NewSeaman extends StatelessWidget {
                                     controller: cnssController,
                                     decoration: InputDecoration(
                                       hintText: 'CNSS',
-                                      suffixIcon: Icon(Feather.octagon),
                                       border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(20.0),

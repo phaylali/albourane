@@ -3,7 +3,6 @@
 import 'package:admin/checker.dart';
 import 'package:admin/icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 
 class MainBody extends StatelessWidget {
@@ -25,13 +24,13 @@ class MainBody extends StatelessWidget {
         key: drawerKey,
         floatingActionButton: context.responsiveValue(
           mobile: FloatingActionButton(
-            child: Icon(Feather.menu),
+            child: OmniIcons().back,
             onPressed: () {
               drawerKey.currentState!.openEndDrawer();
             },
           ),
           watch: FloatingActionButton(
-            child: Icon(Feather.menu),
+            child: OmniIcons().menu,
             onPressed: () {
               drawerKey.currentState!.openEndDrawer();
             },

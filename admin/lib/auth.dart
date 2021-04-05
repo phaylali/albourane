@@ -43,7 +43,7 @@ class AuthenticationService {
         email: email,
         password: password,
       );
-      return "Login Successful";
+      return "تم الدخول بنجاح";
     } on FirebaseAuthException catch (e) {
       return e.message!;
     }

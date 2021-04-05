@@ -24,4 +24,22 @@ class OmniIcons {
   final Widget logout = SvgPicture.asset(
     'res/icons/exit.svg',
   );
+  final Widget login = SvgPicture.asset(
+    'res/icons/login.svg',
+  );
+  final Widget password_show = SvgPicture.asset(
+    'res/icons/password-show.svg',
+  );
+  final Widget password_hide = SvgPicture.asset(
+    'res/icons/password-hide.svg',
+  );
+  final Widget email = SvgPicture.asset(
+    'res/icons/email.svg',
+  );
+  final Widget save = SvgPicture.asset(
+    'res/icons/save.svg',
+  );
+  final Widget menu = SvgPicture.asset(
+    'res/icons/menu.svg',
+  );
 }

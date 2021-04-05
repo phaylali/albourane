@@ -1,5 +1,5 @@
+import 'package:admin/icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 
 class ERROR404 extends StatelessWidget {
@@ -46,7 +46,7 @@ class ERROR404 extends StatelessWidget {
                         height: 40,
                         width: 60,
                         child: OutlinedButton(
-                          child: Icon(Feather.arrow_left),
+                          child: OmniIcons().back,
                           onPressed: () {
                             Get.back();
                           },
@@ -59,7 +59,7 @@ class ERROR404 extends StatelessWidget {
                         height: 40,
                         width: 60,
                         child: OutlinedButton(
-                          child: Icon(Feather.home),
+                          child: OmniIcons().home,
                           onPressed: () {
                             Get.toNamed('/');
                           },
@@ -126,7 +126,7 @@ class NoProduct extends StatelessWidget {
                         height: 40,
                         width: 60,
                         child: OutlinedButton(
-                          child: Icon(Feather.arrow_left),
+                          child: OmniIcons().back,
                           onPressed: () {
                             Get.back();
                           },
@@ -139,7 +139,7 @@ class NoProduct extends StatelessWidget {
                         height: 40,
                         width: 60,
                         child: OutlinedButton(
-                          child: Icon(Feather.home),
+                          child: OmniIcons().home,
                           onPressed: () {
                             Get.toNamed('/');
                           },
