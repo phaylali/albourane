@@ -16,6 +16,7 @@ dependencies:
   url_launcher:
   url_strategy:
   native_pdf_view: 
+  connectivity:
 
   # Firebase Packages
   firebase_auth: 

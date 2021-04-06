@@ -49,6 +49,7 @@ class MainBody extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
+              //if connection green if not red
               SizedBox(
                 height: 20,
               ),
