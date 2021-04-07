@@ -10,6 +10,7 @@ import 'package:admin/docNew.dart';
 import 'package:admin/seamanNew.dart';
 import 'package:admin/seamanPage.dart';
 import 'package:admin/seamen.dart';
+import 'package:admin/test.dart';
 import 'package:admin/themes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,7 @@ class Start extends StatelessWidget {
           GetPage(name: '/Document', page: () => DocumentPage()),
           GetPage(name: '/Boat', page: () => BoatPage()),
           GetPage(name: '/Seaman', page: () => SeamanPage()),
+          GetPage(name: '/test', page: () => PDFTest()),
         ],
         unknownRoute: GetPage(name: '/Error404', page: () => ERROR404()),
         theme: omniDarkBlueTheme(),

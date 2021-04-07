@@ -23,14 +23,16 @@ class MainBody extends StatelessWidget {
       child: Scaffold(
         key: drawerKey,
         floatingActionButton: context.responsiveValue(
-          mobile: FloatingActionButton(
-            child: OmniIcons().back,
+          mobile: FloatingActionButton.extended(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            label: SizedBox(height: 40, width: 40, child: OmniIcons().menu),
             onPressed: () {
               drawerKey.currentState!.openEndDrawer();
             },
           ),
-          watch: FloatingActionButton(
-            child: OmniIcons().menu,
+          watch: FloatingActionButton.extended(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            label: SizedBox(height: 40, width: 40, child: OmniIcons().menu),
             onPressed: () {
               drawerKey.currentState!.openEndDrawer();
             },
@@ -146,10 +148,11 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   leading: SizedBox(
                     height: 40,
-                    width: 100,
+                    width: 60,
                     child: Row(
                       children: [
-                        OmniIcons().boat,
+                        SizedBox(
+                            height: 40, width: 40, child: OmniIcons().boat),
                         Center(
                             child: SizedBox(
                                 height: 20,
@@ -183,10 +186,11 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   leading: SizedBox(
                     height: 40,
-                    width: 100,
+                    width: 60,
                     child: Row(
                       children: [
-                        OmniIcons().seaman,
+                        SizedBox(
+                            height: 40, width: 40, child: OmniIcons().seaman),
                         Center(
                             child: SizedBox(
                                 height: 20,
@@ -217,10 +221,11 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   leading: SizedBox(
                     height: 40,
-                    width: 100,
+                    width: 60,
                     child: Row(
                       children: [
-                        OmniIcons().document,
+                        SizedBox(
+                            height: 40, width: 40, child: OmniIcons().document),
                         Center(
                             child: SizedBox(
                                 height: 20,
@@ -242,6 +247,17 @@ class CustomDrawer extends StatelessWidget {
                       height: 40, width: 40, child: OmniIcons().logout),
                   onTap: () {
                     Get.to(GotToHome());
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    "تجربة",
+                    textDirection: TextDirection.rtl,
+                  ),
+                  leading:
+                      SizedBox(height: 40, width: 40, child: OmniIcons().plus),
+                  onTap: () {
+                    Get.toNamed('/test');
                   },
                 ),
               ],

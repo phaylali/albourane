@@ -61,8 +61,9 @@ class NewBoat extends StatelessWidget {
       subtitle: Text("أدخل معلومات القارب الجديد"),
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-        floatingActionButton: FloatingActionButton(
-          child: OmniIcons().save,
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          label: SizedBox(height: 40, width: 40, child: OmniIcons().save),
           onPressed: () {
             if (!attachmentController.text.isURL) {
               Get.snackbar("", "",

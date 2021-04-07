@@ -48,7 +48,8 @@ class HomePage extends ConsumerWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      OmniIcons().document,
+                      SizedBox(
+                          width: 50, height: 50, child: OmniIcons().document),
                       SizedBox(
                         width: 20,
                       ),
@@ -74,7 +75,7 @@ class HomePage extends ConsumerWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      OmniIcons().boat,
+                      SizedBox(height: 50, width: 50, child: OmniIcons().boat),
                       SizedBox(
                         width: 20,
                       ),
@@ -100,7 +101,8 @@ class HomePage extends ConsumerWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      OmniIcons().logout,
+                      SizedBox(
+                          height: 50, width: 50, child: OmniIcons().logout),
                       SizedBox(
                         width: 20,
                       ),

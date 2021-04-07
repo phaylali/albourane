@@ -15,7 +15,7 @@ dependencies:
   get: 
   url_launcher:
   url_strategy:
-  native_pdf_view: 
+  
   connectivity:
 
   # Firebase Packages
@@ -23,7 +23,13 @@ dependencies:
   cloud_firestore: 
   firebase_core: 
   flutter_riverpod: 
-  flutter_svg: ^0.21.0-nullsafety.0
+  flutter_svg: 
+  
+  pdf:
+  printing:
+  open_file:
+  path_provider:
+
 
 flutter:
   uses-material-design: true
