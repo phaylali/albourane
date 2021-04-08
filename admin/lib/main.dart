@@ -40,6 +40,7 @@ class Start extends StatelessWidget {
     return Shortcuts(
       shortcuts: <LogicalKeySet, Intent>{
         LogicalKeySet(LogicalKeyboardKey.select): ActivateIntent(),
+        LogicalKeySet(LogicalKeyboardKey.arrowDown): DismissIntent(),
       },
       child: GetMaterialApp(
         getPages: [
