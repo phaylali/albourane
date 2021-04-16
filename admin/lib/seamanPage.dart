@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:admin/error404.dart';
+import 'package:admin/boatPage.dart';
 import 'package:admin/header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +54,7 @@ class SeamanPage extends StatelessWidget {
                         mobile: Row(
                           children: [
                             Expanded(
-                                child: ListView(
+                                child: Column(
                               children: [
                                 Expanded(
                                   child: SeamanInfo(data: data),
@@ -70,7 +70,7 @@ class SeamanPage extends StatelessWidget {
                         tablet: Row(
                           children: [
                             Expanded(
-                                child: ListView(
+                                child: Column(
                               children: [
                                 Expanded(
                                   child: SeamanInfo(data: data),
@@ -98,9 +98,8 @@ class SeamanPage extends StatelessWidget {
                   ),
                 );
               } else {
-                return NoProduct(
-                  title: "لا يوجد بحار في هذا الرابط",
-                  subtitle: "صحح الرابط او عد الى الصفحة الرئيسية",
+                return Center(
+                  child: Text("لا يوجد بحار في هذا الرابط"),
                 );
               }
             }
@@ -161,45 +160,35 @@ class SeamanInfo extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            ListTile(
-              trailing: Text("الاسم"),
-              title: Center(
-                child: Text(
-                  '${data!['name']}',
-                  maxLines: 3,
-                  textAlign: TextAlign.center,
-                ),
-              ),
+            ListTileInfo(
+              data: data,
+              title: '${data!['name']}',
+              trailing: "الاسم",
+              message: "تم نسخ اسم البحار",
             ),
-            ListTile(
-              trailing: Text("البطاقة"),
-              title: Center(
-                child: Text(
-                  '${data!['cin']}',
-                  maxLines: 3,
-                  textAlign: TextAlign.center,
-                ),
-              ),
+            ListTileInfo(
+              data: data,
+              title: '${data!['reference']}',
+              trailing: "الرقم",
+              message: "تم نسخ الرقم البحري للبحار",
             ),
-            ListTile(
-              trailing: Text("الضمان"),
-              title: Center(
-                child: Text(
-                  '${data!['cnss']}',
-                  maxLines: 3,
-                  textAlign: TextAlign.center,
-                ),
-              ),
+            ListTileInfo(
+              data: data,
+              title: '${data!['cin']}',
+              trailing: "البطاقة",
+              message: "تم نسخ بطاقة البحار",
             ),
-            ListTile(
-              trailing: Text("الهاتف"),
-              title: Center(
-                child: Text(
-                  '${data!['phone']}',
-                  maxLines: 3,
-                  textAlign: TextAlign.center,
-                ),
-              ),
+            ListTileInfo(
+              data: data,
+              title: '${data!['cnss']}',
+              trailing: "الضمان",
+              message: "تم نسخ  رقم الضمان الاجتماعي للبحار",
+            ),
+            ListTileInfo(
+              data: data,
+              title: '${data!['phone']}',
+              trailing: "الهاتف",
+              message: "تم نسخ هاتف البحار",
             ),
           ],
         ),

@@ -1,7 +1,6 @@
 import 'package:admin/header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class DocsLibrary extends StatelessWidget {
@@ -67,52 +66,26 @@ class DocsLibrary extends StatelessWidget {
                             ((item) => DataRow(
                                   cells: <DataCell>[
                                     DataCell(
-                                        Text(
-                                          "${item.id}",
-                                        ), onTap: () {
-                                      final String id = item.id;
-                                      Get.toNamed(
-                                        "/Document?id=$id",
-                                      );
-                                    }, onLongPress: () {
-                                      Clipboard.setData(
-                                          ClipboardData(text: "${item.id}"));
-                                      Get.snackbar("", "",
-                                          titleText: Text(
-                                            "تم نسخ الرقم",
-                                            textDirection: TextDirection.rtl,
-                                            textAlign: TextAlign.center,
-                                          ));
-                                    }), //Extracting from Map element the value
+                                      Text(
+                                        "${item.id}",
+                                      ),
+                                      onTap: () {
+                                        final String id = item.id;
+                                        Get.toNamed(
+                                          "/Document?id=$id",
+                                        );
+                                      },
+                                    ), //Extracting from Map element the value
                                     DataCell(
-                                        Text(
-                                          "${item['name']}",
-                                        ), onLongPress: () {
-                                      Clipboard.setData(ClipboardData(
-                                          text: "${item['name']}"));
-                                      Get.snackbar("", "",
-                                          titleText: Text(
-                                            "تم نسخ الاسم",
-                                            textDirection: TextDirection.rtl,
-                                            textAlign: TextAlign.center,
-                                          ));
-                                    }),
+                                      Text(
+                                        "${item['name']}",
+                                      ),
+                                    ),
 
                                     DataCell(
-                                        Text(
-                                            "${item['date'].toDate().toString().split(" ").first}"
-                                            //"${item['date']}",
-                                            ), onLongPress: () {
-                                      Clipboard.setData(ClipboardData(
-                                          text:
-                                              "${item['date'].toDate().toString().split(" ").first}"));
-                                      Get.snackbar("", "",
-                                          titleText: Text(
-                                            "تم نسخ التاريخ",
-                                            textDirection: TextDirection.rtl,
-                                            textAlign: TextAlign.center,
-                                          ));
-                                    }),
+                                      Text(
+                                          "${item['date'].toDate().toString().split(" ").first}"),
+                                    ),
                                     DataCell(
                                         SizedBox(
                                           height: 50,

@@ -1,7 +1,6 @@
 import 'package:admin/header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class BoatsLibrary extends StatelessWidget {
@@ -82,80 +81,36 @@ class BoatsLibrary extends StatelessWidget {
                             ((item) => DataRow(
                                   cells: <DataCell>[
                                     DataCell(
-                                        Text(
-                                          "${item['reference']}",
-                                        ), onTap: () {
-                                      final String id = item.id;
-                                      Get.toNamed(
-                                        "/Boat?id=$id",
-                                      );
-                                    }, onLongPress: () {
-                                      Clipboard.setData(ClipboardData(
-                                          text: "${item['reference']}"));
-                                      Get.snackbar("", "",
-                                          titleText: Text(
-                                            "تم نسخ رقم لوحة القارب",
-                                            textDirection: TextDirection.rtl,
-                                            textAlign: TextAlign.center,
-                                          ));
-                                    }), //Extracting from Map element the value
+                                      Text(
+                                        "${item['reference']}",
+                                      ),
+                                      onTap: () {
+                                        final String id = item.id;
+                                        Get.toNamed(
+                                          "/Boat?id=$id",
+                                        );
+                                      },
+                                    ), //Extracting from Map element the value
                                     DataCell(
-                                        Text(
-                                          "${item['name']}",
-                                        ), onTap: () {
-                                      final String id = item.id;
-                                      Get.toNamed(
-                                        "/Boat?id=$id",
-                                      );
-                                    }, onLongPress: () {
-                                      Clipboard.setData(ClipboardData(
-                                          text: "${item['name']}"));
-                                      Get.snackbar("", "",
-                                          titleText: Text(
-                                            "تم نسخ اسم القارب",
-                                            textDirection: TextDirection.rtl,
-                                            textAlign: TextAlign.center,
-                                          ));
-                                    }),
+                                      Text(
+                                        "${item['name']}",
+                                      ),
+                                    ),
                                     DataCell(
-                                        Text(
-                                          "${item['owner']}",
-                                        ), onLongPress: () {
-                                      Clipboard.setData(ClipboardData(
-                                          text: "${item['owner']}"));
-                                      Get.snackbar("", "",
-                                          titleText: Text(
-                                            "تم نسخ اسم المسؤول",
-                                            textDirection: TextDirection.rtl,
-                                            textAlign: TextAlign.center,
-                                          ));
-                                    }),
+                                      Text(
+                                        "${item['owner']}",
+                                      ),
+                                    ),
                                     DataCell(
-                                        Text(
-                                          "${item['ownerCIN']}",
-                                        ), onLongPress: () {
-                                      Clipboard.setData(ClipboardData(
-                                          text: "${item['ownerCIN']}"));
-                                      Get.snackbar("", "",
-                                          titleText: Text(
-                                            "تم نسخ بطاقة المسؤول",
-                                            textDirection: TextDirection.rtl,
-                                            textAlign: TextAlign.center,
-                                          ));
-                                    }),
+                                      Text(
+                                        "${item['ownerCIN']}",
+                                      ),
+                                    ),
                                     DataCell(
-                                        Text(
-                                          "${item['region']}",
-                                        ), onLongPress: () {
-                                      Clipboard.setData(ClipboardData(
-                                          text: "${item['region']}"));
-                                      Get.snackbar("", "",
-                                          titleText: Text(
-                                            "تم نسخ المنطقة",
-                                            textDirection: TextDirection.rtl,
-                                            textAlign: TextAlign.center,
-                                          ));
-                                    }),
+                                      Text(
+                                        "${item['region']}",
+                                      ),
+                                    ),
                                     DataCell(
                                         SizedBox(
                                           height: 50,

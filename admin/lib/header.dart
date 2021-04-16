@@ -1,5 +1,3 @@
-//import 'dart:ffi';
-
 import 'package:admin/checker.dart';
 import 'package:admin/icons.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +13,6 @@ class MainBody extends StatelessWidget {
     this.subtitle,
     this.child,
   });
-  //GlobalKey<ScaffoldState>? drawerKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState>? drawerKey = GlobalKey();
@@ -52,8 +49,9 @@ class MainBody extends StatelessWidget {
           child: Column(
             children: [
               //if connection green if not red
+              ConnectionIndicator(),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               Text(title!,
                   textAlign: TextAlign.center,

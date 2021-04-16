@@ -1,4 +1,5 @@
 import 'package:admin/auth.dart';
+import 'package:admin/checker.dart';
 import 'package:admin/icons.dart';
 import 'package:admin/passwordController.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +34,9 @@ class AdminSignIn extends ConsumerWidget {
                 child: Center(
                   child: Column(
                     children: [
+                      ConnectionIndicator(),
                       SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       Text("تسجيل الدخول",
                           textAlign: TextAlign.center,
@@ -181,7 +183,6 @@ void submit(TextEditingController emailController,
     TextEditingController passwordController, _auth, email, pass) {
   if (emailController.text.isEmpty || !emailController.text.isEmail) {
     Get.snackbar("", "",
-        overlayColor: Colors.red,
         titleText: Text(
           "خطأ في البريد الاكتروني",
           textDirection: TextDirection.rtl,
@@ -195,7 +196,6 @@ void submit(TextEditingController emailController,
         ));
   } else if (passwordController.text.isEmpty) {
     Get.snackbar("", "",
-        overlayColor: Colors.red,
         titleText: Text(
           "خطأ في كلمة السر",
           textDirection: TextDirection.rtl,

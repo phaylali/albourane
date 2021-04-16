@@ -119,35 +119,6 @@ class NoProduct extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Column(
-                    children: [
-                      Spacer(),
-                      SizedBox(
-                        height: 40,
-                        width: 60,
-                        child: OutlinedButton(
-                          child: OmniIcons().back,
-                          onPressed: () {
-                            Get.back();
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 40,
-                        width: 60,
-                        child: OutlinedButton(
-                          child: OmniIcons().home,
-                          onPressed: () {
-                            Get.toNamed('/');
-                          },
-                        ),
-                      ),
-                      Spacer()
-                    ],
-                  ),
                 ],
               ),
             ),

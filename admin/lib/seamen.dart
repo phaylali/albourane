@@ -1,7 +1,6 @@
 import 'package:admin/header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class SeamenLibrary extends StatelessWidget {
@@ -82,76 +81,36 @@ class SeamenLibrary extends StatelessWidget {
                             ((item) => DataRow(
                                   cells: <DataCell>[
                                     DataCell(
-                                        Text(
-                                          "${item['reference']}",
-                                        ), onTap: () {
-                                      final String id = item.id;
-                                      Get.toNamed(
-                                        "/Seaman?id=$id",
-                                      );
-                                    }, onLongPress: () {
-                                      Clipboard.setData(ClipboardData(
-                                          text: "${item['reference']}"));
-                                      Get.snackbar("", "",
-                                          titleText: Text(
-                                            "تم نسخ الرقم البحري",
-                                            textDirection: TextDirection.rtl,
-                                            textAlign: TextAlign.center,
-                                          ));
-                                    }), //Extracting from Map element the value
+                                      Text(
+                                        "${item['reference']}",
+                                      ),
+                                      onTap: () {
+                                        final String id = item.id;
+                                        Get.toNamed(
+                                          "/Seaman?id=$id",
+                                        );
+                                      },
+                                    ),
                                     DataCell(
-                                        Text(
-                                          "${item['name']}",
-                                        ), onLongPress: () {
-                                      Clipboard.setData(ClipboardData(
-                                          text: "${item['name']}"));
-                                      Get.snackbar("", "",
-                                          titleText: Text(
-                                            "تم نسخ الاسم",
-                                            textDirection: TextDirection.rtl,
-                                            textAlign: TextAlign.center,
-                                          ));
-                                    }),
-
+                                      Text(
+                                        "${item['name']}",
+                                      ),
+                                    ),
                                     DataCell(
-                                        Text(
-                                          "${item['cnss']}",
-                                        ), onLongPress: () {
-                                      Clipboard.setData(ClipboardData(
-                                          text: "${item['cnss']}"));
-                                      Get.snackbar("", "",
-                                          titleText: Text(
-                                            "تم نسخ رقم الضمان الجتماعي",
-                                            textDirection: TextDirection.rtl,
-                                            textAlign: TextAlign.center,
-                                          ));
-                                    }),
+                                      Text(
+                                        "${item['cnss']}",
+                                      ),
+                                    ),
                                     DataCell(
-                                        Text(
-                                          "${item['cin']}",
-                                        ), onLongPress: () {
-                                      Clipboard.setData(ClipboardData(
-                                          text: "${item['cin']}"));
-                                      Get.snackbar("", "",
-                                          titleText: Text(
-                                            "تم نسخ رقم البطاقة",
-                                            textDirection: TextDirection.rtl,
-                                            textAlign: TextAlign.center,
-                                          ));
-                                    }),
+                                      Text(
+                                        "${item['cin']}",
+                                      ),
+                                    ),
                                     DataCell(
-                                        Text(
-                                          "${item['phone']}",
-                                        ), onLongPress: () {
-                                      Clipboard.setData(ClipboardData(
-                                          text: "${item['phone']}"));
-                                      Get.snackbar("", "",
-                                          titleText: Text(
-                                            "تم نسخ الهاتف",
-                                            textDirection: TextDirection.rtl,
-                                            textAlign: TextAlign.center,
-                                          ));
-                                    }),
+                                      Text(
+                                        "${item['phone']}",
+                                      ),
+                                    ),
                                     DataCell(
                                         SizedBox(
                                           height: 50,

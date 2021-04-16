@@ -331,74 +331,63 @@ class NewBoat extends StatelessWidget {
                             ),
                             Expanded(
                               child: ListView(
-                                //direction: Axis.vertical,
+                                shrinkWrap: true,
                                 children: [
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  ListTile(
-                                    title: TextField(
-                                      keyboardType: TextInputType.name,
-                                      maxLines: 1,
-                                      controller: nameController,
-                                      decoration: InputDecoration(
-                                        hintText: 'اسم القارب',
-                                        hintTextDirection: TextDirection.rtl,
-                                      ),
+                                  TextField(
+                                    keyboardType: TextInputType.name,
+                                    maxLines: 1,
+                                    controller: nameController,
+                                    decoration: InputDecoration(
+                                      hintText: 'اسم القارب',
+                                      hintTextDirection: TextDirection.rtl,
                                     ),
                                   ),
-                                  ListTile(
-                                    title: TextField(
-                                      maxLines: 1,
-                                      keyboardType: TextInputType.number,
-                                      controller: refController,
-                                      decoration: InputDecoration(
-                                        hintText: 'رقم اللوحة',
-                                        hintTextDirection: TextDirection.rtl,
-                                      ),
+                                  TextField(
+                                    maxLines: 1,
+                                    keyboardType: TextInputType.number,
+                                    controller: refController,
+                                    decoration: InputDecoration(
+                                      hintText: 'رقم اللوحة',
+                                      hintTextDirection: TextDirection.rtl,
                                     ),
                                   ),
-                                  ListTile(
-                                    title: TextField(
-                                      keyboardType: TextInputType.name,
-                                      maxLines: 1,
-                                      controller: respController,
-                                      decoration: InputDecoration(
-                                        hintText: 'اسم المسؤول',
-                                        hintTextDirection: TextDirection.rtl,
-                                      ),
+                                  TextField(
+                                    keyboardType: TextInputType.name,
+                                    maxLines: 1,
+                                    controller: respController,
+                                    decoration: InputDecoration(
+                                      hintText: 'اسم المسؤول',
+                                      hintTextDirection: TextDirection.rtl,
                                     ),
                                   ),
-                                  ListTile(
-                                    title: TextField(
-                                        keyboardType: TextInputType.name,
-                                        maxLines: 1,
-                                        controller: respIdController,
-                                        decoration: InputDecoration(
-                                          hintText: 'رقم بطاقة المسؤول',
-                                          hintTextDirection: TextDirection.rtl,
-                                        )),
-                                  ),
-                                  ListTile(
-                                    title: TextField(
-                                      keyboardType: TextInputType.name,
-                                      maxLines: 1,
-                                      controller: regionController,
-                                      decoration: InputDecoration(
-                                        hintText: 'المنطقة',
-                                        hintTextDirection: TextDirection.rtl,
-                                      ),
+                                  TextField(
+                                    keyboardType: TextInputType.name,
+                                    maxLines: 1,
+                                    controller: respIdController,
+                                    decoration: InputDecoration(
+                                      hintText: 'رقم بطاقة المسؤول',
+                                      hintTextDirection: TextDirection.rtl,
                                     ),
                                   ),
-                                  ListTile(
-                                    title: TextField(
-                                      keyboardType: TextInputType.url,
-                                      maxLines: 1,
-                                      controller: attachmentController,
-                                      decoration: InputDecoration(
-                                        hintText: 'رابط الصورة',
-                                        hintTextDirection: TextDirection.rtl,
-                                      ),
+                                  TextField(
+                                    keyboardType: TextInputType.name,
+                                    maxLines: 1,
+                                    controller: regionController,
+                                    decoration: InputDecoration(
+                                      hintText: 'المنطقة',
+                                      hintTextDirection: TextDirection.rtl,
+                                    ),
+                                  ),
+                                  TextField(
+                                    keyboardType: TextInputType.url,
+                                    maxLines: 1,
+                                    controller: attachmentController,
+                                    decoration: InputDecoration(
+                                      hintText: 'رابط الصورة',
+                                      hintTextDirection: TextDirection.rtl,
                                     ),
                                   ),
                                   SizedBox(
@@ -428,7 +417,7 @@ class NewBoat extends StatelessWidget {
                                         Theme.of(context).secondaryHeaderColor,
                                     title: Expanded(
                                       child: Text(
-                                        "لائحة الورثة",
+                                        "مالكون آخرون",
                                         textAlign: TextAlign.center,
                                       ),
                                     ),

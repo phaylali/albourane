@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:admin/error404.dart';
+import 'package:admin/boatPage.dart';
 import 'package:admin/header.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +56,7 @@ class DocumentPage extends StatelessWidget {
                         mobile: Row(
                           children: [
                             Expanded(
-                                child: ListView(
+                                child: Column(
                               children: [
                                 Expanded(
                                   child: DocumentInfo(data: data),
@@ -72,7 +72,7 @@ class DocumentPage extends StatelessWidget {
                         tablet: Row(
                           children: [
                             Expanded(
-                                child: ListView(
+                                child: Column(
                               children: [
                                 Expanded(
                                   child: DocumentInfo(data: data),
@@ -100,9 +100,8 @@ class DocumentPage extends StatelessWidget {
                   ),
                 );
               } else {
-                return NoProduct(
-                  title: "لا يوجد وثيقة في هذا الرابط",
-                  subtitle: "صحح الرابط او عد الى الصفحة الرئيسية",
+                return Center(
+                  child: Text("لا يوجد وثيقة في هذا الرابط"),
                 );
               }
             }
@@ -133,10 +132,14 @@ class PreviewOfDocument extends StatelessWidget {
     return OutlinedButton(
         onPressed: () => Get.defaultDialog(
             title: 'كبر الصورة',
-            content: Expanded(
-              child: InteractiveViewer(
-                child: Center(child: Image.network('${data!['preview']}')),
-              ),
+            content: Row(
+              children: [
+                Expanded(
+                  child: InteractiveViewer(
+                    child: Center(child: Image.network('${data!['preview']}')),
+                  ),
+                ),
+              ],
             )),
         style: ButtonStyle(
             shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -162,28 +165,26 @@ class DocumentInfo extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          ListTile(
-            trailing: Text("الاسم"),
-            title: Center(
-              child: Text(
-                '${data!['name']}',
-                maxLines: 3,
-                textAlign: TextAlign.center,
-              ),
-            ),
+          ListTileInfo(
+            data: data,
+            title: '${data!['name']}',
+            trailing: "الاسم",
+            message: "تم نسخ اسم الوثيقة",
+          ),
+          ListTileInfo(
+            data: data,
+            title: '${data!['date'].toDate().toString().split(" ").first}',
+            trailing: "التاريخ",
+            message: "تم نسخ تاريخ الوثيقة",
           ),
           ListTile(
-            trailing: Text("التاريخ"),
-            title: Center(
+            trailing: SizedBox(
               child: Text(
-                '${data!['date'].toDate().toString().split(" ").first}',
-                maxLines: 3,
-                textAlign: TextAlign.center,
+                "المرفقات",
+                textDirection: TextDirection.rtl,
               ),
+              width: 100,
             ),
-          ),
-          ListTile(
-            trailing: Text("المرفقات"),
             onTap: () {
               launch("${data!['attachment']}");
             },
@@ -193,12 +194,12 @@ class DocumentInfo extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          ListTile(
-            trailing: Text("الوصف"),
-            title: Text(
-              "${data!['description']}",
-              textAlign: TextAlign.center,
-            ),
+          ListTileInfo(
+            data: data,
+            title: "${data!['description']}",
+            trailing: "الوصف",
+            max: null,
+            message: "تم نسخ وصف الوثيقة",
           ),
         ],
       ),
