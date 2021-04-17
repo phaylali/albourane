@@ -21,15 +21,6 @@ final passwordProvider = StateProvider<String>((ref) {
   return '';
 });
 
-class UserProvider {
-  final FirebaseAuth _firebaseAuth;
-  UserProvider(this._firebaseAuth);
-  User? get usah => _firebaseAuth.currentUser;
-  String? getName() {
-    return usah!.displayName;
-  }
-}
-
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
   AuthenticationService(this._firebaseAuth);

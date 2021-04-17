@@ -258,6 +258,17 @@ class CustomDrawer extends StatelessWidget {
                     Get.toNamed('/test');
                   },
                 ),
+                ListTile(
+                  title: Text(
+                    "تصريح جديد",
+                    textDirection: TextDirection.rtl,
+                  ),
+                  leading:
+                      SizedBox(height: 40, width: 40, child: OmniIcons().boat),
+                  onTap: () {
+                    Get.toNamed('/NewDeclaration');
+                  },
+                ),
               ],
             ),
           ),
