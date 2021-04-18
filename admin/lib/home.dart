@@ -8,12 +8,12 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends ConsumerWidget {
-  final String x = FirebaseAuth.instance.currentUser!.uid;
+  //final String x = FirebaseAuth.instance.currentUser!.uid;
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return MainBody(
       title: "لوحة التحكم",
-      subtitle: FutureBuilder<DocumentSnapshot>(
+      /*subtitle: FutureBuilder<DocumentSnapshot>(
         future: getDoc(x),
         builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
@@ -34,7 +34,7 @@ class HomePage extends ConsumerWidget {
           }
           return CircularProgressIndicator();
         },
-      ),
+      ),*/
       child: Center(
         child: SingleChildScrollView(
           child: Wrap(

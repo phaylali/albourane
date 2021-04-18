@@ -1,6 +1,7 @@
 import 'package:admin/checker.dart';
 import 'package:admin/icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class MainBody extends StatelessWidget {
@@ -234,6 +235,21 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   onTap: () {
                     Get.toNamed('/NewDocument');
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    "الدخول",
+                    textDirection: TextDirection.rtl,
+                  ),
+                  leading: SizedBox(
+                      height: 40,
+                      width: 40,
+                      child: SvgPicture.asset(
+                        'res/icons/login.svg',
+                      )),
+                  onTap: () {
+                    Get.toNamed('/SignIn');
                   },
                 ),
                 ListTile(

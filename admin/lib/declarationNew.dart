@@ -89,7 +89,6 @@ class NewDeclaration extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              //MonthPickerPage(),
               MonthlyPicker(),
               ExpansionTile(
                 title: SizedBox(
@@ -98,13 +97,27 @@ class NewDeclaration extends StatelessWidget {
                     title: Row(
                       children: [
                         Expanded(
-                          child: Text("اللوحة"),
+                          child: Text(
+                            "اللوحة",
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                         Expanded(
-                          child: Text("الاسم"),
+                          child: Text(
+                            "الاسم",
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                        Expanded(child: Text("المربوح")),
-                        Expanded(child: Text("الايام")),
+                        Expanded(
+                            child: Text(
+                          "المربوح",
+                          textAlign: TextAlign.center,
+                        )),
+                        Expanded(
+                            child: Text(
+                          "الايام",
+                          textAlign: TextAlign.center,
+                        )),
                       ],
                     ),
                   ),
@@ -145,6 +158,7 @@ class NewDeclaration extends StatelessWidget {
                                                 hintTextDirection:
                                                     TextDirection.rtl,
                                               ),
+                                              onFieldSubmitted: (value) {},
                                             ),
                                           ),
                                           Expanded(
@@ -171,17 +185,6 @@ class NewDeclaration extends StatelessWidget {
                         );
                       }),
                 ],
-              ),
-              ListTile(
-                title: TextField(
-                  maxLines: 1,
-                  keyboardType: TextInputType.number,
-                  controller: referenceController,
-                  decoration: InputDecoration(
-                    hintText: 'الرقم البحري',
-                    hintTextDirection: TextDirection.rtl,
-                  ),
-                ),
               ),
             ],
           ),

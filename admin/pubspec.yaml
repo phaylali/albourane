@@ -15,16 +15,8 @@ dependencies:
   get: 
   url_launcher:
   url_strategy:
-  
+  flutter_svg:
   cross_connectivity: 
-
-  # Firebase Packages
-  firebase_auth: 
-  cloud_firestore: 
-  firebase_core: 
-  flutter_riverpod: 
-  flutter_svg: 0.21.0
-  
   pdf:
   printing:
   open_file:
@@ -32,6 +24,11 @@ dependencies:
   keyboard_actions:
   flutter_date_pickers: 
 
+  # Firebase Packages
+  firebase_auth: 
+  cloud_firestore: 
+  firebase_core: 
+  flutter_riverpod: 
 
 flutter:
   uses-material-design: true

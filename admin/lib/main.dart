@@ -1,5 +1,6 @@
-import 'package:admin/checker.dart';
+//import 'package:admin/checker.dart';
 import 'package:admin/declarationNew.dart';
+import 'package:admin/home.dart';
 import 'package:admin/login.dart';
 import 'package:admin/boatPage.dart';
 import 'package:admin/boats.dart';
@@ -39,27 +40,32 @@ class Start extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      getPages: [
-        GetPage(name: '/', page: () => Root()),
-        GetPage(name: '/SignIn', page: () => AdminSignIn()),
-        GetPage(name: '/NewDocument', page: () => NewDocument()),
-        GetPage(name: '/NewBoat', page: () => NewBoat()),
-        GetPage(name: '/NewSeaman', page: () => NewSeaman()),
-        GetPage(name: '/Documents', page: () => DocsLibrary()),
-        GetPage(name: '/Boats', page: () => BoatsLibrary()),
-        GetPage(name: '/Seamen', page: () => SeamenLibrary()),
-        GetPage(name: '/Document', page: () => DocumentPage()),
-        GetPage(name: '/Boat', page: () => BoatPage()),
-        GetPage(name: '/Seaman', page: () => SeamanPage()),
-        GetPage(name: '/test', page: () => PDFTest()),
-        GetPage(name: '/NewDeclaration', page: () => NewDeclaration()),
-      ],
-      unknownRoute: GetPage(name: '/Error404', page: () => ERROR404()),
-      theme: omniDarkBlueTheme(),
-      navigatorKey: Get.key,
-      title: "ALBOURANE ADMIN",
-      debugShowCheckedModeBanner: false,
-      home: Root(),
-    );
+        getPages: [
+          //uncomment this when the project is finished
+          //GetPage(name: '/', page: () => Root()),
+          //comment this when the debug is finished
+          GetPage(name: '/', page: () => HomePage()),
+          GetPage(name: '/SignIn', page: () => AdminSignIn()),
+          GetPage(name: '/NewDocument', page: () => NewDocument()),
+          GetPage(name: '/NewBoat', page: () => NewBoat()),
+          GetPage(name: '/NewSeaman', page: () => NewSeaman()),
+          GetPage(name: '/Documents', page: () => DocsLibrary()),
+          GetPage(name: '/Boats', page: () => BoatsLibrary()),
+          GetPage(name: '/Seamen', page: () => SeamenLibrary()),
+          GetPage(name: '/Document', page: () => DocumentPage()),
+          GetPage(name: '/Boat', page: () => BoatPage()),
+          GetPage(name: '/Seaman', page: () => SeamanPage()),
+          GetPage(name: '/test', page: () => PDFTest()),
+          GetPage(name: '/NewDeclaration', page: () => NewDeclaration()),
+        ],
+        unknownRoute: GetPage(name: '/Error404', page: () => ERROR404()),
+        theme: omniDarkBlueTheme(),
+        navigatorKey: Get.key,
+        title: "ALBOURANE ADMIN",
+        debugShowCheckedModeBanner: false,
+        //uncomment this when the project is finished
+        //home: Root(),
+        //comment this when the debug is finished
+        home: HomePage());
   }
 }
