@@ -1,11 +1,11 @@
-import 'package:admin/auth.dart';
+//import 'package:admin/auth.dart';
 import 'package:admin/header.dart';
 import 'package:admin/icons.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends ConsumerWidget {
   //final String x = FirebaseAuth.instance.currentUser!.uid;

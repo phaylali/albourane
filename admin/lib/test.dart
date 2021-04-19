@@ -89,10 +89,7 @@ class MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
 
     final actions = <PdfPreviewAction>[
       if (!kIsWeb)
-        PdfPreviewAction(
-          icon: const Icon(Icons.save),
-          onPressed: _saveAsFile,
-        )
+        PdfPreviewAction(icon: const Icon(Icons.save), onPressed: _saveAsFile)
     ];
 
     return PdfPreview(

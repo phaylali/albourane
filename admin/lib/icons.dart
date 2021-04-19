@@ -43,12 +43,12 @@ class OmniIcons {
     width: 24,
     height: 24,
   );
-  final Widget password_show = SvgPicture.asset(
+  final Widget passwordShow = SvgPicture.asset(
     'res/icons/password-show.svg',
     width: 24,
     height: 24,
   );
-  final Widget password_hide = SvgPicture.asset(
+  final Widget passwordHide = SvgPicture.asset(
     'res/icons/password-hide.svg',
     width: 24,
     height: 24,

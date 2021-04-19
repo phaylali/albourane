@@ -1,5 +1,6 @@
 //import 'package:admin/checker.dart';
 import 'package:admin/declarationNew.dart';
+import 'package:admin/declarationPage.dart';
 import 'package:admin/home.dart';
 import 'package:admin/login.dart';
 import 'package:admin/boatPage.dart';
@@ -57,6 +58,7 @@ class Start extends StatelessWidget {
           GetPage(name: '/Seaman', page: () => SeamanPage()),
           GetPage(name: '/test', page: () => PDFTest()),
           GetPage(name: '/NewDeclaration', page: () => NewDeclaration()),
+          GetPage(name: '/Declaration', page: () => DeclarationPage()),
         ],
         unknownRoute: GetPage(name: '/Error404', page: () => ERROR404()),
         theme: omniDarkBlueTheme(),

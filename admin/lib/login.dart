@@ -97,7 +97,7 @@ class AdminSignIn extends ConsumerWidget {
                                           padding:
                                               const EdgeInsets.only(right: 10),
                                           child: SizedBox(
-                                            child: OmniIcons().password_hide,
+                                            child: OmniIcons().passwordHide,
                                             width: 40,
                                             height: 40,
                                           ),
@@ -106,7 +106,7 @@ class AdminSignIn extends ConsumerWidget {
                                           padding:
                                               const EdgeInsets.only(right: 10),
                                           child: SizedBox(
-                                            child: OmniIcons().password_show,
+                                            child: OmniIcons().passwordShow,
                                             width: 40,
                                             height: 40,
                                           ),
