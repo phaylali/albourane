@@ -1,10 +1,11 @@
 import 'package:admin/auth.dart';
-import 'package:admin/checker.dart';
+import 'package:admin/header.dart';
 import 'package:admin/icons.dart';
 import 'package:admin/passwordController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
 
 class AdminSignIn extends ConsumerWidget {
   final TextEditingController emailController = TextEditingController();
@@ -19,53 +20,53 @@ class AdminSignIn extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final email = watch(emailProvider).state;
-    final pass = watch(passwordProvider).state;
     final _auth = watch(authServicesProvider);
-    return SafeArea(
+
+    return MainBody(
+      title: "تسجيل الدخول",
       child: Scaffold(
-        body: Row(
-          children: [
-            SizedBox(
-              width: 20,
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Center(
-                  child: Column(
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          label: SizedBox(height: 40, width: 40, child: OmniIcons().login),
+          onPressed: () async {
+            print("password is : " + passwordController.text);
+            print("emaail is : " + emailController.text);
+            submit(emailController, passwordController, _auth,
+                emailController.text, passwordController.text);
+          },
+        ),
+        body: Center(
+          child: GetBuilder<LoginController>(
+              init: LoginController(),
+              builder: (p) {
+                return KeyboardActions(
+                  config: p.config(context),
+                  child: ListView(
+                    shrinkWrap: true,
                     children: [
-                      ConnectionIndicator(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text("تسجيل الدخول",
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headline6),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Center(child: Text("ادخل المعلومات")),
                       SizedBox(
                         height: 20,
                       ),
                       SizedBox(
-                        width: 600,
-                        child: TextField(
-                          controller: emailController,
-                          onChanged: (value) => updateEmail(context, value),
-                          decoration: InputDecoration(
-                            hintText: 'البريد الالكتروني',
-                            hintTextDirection: TextDirection.rtl,
-                            suffixIcon: Padding(
-                              padding: const EdgeInsets.only(right: 10),
-                              child: SizedBox(
-                                child: OmniIcons().email,
-                                width: 40,
-                                height: 40,
+                        height: 60,
+                        child: OutlinedButton(
+                          onPressed: null,
+                          child: ListTile(
+                            title: TextField(
+                              focusNode: p.emailNode.value,
+                              keyboardType: TextInputType.name,
+                              maxLines: 1,
+                              controller: emailController,
+                              decoration: InputDecoration(
+                                hintText: 'البريد الالكتروني',
+                                hintTextDirection: TextDirection.rtl,
                               ),
                             ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                            trailing: SizedBox(
+                              child: OmniIcons().email,
+                              width: 40,
+                              height: 40,
                             ),
                           ),
                         ),
@@ -74,91 +75,47 @@ class AdminSignIn extends ConsumerWidget {
                         height: 20,
                       ),
                       SizedBox(
-                        width: 600,
-                        child: GetX<PasswordController>(
-                          init: PasswordController(),
-                          builder: (p) {
-                            return TextField(
+                        height: 60,
+                        child: OutlinedButton(
+                          onPressed: null,
+                          child: ListTile(
+                            title: TextField(
+                              focusNode: p.passwordNode.value,
+                              maxLines: 1,
                               controller: passwordController,
-                              onChanged: (value) =>
-                                  updatePassword(context, value),
                               obscuringCharacter: '*',
                               obscureText: p.hidden.value,
-                              onSubmitted: (value) {
-                                submit(emailController, passwordController,
-                                    _auth, email, pass);
-                              },
                               decoration: InputDecoration(
                                 hintText: 'كلمة السر',
                                 hintTextDirection: TextDirection.rtl,
-                                suffixIcon: InkWell(
-                                  child: p.hidden.isTrue
-                                      ? Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 10),
-                                          child: SizedBox(
-                                            child: OmniIcons().passwordHide,
-                                            width: 40,
-                                            height: 40,
-                                          ),
-                                        )
-                                      : Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 10),
-                                          child: SizedBox(
-                                            child: OmniIcons().passwordShow,
-                                            width: 40,
-                                            height: 40,
-                                          ),
-                                        ),
-                                  onTap: () => p.change(),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
                               ),
-                            );
-                          },
+                            ),
+                            trailing: SizedBox(
+                              child: p.hidden.isTrue
+                                  ? OmniIcons().passwordHide
+                                  : OmniIcons().passwordShow,
+                              width: 40,
+                              height: 40,
+                            ),
+                            leading: OutlinedButton(
+                              onPressed: null,
+                              child: Switch.adaptive(
+                                  value: p.hidden.value,
+                                  activeColor: Theme.of(context).accentColor,
+                                  onChanged: (value) {
+                                    p.change();
+                                  }),
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(
                         height: 20,
                       ),
-                      SizedBox(
-                        width: 600,
-                        height: 50,
-                        child: OutlinedButton(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                child: OmniIcons().login,
-                                height: 40,
-                                width: 40,
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                'الدخول',
-                              )
-                            ],
-                          ),
-                          onPressed: () {
-                            submit(emailController, passwordController, _auth,
-                                email, pass);
-                          },
-                        ),
-                      ),
                     ],
                   ),
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-          ],
+                );
+              }),
         ),
       ),
     );

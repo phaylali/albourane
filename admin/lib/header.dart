@@ -21,20 +21,17 @@ class MainBody extends StatelessWidget {
       child: Scaffold(
         key: drawerKey,
         floatingActionButton: context.responsiveValue(
-          mobile: FloatingActionButton.extended(
+          /*mobile: FloatingActionButton.extended(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             label: SizedBox(height: 40, width: 40, child: OmniIcons().menu),
             onPressed: () {
               drawerKey.currentState!.openEndDrawer();
             },
-          ),
-          watch: FloatingActionButton.extended(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            label: SizedBox(height: 40, width: 40, child: OmniIcons().menu),
-            onPressed: () {
-              drawerKey.currentState!.openEndDrawer();
-            },
-          ),
+          ),*/
+          mobile: Fab(drawerKey: drawerKey),
+          watch: Fab(drawerKey: drawerKey),
           tablet: Container(),
           desktop: Container(),
         ),
@@ -49,7 +46,6 @@ class MainBody extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
-              //if connection green if not red
               ConnectionIndicator(),
               SizedBox(
                 height: 10,
@@ -67,7 +63,13 @@ class MainBody extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
+                    SizedBox(
+                      width: 20,
+                    ),
                     Expanded(child: child!),
+                    SizedBox(
+                      width: 20,
+                    ),
                     Center(
                         child: context.responsiveValue(
                             desktop: CustomDrawer(), tablet: CustomDrawer()))
@@ -81,6 +83,27 @@ class MainBody extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class Fab extends StatelessWidget {
+  const Fab({
+    Key? key,
+    required this.drawerKey,
+  }) : super(key: key);
+
+  final GlobalKey<ScaffoldState>? drawerKey;
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      child: SizedBox(height: 40, width: 40, child: OmniIcons().menu),
+      onPressed: () {
+        drawerKey!.currentState!.openEndDrawer();
+      },
     );
   }
 }

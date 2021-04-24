@@ -29,8 +29,10 @@ void main() async {
 
   await Firebase.initializeApp();
   LicenseRegistry.addLicense(() async* {
-    final license = await rootBundle.loadString('res/google_fonts/OFL.txt');
-    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+    final licenseAR = await rootBundle.loadString('res/fonts/OFL.txt');
+    final licenseEN = await rootBundle.loadString('res/fonts/SIL.txt');
+    yield LicenseEntryWithLineBreaks(['fonts'], licenseAR);
+    yield LicenseEntryWithLineBreaks(['fonts'], licenseEN);
   });
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: Colors.black));

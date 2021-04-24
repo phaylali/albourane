@@ -4,6 +4,8 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
     visualDensity: VisualDensity.adaptivePlatformDensity,
     focusColor: Colors.blue[400],
     brightness: Brightness.dark,
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
     scaffoldBackgroundColor: Colors.blueGrey[900],
     appBarTheme: AppBarTheme(color: Colors.blue[900]),
     accentColor: Colors.blue[400],
@@ -81,13 +83,17 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
             backgroundColor: MaterialStateColor.resolveWith(getDarkBlueColor),
             foregroundColor:
                 MaterialStateColor.resolveWith(getDarkBlueOverlayColor),
-            shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()))),
+            shape: MaterialStateProperty.all<OutlinedBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30))))),
     outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
             backgroundColor: MaterialStateColor.resolveWith(getDarkBlueColor),
             foregroundColor:
                 MaterialStateColor.resolveWith(getDarkBlueOverlayColor),
-            shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()))),
+            shape: MaterialStateProperty.all<OutlinedBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30))))),
     dialogBackgroundColor: Colors.blueGrey[900]);
 
 Color getDarkBlueColor(Set<MaterialState> states) {
@@ -97,7 +103,7 @@ Color getDarkBlueColor(Set<MaterialState> states) {
     MaterialState.focused,
   };
   if (states.any(interactiveStates.contains)) {
-    return Colors.blue[400]!;
+    return Colors.blueGrey[700]!;
   }
   return Colors.blueGrey[900]!;
 }

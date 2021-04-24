@@ -37,10 +37,19 @@ flutter:
   fonts:
     - family: Tajawal
       fonts: 
-        - asset: res/google_fonts/Tajawal-Regular.ttf
-        - asset: res/google_fonts/Tajawal-Bold.ttf
-        - asset: res/google_fonts/Tajawal-Medium.ttf
-        - asset: res/google_fonts/Tajawal-Light.ttf
+        - asset: res/fonts/Tajawal-Regular.ttf
+        - asset: res/fonts/Tajawal-Bold.ttf
+    - family: Carlito
+      fonts: 
+        - asset: res/fonts/Carlito-Regular.ttf
+        - asset: res/fonts/Carlito-Bold.ttf
+    - family: LDFComicSans
+      fonts: 
+        - asset: res/fonts/LDFComicSansBold.ttf
+    - family: EMComic
+      fonts: 
+        - asset: res/fonts/EMcomic-Bold.ttf
+        
 
 
 
