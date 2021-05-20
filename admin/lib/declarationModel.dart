@@ -1,114 +1,320 @@
 import 'dart:typed_data';
 
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart';
-import 'package:printing/printing.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
+
 import 'package:intl/intl.dart';
 
-Future<Uint8List> generatePDF(
-    bahara,
-    startDate,
-    finishDate,
-    region,
-    boat,
-    reference,
-    owner,
-    marinz,
-    sales,
-    revenue,
-    cnss,
-    amo,
-    totalCnss,
-    taxeHalle,
-    subPerc,
-    sub,
-    taxeRegion,
-    totalGlobal,
-    carb,
-    charges,
-    net,
-    patron,
-    payTotal) async {
-  final doc = Document();
-  final fontReg = await fontFromAssetBundle('res/fonts/Carlito-Regular.ttf');
-  final fontEM = await fontFromAssetBundle('res/fonts/EMcomic-Bold.ttf');
-  final fontBold = await fontFromAssetBundle('res/fonts/Carlito-Bold.ttf');
-  final cnssLogo = await imageFromAssetBundle('res/icons/cnss.png');
-  final pda = await imageFromAssetBundle('res/icons/pda.jpg');
+import 'package:get/get.dart';
+import 'package:pdf/pdf.dart';
+import 'package:printing/printing.dart';
+import 'package:pdf/widgets.dart';
 
-  doc.addPage(Page(
-      pageFormat: PdfPageFormat.a4,
-      orientation: PageOrientation.portrait,
-      theme: ThemeData(
-          defaultTextStyle: TextStyle(
-        font: fontReg,
-        fontBold: fontBold,
-        fontSize: 12,
-      )),
-      build: (Context context) {
-        return FullPage(
-          ignoreMargins: true,
-          child: declarationPDF(
-              cnssLogo,
-              fontEM,
-              pda,
-              startDate,
-              finishDate,
-              region,
-              boat,
-              reference,
-              owner,
-              marinz,
-              sales,
-              revenue,
-              bahara,
-              cnss,
-              amo,
-              totalCnss,
-              taxeHalle,
-              subPerc,
-              sub,
-              taxeRegion,
-              totalGlobal,
-              carb,
-              charges,
-              net,
-              patron,
-              payTotal,
-              fontReg),
+@immutable
+class Declaration {
+  Declaration(
+      {required this.boatName,
+      required this.boatReference,
+      required this.boatRegion,
+      required this.boatOwner,
+      required this.boatCoopPerc,
+      required this.monthFinish,
+      required this.monthEquipageNumber,
+      required this.monthRevenue,
+      required this.monthSales,
+      required this.monthStart,
+      required this.monthAmo,
+      required this.monthAutres,
+      required this.monthCarb,
+      required this.monthChargesCommun,
+      required this.monthCnss,
+      required this.monthCoop,
+      required this.monthEquipage,
+      required this.monthEquipagePerc,
+      required this.monthNet,
+      required this.monthPatron,
+      required this.monthPatronPerc,
+      required this.monthPeage,
+      required this.monthPie,
+      required this.monthTaxeHalle,
+      required this.monthTaxeRegion,
+      required this.monthTotalCnss,
+      required this.monthTotalGlobal});
+
+  Declaration.fromJson(Map<String, Object?> json)
+      : this(
+          boatName: json['name']! as String,
+          boatOwner: json['owner']! as String,
+          boatReference: json['reference']! as String,
+          boatRegion: json['region']! as String,
+          boatCoopPerc: json['sub']! as num,
+          monthStart: json['startDate']! as String,
+          monthFinish: json['finishDate']! as String,
+          monthEquipageNumber: json['equipageNumber']! as int,
+          monthSales: json['sales']! as int,
+          monthRevenue: json['revenue']! as num,
+          monthCnss: json['cnss']! as num,
+          monthAmo: json['amo']! as num,
+          monthTotalCnss: json['totalCnss']! as num,
+          monthTaxeHalle: json['taxeHalle']! as num,
+          monthCoop: json['cooperative']! as num,
+          monthPeage: json['peage']! as num,
+          monthTaxeRegion: json['taxeRegion']! as num,
+          monthTotalGlobal: json['totalGlobal']! as num,
+          monthCarb: json['carburant']! as num,
+          monthAutres: json['autres']! as num,
+          monthChargesCommun: json['chargesCommun']! as num,
+          monthNet: json['net']! as num,
+          monthPatron: json['patron']! as num,
+          monthPatronPerc: json['patronPerc']! as num,
+          monthEquipage: json['equipage']! as num,
+          monthEquipagePerc: json['equipagePerc']! as num,
+          monthPie: json['pie']! as num,
         );
-      }));
 
-  return await doc.save();
+  final String boatName;
+  final String boatReference;
+  final String boatRegion;
+  final String boatOwner;
+  final num boatCoopPerc;
+  final String monthStart;
+  final String monthFinish;
+  final int monthSales;
+  final int monthEquipageNumber;
+  final num monthRevenue;
+  final num monthCnss;
+  final num monthAmo;
+  final num monthTotalCnss;
+  final num monthTaxeHalle;
+  final num monthAutres;
+  final num monthPeage;
+  final num monthTaxeRegion;
+  final num monthCoop;
+  final num monthNet;
+  final num monthTotalGlobal;
+  final num monthCarb;
+  final num monthChargesCommun;
+  final num monthPatron;
+  final num monthPatronPerc;
+  final num monthEquipage;
+  final num monthEquipagePerc;
+  final num monthPie;
+
+  Map<String, Object?> toJson() {
+    return {
+      //'name' : boatName,
+      //'owner' : boatOwner,
+      //'reference' : boatReference,
+      //'region': boatRegion,
+      //'sub' : boatCoopPerc,
+      'startDate': monthStart,
+      'finishDate': monthFinish,
+      'revenue': monthRevenue,
+      'cnss': monthCnss,
+      'amo': monthAmo,
+      'totalCnss': monthTotalCnss,
+      'taxeHalle': monthTaxeHalle,
+      'cooperative': monthCoop,
+      'peage': monthPeage,
+      'taxeRegion': monthTaxeRegion,
+      'totalGlobal': monthTotalGlobal,
+      'carb': monthCarb,
+      'autres': monthAutres,
+      'chargesCommun': monthChargesCommun,
+      'net': monthNet,
+      'patron': monthPatron,
+      'patronPerc': monthPatronPerc,
+      'equipage': monthEquipage,
+      'equipageNumber': monthEquipageNumber,
+      'equipagePerc': monthEquipagePerc,
+      'pie': monthPie
+    };
+  }
 }
 
-Column declarationPDF(
-    ImageProvider cnssLogo,
-    TtfFont fontEM,
-    ImageProvider pda,
-    startDate,
-    finishDate,
-    region,
-    boat,
-    reference,
-    owner,
-    marinz,
-    sales,
-    revenue,
-    bahara,
-    cnss,
-    amo,
-    totalCnss,
-    taxeHalle,
-    subPerc,
-    sub,
-    taxeRegion,
-    totalGlobal,
-    carb,
-    charges,
-    net,
-    patron,
-    payTotal,
+/*
+class DeclarationMonthModel {
+  String? monthStart, monthFinish;
+  int? monthSales, monthEquipageNumber;
+  double? monthRevenue,
+      monthCnss,
+      monthAmo,
+      monthTotalCnss,
+      monthTaxeHalle,
+      monthCoop,
+      monthPeage,
+      monthTaxeRegion,
+      monthTotalGlobal,
+      monthCarb,
+      monthAutres,
+      monthChargesCommun,
+      monthNet,
+      monthPatron,
+      monthPatronPerc,
+      monthEquipage,
+      monthEquipagePerc,
+      monthPie;
+
+  DeclarationMonthModel(
+      this.monthFinish,
+      this.monthEquipageNumber,
+      this.monthRevenue,
+      this.monthSales,
+      this.monthStart,
+      this.monthAmo,
+      this.monthAutres,
+      this.monthCarb,
+      this.monthChargesCommun,
+      this.monthCnss,
+      this.monthCoop,
+      this.monthEquipage,
+      this.monthEquipagePerc,
+      this.monthNet,
+      this.monthPatron,
+      this.monthPatronPerc,
+      this.monthPeage,
+      this.monthPie,
+      this.monthTaxeHalle,
+      this.monthTaxeRegion,
+      this.monthTotalCnss,
+      this.monthTotalGlobal);
+
+  DeclarationMonthModel.fromJson(DocumentSnapshot<Map<dynamic, dynamic>> map) {
+    print(map.toString());
+    monthStart = map['startDate'];
+    monthFinish = map['finishDate'];
+    monthEquipageNumber = map['equipageNumber'];
+    monthRevenue = map['revenue'];
+    monthCnss = map['cnss'];
+    monthAmo = map['amo'];
+    monthTotalCnss = map['totalCnss'];
+    monthTaxeHalle = map['taxeHalle'];
+    monthCoop = map['cooperative'];
+    monthPeage = map['peage'];
+    monthTaxeRegion = map['taxeRegion'];
+    monthTotalGlobal = map['totalGlobal'];
+    monthCarb = map['carburant'];
+    monthAutres = map['autres'];
+    monthChargesCommun = map['chargesCommun'];
+    monthNet = map['net'];
+    monthPatron = map['patron'];
+    monthPatronPerc = map['patronPerc'];
+    monthEquipage = map['equipage'];
+    monthEquipagePerc = map['equipagePerc'];
+    monthPie = map['pie'];
+  }
+
+  toJson() {
+    return {
+      //'name': name,
+      'startDate': monthStart,
+      'finishDate': monthFinish,
+      'revenue': monthRevenue,
+      'cnss': monthCnss,
+      'amo': monthAmo,
+      'totalCnss': monthTotalCnss,
+      'taxeHalle': monthTaxeHalle,
+      'cooperative': monthCoop,
+      'peage': monthPeage,
+      'taxeRegion': monthTaxeRegion,
+      'totalGlobal': monthTotalGlobal,
+      'carb': monthCarb,
+      'autres': monthAutres,
+      'chargesCommun': monthChargesCommun,
+      'net': monthNet,
+      'patron': monthPatron,
+      'patronPerc': monthPatronPerc,
+      'equipage': monthEquipage,
+      'equipageNumber': monthEquipageNumber,
+      'equipagePerc': monthEquipagePerc,
+      'pie': monthPie
+    };
+  }
+}
+*/
+class DecModelController extends GetxController {
+  late String id = '';
+  late String month = '';
+  DecModelController(this.id, this.month);
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    getData(id, month);
+  }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+  }
+
+  Future getData(String boat, String month) async {
+    DocumentSnapshot boatSnapshot =
+        await FirebaseFirestore.instance.collection('boats').doc(boat).get();
+    DocumentSnapshot monthSnapshot = await FirebaseFirestore.instance
+        .collection('boats')
+        .doc(boat)
+        .collection('revenue')
+        .doc(month)
+        .get();
+  }
+
+  Future<Uint8List> generatePDF() async {
+    final doc = Document();
+    final fontReg = await fontFromAssetBundle('res/fonts/Carlito-Regular.ttf');
+    final fontEM = await fontFromAssetBundle('res/fonts/EMcomic-Bold.ttf');
+    final fontBold = await fontFromAssetBundle('res/fonts/Carlito-Bold.ttf');
+    final cnssLogo = await imageFromAssetBundle('res/icons/cnss.png');
+    final pda = await imageFromAssetBundle('res/icons/pda.jpg');
+    doc.addPage(Page(
+        pageFormat: PdfPageFormat.a4,
+        orientation: PageOrientation.portrait,
+        theme: ThemeData(
+            defaultTextStyle: TextStyle(
+          font: fontReg,
+          fontBold: fontBold,
+          fontSize: 12,
+        )),
+        build: (Context context) {
+          return FullPage(
+              ignoreMargins: true,
+              child: declarationPDF(cnssLogo, fontEM, pda, fontReg));
+        }));
+
+    return await doc.save();
+  }
+
+  /*
+  Future<void> saveAsFile(
+    BuildContext context,
+    LayoutCallback build,
+    PdfPageFormat pageFormat,
+  ) async {
+    final bytes = await build(pageFormat);
+
+    final appDocDir = await getApplicationDocumentsDirectory();
+    final appDocPath = appDocDir.path;
+    final file = File(appDocPath + '/' + 'document.pdf');
+    print('Save as file ${file.path} ...');
+    await file.writeAsBytes(bytes);
+    await OpenFile.open(file.path);
+    notifyChildrens();
+    update();
+  }*/
+  /*
+            final actions = <PdfPreviewAction>[
+              if (!kIsWeb)
+                PdfPreviewAction(
+                    icon: const Icon(Icons.save), onPressed: saveAsFile),
+              PdfPreviewAction(
+                  icon: const Icon(Icons.save), onPressed: system)
+            ];
+*/
+
+}
+
+Column declarationPDF(ImageProvider cnssLogo, TtfFont fontEM, ImageProvider pda,
     TtfFont fontReg) {
   return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
     Row(

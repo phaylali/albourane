@@ -5,10 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "admin",
-            "cwd": "admin",
+          "name": "Flutter",
+          "request": "launch",
+          "type": "dart",
+          "flutterMode": "debug"
+        },
+        {
+            "name": "Flutter Web",
             "request": "launch",
-            "type": "dart"
-        }
-    ]
+            "type": "dart",
+            "program": "admin/lib/main.dart",
+            "args": ["--web-port", "5555",
+            ]
+        },
+         ]
 }

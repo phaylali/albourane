@@ -26,11 +26,11 @@ class DocumentPage extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             } else {
-              DocumentSnapshot? item = snapshot.data;
+              DocumentSnapshot? data = snapshot.data;
               return Center(
                   // here only return is missing
                   child: Text(
-                "${item!.id}",
+                "${data!.id}",
               ));
             }
           } else if (snapshot.hasError) {
@@ -46,10 +46,9 @@ class DocumentPage extends StatelessWidget {
               return Center(child: Text("هناك مشكل ما"));
             }
             if (snapshot.connectionState == ConnectionState.done) {
-              DocumentSnapshot? d = snapshot.data;
+              DocumentSnapshot? data = snapshot.data;
 
-              if (d!.exists) {
-                Map<String?, dynamic>? data = d.data()!;
+              if (data!.exists) {
                 return Center(
                   child: Container(
                     child: context.responsiveValue(
@@ -125,7 +124,7 @@ class PreviewOfDocument extends StatelessWidget {
     required this.data,
   }) : super(key: key);
 
-  final Map<String?, dynamic>? data;
+  final DocumentSnapshot<Object?>? data;
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +157,7 @@ class DocumentInfo extends StatelessWidget {
     required this.data,
   }) : super(key: key);
 
-  final Map<String?, dynamic>? data;
+  final DocumentSnapshot<Object?>? data;
 
   @override
   Widget build(BuildContext context) {

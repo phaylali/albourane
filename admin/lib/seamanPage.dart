@@ -24,10 +24,10 @@ class SeamanPage extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             } else {
-              DocumentSnapshot? item = snapshot.data;
+              final DocumentSnapshot? data = snapshot.data;
               return Center(
                   child: Text(
-                "${item!['reference']}",
+                "${data!['reference']}",
               ));
             }
           } else if (snapshot.hasError) {
@@ -43,10 +43,9 @@ class SeamanPage extends StatelessWidget {
               return Center(child: Text("هناك مشكل ما"));
             }
             if (snapshot.connectionState == ConnectionState.done) {
-              DocumentSnapshot? d = snapshot.data;
+              dynamic data = snapshot.data!.data()!;
 
-              if (d!.exists) {
-                Map<String?, dynamic>? data = d.data()!;
+              if (data!.exists) {
                 return Center(
                   child: Container(
                     child: context.responsiveValue(
@@ -98,7 +97,9 @@ class SeamanPage extends StatelessWidget {
                 );
               } else {
                 return Center(
-                  child: Text("لا يوجد بحار في هذا الرابط"),
+                  child: Text(data["name"]
+                      //"لا يوجد بحار في هذا الرابط"
+                      ),
                 );
               }
             }
@@ -121,8 +122,7 @@ class ImageOfSeaman extends StatelessWidget {
     Key? key,
     required this.data,
   }) : super(key: key);
-
-  final Map<String?, dynamic>? data;
+  final DocumentSnapshot<Object?>? data;
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +151,7 @@ class SeamanInfo extends StatelessWidget {
     required this.data,
   }) : super(key: key);
 
-  final Map<String?, dynamic>? data;
+  final DocumentSnapshot<Object?>? data;
 
   @override
   Widget build(BuildContext context) {

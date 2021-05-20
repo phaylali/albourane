@@ -20,13 +20,11 @@ class BoatPage extends StatelessWidget {
         future: getBoatDoc(id),
         builder: (BuildContext context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            DocumentSnapshot? d = snapshot.data;
-            if (d!.exists) {
-              Map<String?, dynamic>? item = d.data()!;
-
+            DocumentSnapshot? data = snapshot.data;
+            if (data!.exists) {
               return Center(
                   child: Text(
-                "${item['reference']}",
+                "${data['reference']}",
               ));
             } else
               return Text("لا يوجد هذا القارب");
@@ -42,10 +40,9 @@ class BoatPage extends StatelessWidget {
             if (snapshot.hasError) {
               return Center(child: Text("هناك مشكل ما"));
             } else if (snapshot.connectionState == ConnectionState.done) {
-              DocumentSnapshot? d = snapshot.data;
+              DocumentSnapshot? data = snapshot.data;
 
-              if (d!.exists) {
-                Map<String?, dynamic>? data = d.data()!;
+              if (data!.exists) {
                 return Center(
                   child: Container(
                     child: context.responsiveValue(
@@ -106,7 +103,7 @@ class ImageOfBoat extends StatelessWidget {
     required this.data,
   }) : super(key: key);
 
-  final Map<String?, dynamic>? data;
+  final DocumentSnapshot<Object?>? data;
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +123,7 @@ class BoatInfo extends StatelessWidget {
     required this.data,
   }) : super(key: key);
 
-  final Map<String?, dynamic>? data;
+  final DocumentSnapshot<Object?>? data;
 
   @override
   Widget build(BuildContext context) {
@@ -206,7 +203,7 @@ class ListTileInfo extends StatelessWidget {
     this.max,
   }) : super(key: key);
 
-  final Map<String?, dynamic>? data;
+  final DocumentSnapshot<Object?>? data;
   final String? trailing;
   final String? title;
   final String? message;

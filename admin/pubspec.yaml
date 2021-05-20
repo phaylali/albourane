@@ -23,6 +23,7 @@ dependencies:
   path_provider:
   keyboard_actions:
   flutter_date_pickers: 
+  intl:
 
   # Firebase Packages
   firebase_auth: 
