@@ -1,13 +1,13 @@
 import 'package:admin/declarationModel.dart';
 import 'package:admin/header.dart';
-import 'package:admin/pdfpreview.dart';
-import 'package:admin/providers.dart';
-import 'package:flutter/foundation.dart';
+//import 'package:admin/pdfpreview.dart';
+//import 'package:admin/providers.dart';
+//import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 
 /*
 class HomeService {
@@ -81,10 +81,10 @@ class HomeViewModel extends GetxController {
 */
 class DeclarationPage extends StatelessWidget {
   //final DeclarationBoatModel? boatModel;
-  final DeclarationMonthModel? monthModel;
-  DeclarationPage({
+  //final DeclarationMonthModel? monthModel;
+  /*DeclarationPage({
     this.monthModel,
-  });
+  });*/
   @override
   Widget build(BuildContext context) {
     final String id = Get.parameters['id']!;
