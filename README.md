@@ -18,4 +18,5 @@ La Cooperativa de Pesca Artesanal Albourane Ouedlaou, que inició su actividad c
 La cooperativa busca desarrollar el sector de la pesca marítima tradicional en Ouedlaou y mejorar las condiciones laborales de la gente de mar en la región, así como crear nuevos mercados y oportunidades para aumentar sus ingresos y regularizar su estatus, así como capacitar a nuevos marinos para cubrir el escasez de mano de obra en este campo y muchos otros servicios y actividades.
 
 
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="omniversify" data-color="#FF5F5F" data-emoji=""  data-font="Lato" data-text="Buy me a coffee (or tea)" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
+
+<a href="https://www.buymeacoffee.com/omniversify" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
