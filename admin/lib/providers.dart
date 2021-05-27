@@ -1,17 +1,8 @@
-//import 'dart:io';
 import 'dart:typed_data';
-
-//import 'package:admin/bahara.dart';
-//import 'package:admin/pdfpreview.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart' as dp;
 import 'package:intl/intl.dart';
-//import 'package:open_file/open_file.dart';
-//import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
-//import 'package:printing/printing.dart';
 
 class DateController extends GetxController {
   final Rx<DateTime> dateNow = DateTime.now().obs;

@@ -39,7 +39,10 @@ class HomePage extends ConsumerWidget {
                           ],
                         ),
                         onPressed: () {
-                          Get.toNamed('/Documents');
+                          //Get.toNamed('/Documents');
+                          Get.toNamed(
+                            "/Declaration?id=3-1-1245&m=01-2021",
+                          );
                         },
                       ),
                     ),

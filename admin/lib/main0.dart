@@ -249,7 +249,7 @@ class _MovieItem extends StatelessWidget {
           Likes(
             reference: reference,
             currentLikes: movie.likes,
-          )
+          ),
         ],
       ),
     );
