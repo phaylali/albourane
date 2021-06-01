@@ -28,13 +28,14 @@ class DeclarationPage extends StatelessWidget {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 }
-
+                print("CNSS/ID_$id/M_$month");
                 return PdfPreview(
                   initialPageFormat: PdfPageFormat.a4,
                   maxPageWidth: 700,
+                  pdfFileName: "CNSS/ID_$id/M_$month",
                   build: (format) => b.generatePDF(),
-                  pdfPreviewPageDecoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor),
+                  canChangeOrientation: false,
+                  canChangePageFormat: false,
                 );
               },
             );

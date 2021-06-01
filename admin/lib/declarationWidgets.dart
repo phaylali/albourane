@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
-Row decDetails(Declaration month, Boat boat) {
+Row decDetails(Month month, Boat boat) {
   return Row(children: [
     SizedBox(width: 10),
     Expanded(
@@ -120,7 +120,8 @@ Row decDetails(Declaration month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  month.monthCnss.toString() + "  ",
+                  month.monthCnss.toStringAsFixed(2).replaceAll(".", ",") +
+                      "  ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -179,7 +180,7 @@ Row decDetails(Declaration month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  month.monthAmo.toString() + "  ",
+                  month.monthAmo.toStringAsFixed(2).replaceAll(".", ",") + "  ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -217,12 +218,11 @@ Row decDetails(Declaration month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  month.monthTotalCnss.toString() + "  ",
+                  month.monthTotalCnss.toStringAsFixed(2).replaceAll(".", ",") +
+                      "  ",
                   maxLines: 1,
                   softWrap: false,
-                  style: TextStyle(
-                    fontSize: 12,
-                  ),
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                 ),
               )),
         ),
@@ -276,7 +276,8 @@ Row decDetails(Declaration month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  month.monthTaxeHalle.toString() + "  ",
+                  month.monthTaxeHalle.toStringAsFixed(2).replaceAll(".", ",") +
+                      "  ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -316,7 +317,8 @@ Row decDetails(Declaration month, Boat boat) {
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
-                  boat.boatCoopPerc.toString() + "% ",
+                  boat.boatCoopPerc.toStringAsFixed(2).replaceAll(".", ",") +
+                      "% ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -335,7 +337,8 @@ Row decDetails(Declaration month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  month.monthCoop.toString() + "  ",
+                  month.monthCoop.toStringAsFixed(2).replaceAll(".", ",") +
+                      "  ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -394,7 +397,8 @@ Row decDetails(Declaration month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  month.monthPeage.toString() + "  ",
+                  month.monthPeage.toStringAsFixed(2).replaceAll(".", ",") +
+                      "  ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -453,7 +457,10 @@ Row decDetails(Declaration month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  month.monthTaxeRegion.toString() + "  ",
+                  month.monthTaxeRegion
+                          .toStringAsFixed(2)
+                          .replaceAll(".", ",") +
+                      "  ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -491,10 +498,13 @@ Row decDetails(Declaration month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  month.monthTotalGlobal.toString() + "  ",
+                  month.monthTotalGlobal
+                          .toStringAsFixed(2)
+                          .replaceAll(".", ",") +
+                      "  ",
                   maxLines: 1,
                   softWrap: false,
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
               )),
         ),
@@ -543,7 +553,8 @@ Row decDetails(Declaration month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  month.monthCarb.toString() + "  ",
+                  month.monthCarb.toStringAsFixed(2).replaceAll(".", ",") +
+                      "  ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -583,7 +594,8 @@ Row decDetails(Declaration month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  month.monthAutres.toString() + "  ",
+                  month.monthAutres.toStringAsFixed(2).replaceAll(".", ",") +
+                      "  ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -623,7 +635,10 @@ Row decDetails(Declaration month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  month.monthChargesCommun.toString() + "  ",
+                  month.monthChargesCommun
+                          .toStringAsFixed(2)
+                          .replaceAll(".", ",") +
+                      "  ",
                   softWrap: false,
                   style: TextStyle(
                     fontSize: 12,
@@ -673,7 +688,7 @@ Row decDetails(Declaration month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  month.monthNet.toString() + "  ",
+                  month.monthNet.toStringAsFixed(2).replaceAll(".", ",") + "  ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -713,7 +728,8 @@ Row decDetails(Declaration month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  month.monthPatron.toString() + "  ",
+                  month.monthPatron.toStringAsFixed(2).replaceAll(".", ",") +
+                      "  ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -753,7 +769,8 @@ Row decDetails(Declaration month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  month.monthEquipage.toString() + "  ",
+                  month.monthEquipage.toStringAsFixed(2).replaceAll(".", ",") +
+                      "  ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -952,8 +969,8 @@ SizedBox decEquipageTitle() {
       ]));
 }
 
-Row decHeader(ImageProvider cnssLogo, TtfFont fontEM, TtfFont fontReg,
-    ImageProvider pda) {
+Row decHeader(
+    ImageProvider cnssLogo, Font fontEM, Font fontReg, ImageProvider pda) {
   return Row(
     children: [
       SizedBox(width: 10),
@@ -1148,7 +1165,167 @@ Row decMarinzTitle() {
   ]);
 }
 
-SizedBox decInfo(Declaration month, Boat boat) {
+Row decMarinRow(Marin marin, Month month) {
+  return Row(children: [
+    SizedBox(width: 10),
+    Expanded(
+      child: Table(
+        border: TableBorder.all(),
+        columnWidths: {
+          0: FractionColumnWidth(.15),
+          1: FractionColumnWidth(.23),
+          2: FractionColumnWidth(.16),
+          3: FractionColumnWidth(.14),
+          4: FractionColumnWidth(.12),
+          5: FractionColumnWidth(.10),
+          6: FractionColumnWidth(.08),
+          7: FractionColumnWidth(.13),
+          8: FractionColumnWidth(.12),
+        },
+        children: [
+          TableRow(children: [
+            Container(
+                height: 20,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1),
+                ),
+                child: Center(
+                  child: Text(
+                    marin.marinCnss,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 11,
+                    ),
+                  ),
+                )),
+            Container(
+                height: 20,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1),
+                ),
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                        ' ' +
+                            marin.marinLastName.substring(
+                                0,
+                                marin.marinLastName.length > 16
+                                    ? 16
+                                    : marin.marinLastName.length),
+                        softWrap: false,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontSize: 11,
+                        ),
+                        overflow: TextOverflow.clip))),
+            Container(
+                height: 20,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1),
+                ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                      ' ' +
+                          marin.marinFirstName.toUpperCase().substring(
+                              0,
+                              marin.marinFirstName.length > 12
+                                  ? 12
+                                  : marin.marinFirstName.length),
+                      softWrap: false,
+                      maxLines: 1,
+                      style: TextStyle(
+                        fontSize: 11,
+                      ),
+                      overflow: TextOverflow.clip),
+                )),
+            Container(
+                height: 20,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1),
+                ),
+                child: Center(
+                  child: Text(
+                    marin.marinReference,
+                    style: TextStyle(
+                      fontSize: 11,
+                    ),
+                  ),
+                )),
+            Container(
+                height: 20,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1),
+                ),
+                child: Center(
+                  child: Text(
+                    marin.marinCin,
+                    style: TextStyle(
+                      fontSize: 11,
+                    ),
+                  ),
+                )),
+            Container(
+                height: 20,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1),
+                ),
+                child: Center(
+                  child: Text(
+                    "1",
+                    style: TextStyle(
+                      fontSize: 11,
+                    ),
+                  ),
+                )),
+            Container(
+                height: 20,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1),
+                ),
+                child: Center(
+                  child: Text(
+                    "1",
+                    style: TextStyle(
+                      fontSize: 11,
+                    ),
+                  ),
+                )),
+            Container(
+                height: 20,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1),
+                ),
+                child: Center(
+                  child: Text(
+                    month.monthPie.toStringAsFixed(2).replaceAll(".", ","),
+                    style: TextStyle(
+                      fontSize: 11,
+                    ),
+                  ),
+                )),
+            Container(
+                height: 20,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1),
+                ),
+                child: Center(
+                  child: Text(
+                    month.monthSales.toString(),
+                    style: TextStyle(
+                      fontSize: 11,
+                    ),
+                  ),
+                )),
+          ]),
+        ],
+      ),
+    ),
+    SizedBox(width: 10),
+  ]);
+}
+
+SizedBox decInfo(Month month, Boat boat) {
   return SizedBox(
     height: 70,
     child: Row(children: [
@@ -1269,7 +1446,8 @@ SizedBox decInfo(Declaration month, Boat boat) {
                       decoration: BoxDecoration(border: Border.all(width: 1)),
                       child: Center(
                         child: Text(
-                          month.monthEquipageNumber.toString() + ",00",
+                          month.monthEquipageNumber.toStringAsFixed(2),
+                          //.toString() + ",00",
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
@@ -1295,7 +1473,7 @@ SizedBox decInfo(Declaration month, Boat boat) {
                       decoration: BoxDecoration(border: Border.all(width: 1)),
                       child: Center(
                         child: Text(
-                          month.monthRevenue.toString(),
+                          month.monthRevenue.toStringAsFixed(2),
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
@@ -1312,7 +1490,7 @@ SizedBox decInfo(Declaration month, Boat boat) {
   );
 }
 
-Row decDate(Declaration month) {
+Row decDate(Month month) {
   return Row(children: [
     SizedBox(width: 100),
     Expanded(

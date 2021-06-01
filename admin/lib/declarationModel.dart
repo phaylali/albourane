@@ -1,12 +1,9 @@
-//import 'dart:convert';
 import 'dart:typed_data';
-
+import 'package:flutter/services.dart';
 import 'package:admin/declarationWidgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-
-//import 'package:intl/intl.dart';
-
+import 'declarationWidgets.dart';
 import 'package:get/get.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
@@ -53,12 +50,15 @@ class Marin {
 
   Marin.fromJson(Map<String, Object?> json)
       : this(
-          marinLastName: json['name']! as String,
-          marinFirstName: json['owner']! as String,
+          marinLastName: json['lastName']! as String,
+          marinFirstName: json['firstName']! as String,
           marinReference: json['reference']! as String,
-          marinCnss: json['region']! as String,
-          marinCin: json['sub']! as String,
+          marinCnss: json['cnss']! as String,
+          marinCin: json['cni']! as String,
         );
+  Map<String, Object?> toJson() {
+    return {};
+  }
 
   final String marinLastName;
   final String marinFirstName;
@@ -68,8 +68,9 @@ class Marin {
 }
 
 @immutable
-class Declaration {
-  Declaration({
+class Month {
+  Month({
+    required this.bahara,
     required this.monthFinish,
     required this.monthEquipageNumber,
     required this.monthRevenue,
@@ -96,11 +97,13 @@ class Declaration {
     //required this.marins,
   });
 
-  Declaration.fromJson(
+  Month.fromJson(
     Map<String, Object?> json,
   ) : this(
-          //marins: (json['marins']! as List).cast<Marin>(),
+          //bahara: (json['marins']! as List).cast<Marin>(),
           //boat: Boat.fromJson(json['boat']! as Map<String, Object?>),
+          //bahara: List<Marin>.from(json['bahara']! as List<Marin>),
+          bahara: json['bahara']! as List,
           monthStart: json['startDate']! as String,
           monthFinish: json['finishDate']! as String,
           monthEquipageNumber: json['equipageNumber']! as int,
@@ -124,8 +127,9 @@ class Declaration {
           monthEquipagePerc: json['equipagePerc']! as num,
           monthPie: json['pie']! as num,
         );
-  //final List<Marin> marins;
+  //final List<Marin> bahara;
   //final Boat boat;
+  final List bahara;
   final String monthStart;
   final String monthFinish;
   final int monthSales;
@@ -156,6 +160,7 @@ class Declaration {
       //'reference' : boatReference,
       //'region': boatRegion,
       //'sub' : boatCoopPerc,
+      'bahara': bahara,
       'startDate': monthStart,
       'finishDate': monthFinish,
       'revenue': monthRevenue,
@@ -182,21 +187,40 @@ class Declaration {
 }
 
 class DecModelController extends GetxController {
-  late String id;
-  late String month;
-  late Declaration monthDec;
-  late Boat boatDec;
+  final String id;
+  final String month;
+  late Month? monthDec;
+  late Boat? boatDec;
 
-  DecModelController(this.id, this.month);
+  List<Row> marinsRows = [];
+  DecModelController(
+    this.id,
+    this.month,
+  );
   @override
   void onInit() async {
     super.onInit();
-    await getData(id, month);
   }
 
   @override
   void onClose() {
     super.onClose();
+  }
+
+  void getMarins(ido, month) async {
+    print('run 1 + $ido');
+    await FirebaseFirestore.instance
+        .collection('seamen')
+        .doc(ido)
+        .withConverter<Marin>(
+          fromFirestore: (snapshots, _) => Marin.fromJson(snapshots.data()!),
+          toFirestore: (marin, _) => marin.toJson(),
+        )
+        .get()
+        .then((value) {
+      print('run 2 + $ido + ' + value.toString());
+      marinsRows.add(decMarinRow(value.data()!, month));
+    });
   }
 
   Future getData(boat, month) async {
@@ -207,39 +231,40 @@ class DecModelController extends GetxController {
           fromFirestore: (snapshots, _) => Boat.fromJson(snapshots.data()!),
           toFirestore: (boat, _) => boat.toJson(),
         );
+    final boatly = await boatRef.get().then((s) => s.data());
     final monthRef = await FirebaseFirestore.instance
         .collection('boats')
         .doc(boat)
         .collection('revenue')
         .doc(month)
-        .withConverter<Declaration>(
-          fromFirestore: (snapshots, _) =>
-              Declaration.fromJson(snapshots.data()!),
+        .withConverter<Month>(
+          fromFirestore: (snapshots, _) => Month.fromJson(snapshots.data()!),
           toFirestore: (month, _) => month.toJson(),
         );
-
     final monthly = await monthRef.get().then((s) => s.data());
-    final boatly = await boatRef.get().then((s) => s.data());
-    update();
-    /*  
-    final marinsRef = await FirebaseFirestore.instance
-        .collection('boats')
-        .doc(boat)
-        .collection('revenue')
-        .doc(month)
-        .withConverter<Declaration>(
-          fromFirestore: (snapshots, _) =>
-              Declaration.fromJson(snapshots.data()!),
-          toFirestore: (month, _) => month.toJson(),
-        );*/
-    return {monthDec = monthly!, boatDec = boatly!};
+
+    for (var age in monthly!.bahara) {
+      getMarins(age, monthly);
+    }
+    print('length is : ' + monthly.bahara.length.toString());
+
+    return {
+      monthDec = monthly,
+      boatDec = boatly,
+    };
   }
 
   Future<Uint8List> generatePDF() async {
     final doc = Document();
-    final fontReg = await fontFromAssetBundle('res/fonts/Carlito-Regular.ttf');
-    final fontEM = await fontFromAssetBundle('res/fonts/EMcomic-Bold.ttf');
-    final fontBold = await fontFromAssetBundle('res/fonts/Carlito-Bold.ttf');
+    final font1 = await rootBundle.load('res/fonts/Carlito-Regular.ttf');
+    final font = Font.ttf(font1);
+    final font2 = await rootBundle.load('res/fonts/EMcomic-Bold.ttf');
+    final fontEM = Font.ttf(font2);
+    final font3 = await rootBundle.load('res/fonts/Carlito-Bold.ttf');
+    final fontBold = Font.ttf(font3);
+    final font4 = await rootBundle.load('res/fonts/Carlito-Italic.ttf');
+    final fontItalic = Font.ttf(font4);
+
     final cnssLogo = await imageFromAssetBundle('res/icons/cnss.png');
     final pda = await imageFromAssetBundle('res/icons/pda.jpg');
 
@@ -248,12 +273,12 @@ class DecModelController extends GetxController {
         orientation: PageOrientation.portrait,
         theme: ThemeData(
             defaultTextStyle: TextStyle(
-          font: fontReg,
+          font: font,
           fontBold: fontBold,
+          fontItalic: fontItalic,
           fontSize: 12,
         )),
         build: (Context context) {
-          //final dec = Declaration.fromJson();
           return FullPage(
               ignoreMargins: true,
               child: Row(children: [
@@ -262,17 +287,18 @@ class DecModelController extends GetxController {
                     child: Center(
                   child: Column(children: [
                     margin(),
-                    decHeader(cnssLogo, fontEM, fontReg, pda),
-                    marginMini(),
-                    decDate(monthDec),
-                    marginMini(),
-                    decInfo(monthDec, boatDec),
+                    decHeader(cnssLogo, fontEM, font, pda),
+                    margin(),
+                    decDate(monthDec!),
+                    margin(),
+                    decInfo(monthDec!, boatDec!),
                     marginMini(),
                     decEquipageTitle(),
                     marginMini(),
                     decMarinzTitle(),
+                    SizedBox(width: 660, child: Column(children: marinsRows)),
                     margin(),
-                    decDetails(monthDec, boatDec),
+                    decDetails(monthDec!, boatDec!),
                     margin(),
                     decSignature(),
                     Spacer(),
@@ -281,11 +307,7 @@ class DecModelController extends GetxController {
                   ]),
                 )),
                 SizedBox(width: 20)
-              ])
-
-              //declarationPDF(cnssLogo, fontEM, pda, fontReg, dec)
-
-              );
+              ]));
         }));
 
     return await doc.save();

@@ -44,13 +44,11 @@ flutter:
       fonts: 
         - asset: res/fonts/Carlito-Regular.ttf
         - asset: res/fonts/Carlito-Bold.ttf
-    - family: LDFComicSans
-      fonts: 
-        - asset: res/fonts/LDFComicSansBold.ttf
+        - asset: res/fonts/Carlito-Italic.ttf
     - family: EMComic
       fonts: 
         - asset: res/fonts/EMcomic-Bold.ttf
-        
+         
 
 
 
