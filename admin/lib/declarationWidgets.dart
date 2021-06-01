@@ -579,7 +579,7 @@ Row decDetails(Month month, Boat boat) {
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 11,
                   ),
                 ),
               )),
@@ -620,7 +620,7 @@ Row decDetails(Month month, Boat boat) {
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 11,
                   ),
                 ),
               )),
@@ -1205,13 +1205,12 @@ Row decMarinRow(Marin marin, Month month) {
                 ),
                 child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(
-                        ' ' +
-                            marin.marinLastName.substring(
+                    child: Text(' ' + marin.marinLastName.toString(),
+                        /*marin.marinLastName.substring(
                                 0,
                                 marin.marinLastName.length > 16
                                     ? 16
-                                    : marin.marinLastName.length),
+                                    : marin.marinLastName.length),*/
                         softWrap: false,
                         maxLines: 1,
                         style: TextStyle(
@@ -1225,13 +1224,7 @@ Row decMarinRow(Marin marin, Month month) {
                 ),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                      ' ' +
-                          marin.marinFirstName.toUpperCase().substring(
-                              0,
-                              marin.marinFirstName.length > 12
-                                  ? 12
-                                  : marin.marinFirstName.length),
+                  child: Text(' ' + marin.marinFirstName.toUpperCase(),
                       softWrap: false,
                       maxLines: 1,
                       style: TextStyle(
