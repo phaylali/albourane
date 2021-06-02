@@ -63,7 +63,7 @@ Row decDetails(Month month, Boat boat) {
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
-                  " Valeur(DH) ",
+                  " Valeur (DH) ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
@@ -101,7 +101,7 @@ Row decDetails(Month month, Boat boat) {
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
-                  " 6.00% ",
+                  " 6,00% ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -161,7 +161,7 @@ Row decDetails(Month month, Boat boat) {
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
-                  " 1.70% ",
+                  " 1,70% ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -378,7 +378,7 @@ Row decDetails(Month month, Boat boat) {
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
-                  " 0.00% ",
+                  " 0,00% ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -397,8 +397,7 @@ Row decDetails(Month month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  month.monthPeage.toStringAsFixed(2).replaceAll(".", ",") +
-                      "  ",
+                  "0,00" + "  ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -438,7 +437,7 @@ Row decDetails(Month month, Boat boat) {
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
-                  " 0.16% ",
+                  " 0,16% ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -519,7 +518,7 @@ Row decDetails(Month month, Boat boat) {
               border: Border.all(width: 1), color: PdfColors.grey.shade(0.1)),
           child: Center(
             child: Text(
-              " Autre Dépenses ",
+              " Autres Dépenses ",
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
           )),
@@ -575,7 +574,7 @@ Row decDetails(Month month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  " Autres Charges Communes(DH) ",
+                  " Autres Charges Communes (DH) ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -616,7 +615,7 @@ Row decDetails(Month month, Boat boat) {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  " Charges Comm. Hors CNSS(DH) ",
+                  " Charges Comm. Hors CNSS (DH) ",
                   maxLines: 1,
                   softWrap: false,
                   style: TextStyle(
@@ -1206,11 +1205,6 @@ Row decMarinRow(Marin marin, Month month) {
                 child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(' ' + marin.marinLastName.toString(),
-                        /*marin.marinLastName.substring(
-                                0,
-                                marin.marinLastName.length > 16
-                                    ? 16
-                                    : marin.marinLastName.length),*/
                         softWrap: false,
                         maxLines: 1,
                         style: TextStyle(
@@ -1439,7 +1433,9 @@ SizedBox decInfo(Month month, Boat boat) {
                       decoration: BoxDecoration(border: Border.all(width: 1)),
                       child: Center(
                         child: Text(
-                          month.monthEquipageNumber.toStringAsFixed(2),
+                          month.monthEquipageNumber
+                              .toStringAsFixed(2)
+                              .replaceAll(".", ","),
                           //.toString() + ",00",
                           style: TextStyle(
                             fontSize: 12,
@@ -1466,7 +1462,9 @@ SizedBox decInfo(Month month, Boat boat) {
                       decoration: BoxDecoration(border: Border.all(width: 1)),
                       child: Center(
                         child: Text(
-                          month.monthRevenue.toStringAsFixed(2),
+                          month.monthRevenue
+                              .toStringAsFixed(2)
+                              .replaceAll(".", ","),
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,

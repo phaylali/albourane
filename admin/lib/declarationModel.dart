@@ -1,13 +1,17 @@
-import 'dart:typed_data';
+import 'dart:io';
+//import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'package:admin/declarationWidgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 import 'declarationWidgets.dart';
 import 'package:get/get.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 import 'package:pdf/widgets.dart';
+import 'package:flutter/material.dart' as d;
 
 @immutable
 class Boat {
@@ -93,16 +97,11 @@ class Month {
     required this.monthTaxeRegion,
     required this.monthTotalCnss,
     required this.monthTotalGlobal,
-    //required this.boat,
-    //required this.marins,
   });
 
   Month.fromJson(
     Map<String, Object?> json,
   ) : this(
-          //bahara: (json['marins']! as List).cast<Marin>(),
-          //boat: Boat.fromJson(json['boat']! as Map<String, Object?>),
-          //bahara: List<Marin>.from(json['bahara']! as List<Marin>),
           bahara: json['bahara']! as List,
           monthStart: json['startDate']! as String,
           monthFinish: json['finishDate']! as String,
@@ -127,8 +126,6 @@ class Month {
           monthEquipagePerc: json['equipagePerc']! as num,
           monthPie: json['pie']! as num,
         );
-  //final List<Marin> bahara;
-  //final Boat boat;
   final List bahara;
   final String monthStart;
   final String monthFinish;
@@ -155,11 +152,6 @@ class Month {
 
   Map<String, Object?> toJson() {
     return {
-      //'name' : boatName,
-      //'owner' : boatOwner,
-      //'reference' : boatReference,
-      //'region': boatRegion,
-      //'sub' : boatCoopPerc,
       'bahara': bahara,
       'startDate': monthStart,
       'finishDate': monthFinish,
@@ -191,6 +183,8 @@ class DecModelController extends GetxController {
   final String month;
   late Month? monthDec;
   late Boat? boatDec;
+  final doc = Document();
+  //var foco = Uint8List;
 
   List<Row> marinsRows = [];
   DecModelController(
@@ -246,6 +240,9 @@ class DecModelController extends GetxController {
     for (var age in monthly!.bahara) {
       getMarins(age, monthly);
     }
+
+    await generatePDF(doc);
+
     print('length is : ' + monthly.bahara.length.toString());
 
     return {
@@ -254,8 +251,69 @@ class DecModelController extends GetxController {
     };
   }
 
-  Future<Uint8List> generatePDF() async {
-    final doc = Document();
+  onError() {
+    Get.snackbar("", "",
+        titleText: d.Text(
+          "خطأ",
+          textDirection: d.TextDirection.rtl,
+          textAlign: d.TextAlign.center,
+        ),
+        messageText: d.Text(
+          " ",
+          textScaleFactor: 0.7,
+          textDirection: d.TextDirection.rtl,
+          textAlign: d.TextAlign.center,
+        ));
+  }
+
+  onShared() {
+    Get.snackbar("", "",
+        titleText: d.Text(
+          "تم النشر بنجاح",
+          textDirection: d.TextDirection.rtl,
+          textAlign: d.TextAlign.center,
+        ),
+        messageText: d.Text(
+          " ",
+          textScaleFactor: 0.7,
+          textDirection: d.TextDirection.rtl,
+          textAlign: d.TextAlign.center,
+        ));
+  }
+
+  shareDeclaration() async {
+    await Printing.sharePdf(
+        bytes: await
+            // generatePDF(),
+            doc.save(),
+        filename: 'CNSS-ID_$id-M_$month.pdf');
+  }
+
+  printDeclaration() async {
+    await Printing.layoutPdf(
+        name: 'CNSS-ID_$id-M_$month.pdf',
+        format: PdfPageFormat.a4,
+        onLayout: (PdfPageFormat format) async => doc.save()
+        //generatePDF()
+        );
+  }
+
+  Future<void> saveAsFile(
+    d.BuildContext context,
+    LayoutCallback build,
+    PdfPageFormat pageFormat,
+  ) async {
+    final bytes = await build(pageFormat);
+
+    final appDocDir = await getApplicationDocumentsDirectory();
+    final appDocPath = appDocDir.path;
+    final file = File(appDocPath + '/' + 'CNSS-ID_$id-M_$month.pdf');
+    print('Save as file ${file.path} ...');
+    await file.writeAsBytes(bytes);
+    await OpenFile.open(file.path);
+  }
+
+  generatePDF(doc) async {
     final font1 = await rootBundle.load('res/fonts/Carlito-Regular.ttf');
     final font = Font.ttf(font1);
     final font2 = await rootBundle.load('res/fonts/EMcomic-Bold.ttf');
@@ -310,6 +368,65 @@ class DecModelController extends GetxController {
               ]));
         }));
 
-    return await doc.save();
+    return doc;
   }
+/*
+  Future<Uint8List> generatePDF() async {
+    final font1 = await rootBundle.load('res/fonts/Carlito-Regular.ttf');
+    final font = Font.ttf(font1);
+    final font2 = await rootBundle.load('res/fonts/EMcomic-Bold.ttf');
+    final fontEM = Font.ttf(font2);
+    final font3 = await rootBundle.load('res/fonts/Carlito-Bold.ttf');
+    final fontBold = Font.ttf(font3);
+    final font4 = await rootBundle.load('res/fonts/Carlito-Italic.ttf');
+    final fontItalic = Font.ttf(font4);
+
+    final cnssLogo = await imageFromAssetBundle('res/icons/cnss.png');
+    final pda = await imageFromAssetBundle('res/icons/pda.jpg');
+    final doc = Document();
+    doc.addPage(Page(
+        pageFormat: PdfPageFormat.a4,
+        orientation: PageOrientation.portrait,
+        theme: ThemeData(
+            defaultTextStyle: TextStyle(
+          font: font,
+          fontBold: fontBold,
+          fontItalic: fontItalic,
+          fontSize: 12,
+        )),
+        build: (Context context) {
+          return FullPage(
+              ignoreMargins: true,
+              child: Row(children: [
+                SizedBox(width: 20),
+                Expanded(
+                    child: Center(
+                  child: Column(children: [
+                    margin(),
+                    decHeader(cnssLogo, fontEM, font, pda),
+                    margin(),
+                    decDate(monthDec!),
+                    margin(),
+                    decInfo(monthDec!, boatDec!),
+                    marginMini(),
+                    decEquipageTitle(),
+                    marginMini(),
+                    decMarinzTitle(),
+                    SizedBox(width: 660, child: Column(children: marinsRows)),
+                    margin(),
+                    decDetails(monthDec!, boatDec!),
+                    margin(),
+                    decSignature(),
+                    Spacer(),
+                    decDateNow(),
+                    margin()
+                  ]),
+                )),
+                SizedBox(width: 20)
+              ]));
+        }));
+    
+
+    return await doc.save();
+  }*/
 }
