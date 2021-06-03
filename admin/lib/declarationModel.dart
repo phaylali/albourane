@@ -286,16 +286,38 @@ class DecModelController extends GetxController {
         bytes: await
             // generatePDF(),
             doc.save(),
-        filename: 'CNSS-ID_$id-M_$month.pdf');
+        filename: 'CNSS|$id|$month.pdf');
+    Get.snackbar("", "",
+        titleText: d.Text(
+          "تم النشر بنجاح",
+          textDirection: d.TextDirection.rtl,
+          textAlign: d.TextAlign.center,
+        ),
+        messageText: d.Text(
+          " ",
+          textScaleFactor: 0.7,
+          textDirection: d.TextDirection.rtl,
+          textAlign: d.TextAlign.center,
+        ));
   }
 
   printDeclaration() async {
     await Printing.layoutPdf(
-        name: 'CNSS-ID_$id-M_$month.pdf',
+        name: 'CNSS|$id|$month.pdf',
         format: PdfPageFormat.a4,
-        onLayout: (PdfPageFormat format) async => doc.save()
-        //generatePDF()
-        );
+        onLayout: (PdfPageFormat format) async => doc.save());
+    Get.snackbar("", "",
+        titleText: d.Text(
+          "تم الطبع بنجاح",
+          textDirection: d.TextDirection.rtl,
+          textAlign: d.TextAlign.center,
+        ),
+        messageText: d.Text(
+          " ",
+          textScaleFactor: 0.7,
+          textDirection: d.TextDirection.rtl,
+          textAlign: d.TextAlign.center,
+        ));
   }
 
   Future<void> saveAsFile(
@@ -370,63 +392,4 @@ class DecModelController extends GetxController {
 
     return doc;
   }
-/*
-  Future<Uint8List> generatePDF() async {
-    final font1 = await rootBundle.load('res/fonts/Carlito-Regular.ttf');
-    final font = Font.ttf(font1);
-    final font2 = await rootBundle.load('res/fonts/EMcomic-Bold.ttf');
-    final fontEM = Font.ttf(font2);
-    final font3 = await rootBundle.load('res/fonts/Carlito-Bold.ttf');
-    final fontBold = Font.ttf(font3);
-    final font4 = await rootBundle.load('res/fonts/Carlito-Italic.ttf');
-    final fontItalic = Font.ttf(font4);
-
-    final cnssLogo = await imageFromAssetBundle('res/icons/cnss.png');
-    final pda = await imageFromAssetBundle('res/icons/pda.jpg');
-    final doc = Document();
-    doc.addPage(Page(
-        pageFormat: PdfPageFormat.a4,
-        orientation: PageOrientation.portrait,
-        theme: ThemeData(
-            defaultTextStyle: TextStyle(
-          font: font,
-          fontBold: fontBold,
-          fontItalic: fontItalic,
-          fontSize: 12,
-        )),
-        build: (Context context) {
-          return FullPage(
-              ignoreMargins: true,
-              child: Row(children: [
-                SizedBox(width: 20),
-                Expanded(
-                    child: Center(
-                  child: Column(children: [
-                    margin(),
-                    decHeader(cnssLogo, fontEM, font, pda),
-                    margin(),
-                    decDate(monthDec!),
-                    margin(),
-                    decInfo(monthDec!, boatDec!),
-                    marginMini(),
-                    decEquipageTitle(),
-                    marginMini(),
-                    decMarinzTitle(),
-                    SizedBox(width: 660, child: Column(children: marinsRows)),
-                    margin(),
-                    decDetails(monthDec!, boatDec!),
-                    margin(),
-                    decSignature(),
-                    Spacer(),
-                    decDateNow(),
-                    margin()
-                  ]),
-                )),
-                SizedBox(width: 20)
-              ]));
-        }));
-    
-
-    return await doc.save();
-  }*/
 }

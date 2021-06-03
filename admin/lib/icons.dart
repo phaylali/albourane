@@ -68,4 +68,14 @@ class OmniIcons {
     width: 24,
     height: 24,
   );
+  final Widget print = SvgPicture.asset(
+    'res/icons/print.svg',
+    width: 24,
+    height: 24,
+  );
+  final Widget share = SvgPicture.asset(
+    'res/icons/share.svg',
+    width: 24,
+    height: 24,
+  );
 }

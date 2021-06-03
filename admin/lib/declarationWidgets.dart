@@ -509,7 +509,7 @@ Row decDetails(Month month, Boat boat) {
         ),
       ]),
     ])),
-    SizedBox(width: 40),
+    SizedBox(width: 20),
     Expanded(
         child: Column(children: [
       Container(

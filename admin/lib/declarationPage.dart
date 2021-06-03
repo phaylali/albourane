@@ -3,7 +3,6 @@ import 'package:admin/header.dart';
 import 'package:admin/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-//import 'package:keyboard_actions/external/platform_check/platform_check.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 
@@ -31,48 +30,62 @@ class DeclarationPage extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 }
 
-                print("CNSS/ID_$id/M_$month");
+                print("CNSS|$id|$month");
                 return Column(
                   children: [
                     Expanded(
                       child: PdfPreview(
                         initialPageFormat: PdfPageFormat.a4,
                         maxPageWidth: 700,
-                        pdfFileName: "CNSS-ID_$id-M_$month",
-                        //pdfPreviewPageDecoration: Decoration(),
+                        pdfFileName: "CNSS|$id|$month",
                         build: (format) => b.doc.save(),
-                        //b.doco.save(),
-                        //b.generatePDF(),
                         canChangeOrientation: false,
                         canChangePageFormat: false,
                         allowPrinting: false,
                         allowSharing: false,
                         useActions: false,
-                        //onShared: b.onShared(),
-                        //onPrinted: b.onShared(),
-                        //onError: b.onError(),
                       ),
                     ),
-                    Wrap(
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
                       children: [
+                        Spacer(),
                         SizedBox(
                             width: 300,
                             height: 40,
-                            child: ListTile(
-                                leading: OmniIcons().back,
-                                title: Text('Share Declaration'),
-                                onTap: () {
+                            child: OutlinedButton(
+                                onPressed: () {
                                   b.shareDeclaration();
-                                })),
+                                },
+                                child: Row(
+                                  children: [
+                                    Spacer(),
+                                    OmniIcons().share,
+                                    Spacer(),
+                                    Text('انشر التقرير'),
+                                    Spacer(),
+                                  ],
+                                ))),
+                        Spacer(),
                         SizedBox(
                             width: 300,
                             height: 40,
-                            child: ListTile(
-                                leading: OmniIcons().back,
-                                title: Text('Print Declaration'),
-                                onTap: () {
+                            child: OutlinedButton(
+                                onPressed: () {
                                   b.printDeclaration();
-                                })),
+                                },
+                                child: Row(
+                                  children: [
+                                    Spacer(),
+                                    OmniIcons().print,
+                                    Spacer(),
+                                    Text('اطبع التقرير'),
+                                    Spacer(),
+                                  ],
+                                ))),
+                        Spacer(),
                       ],
                     )
                   ],
