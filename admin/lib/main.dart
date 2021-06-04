@@ -1,10 +1,9 @@
-//import 'package:admin/checker.dart';
 import 'package:admin/declarationNew.dart';
-import 'package:admin/declarationPage.dart';
+import 'package:admin/lists/boats.dart';
+import 'package:admin/pages/declarationPage.dart';
 import 'package:admin/home.dart';
 import 'package:admin/login.dart';
 import 'package:admin/boatPage.dart';
-import 'package:admin/boats.dart';
 import 'package:admin/docs.dart';
 import 'package:admin/docPage.dart';
 import 'package:admin/error404.dart';
@@ -13,8 +12,7 @@ import 'package:admin/docNew.dart';
 import 'package:admin/seamanNew.dart';
 import 'package:admin/seamanPage.dart';
 import 'package:admin/seamen.dart';
-import 'package:admin/test.dart';
-import 'package:admin/themes.dart';
+import 'package:admin/resources/themes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -55,12 +53,12 @@ class Start extends StatelessWidget {
           GetPage(name: '/NewBoat', page: () => NewBoat()),
           GetPage(name: '/NewSeaman', page: () => NewSeaman()),
           GetPage(name: '/Documents', page: () => DocsLibrary()),
-          GetPage(name: '/Boats', page: () => BoatsLibrary()),
+          GetPage(name: '/Boats', page: () => Boats()),
           GetPage(name: '/Seamen', page: () => SeamenLibrary()),
           GetPage(name: '/Document', page: () => DocumentPage()),
           GetPage(name: '/Boat', page: () => BoatPage()),
           GetPage(name: '/Seaman', page: () => SeamanPage()),
-          GetPage(name: '/test', page: () => PDFTest()),
+
           GetPage(name: '/NewDeclaration', page: () => NewDeclaration()),
           GetPage(name: '/Declaration', page: () => DeclarationPage()),
         ],

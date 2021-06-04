@@ -1,5 +1,5 @@
-import 'package:admin/header.dart';
-import 'package:admin/icons.dart';
+import 'package:admin/widgets/mainBody.dart';
+import 'package:admin/resources/icons.dart';
 import 'package:admin/providers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';

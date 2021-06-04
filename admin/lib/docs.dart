@@ -1,4 +1,4 @@
-import 'package:admin/header.dart';
+import 'package:admin/widgets/mainBody.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

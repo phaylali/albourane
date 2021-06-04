@@ -1,5 +1,5 @@
 import 'package:admin/checker.dart';
-import 'package:admin/icons.dart';
+import 'package:admin/resources/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -21,15 +21,6 @@ class MainBody extends StatelessWidget {
       child: Scaffold(
         key: drawerKey,
         floatingActionButton: context.responsiveValue(
-          /*mobile: FloatingActionButton.extended(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            label: SizedBox(height: 40, width: 40, child: OmniIcons().menu),
-            onPressed: () {
-              drawerKey.currentState!.openEndDrawer();
-            },
-          ),*/
           mobile: Fab(drawerKey: drawerKey),
           watch: Fab(drawerKey: drawerKey),
           tablet: Container(),
@@ -98,7 +89,6 @@ class Fab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       child: SizedBox(height: 40, width: 40, child: OmniIcons().menu),
       onPressed: () {

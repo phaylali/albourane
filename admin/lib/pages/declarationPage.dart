@@ -1,6 +1,7 @@
-import 'package:admin/declarationModel.dart';
-import 'package:admin/header.dart';
-import 'package:admin/icons.dart';
+import 'package:admin/controllers/declarationController.dart';
+
+import 'package:admin/widgets/mainBody.dart';
+import 'package:admin/resources/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pdf/pdf.dart';
@@ -14,8 +15,8 @@ class DeclarationPage extends StatelessWidget {
 
     return MainBody(
         title: "تصريح",
-        child: GetBuilder<DecModelController>(
-          init: DecModelController(id, month),
+        child: GetBuilder<DeclarationController>(
+          init: DeclarationController(id, month),
           builder: (b) {
             return FutureBuilder(
               future: b.getData(id, month),
@@ -30,7 +31,6 @@ class DeclarationPage extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 }
 
-                print("CNSS|$id|$month");
                 return Column(
                   children: [
                     Expanded(

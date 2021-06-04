@@ -1,4 +1,4 @@
-import 'package:admin/icons.dart';
+import 'package:admin/resources/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

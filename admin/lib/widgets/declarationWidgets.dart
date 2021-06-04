@@ -1,4 +1,6 @@
-import 'package:admin/declarationModel.dart';
+import 'package:admin/models/boatModel.dart';
+import 'package:admin/models/marinModel.dart';
+import 'package:admin/models/monthModel.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
