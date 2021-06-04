@@ -30,7 +30,6 @@ class Boats extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 }
 
-                final data = snapshot.data;
                 return Row(
                   children: [
                     SizedBox(
@@ -38,20 +37,13 @@ class Boats extends StatelessWidget {
                     ),
                     Expanded(
                       child: Wrap(
+                        alignment: WrapAlignment.spaceEvenly,
+                        direction: Axis.horizontal,
                         children: snapshot.data!.docs
-                            .map((item) => BoatItem(item.data()))
+                            .map((item) => BoatPreview(item.data()))
                             .toList()
                             .cast<Widget>(),
                       ),
-/*
-                      ListView.builder(
-                          itemCount: data!.size,
-                          itemBuilder: (context, index) {
-                            if (data.docs.isNotEmpty)
-                              return BoatItem(data.docs[index].data());
-                            return const Center(
-                                child: CircularProgressIndicator());
-                          }),*/
                     ),
                     SizedBox(
                       width: 20,
@@ -65,23 +57,32 @@ class Boats extends StatelessWidget {
   }
 }
 
-class BoatItem extends StatelessWidget {
-  BoatItem(this.boat);
+class BoatPreview extends StatelessWidget {
+  BoatPreview(this.boat);
 
   final Boat boat;
 
   Widget get details {
-    return ListTile(
-      leading: reference,
-      title: name,
-      subtitle: owner,
+    return OutlinedButton(
+      child: ListTile(
+        leading: reference,
+        title: name,
+        subtitle: owner,
+        onTap: () {
+          final String id = boat.boatReference.replaceAll('/', '-');
+          Get.toNamed(
+            "/Boat?id=$id",
+          );
+        },
+      ),
+      onPressed: () {},
     );
   }
 
   Widget get name {
     return Text(
       '${boat.boatName}',
-      textScaleFactor: 1.5,
+      textScaleFactor: 1.3,
     );
   }
 
@@ -94,11 +95,15 @@ class BoatItem extends StatelessWidget {
   Widget get owner {
     return Text(
       '${boat.boatOwner}',
+      textScaleFactor: 0.75,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return details;
+    return SizedBox(
+      child: details,
+      width: 300,
+    );
   }
 }
