@@ -9,6 +9,7 @@ class Marin {
     required this.marinReference,
     required this.marinCnss,
     required this.marinCin,
+    required this.marinImage,
   });
 
   Marin.fromJson(Map<String, Object?> json)
@@ -18,11 +19,20 @@ class Marin {
           marinReference: json['reference']! as String,
           marinCnss: json['cnss']! as String,
           marinCin: json['cni']! as String,
+          marinImage: json['image']! as String,
         );
   Map<String, Object?> toJson() {
-    return {};
+    return {
+      'lastName': marinLastName,
+      'firstName': marinFirstName,
+      'reference': marinReference,
+      'cnss': marinCnss,
+      'image': marinImage,
+      'cni': marinCin
+    };
   }
 
+  final String marinImage;
   final String marinLastName;
   final String marinFirstName;
   final String marinReference;

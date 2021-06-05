@@ -1,15 +1,15 @@
-import 'package:admin/controllers/boatsController.dart';
-import 'package:admin/models/boatModel.dart';
+import 'package:admin/controllers/marinsController.dart';
+import 'package:admin/models/marinModel.dart';
 import 'package:admin/resources/icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BoatInfo extends StatelessWidget {
-  BoatInfo(this.boat, this.controller);
+class MarinInfo extends StatelessWidget {
+  MarinInfo(this.marin, this.controller);
 
-  final Boat boat;
-  final BoatsController controller;
+  final Marin marin;
+  final MarinsController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +39,9 @@ class BoatInfo extends StatelessWidget {
                     height: 10,
                   ),
                   Expanded(
-                      child: boat.boatImage.isNotEmpty
-                          ? Image.network(boat.boatImage)
-                          : OmniIcons().boat),
+                      child: marin.marinImage.isNotEmpty
+                          ? Image.network(marin.marinImage)
+                          : OmniIcons().seaman),
                 ],
               ),
               onPressed: () {
@@ -52,7 +52,7 @@ class BoatInfo extends StatelessWidget {
                         children: [
                           Expanded(
                               child: Image.network(
-                            boat.boatImage,
+                            marin.marinImage,
                             width: context.width * 9 / 10,
                             height: context.height * 7 / 10,
                           )),
@@ -92,8 +92,8 @@ class BoatInfo extends StatelessWidget {
                             ListTile(
                                 title: Center(
                                   child: Text(
-                                    boat.boatName.isNotEmpty
-                                        ? boat.boatName
+                                    marin.marinLastName.isNotEmpty
+                                        ? marin.marinLastName
                                         : "لايوجد",
                                     maxLines: 3,
                                     textAlign: TextAlign.center,
@@ -101,13 +101,16 @@ class BoatInfo extends StatelessWidget {
                                 ),
                                 onTap: () {
                                   controller.getListTile(
-                                      boat.boatName, "تم نسخ اسم القارب");
+                                      marin.marinLastName +
+                                          ' ' +
+                                          marin.marinFirstName,
+                                      "تم نسخ اسم البحار");
                                 }),
                             ListTile(
                                 title: Center(
                                   child: Text(
-                                    boat.boatReference.isNotEmpty
-                                        ? boat.boatReference
+                                    marin.marinFirstName.isNotEmpty
+                                        ? marin.marinFirstName
                                         : "لايوجد",
                                     maxLines: 3,
                                     textAlign: TextAlign.center,
@@ -115,49 +118,52 @@ class BoatInfo extends StatelessWidget {
                                 ),
                                 onTap: () {
                                   controller.getListTile(
-                                      boat.boatReference, "تم نسخ لوحة القارب");
+                                      marin.marinLastName +
+                                          ' ' +
+                                          marin.marinFirstName,
+                                      "تم نسخ اسم البحار");
                                 }),
                             ListTile(
                                 title: Center(
                                   child: Text(
-                                    boat.boatRegion.isNotEmpty
-                                        ? boat.boatRegion
+                                    marin.marinCnss.isNotEmpty
+                                        ? marin.marinCnss
                                         : "لايوجد",
                                     maxLines: 3,
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                                 onTap: () {
-                                  controller.getListTile(
-                                      boat.boatRegion, "تم نسخ المنطقة");
+                                  controller.getListTile(marin.marinCnss,
+                                      "تم نسخ بطاقة الضمان الاجتماعي");
                                 }),
                             ListTile(
                                 title: Center(
                                   child: Text(
-                                    boat.boatOwner.isNotEmpty
-                                        ? boat.boatOwner
+                                    marin.marinCin.isNotEmpty
+                                        ? marin.marinCin
                                         : "لايوجد",
                                     maxLines: 3,
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                                 onTap: () {
-                                  controller.getListTile(
-                                      boat.boatOwner, "تم نسخ اسم المالك");
+                                  controller.getListTile(marin.marinCin,
+                                      "تم نسخ رقم البطاقة الوطنية");
                                 }),
                             ListTile(
                                 title: Center(
                                   child: Text(
-                                    boat.boatOwnerCni.isNotEmpty
-                                        ? boat.boatOwnerCni
+                                    marin.marinReference.isNotEmpty
+                                        ? marin.marinReference
                                         : "لايوجد",
                                     maxLines: 3,
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
                                 onTap: () {
-                                  controller.getListTile(
-                                      boat.boatOwnerCni, "تم نسخ بطاقة المالك");
+                                  controller.getListTile(marin.marinReference,
+                                      "تم نسخ الرقم التعريفي للبحار");
                                 }),
                           ],
                         ),
@@ -169,23 +175,23 @@ class BoatInfo extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
+                              "النسب",
+                              textDirection: TextDirection.rtl,
+                            ),
+                            Text(
                               "الاسم",
                               textDirection: TextDirection.rtl,
                             ),
                             Text(
+                              "الضمان",
+                              textDirection: TextDirection.rtl,
+                            ),
+                            Text(
+                              "البطاقة",
+                              textDirection: TextDirection.rtl,
+                            ),
+                            Text(
                               "اللوحة",
-                              textDirection: TextDirection.rtl,
-                            ),
-                            Text(
-                              "المنطقة",
-                              textDirection: TextDirection.rtl,
-                            ),
-                            Text(
-                              "المالك",
-                              textDirection: TextDirection.rtl,
-                            ),
-                            Text(
-                              "بطاقته",
                               textDirection: TextDirection.rtl,
                             ),
                           ],
@@ -220,8 +226,8 @@ class BoatInfo extends StatelessWidget {
                     ),
                     Expanded(
                       child: FutureBuilder<QuerySnapshot>(
-                          future: controller.getBoatRevenue(
-                              boat.boatReference.replaceAll('/', '-')),
+                          future: controller.getMarinRevenue(
+                              marin.marinReference.replaceAll('/', '-')),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) {
                               return Center(
@@ -238,7 +244,8 @@ class BoatInfo extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   final month = snapshot.data!.docs[index].id;
                                   final id =
-                                      boat.boatReference.replaceAll('/', '-');
+                                      snapshot.data!.docs[index]['boatID'];
+
                                   return Center(
                                     child: ListTile(
                                       title: Text(
