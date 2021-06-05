@@ -29,27 +29,28 @@ class Boats extends StatelessWidget {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 }
-
-                return Row(
-                  children: [
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: Wrap(
-                        alignment: WrapAlignment.spaceEvenly,
-                        direction: Axis.horizontal,
-                        children: snapshot.data!.docs
-                            .map((item) => BoatPreview(item.data()))
-                            .toList()
-                            .cast<Widget>(),
+                if (snapshot.connectionState == ConnectionState.done)
+                  return Row(
+                    children: [
+                      SizedBox(
+                        width: 20,
                       ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    )
-                  ],
-                );
+                      Expanded(
+                        child: Wrap(
+                          alignment: WrapAlignment.spaceEvenly,
+                          direction: Axis.horizontal,
+                          children: snapshot.data!.docs
+                              .map((item) => BoatPreview(item.data()))
+                              .toList()
+                              .cast<Widget>(),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      )
+                    ],
+                  );
+                return const Center(child: CircularProgressIndicator());
               });
         },
       ),
@@ -64,18 +65,17 @@ class BoatPreview extends StatelessWidget {
 
   Widget get details {
     return OutlinedButton(
+      onPressed: () {
+        final String id = boat.boatReference.replaceAll('/', '-');
+        Get.toNamed(
+          "/Boat?id=$id",
+        );
+      },
       child: ListTile(
         leading: reference,
         title: name,
         subtitle: owner,
-        onTap: () {
-          final String id = boat.boatReference.replaceAll('/', '-');
-          Get.toNamed(
-            "/Boat?id=$id",
-          );
-        },
       ),
-      onPressed: () {},
     );
   }
 
@@ -83,12 +83,20 @@ class BoatPreview extends StatelessWidget {
     return Text(
       '${boat.boatName}',
       textScaleFactor: 1.3,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 2,
     );
   }
 
   Widget get reference {
-    return Text(
-      '${boat.boatReference}',
+    return SizedBox(
+      width: 70,
+      child: Center(
+        child: Text(
+          '${boat.boatReference}',
+          textScaleFactor: 0.8,
+        ),
+      ),
     );
   }
 
@@ -96,6 +104,8 @@ class BoatPreview extends StatelessWidget {
     return Text(
       '${boat.boatOwner}',
       textScaleFactor: 0.75,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 2,
     );
   }
 
@@ -104,6 +114,7 @@ class BoatPreview extends StatelessWidget {
     return SizedBox(
       child: details,
       width: 300,
+      height: 100,
     );
   }
 }

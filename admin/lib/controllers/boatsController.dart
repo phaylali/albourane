@@ -1,4 +1,5 @@
 import 'package:admin/models/boatModel.dart';
+//import 'package:admin/models/monthModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,25 +17,32 @@ class BoatsController extends GetxController {
   }
 
   Future<QuerySnapshot<Boat>> getBoats() async {
-    final boatsRef =
-        FirebaseFirestore.instance.collection('boats').withConverter<Boat>(
-              fromFirestore: (snapshots, _) => Boat.fromJson(snapshots.data()!),
-              toFirestore: (boat, _) => boat.toJson(),
-            );
+    return await FirebaseFirestore.instance
+        .collection('boats')
+        .withConverter<Boat>(
+          fromFirestore: (snapshots, _) => Boat.fromJson(snapshots.data()!),
+          toFirestore: (movie, _) => movie.toJson(),
+        )
+        .get();
+  }
 
-    return boatsRef.get();
+  Future<QuerySnapshot> getBoatRevenue(x) async {
+    return await FirebaseFirestore.instance
+        .collection('boats')
+        .doc(x)
+        .collection('revenue')
+        .get();
   }
 
   Future<DocumentSnapshot<Boat>> getBoat(x) async {
-    final boatRef = FirebaseFirestore.instance
+    return await FirebaseFirestore.instance
         .collection('boats')
         .doc(x)
         .withConverter<Boat>(
           fromFirestore: (snapshots, _) => Boat.fromJson(snapshots.data()!),
           toFirestore: (boat, _) => boat.toJson(),
-        );
-
-    return boatRef.get();
+        )
+        .get();
   }
 
   getListTile(title, message) {

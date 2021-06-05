@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:admin/boatPage.dart';
+
 import 'package:admin/widgets/mainBody.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -164,18 +164,20 @@ class DocumentInfo extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          /*
           ListTileInfo(
             data: data,
             title: '${data!['name']}',
             trailing: "الاسم",
             message: "تم نسخ اسم الوثيقة",
-          ),
+          ),*/
+          /*
           ListTileInfo(
             data: data,
             title: '${data!['date'].toDate().toString().split(" ").first}',
             trailing: "التاريخ",
             message: "تم نسخ تاريخ الوثيقة",
-          ),
+          ),*/
           ListTile(
             trailing: SizedBox(
               child: Text(
@@ -193,13 +195,14 @@ class DocumentInfo extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
+          /*
           ListTileInfo(
             data: data,
             title: "${data!['description']}",
             trailing: "الوصف",
             max: null,
             message: "تم نسخ وصف الوثيقة",
-          ),
+          ),*/
         ],
       ),
     );

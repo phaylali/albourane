@@ -1,4 +1,3 @@
-import 'package:admin/boatPage.dart';
 import 'package:admin/widgets/mainBody.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -159,6 +158,7 @@ class SeamanInfo extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
+            /*
             ListTileInfo(
               data: data,
               title: '${data!['name']}',
@@ -188,7 +188,7 @@ class SeamanInfo extends StatelessWidget {
               title: '${data!['phone']}',
               trailing: "الهاتف",
               message: "تم نسخ هاتف البحار",
-            ),
+            ),*/
           ],
         ),
       ),

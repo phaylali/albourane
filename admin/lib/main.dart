@@ -1,9 +1,9 @@
 import 'package:admin/declarationNew.dart';
 import 'package:admin/lists/boats.dart';
+import 'package:admin/pages/boatPage.dart';
 import 'package:admin/pages/declarationPage.dart';
 import 'package:admin/home.dart';
 import 'package:admin/login.dart';
-import 'package:admin/boatPage.dart';
 import 'package:admin/docs.dart';
 import 'package:admin/docPage.dart';
 import 'package:admin/error404.dart';
