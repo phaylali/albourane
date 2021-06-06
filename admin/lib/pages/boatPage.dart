@@ -35,7 +35,8 @@ class BoatPage extends StatelessWidget {
                       width: 20,
                     ),
                     Expanded(
-                      child: BoatInfo(snapshot.data!.data()!, b),
+                      child: SingleChildScrollView(
+                          child: BoatInfo(snapshot.data!.data()!, b)),
                     ),
                     SizedBox(
                       width: 20,

@@ -1,12 +1,11 @@
 import 'package:admin/widgets/mainBody.dart';
 import 'package:admin/resources/icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
-class HomePage extends ConsumerWidget {
+class HomePage extends StatelessWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context) {
     return MainBody(
       title: "لوحة التحكم",
       child: FutureBuilder<Object>(
@@ -40,9 +39,6 @@ class HomePage extends ConsumerWidget {
                         ),
                         onPressed: () {
                           //Get.toNamed('/Documents');
-                          Get.toNamed(
-                            "/Declaration?id=3-1-1245&m=01-2021",
-                          );
                         },
                       ),
                     ),

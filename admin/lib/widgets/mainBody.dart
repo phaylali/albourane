@@ -278,17 +278,6 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   title: Text(
-                    "تجربة",
-                    textDirection: TextDirection.rtl,
-                  ),
-                  leading:
-                      SizedBox(height: 40, width: 40, child: OmniIcons().plus),
-                  onTap: () {
-                    Get.toNamed('/test');
-                  },
-                ),
-                ListTile(
-                  title: Text(
                     "تصريح جديد",
                     textDirection: TextDirection.rtl,
                   ),
@@ -296,17 +285,6 @@ class CustomDrawer extends StatelessWidget {
                       SizedBox(height: 40, width: 40, child: OmniIcons().boat),
                   onTap: () {
                     Get.toNamed('/NewDeclaration');
-                  },
-                ),
-                ListTile(
-                  title: Text(
-                    "تصريح",
-                    textDirection: TextDirection.rtl,
-                  ),
-                  leading:
-                      SizedBox(height: 40, width: 40, child: OmniIcons().boat),
-                  onTap: () {
-                    Get.toNamed('/Declaration');
                   },
                 ),
               ],

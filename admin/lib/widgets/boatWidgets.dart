@@ -15,7 +15,6 @@ class BoatInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
         alignment: WrapAlignment.spaceEvenly,
-        direction: Axis.horizontal,
         spacing: 20,
         runSpacing: 20,
         children: [
@@ -66,7 +65,7 @@ class BoatInfo extends StatelessWidget {
             width: 300,
             height: 300,
             child: OutlinedButton(
-              child: Column(
+              child: ListView(
                 children: [
                   SizedBox(
                     height: 10,
@@ -81,118 +80,107 @@ class BoatInfo extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 180,
-                        height: 260,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ListTile(
-                                title: Center(
-                                  child: Text(
-                                    boat.boatName.isNotEmpty
-                                        ? boat.boatName
-                                        : "لايوجد",
-                                    maxLines: 3,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                onTap: () {
-                                  controller.getListTile(
-                                      boat.boatName, "تم نسخ اسم القارب");
-                                }),
-                            ListTile(
-                                title: Center(
-                                  child: Text(
-                                    boat.boatReference.isNotEmpty
-                                        ? boat.boatReference
-                                        : "لايوجد",
-                                    maxLines: 3,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                onTap: () {
-                                  controller.getListTile(
-                                      boat.boatReference, "تم نسخ لوحة القارب");
-                                }),
-                            ListTile(
-                                title: Center(
-                                  child: Text(
-                                    boat.boatRegion.isNotEmpty
-                                        ? boat.boatRegion
-                                        : "لايوجد",
-                                    maxLines: 3,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                onTap: () {
-                                  controller.getListTile(
-                                      boat.boatRegion, "تم نسخ المنطقة");
-                                }),
-                            ListTile(
-                                title: Center(
-                                  child: Text(
-                                    boat.boatOwner.isNotEmpty
-                                        ? boat.boatOwner
-                                        : "لايوجد",
-                                    maxLines: 3,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                onTap: () {
-                                  controller.getListTile(
-                                      boat.boatOwner, "تم نسخ اسم المالك");
-                                }),
-                            ListTile(
-                                title: Center(
-                                  child: Text(
-                                    boat.boatOwnerCni.isNotEmpty
-                                        ? boat.boatOwnerCni
-                                        : "لايوجد",
-                                    maxLines: 3,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                onTap: () {
-                                  controller.getListTile(
-                                      boat.boatOwnerCni, "تم نسخ بطاقة المالك");
-                                }),
-                          ],
+                  ListTile(
+                      trailing: SizedBox(
+                        width: 80,
+                        child: Text(
+                          "الاسم",
+                          textDirection: TextDirection.rtl,
                         ),
                       ),
-                      SizedBox(
-                        width: 100,
-                        height: 260,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              "الاسم",
-                              textDirection: TextDirection.rtl,
-                            ),
-                            Text(
-                              "اللوحة",
-                              textDirection: TextDirection.rtl,
-                            ),
-                            Text(
-                              "المنطقة",
-                              textDirection: TextDirection.rtl,
-                            ),
-                            Text(
-                              "المالك",
-                              textDirection: TextDirection.rtl,
-                            ),
-                            Text(
-                              "بطاقته",
-                              textDirection: TextDirection.rtl,
-                            ),
-                          ],
+                      title: Center(
+                        child: Text(
+                          boat.boatName.isNotEmpty ? boat.boatName : "لايوجد",
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                      onTap: () {
+                        controller.getListTile(
+                            boat.boatName, "تم نسخ اسم القارب");
+                      }),
+                  ListTile(
+                      trailing: SizedBox(
+                        width: 80,
+                        child: Text(
+                          "اللوحة",
+                          textDirection: TextDirection.rtl,
+                        ),
+                      ),
+                      title: Center(
+                        child: Text(
+                          boat.boatReference.isNotEmpty
+                              ? boat.boatReference
+                              : "لايوجد",
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      onTap: () {
+                        controller.getListTile(
+                            boat.boatReference, "تم نسخ لوحة القارب");
+                      }),
+                  ListTile(
+                      trailing: SizedBox(
+                        width: 80,
+                        child: Text(
+                          "المنطقة",
+                          textDirection: TextDirection.rtl,
+                        ),
+                      ),
+                      title: Center(
+                        child: Text(
+                          boat.boatRegion.isNotEmpty
+                              ? boat.boatRegion
+                              : "لايوجد",
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      onTap: () {
+                        controller.getListTile(
+                            boat.boatRegion, "تم نسخ المنطقة");
+                      }),
+                  ListTile(
+                      trailing: SizedBox(
+                        width: 80,
+                        child: Text(
+                          "المالك",
+                          textDirection: TextDirection.rtl,
+                        ),
+                      ),
+                      title: Center(
+                        child: Text(
+                          boat.boatOwner.isNotEmpty ? boat.boatOwner : "لايوجد",
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      onTap: () {
+                        controller.getListTile(
+                            boat.boatOwner, "تم نسخ اسم المالك");
+                      }),
+                  ListTile(
+                      trailing: SizedBox(
+                        width: 80,
+                        child: Text(
+                          "بطاقته",
+                          textDirection: TextDirection.rtl,
+                        ),
+                      ),
+                      title: Center(
+                        child: Text(
+                          boat.boatOwnerCni.isNotEmpty
+                              ? boat.boatOwnerCni
+                              : "لايوجد",
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      onTap: () {
+                        controller.getListTile(
+                            boat.boatOwnerCni, "تم نسخ بطاقة المالك");
+                      }),
                 ],
               ),
               onPressed: null,
@@ -258,6 +246,54 @@ class BoatInfo extends StatelessWidget {
                   ],
                 )),
           ),
+          SizedBox(
+            width: 300,
+            height: 300,
+            child: OutlinedButton(
+              onPressed: null,
+              child: ListView(
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    child: Text(
+                      'اجراءات',
+                      textAlign: TextAlign.center,
+                    ),
+                    height: 20,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ListTile(
+                    leading: SizedBox(
+                      height: 40,
+                      width: 60,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: OmniIcons().document),
+                          Center(
+                              child: SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: OmniIcons().plus)),
+                        ],
+                      ),
+                    ),
+                    title: Text('تصريح جديد'),
+                    onTap: () {
+                      final id = boat.boatReference.replaceAll('/', '-');
+                      Get.toNamed('/NewDeclaration&id=$id');
+                    },
+                  ),
+                ],
+              ),
+            ),
+          )
         ]);
   }
 }

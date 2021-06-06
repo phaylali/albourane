@@ -15,7 +15,8 @@ class MarinInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
         alignment: WrapAlignment.spaceEvenly,
-        direction: Axis.horizontal,
+        //direction: Axis.horizontal,
+
         spacing: 20,
         runSpacing: 20,
         children: [
@@ -66,7 +67,7 @@ class MarinInfo extends StatelessWidget {
             width: 300,
             height: 300,
             child: OutlinedButton(
-              child: Column(
+              child: ListView(
                 children: [
                   SizedBox(
                     height: 10,
@@ -81,124 +82,111 @@ class MarinInfo extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 180,
-                        height: 260,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            ListTile(
-                                title: Center(
-                                  child: Text(
-                                    marin.marinLastName.isNotEmpty
-                                        ? marin.marinLastName
-                                        : "لايوجد",
-                                    maxLines: 3,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                onTap: () {
-                                  controller.getListTile(
-                                      marin.marinLastName +
-                                          ' ' +
-                                          marin.marinFirstName,
-                                      "تم نسخ اسم البحار");
-                                }),
-                            ListTile(
-                                title: Center(
-                                  child: Text(
-                                    marin.marinFirstName.isNotEmpty
-                                        ? marin.marinFirstName
-                                        : "لايوجد",
-                                    maxLines: 3,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                onTap: () {
-                                  controller.getListTile(
-                                      marin.marinLastName +
-                                          ' ' +
-                                          marin.marinFirstName,
-                                      "تم نسخ اسم البحار");
-                                }),
-                            ListTile(
-                                title: Center(
-                                  child: Text(
-                                    marin.marinCnss.isNotEmpty
-                                        ? marin.marinCnss
-                                        : "لايوجد",
-                                    maxLines: 3,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                onTap: () {
-                                  controller.getListTile(marin.marinCnss,
-                                      "تم نسخ بطاقة الضمان الاجتماعي");
-                                }),
-                            ListTile(
-                                title: Center(
-                                  child: Text(
-                                    marin.marinCin.isNotEmpty
-                                        ? marin.marinCin
-                                        : "لايوجد",
-                                    maxLines: 3,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                onTap: () {
-                                  controller.getListTile(marin.marinCin,
-                                      "تم نسخ رقم البطاقة الوطنية");
-                                }),
-                            ListTile(
-                                title: Center(
-                                  child: Text(
-                                    marin.marinReference.isNotEmpty
-                                        ? marin.marinReference
-                                        : "لايوجد",
-                                    maxLines: 3,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                onTap: () {
-                                  controller.getListTile(marin.marinReference,
-                                      "تم نسخ الرقم التعريفي للبحار");
-                                }),
-                          ],
+                  ListTile(
+                      trailing: SizedBox(
+                        width: 80,
+                        child: Text(
+                          "النسب",
+                          textDirection: TextDirection.rtl,
                         ),
                       ),
-                      SizedBox(
-                        width: 100,
-                        height: 260,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              "النسب",
-                              textDirection: TextDirection.rtl,
-                            ),
-                            Text(
-                              "الاسم",
-                              textDirection: TextDirection.rtl,
-                            ),
-                            Text(
-                              "الضمان",
-                              textDirection: TextDirection.rtl,
-                            ),
-                            Text(
-                              "البطاقة",
-                              textDirection: TextDirection.rtl,
-                            ),
-                            Text(
-                              "اللوحة",
-                              textDirection: TextDirection.rtl,
-                            ),
-                          ],
+                      title: Center(
+                        child: Text(
+                          marin.marinLastName.isNotEmpty
+                              ? marin.marinLastName
+                              : "لايوجد",
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                      onTap: () {
+                        controller.getListTile(
+                            marin.marinLastName + ' ' + marin.marinFirstName,
+                            "تم نسخ اسم البحار");
+                      }),
+                  ListTile(
+                      trailing: SizedBox(
+                        width: 80,
+                        child: Text(
+                          "الاسم",
+                          textDirection: TextDirection.rtl,
+                        ),
+                      ),
+                      title: Center(
+                        child: Text(
+                          marin.marinFirstName.isNotEmpty
+                              ? marin.marinFirstName
+                              : "لايوجد",
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      onTap: () {
+                        controller.getListTile(
+                            marin.marinLastName + ' ' + marin.marinFirstName,
+                            "تم نسخ اسم البحار");
+                      }),
+                  ListTile(
+                      trailing: SizedBox(
+                        width: 80,
+                        child: Text(
+                          "الضمان",
+                          textDirection: TextDirection.rtl,
+                        ),
+                      ),
+                      title: Center(
+                        child: Text(
+                          marin.marinCnss.isNotEmpty
+                              ? marin.marinCnss
+                              : "لايوجد",
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      onTap: () {
+                        controller.getListTile(
+                            marin.marinCnss, "تم نسخ بطاقة الضمان الاجتماعي");
+                      }),
+                  ListTile(
+                      trailing: SizedBox(
+                        width: 80,
+                        child: Text(
+                          "البطاقة",
+                          textDirection: TextDirection.rtl,
+                        ),
+                      ),
+                      title: Center(
+                        child: Text(
+                          marin.marinCin.isNotEmpty ? marin.marinCin : "لايوجد",
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      onTap: () {
+                        controller.getListTile(
+                            marin.marinCin, "تم نسخ رقم البطاقة الوطنية");
+                      }),
+                  ListTile(
+                      trailing: SizedBox(
+                        width: 80,
+                        child: Text(
+                          "اللوحة",
+                          textDirection: TextDirection.rtl,
+                        ),
+                      ),
+                      title: Center(
+                        child: Text(
+                          marin.marinReference.isNotEmpty
+                              ? marin.marinReference
+                              : "لايوجد",
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      onTap: () {
+                        controller.getListTile(marin.marinReference,
+                            "تم نسخ الرقم التعريفي للبحار");
+                      }),
                 ],
               ),
               onPressed: null,
@@ -266,5 +254,56 @@ class MarinInfo extends StatelessWidget {
                 )),
           ),
         ]);
+  }
+}
+
+class MarinPreview extends StatelessWidget {
+  MarinPreview(this.marin);
+
+  final Marin marin;
+
+  Widget get details {
+    return OutlinedButton(
+      onPressed: () {
+        final String id = marin.marinReference.replaceAll('/', '-');
+        Get.toNamed(
+          "/Seaman?id=$id",
+        );
+      },
+      child: ListTile(
+        leading: reference,
+        title: name,
+      ),
+    );
+  }
+
+  Widget get name {
+    return Text(
+      '${marin.marinLastName} ${marin.marinFirstName}',
+      textScaleFactor: 1.2,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 3,
+    );
+  }
+
+  Widget get reference {
+    return SizedBox(
+      width: 90,
+      child: Center(
+        child: Text(
+          '${marin.marinReference}',
+          textScaleFactor: 0.8,
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: details,
+      width: 300,
+      height: 100,
+    );
   }
 }

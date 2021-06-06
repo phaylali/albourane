@@ -1,8 +1,8 @@
 import 'package:admin/controllers/marinsController.dart';
 import 'package:admin/models/marinModel.dart';
 import 'package:admin/widgets/mainBody.dart';
+import 'package:admin/widgets/marinWidgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,13 +36,17 @@ class Marins extends StatelessWidget {
                         width: 20,
                       ),
                       Expanded(
-                        child: Wrap(
-                          alignment: WrapAlignment.spaceEvenly,
-                          direction: Axis.horizontal,
-                          children: snapshot.data!.docs
-                              .map((item) => MarinPreview(item.data()))
-                              .toList()
-                              .cast<Widget>(),
+                        child: SingleChildScrollView(
+                          child: Wrap(
+                            alignment: WrapAlignment.spaceEvenly,
+                            direction: Axis.horizontal,
+                            runSpacing: 20,
+                            spacing: 20,
+                            children: snapshot.data!.docs
+                                .map((item) => MarinPreview(item.data()))
+                                .toList()
+                                .cast<Widget>(),
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -54,57 +58,6 @@ class Marins extends StatelessWidget {
               });
         },
       ),
-    );
-  }
-}
-
-class MarinPreview extends StatelessWidget {
-  MarinPreview(this.marin);
-
-  final Marin marin;
-
-  Widget get details {
-    return OutlinedButton(
-      onPressed: () {
-        final String id = marin.marinReference.replaceAll('/', '-');
-        Get.toNamed(
-          "/Seaman?id=$id",
-        );
-      },
-      child: ListTile(
-        leading: reference,
-        title: name,
-      ),
-    );
-  }
-
-  Widget get name {
-    return Text(
-      '${marin.marinLastName} ${marin.marinFirstName}',
-      textScaleFactor: 1.3,
-      overflow: TextOverflow.ellipsis,
-      maxLines: 2,
-    );
-  }
-
-  Widget get reference {
-    return SizedBox(
-      width: 70,
-      child: Center(
-        child: Text(
-          '${marin.marinReference}',
-          textScaleFactor: 0.8,
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      child: details,
-      width: 300,
-      height: 100,
     );
   }
 }

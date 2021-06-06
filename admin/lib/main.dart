@@ -1,17 +1,5 @@
-import 'package:admin/declarationNew.dart';
-import 'package:admin/lists/boats.dart';
-import 'package:admin/pages/boatPage.dart';
-import 'package:admin/pages/declarationPage.dart';
 import 'package:admin/home.dart';
-import 'package:admin/login.dart';
-import 'package:admin/docs.dart';
-import 'package:admin/docPage.dart';
-import 'package:admin/error404.dart';
-import 'package:admin/boatNew.dart';
-import 'package:admin/docNew.dart';
-import 'package:admin/seamanNew.dart';
-import 'package:admin/seamanPage.dart';
-import 'package:admin/seamen.dart';
+import 'package:admin/resources/routes.dart';
 import 'package:admin/resources/themes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:url_strategy/url_strategy.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,33 +23,16 @@ void main() async {
   });
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: Colors.black));
-  runApp(ProviderScope(child: Start()));
+  runApp(Start());
 }
 
 class Start extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        getPages: [
-          //uncomment this when the project is finished
-          //GetPage(name: '/', page: () => Root()),
-          //comment this when the debug is finished
-          GetPage(name: '/', page: () => HomePage()),
-          GetPage(name: '/SignIn', page: () => AdminSignIn()),
-          GetPage(name: '/NewDocument', page: () => NewDocument()),
-          GetPage(name: '/NewBoat', page: () => NewBoat()),
-          GetPage(name: '/NewSeaman', page: () => NewSeaman()),
-          GetPage(name: '/Documents', page: () => DocsLibrary()),
-          GetPage(name: '/Boats', page: () => Boats()),
-          GetPage(name: '/Seamen', page: () => SeamenLibrary()),
-          GetPage(name: '/Document', page: () => DocumentPage()),
-          GetPage(name: '/Boat', page: () => BoatPage()),
-          GetPage(name: '/Seaman', page: () => SeamanPage()),
-
-          GetPage(name: '/NewDeclaration', page: () => NewDeclaration()),
-          GetPage(name: '/Declaration', page: () => DeclarationPage()),
-        ],
-        unknownRoute: GetPage(name: '/Error404', page: () => ERROR404()),
+        initialRoute: AppPages.INITIAL,
+        getPages: AppPages.routes,
+        unknownRoute: AppPages.routes[7],
         theme: omniDarkBlueTheme(),
         navigatorKey: Get.key,
         title: "ALBOURANE ADMIN",

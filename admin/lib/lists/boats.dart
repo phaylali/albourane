@@ -36,13 +36,17 @@ class Boats extends StatelessWidget {
                         width: 20,
                       ),
                       Expanded(
-                        child: Wrap(
-                          alignment: WrapAlignment.spaceEvenly,
-                          direction: Axis.horizontal,
-                          children: snapshot.data!.docs
-                              .map((item) => BoatPreview(item.data()))
-                              .toList()
-                              .cast<Widget>(),
+                        child: SingleChildScrollView(
+                          child: Wrap(
+                            alignment: WrapAlignment.spaceEvenly,
+                            direction: Axis.horizontal,
+                            spacing: 20,
+                            runSpacing: 20,
+                            children: snapshot.data!.docs
+                                .map((item) => BoatPreview(item.data()))
+                                .toList()
+                                .cast<Widget>(),
+                          ),
                         ),
                       ),
                       SizedBox(

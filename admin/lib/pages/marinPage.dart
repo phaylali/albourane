@@ -35,7 +35,8 @@ class MarinPage extends StatelessWidget {
                       width: 20,
                     ),
                     Expanded(
-                      child: MarinInfo(snapshot.data!.data()!, b),
+                      child: SingleChildScrollView(
+                          child: MarinInfo(snapshot.data!.data()!, b)),
                     ),
                     SizedBox(
                       width: 20,

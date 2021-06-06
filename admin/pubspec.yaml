@@ -21,10 +21,8 @@ dependencies:
   printing:
   open_file:
   path_provider:
-  keyboard_actions:
   flutter_date_pickers: 
   intl:
-  share_plus:
 
   # Firebase Packages
   firebase_auth: 
