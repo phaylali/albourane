@@ -1,7 +1,7 @@
 import 'package:admin/auth.dart';
+import 'package:admin/controllers/passwordController.dart';
 import 'package:admin/widgets/mainBody.dart';
 import 'package:admin/resources/icons.dart';
-import 'package:admin/passwordController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';

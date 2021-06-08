@@ -1,24 +1,28 @@
+import 'package:admin/controllers/dateController.dart';
 import 'package:admin/models/boatModel.dart';
 import 'package:admin/widgets/mainBody.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:flutter_date_pickers/flutter_date_pickers.dart' as dp;
 
 class DeclarationInputController extends GetxController {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-  late TextEditingController revenueController, salesController;
+  late TextEditingController revenueController, salesController, carbController;
 
   var email = '';
   var password = '';
   RxDouble revenue = 0.0.obs;
   RxInt sales = 0.obs;
+  RxDouble carb = 0.0.obs;
 
   @override
   void onInit() {
     super.onInit();
     revenueController = TextEditingController();
     salesController = TextEditingController();
+    carbController = TextEditingController();
   }
 
   @override
@@ -30,6 +34,7 @@ class DeclarationInputController extends GetxController {
   void onClose() {
     revenueController.dispose();
     salesController.dispose();
+    carbController.dispose();
   }
 
   String? validateEmail(String value) {
@@ -68,121 +73,198 @@ class DeclarationInput extends GetView<DeclarationInputController> {
   final String id = Get.parameters['id']!;
   @override
   Widget build(BuildContext context) {
-    return MainBody(
-      title: 'تصريح جديد',
-      child: FutureBuilder<DocumentSnapshot<Boat>>(
-          future: controller.getBoat(id),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Center(
-                child: Text(snapshot.error.toString()),
-              );
-            }
+    GlobalKey<ScaffoldState>? drawerKey = GlobalKey();
 
-            if (!snapshot.hasData) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            return Wrap(
-              alignment: WrapAlignment.spaceEvenly,
-              spacing: 20,
-              runSpacing: 20,
-              children: [
-                SizedBox(
-                  width: 300,
-                  child: OutlinedButton(
-                      onPressed: () {},
-                      child: ListTile(
-                        trailing: Text('اسم القارب'),
-                        title: Text(snapshot.data!.data()!.boatName),
-                      )),
-                ),
-                SizedBox(
-                  width: 300,
-                  child: OutlinedButton(
-                      onPressed: () {},
-                      child: ListTile(
-                        trailing: Text('لوحة القارب'),
-                        title: Text(snapshot.data!.data()!.boatReference),
-                      )),
-                ),
-                SizedBox(
-                  width: 300,
-                  child: OutlinedButton(
-                      onPressed: () {},
-                      child: ListTile(
-                        trailing: Text('لوحة القارب'),
-                        title: Text(snapshot.data!.data()!.boatReference),
-                      )),
-                ),
-                SizedBox(
-                  width: 300,
-                  child: OutlinedButton(
-                      onPressed: () {},
-                      child: ListTile(
-                        trailing: Text(''),
-                        title: TextFormField(
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly
-                          ],
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            labelText: "المدخول الشهري",
+    return Scaffold(
+      key: drawerKey,
+      floatingActionButton: Fab(drawerKey: drawerKey),
+      endDrawer: Drawer(
+        child: CustomDrawer(),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: FutureBuilder<DocumentSnapshot<Boat>>(
+                    future: controller.getBoat(id),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text(snapshot.error.toString()),
+                        );
+                      }
+
+                      if (!snapshot.hasData) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      return Wrap(
+                        alignment: WrapAlignment.spaceEvenly,
+                        spacing: 20,
+                        runSpacing: 20,
+                        children: [
+                          SizedBox(
+                            width: 300,
+                            child: OutlinedButton(
+                                onPressed: null,
+                                child: ListTile(
+                                  trailing: Text('اسم القارب'),
+                                  title: Text(snapshot.data!.data()!.boatName),
+                                )),
                           ),
-                          keyboardType: TextInputType.number,
-                          controller: controller.revenueController,
-                          onSaved: (value) {
-                            controller.revenue = value! as RxDouble;
-                          },
-                          /*validator: (value) {
-                            return controller.validateEmail(value!);
-                          },*/
-                        ),
-                      )),
-                ),
-                SizedBox(
-                  width: 300,
-                  child: OutlinedButton(
-                      onPressed: () {},
-                      child: ListTile(
-                        trailing: Text(''),
-                        title: TextFormField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            labelText: "عدد المبيعات",
+                          SizedBox(
+                            width: 300,
+                            child: OutlinedButton(
+                                onPressed: null,
+                                child: ListTile(
+                                  trailing: Text('لوحة القارب'),
+                                  title: Text(
+                                      snapshot.data!.data()!.boatReference),
+                                )),
                           ),
-                          keyboardType: TextInputType.number,
-                          controller: controller.salesController,
-                          onSaved: (value) {
-                            controller.sales = value! as RxInt;
-                          },
-                          /*
-                          validator: (value) {
-                            return controller.validateEmail(value!);
-                          },*/
-                        ),
-                      )),
-                ),
-                SizedBox(
-                  width: 300,
-                  child: OutlinedButton(
-                    onPressed: () {},
-                    child: TextFormField(),
-                  ),
-                ),
-                SizedBox(
-                  width: 300,
-                  child: OutlinedButton(
-                    onPressed: () {},
-                    child: TextFormField(),
-                  ),
-                ),
-              ],
-            );
-          }),
+                          SizedBox(
+                            width: 300,
+                            child: OutlinedButton(
+                                onPressed: null,
+                                child: ListTile(
+                                  title: TextFormField(
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp("[0-9 .]")),
+                                    ],
+                                    decoration: InputDecoration(
+                                      labelText: "المدخول الشهري",
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                    controller: controller.revenueController,
+                                    onSaved: (value) {
+                                      controller.revenue = value! as RxDouble;
+                                    },
+                                    /*validator: (value) {
+                                      return controller.validateEmail(value!);
+                                    },*/
+                                  ),
+                                )),
+                          ),
+                          SizedBox(
+                            width: 300,
+                            child: OutlinedButton(
+                                onPressed: null,
+                                child: ListTile(
+                                  title: TextFormField(
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    decoration: InputDecoration(
+                                      labelText: "عدد المبيعات",
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                    controller: controller.salesController,
+                                    onSaved: (value) {
+                                      controller.sales = value! as RxInt;
+                                    },
+                                    /*
+                                    validator: (value) {
+                                      return controller.validateEmail(value!);
+                                    },*/
+                                  ),
+                                )),
+                          ),
+                          SizedBox(
+                            width: 300,
+                            child: OutlinedButton(
+                                onPressed: null,
+                                child: ListTile(
+                                  trailing: Text(''),
+                                  title: TextFormField(
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp("[0-9 .]")),
+                                    ],
+                                    decoration: InputDecoration(
+                                      /*border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),*/
+                                      labelText: "المحروقات",
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                    controller: controller.carbController,
+                                    onSaved: (value) {
+                                      controller.carb = value! as RxDouble;
+                                    },
+                                    /*
+                                    validator: (value) {
+                                      return controller.validateEmail(value!);
+                                    },*/
+                                  ),
+                                )),
+                          ),
+                          SizedBox(
+                              width: 300,
+                              child: OutlinedButton(
+                                onPressed: null,
+                                child: GetX<DateController>(
+                                  builder: (d) {
+                                    return dp.MonthPicker(
+                                      selectedDate: d.dateNow.value,
+                                      onChanged: d.renew,
+                                      firstDate: d.firstDate.value,
+                                      lastDate: d.lastDate.value,
+                                      datePickerStyles: d.styles.value,
+                                    );
+                                  },
+                                ),
+                              )),
+                          SizedBox(
+                            width: 300,
+                            child: OutlinedButton(
+                                onPressed: null,
+                                child: ListTile(
+                                  trailing: Text(
+                                    "تاريخ البداية",
+                                    textScaleFactor: 0.9,
+                                  ),
+                                  title: GetX<DateController>(
+                                    builder: (controller) {
+                                      return Text(
+                                        '${controller.firstDayOfMonthText}',
+                                      );
+                                    },
+                                  ),
+                                )),
+                          ),
+                          SizedBox(
+                            width: 300,
+                            child: OutlinedButton(
+                                onPressed: null,
+                                child: ListTile(
+                                  trailing: Text(
+                                    "تاريخ النهاية",
+                                    textScaleFactor: 0.9,
+                                  ),
+                                  title: GetX<DateController>(
+                                    builder: (controller) {
+                                      return Text(
+                                        '${controller.lastDayOfMonthText}',
+                                      );
+                                    },
+                                  ),
+                                )),
+                          ),
+                        ],
+                      );
+                    }),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
 
 /*

@@ -1,6 +1,6 @@
+import 'package:admin/controllers/dateController.dart';
 import 'package:admin/widgets/mainBody.dart';
 import 'package:admin/resources/icons.dart';
-import 'package:admin/providers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -224,29 +224,6 @@ class MonthlyPicker extends StatelessWidget {
                     child: Text(
                       "التواريخ",
                       textAlign: TextAlign.center,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  ListTile(
-                    title: Text(
-                      "${d.firstDayOfMonthText}",
-                      textAlign: TextAlign.center,
-                    ),
-                    trailing: SizedBox(
-                      child: Text("تاريخ البداية"),
-                      width: 130,
-                    ),
-                  ),
-                  ListTile(
-                    title: Text(
-                      "${d.lastDayOfMonthText}",
-                      textAlign: TextAlign.center,
-                    ),
-                    trailing: SizedBox(
-                      child: Text("تاريخ النهاية"),
-                      width: 130,
                     ),
                   ),
                 ],

@@ -287,7 +287,7 @@ class BoatInfo extends StatelessWidget {
                     title: Text('تصريح جديد'),
                     onTap: () {
                       final id = boat.boatReference.replaceAll('/', '-');
-                      Get.toNamed('/NewDeclaration&id=$id');
+                      Get.toNamed('/NewDeclaration?id=$id');
                     },
                   ),
                 ],

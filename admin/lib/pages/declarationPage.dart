@@ -49,43 +49,37 @@ class DeclarationPage extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
+                    Wrap(
+                      alignment: WrapAlignment.spaceEvenly,
+                      spacing: 20,
+                      runSpacing: 20,
                       children: [
-                        Spacer(),
                         SizedBox(
                             width: 300,
-                            height: 40,
                             child: OutlinedButton(
                                 onPressed: () {
                                   b.shareDeclaration();
                                 },
-                                child: Row(
-                                  children: [
-                                    Spacer(),
-                                    OmniIcons().share,
-                                    Spacer(),
-                                    Text('انشر التقرير'),
-                                    Spacer(),
-                                  ],
+                                child: ListTile(
+                                  leading: OmniIcons().share,
+                                  title: Text(
+                                    'انشر التقرير',
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ))),
-                        Spacer(),
                         SizedBox(
                             width: 300,
-                            height: 40,
                             child: OutlinedButton(
                                 onPressed: () {
                                   b.printDeclaration();
                                 },
-                                child: Row(
-                                  children: [
-                                    Spacer(),
-                                    OmniIcons().print,
-                                    Spacer(),
-                                    Text('اطبع التقرير'),
-                                    Spacer(),
-                                  ],
+                                child: ListTile(
+                                  leading: OmniIcons().print,
+                                  title: Text(
+                                    'اطبع التقرير',
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ))),
-                        Spacer(),
                       ],
                     )
                   ],

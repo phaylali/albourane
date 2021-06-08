@@ -47,7 +47,7 @@ class DeclarationController extends GetxController {
   }
 
   Future getData(boat, month) async {
-    final boatRef = await FirebaseFirestore.instance
+    final boatRef = FirebaseFirestore.instance
         .collection('boats')
         .doc(boat)
         .withConverter<Boat>(
@@ -55,7 +55,7 @@ class DeclarationController extends GetxController {
           toFirestore: (boat, _) => boat.toJson(),
         );
     final boatly = await boatRef.get().then((s) => s.data());
-    final monthRef = await FirebaseFirestore.instance
+    final monthRef = FirebaseFirestore.instance
         .collection('boats')
         .doc(boat)
         .collection('revenue')
