@@ -10,12 +10,22 @@ class DateController extends GetxController {
 
   final Rx<DateTime> firstDayOfMonth =
       DateTime(DateTime.now().year, DateTime.now().month, 1).obs;
+  final Rx<DateTime> selectedMonth = DateTime(
+    DateTime.now().year,
+    DateTime.now().month,
+  ).obs;
   final Rx<DateTime> lastDayOfMonth =
       DateTime(DateTime.now().year, DateTime.now().month + 1)
           .subtract(Duration(days: 1))
           .obs;
   final RxString firstDayOfMonthText = DateFormat('dd/MM/yyyy')
       .format(DateTime(DateTime.now().year, DateTime.now().month, 1))
+      .obs;
+  final RxString selectedMonthText = DateFormat('MM-yyyy')
+      .format(DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+      ))
       .obs;
   static RxString firstDayOfMonthTextNow = DateFormat('dd/MM/yyyy')
       .format(DateTime(DateTime.now().year, DateTime.now().month, 1))
@@ -35,10 +45,13 @@ class DateController extends GetxController {
         .format(DateTime(newDate.year, newDate.month, 1));
     lastDayOfMonthText.value = DateFormat('dd/MM/yyyy').format(
         DateTime(newDate.year, newDate.month + 1).subtract(Duration(days: 1)));
+    selectedMonthText.value =
+        DateFormat('MM-yyyy').format(DateTime(newDate.year, newDate.month));
 
     firstDayOfMonth.value = DateTime(newDate.year, newDate.month, 1);
     lastDayOfMonth.value =
         DateTime(newDate.year, newDate.month + 1).subtract(Duration(days: 1));
+    selectedMonth.value = DateTime(newDate.year, newDate.month);
     notifyChildrens();
     update();
   }

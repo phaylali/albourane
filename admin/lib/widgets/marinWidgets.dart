@@ -1,4 +1,5 @@
 import 'package:admin/controllers/marinsController.dart';
+//import 'package:admin/forms/declarationNew.dart';
 import 'package:admin/models/marinModel.dart';
 import 'package:admin/resources/icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -268,6 +269,77 @@ class MarinPreview extends StatelessWidget {
         final String id = marin.marinReference.replaceAll('/', '-');
         Get.toNamed(
           "/Seaman?id=$id",
+        );
+      },
+      child: ListTile(
+        leading: reference,
+        title: name,
+      ),
+    );
+  }
+
+  Widget get name {
+    return Text(
+      '${marin.marinLastName} ${marin.marinFirstName}',
+      textScaleFactor: 1.2,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 3,
+    );
+  }
+
+  Widget get reference {
+    return SizedBox(
+      width: 90,
+      child: Center(
+        child: Text(
+          '${marin.marinReference}',
+          textScaleFactor: 0.8,
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: details,
+      width: 300,
+      height: 100,
+    );
+  }
+}
+
+class MarinAdd extends StatelessWidget {
+  MarinAdd(this.marin, this.marins, this.controller);
+
+  final Marin marin;
+  final List<Marin> marins;
+  final GetxController controller;
+
+  Widget get details {
+    return OutlinedButton(
+      onPressed: () {
+        Get.defaultDialog(
+          title: 'هل أنت متؤكد من إضافة هذا البحار؟',
+          textConfirm: 'تأكيد',
+          middleText:
+              '${marin.marinLastName} ${marin.marinFirstName} : ${marin.marinReference}',
+          onConfirm: () {
+            if (!marins.contains(marin)) {
+              marins.add(marin);
+              controller.update();
+            } else
+              Get.snackbar('', '',
+                  titleText: Text(
+                    "البحار موجود في الائحة",
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.center,
+                  ));
+          },
+          textCancel: 'الغاء',
+          /*onCancel: () {
+              Get.back();
+            }*/
         );
       },
       child: ListTile(
