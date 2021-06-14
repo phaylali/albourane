@@ -3,6 +3,7 @@ import 'package:admin/controllers/dateController.dart';
 //import 'package:admin/lists/marins.dart';
 import 'package:admin/models/boatModel.dart';
 import 'package:admin/models/marinModel.dart';
+import 'package:admin/models/marinMonthModel.dart';
 import 'package:admin/models/monthModel.dart';
 import 'package:admin/widgets/mainBody.dart';
 import 'package:admin/widgets/marinWidgets.dart';
@@ -91,6 +92,8 @@ class DeclarationInputController extends GetxController {
       baharaz.add(element.marinReference.replaceAll('/', '-'));
     });
     final rev = double.parse(revenueController.text);
+    final salezo = int.parse(salesController.text);
+    final carbo = double.parse(carbController.text);
     final cnss = rev * 6 / 100;
     final amo = rev * 1.7 / 100;
     final totalcnss = cnss + amo;
@@ -98,8 +101,8 @@ class DeclarationInputController extends GetxController {
     final coop = rev * coopPerc / 100;
     final taxeregion = rev * 0.16 / 100;
     final totalglobal = cnss + amo + taxehalle + taxeregion + coop;
-    final charges = carb.value + taxeregion + coop + taxehalle;
-    final net = revenue.value - totalcnss - charges;
+    final charges = carbo + taxeregion + coop + taxehalle;
+    final net = rev - totalcnss - charges;
     final patron = net * 40 / 100;
     final equipage = net * 60 / 100;
     final pie = equipage / marinFinal.length;
@@ -118,11 +121,11 @@ class DeclarationInputController extends GetxController {
             monthFinish: finish,
             monthEquipageNumber: marinFinal.length,
             monthRevenue: rev,
-            monthSales: sales.toInt(),
+            monthSales: salezo,
             monthStart: start,
             monthAmo: amo,
             monthAutres: 0.00,
-            monthCarb: carb.toDouble(),
+            monthCarb: carbo,
             monthChargesCommun: charges,
             monthCnss: cnss,
             monthCoop: coop,
@@ -136,7 +139,23 @@ class DeclarationInputController extends GetxController {
             monthTaxeHalle: taxehalle,
             monthTaxeRegion: taxeregion,
             monthTotalCnss: totalcnss,
-            monthTotalGlobal: totalglobal));
+            monthTotalGlobal: totalglobal))
+        .then((value) {
+      marinFinal.forEach((element) async {
+        final mar = element.marinReference.replaceAll('/', '-');
+        FirebaseFirestore.instance
+            .collection('seamen')
+            .doc(mar)
+            .collection('revenue')
+            .withConverter<MarinMonth>(
+              fromFirestore: (snapshots, _) =>
+                  MarinMonth.fromJson(snapshots.data()!),
+              toFirestore: (month, _) => month.toJson(),
+            )
+            .doc(doc)
+            .set(MarinMonth(boatReference: boat, marinPie: pie));
+      });
+    });
   }
 
   addSearchList(filtero) async {
