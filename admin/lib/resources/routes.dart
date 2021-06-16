@@ -1,3 +1,4 @@
+import 'package:admin/forms/boatNew.dart';
 import 'package:admin/forms/declarationNew.dart';
 import 'package:admin/resources/bindings.dart';
 import 'package:admin/resources/error404.dart';
@@ -15,6 +16,7 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const BOATS = _Paths.BOATS;
   static const BOAT = _Paths.BOAT;
+  static const BOATNEW = _Paths.BOATNEW;
   static const SEAMEN = _Paths.SEAMEN;
   static const SEAMAN = _Paths.SEAMAN;
   static const DECLARATION = _Paths.DECLARATION;
@@ -27,6 +29,7 @@ abstract class _Paths {
   static const LOGIN = '/SignIn';
   static const BOATS = '/Boats';
   static const BOAT = '/Boat';
+  static const BOATNEW = '/NewBoat';
   static const SEAMEN = '/Seamen';
   static const SEAMAN = '/Seaman';
   static const DECLARATION = '/Declaration';
@@ -42,7 +45,6 @@ class AppPages {
     GetPage(
       name: _Paths.HOME,
       page: () => HomePage(),
-      //binding: HomeBinding(),
     ),
     GetPage(
       name: _Paths.LOGIN,
@@ -76,5 +78,9 @@ class AppPages {
         name: _Paths.DECLARATIONNEW,
         page: () => DeclarationInput(),
         binding: DeclarationInputBinding()),
+    GetPage(
+        name: _Paths.BOATNEW,
+        page: () => BoatInput(),
+        binding: BoatInputBinding()),
   ];
 }

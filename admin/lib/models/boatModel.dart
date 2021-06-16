@@ -3,14 +3,16 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class Boat {
-  Boat(
-      {required this.boatName,
-      required this.boatReference,
-      required this.boatRegion,
-      required this.boatOwner,
-      required this.boatCoopPerc,
-      required this.boatImage,
-      required this.boatOwnerCni});
+  Boat({
+    required this.boatName,
+    required this.boatReference,
+    required this.boatRegion,
+    required this.boatOwner,
+    required this.boatCoopPerc,
+    required this.boatImage,
+    required this.boatOwnerCni,
+    required this.boatOwnerPhone,
+  });
 
   Boat.fromJson(Map<String, Object?> json)
       : this(
@@ -21,6 +23,7 @@ class Boat {
           boatRegion: json['region']! as String,
           boatCoopPerc: json['sub']! as num,
           boatOwnerCni: json['ownerCIN']! as String,
+          boatOwnerPhone: json['phone']! as String,
         );
   Map<String, Object?> toJson() {
     return {
@@ -30,7 +33,8 @@ class Boat {
       'owner': boatOwner,
       'reference': boatReference,
       'region': boatRegion,
-      'ownerCIN': boatOwnerCni
+      'ownerCIN': boatOwnerCni,
+      'phone': boatOwnerPhone,
     };
   }
 
@@ -41,4 +45,5 @@ class Boat {
   final String boatOwner;
   final String boatOwnerCni;
   final num boatCoopPerc;
+  final String boatOwnerPhone;
 }
