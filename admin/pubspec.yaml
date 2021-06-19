@@ -29,12 +29,7 @@ dependencies:
   cloud_firestore: 
   firebase_core: 
   flutter_riverpod: 
-dependency_overrides:
-  pdf:
-    git:
-      url: https://github.com/DavBfr/dart_pdf.git
-      ref: master
-      path: pdf
+
 flutter:
   uses-material-design: true
   assets:
