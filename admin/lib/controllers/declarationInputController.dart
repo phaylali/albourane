@@ -22,6 +22,10 @@ class DeclarationInputController extends GetxController {
   List<Marin> marinFinal = [];
   var baharaz = [].obs;
 
+  CollectionReference boatsCol = FirebaseFirestore.instance.collection('boats');
+  CollectionReference seamenCol =
+      FirebaseFirestore.instance.collection('seamen');
+
   @override
   void onInit() {
     super.onInit();
@@ -46,11 +50,10 @@ class DeclarationInputController extends GetxController {
   }
 
   getMarins() async {
-    return await FirebaseFirestore.instance
-        .collection('seamen')
+    return await seamenCol
         .withConverter<Marin>(
           fromFirestore: (snapshots, _) => Marin.fromJson(snapshots.data()!),
-          toFirestore: (movie, _) => movie.toJson(),
+          toFirestore: (marin, _) => marin.toJson(),
         )
         .get()
         .then((value) {
@@ -62,20 +65,15 @@ class DeclarationInputController extends GetxController {
   }
 
   Future<DocumentSnapshot<Month>> getOldMarins(boat) async {
-    final hy = await FirebaseFirestore.instance
-        .collection('boats')
-        .doc(boat)
-        .collection('revenue')
-        .get();
+    final hy = await boatsCol.doc(boat).collection('revenue').get();
 
-    return FirebaseFirestore.instance
-        .collection('boats')
+    return boatsCol
         .doc(boat)
         .collection('revenue')
         .doc(hy.docs.last.id)
         .withConverter<Month>(
           fromFirestore: (snapshots, _) => Month.fromJson(snapshots.data()!),
-          toFirestore: (boat, _) => boat.toJson(),
+          toFirestore: (month, _) => month.toJson(),
         )
         .get();
   }
@@ -100,8 +98,7 @@ class DeclarationInputController extends GetxController {
     final equipage = net * 60 / 100;
     final pie = equipage / marinFinal.length;
 
-    return await FirebaseFirestore.instance
-        .collection('boats')
+    return await boatsCol
         .doc(boat)
         .collection('revenue')
         .withConverter<Month>(
@@ -136,8 +133,7 @@ class DeclarationInputController extends GetxController {
         .then((value) {
       marinFinal.forEach((element) async {
         final mar = element.marinReference.replaceAll('/', '-');
-        FirebaseFirestore.instance
-            .collection('seamen')
+        seamenCol
             .doc(mar)
             .collection('revenue')
             .withConverter<MarinMonth>(
@@ -159,8 +155,7 @@ class DeclarationInputController extends GetxController {
   }
 
   Future<DocumentSnapshot<Boat>> getBoat(x) async {
-    return await FirebaseFirestore.instance
-        .collection('boats')
+    return await boatsCol
         .doc(x)
         .withConverter<Boat>(
           fromFirestore: (snapshots, _) => Boat.fromJson(snapshots.data()!),

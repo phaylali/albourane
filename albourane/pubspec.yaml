@@ -1,0 +1,49 @@
+name: albourane
+description: A new Flutter application.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  get: 
+  url_launcher:
+  url_strategy:
+  flutter_svg:
+  cross_connectivity: 
+  pdf:
+  printing:
+  open_file:
+  path_provider:
+  flutter_date_pickers: 
+  intl:
+
+  # Firebase Packages
+  firebase_auth: 
+  cloud_firestore: 
+  firebase_core: 
+
+flutter:
+  uses-material-design: true
+  assets:
+    - res/icons/
+  fonts:
+    - family: Tajawal
+      fonts: 
+        - asset: res/fonts/Tajawal-Regular.ttf
+        - asset: res/fonts/Tajawal-Bold.ttf
+    - family: Carlito
+      fonts: 
+        - asset: res/fonts/Carlito-Regular.ttf
+        - asset: res/fonts/Carlito-Bold.ttf
+        - asset: res/fonts/Carlito-Italic.ttf
+    - family: EMComic
+      fonts: 
+        - asset: res/fonts/EMcomic-Bold.ttf
+         

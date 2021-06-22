@@ -1,4 +1,4 @@
-import 'package:admin/home.dart';
+import 'package:admin/pages/home.dart';
 import 'package:admin/resources/routes.dart';
 import 'package:admin/resources/themes.dart';
 import 'package:flutter/foundation.dart';

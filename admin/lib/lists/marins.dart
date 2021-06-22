@@ -6,56 +6,37 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Marins extends StatelessWidget {
+class Marins extends GetView<MarinsController> {
   const Marins({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MainBody(
-      title: "القوارب",
-      subtitle: Text("قاعدة بيانات القوارب"),
-      child: GetBuilder<MarinsController>(
-        init: MarinsController(),
-        builder: (b) {
-          return FutureBuilder<QuerySnapshot<Marin>>(
-              future: b.getMarins(),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text(snapshot.error.toString()),
-                  );
-                }
+      title: "البحارة",
+      child: FutureBuilder<QuerySnapshot<Marin>>(
+        future: controller.getMarins(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(snapshot.error.toString()),
+            );
+          }
 
-                if (!snapshot.hasData) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (snapshot.connectionState == ConnectionState.done)
-                  return Row(
-                    children: [
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Wrap(
-                            alignment: WrapAlignment.spaceEvenly,
-                            direction: Axis.horizontal,
-                            runSpacing: 20,
-                            spacing: 20,
-                            children: snapshot.data!.docs
-                                .map((item) => MarinPreview(item.data()))
-                                .toList()
-                                .cast<Widget>(),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      )
-                    ],
-                  );
-                return const Center(child: CircularProgressIndicator());
-              });
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.connectionState == ConnectionState.done)
+            return Wrap(
+              alignment: WrapAlignment.spaceEvenly,
+              direction: Axis.horizontal,
+              runSpacing: 20,
+              spacing: 20,
+              children: snapshot.data!.docs
+                  .map((item) => MarinPreview(item.data()))
+                  .toList()
+                  .cast<Widget>(),
+            );
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );

@@ -14,424 +14,363 @@ class DeclarationInput extends GetView<DeclarationInputController> {
   final String id = Get.parameters['id']!;
   @override
   Widget build(BuildContext context) {
-    GlobalKey<ScaffoldState>? drawerKey = GlobalKey();
+    return MainBody(
+        title: 'تصريح جديد',
+        child: FutureBuilder<DocumentSnapshot<Boat>>(
+            future: controller.getBoat(id),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text(snapshot.error.toString()),
+                );
+              }
 
-    return Scaffold(
-      key: drawerKey,
-      floatingActionButton: Fab(drawerKey: drawerKey),
-      endDrawer: Drawer(
-        child: CustomDrawer(),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              Center(
-                child: FutureBuilder<DocumentSnapshot<Boat>>(
-                    future: controller.getBoat(id),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return Center(
-                          child: Text(snapshot.error.toString()),
-                        );
-                      }
-
-                      if (!snapshot.hasData) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                      final b = snapshot.data!.data()!;
-                      return Row(
-                        children: [
-                          SizedBox(
-                            width: 20,
+              if (!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              final b = snapshot.data!.data()!;
+              return Wrap(
+                //alignment: WrapAlignment.spaceEvenly,
+                spacing: 20,
+                runSpacing: 20,
+                children: [
+                  SizedBox(
+                    width: 300,
+                    height: 70,
+                    child: OutlinedButton(
+                        onPressed: null,
+                        child: ListTile(
+                          trailing: Text('اسم القارب'),
+                          title: Text(b.boatName),
+                        )),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: 70,
+                    child: OutlinedButton(
+                        onPressed: null,
+                        child: ListTile(
+                          trailing: Text('لوحة القارب'),
+                          title: Text(b.boatReference),
+                        )),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: 70,
+                    child: OutlinedButton(
+                        onPressed: null,
+                        child: ListTile(
+                          title: TextFormField(
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp("[0-9 .]")),
+                            ],
+                            decoration: InputDecoration(
+                              labelText: "المدخول الشهري",
+                            ),
+                            keyboardType: TextInputType.number,
+                            controller: controller.revenueController,
+                            onSaved: (value) {
+                              controller.revenue = value! as RxDouble;
+                            },
+                            /*validator: (value) {
+                                    return controller.validateEmail(value!);
+                                  },*/
                           ),
-                          Expanded(
-                            child: Wrap(
-                              //alignment: WrapAlignment.spaceEvenly,
-                              spacing: 20,
-                              runSpacing: 20,
-                              children: [
-                                SizedBox(
-                                  width: 300,
-                                  height: 70,
-                                  child: OutlinedButton(
-                                      onPressed: null,
-                                      child: ListTile(
-                                        trailing: Text('اسم القارب'),
-                                        title: Text(b.boatName),
-                                      )),
-                                ),
-                                SizedBox(
-                                  width: 300,
-                                  height: 70,
-                                  child: OutlinedButton(
-                                      onPressed: null,
-                                      child: ListTile(
-                                        trailing: Text('لوحة القارب'),
-                                        title: Text(b.boatReference),
-                                      )),
-                                ),
-                                SizedBox(
-                                  width: 300,
-                                  height: 70,
-                                  child: OutlinedButton(
-                                      onPressed: null,
-                                      child: ListTile(
-                                        title: TextFormField(
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp("[0-9 .]")),
-                                          ],
-                                          decoration: InputDecoration(
-                                            labelText: "المدخول الشهري",
-                                          ),
-                                          keyboardType: TextInputType.number,
-                                          controller:
-                                              controller.revenueController,
-                                          onSaved: (value) {
-                                            controller.revenue =
-                                                value! as RxDouble;
-                                          },
-                                          /*validator: (value) {
-                                            return controller.validateEmail(value!);
-                                          },*/
-                                        ),
-                                      )),
-                                ),
-                                SizedBox(
-                                  width: 300,
-                                  height: 70,
-                                  child: OutlinedButton(
-                                      onPressed: null,
-                                      child: ListTile(
-                                        title: TextFormField(
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
-                                          ],
-                                          decoration: InputDecoration(
-                                            labelText: "عدد المبيعات",
-                                          ),
-                                          keyboardType: TextInputType.number,
-                                          controller:
-                                              controller.salesController,
-                                          onSaved: (value) {
-                                            controller.sales = value! as RxInt;
-                                          },
-                                          /*
-                                          validator: (value) {
-                                            return controller.validateEmail(value!);
-                                          },*/
-                                        ),
-                                      )),
-                                ),
-                                SizedBox(
-                                  width: 300,
-                                  height: 70,
-                                  child: OutlinedButton(
-                                      onPressed: null,
-                                      child: ListTile(
-                                        trailing: Text(''),
-                                        title: TextFormField(
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp("[0-9 .]")),
-                                          ],
-                                          decoration: InputDecoration(
-                                            /*border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(10),
-                                            ),*/
-                                            labelText: "المحروقات",
-                                          ),
-                                          keyboardType: TextInputType.number,
-                                          controller: controller.carbController,
-                                          onSaved: (value) {
-                                            controller.carb =
-                                                value! as RxDouble;
-                                          },
-                                          /*
-                                          validator: (value) {
-                                            return controller.validateEmail(value!);
-                                          },*/
-                                        ),
-                                      )),
-                                ),
-                                SizedBox(
-                                  width: 300,
-                                  height: 70,
-                                  child: OutlinedButton(
-                                      onPressed: null,
-                                      child: ListTile(
-                                        trailing: Text(
-                                          "تاريخ البداية",
-                                          textScaleFactor: 0.9,
-                                        ),
-                                        title: GetX<DateController>(
-                                          builder: (d) {
-                                            return Text(
-                                              '${d.firstDayOfMonthText}',
-                                            );
-                                          },
-                                        ),
-                                      )),
-                                ),
-                                SizedBox(
-                                  width: 300,
-                                  height: 70,
-                                  child: OutlinedButton(
-                                      onPressed: null,
-                                      child: ListTile(
-                                        trailing: Text(
-                                          "تاريخ النهاية",
-                                          textScaleFactor: 0.9,
-                                        ),
-                                        title: GetX<DateController>(
-                                          builder: (d) {
-                                            return Text(
-                                              '${d.lastDayOfMonthText}',
-                                            );
-                                          },
-                                        ),
-                                      )),
-                                ),
-                                SizedBox(
-                                    width: 300,
-                                    height: 300,
-                                    child: OutlinedButton(
-                                      onPressed: null,
-                                      child: GetX<DateController>(
-                                        builder: (d) {
-                                          return dp.MonthPicker(
-                                            selectedDate: d.dateNow.value,
-                                            onChanged: d.renew,
-                                            firstDate: d.firstDate.value,
-                                            lastDate: d.lastDate.value,
-                                            datePickerStyles: d.styles.value,
-                                          );
-                                        },
-                                      ),
-                                    )),
-                                SizedBox(
-                                  child: OutlinedButton(
-                                      onPressed: null,
-                                      child: FutureBuilder<
-                                              DocumentSnapshot<Month>>(
-                                          future: controller.getOldMarins(b
-                                              .boatReference
-                                              .replaceAll('/', '-')),
-                                          builder: (context, snapshot) {
-                                            if (snapshot.hasError) {
-                                              return Center(
-                                                child: Text(
-                                                    snapshot.error.toString()),
-                                              );
-                                            }
+                        )),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: 70,
+                    child: OutlinedButton(
+                        onPressed: null,
+                        child: ListTile(
+                          title: TextFormField(
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            decoration: InputDecoration(
+                              labelText: "عدد المبيعات",
+                            ),
+                            keyboardType: TextInputType.number,
+                            controller: controller.salesController,
+                            onSaved: (value) {
+                              controller.sales = value! as RxInt;
+                            },
+                            /*
+                                  validator: (value) {
+                                    return controller.validateEmail(value!);
+                                  },*/
+                          ),
+                        )),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: 70,
+                    child: OutlinedButton(
+                        onPressed: null,
+                        child: ListTile(
+                          trailing: Text(''),
+                          title: TextFormField(
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp("[0-9 .]")),
+                            ],
+                            decoration: InputDecoration(
+                              /*border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),*/
+                              labelText: "المحروقات",
+                            ),
+                            keyboardType: TextInputType.number,
+                            controller: controller.carbController,
+                            onSaved: (value) {
+                              controller.carb = value! as RxDouble;
+                            },
+                            /*
+                                  validator: (value) {
+                                    return controller.validateEmail(value!);
+                                  },*/
+                          ),
+                        )),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: 70,
+                    child: OutlinedButton(
+                        onPressed: null,
+                        child: ListTile(
+                          trailing: Text(
+                            "تاريخ البداية",
+                            textScaleFactor: 0.9,
+                          ),
+                          title: GetX<DateController>(
+                            builder: (d) {
+                              return Text(
+                                '${d.firstDayOfMonthText}',
+                              );
+                            },
+                          ),
+                        )),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: 70,
+                    child: OutlinedButton(
+                        onPressed: null,
+                        child: ListTile(
+                          trailing: Text(
+                            "تاريخ النهاية",
+                            textScaleFactor: 0.9,
+                          ),
+                          title: GetX<DateController>(
+                            builder: (d) {
+                              return Text(
+                                '${d.lastDayOfMonthText}',
+                              );
+                            },
+                          ),
+                        )),
+                  ),
+                  SizedBox(
+                      width: 300,
+                      height: 300,
+                      child: OutlinedButton(
+                        onPressed: null,
+                        child: GetX<DateController>(
+                          builder: (d) {
+                            return dp.MonthPicker(
+                              selectedDate: d.dateNow.value,
+                              onChanged: d.renew,
+                              firstDate: d.firstDate.value,
+                              lastDate: d.lastDate.value,
+                              datePickerStyles: d.styles.value,
+                            );
+                          },
+                        ),
+                      )),
+                  SizedBox(
+                    child: OutlinedButton(
+                        onPressed: null,
+                        child: FutureBuilder<DocumentSnapshot<Month>>(
+                            future: controller.getOldMarins(
+                                b.boatReference.replaceAll('/', '-')),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) {
+                                return Center(
+                                  child: Text(snapshot.error.toString()),
+                                );
+                              }
 
-                                            if (!snapshot.hasData) {
-                                              return const Center(
-                                                  child:
-                                                      CircularProgressIndicator());
-                                            }
-                                            if (snapshot.connectionState ==
-                                                ConnectionState.done) {
-                                              return Row(
-                                                children: [
-                                                  SizedBox(
-                                                    width: 20,
-                                                  ),
-                                                  Expanded(
-                                                    child:
-                                                        SingleChildScrollView(
-                                                      child: Column(
-                                                        children: [
-                                                          SizedBox(
-                                                            height: 20,
-                                                          ),
-                                                          Text(
-                                                            'البحارة القدماء',
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                          SizedBox(
-                                                            height: 20,
-                                                          ),
-                                                          Wrap(
-                                                              alignment:
-                                                                  WrapAlignment
-                                                                      .spaceEvenly,
-                                                              direction: Axis
-                                                                  .horizontal,
-                                                              runSpacing: 20,
-                                                              spacing: 20,
-                                                              children: snapshot
-                                                                  .data!
-                                                                  .data()!
-                                                                  .bahara
-                                                                  .map((item) =>
-                                                                      Text(
-                                                                          item))
-                                                                  .toList()
-                                                                  .cast<
-                                                                      Widget>()),
-                                                          SizedBox(
-                                                            height: 20,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 20,
-                                                  )
-                                                ],
-                                              );
-                                            }
-
-                                            return const Center(
-                                                child:
-                                                    CircularProgressIndicator());
-                                          })),
-                                ),
-                                SizedBox(
-                                  child: OutlinedButton(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        ListTile(
-                                            title: Text(
-                                          "البحارة المختارون",
-                                          textAlign: TextAlign.center,
-                                        )),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        GetBuilder<DeclarationInputController>(
-                                          builder: (_) {
-                                            return Wrap(
-                                              alignment:
-                                                  WrapAlignment.spaceEvenly,
-                                              direction: Axis.horizontal,
-                                              runSpacing: 20,
-                                              spacing: 20,
-                                              children: _.marinFinal
-                                                  .map((item) =>
-                                                      MarinPreview(item))
-                                                  .toList()
-                                                  .cast<Widget>(),
-                                            );
-                                          },
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                      ],
+                              if (!snapshot.hasData) {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              }
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                return Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 20,
                                     ),
-                                    onPressed: null,
-                                  ),
-                                ),
-                                SizedBox(
-                                  child: OutlinedButton(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        OutlinedButton(
-                                            onPressed: null,
-                                            child: ListTile(
-                                              title: TextFormField(
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .allow(
-                                                          RegExp("[A-Z0-9-/]")),
-                                                ],
-                                                decoration: InputDecoration(
-                                                  labelText: "اختر البحارة",
-                                                ),
-                                                controller:
-                                                    controller.filterController,
-                                                onChanged: (value) {
-                                                  controller
-                                                      .addSearchList(value);
-                                                  controller.update();
-                                                },
-                                              ),
-                                            )),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        SingleChildScrollView(
-                                          child: GetBuilder<
-                                              DeclarationInputController>(
-                                            builder: (_) {
-                                              return Wrap(
+                                    Expanded(
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              'البحارة القدماء',
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Wrap(
                                                 alignment:
                                                     WrapAlignment.spaceEvenly,
                                                 direction: Axis.horizontal,
                                                 runSpacing: 20,
                                                 spacing: 20,
-                                                children: _.marinQuery
-                                                    .map((item) => MarinAdd(
-                                                        item, _.marinFinal, _))
+                                                children: snapshot.data!
+                                                    .data()!
+                                                    .bahara
+                                                    .map((item) => Text(item))
                                                     .toList()
-                                                    .cast<Widget>(),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                      ],
-                                    ),
-                                    onPressed: null,
-                                  ),
-                                ),
-                                Center(
-                                  child: SizedBox(
-                                      height: 70,
-                                      width: 300,
-                                      child: OutlinedButton(
-                                          onPressed: () {
-                                            DateController d =
-                                                Get.put(DateController());
-
-                                            controller.addDeclaration(
-                                                '${b.boatReference.replaceAll('/', '-')}',
-                                                '${d.selectedMonthText.replaceAll('/', '-')}',
-                                                '${d.firstDayOfMonthText}',
-                                                '${d.lastDayOfMonthText}',
-                                                b.boatCoopPerc);
-                                          },
-                                          child: ListTile(
-                                            title: Text(
-                                              'انتج التقرير',
-                                              textAlign: TextAlign.center,
+                                                    .cast<Widget>()),
+                                            SizedBox(
+                                              height: 20,
                                             ),
-                                          ))),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    )
+                                  ],
+                                );
+                              }
+
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            })),
+                  ),
+                  SizedBox(
+                    child: OutlinedButton(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 20,
+                          ),
+                          ListTile(
+                              title: Text(
+                            "البحارة المختارون",
+                            textAlign: TextAlign.center,
+                          )),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          GetBuilder<DeclarationInputController>(
+                            builder: (_) {
+                              return Wrap(
+                                alignment: WrapAlignment.spaceEvenly,
+                                direction: Axis.horizontal,
+                                runSpacing: 20,
+                                spacing: 20,
+                                children: _.marinFinal
+                                    .map((item) => MarinPreview(item))
+                                    .toList()
+                                    .cast<Widget>(),
+                              );
+                            },
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      ),
+                      onPressed: null,
+                    ),
+                  ),
+                  SizedBox(
+                    child: OutlinedButton(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 20,
+                          ),
+                          OutlinedButton(
+                              onPressed: null,
+                              child: ListTile(
+                                title: TextFormField(
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp("[A-Z0-9-/]")),
+                                  ],
+                                  decoration: InputDecoration(
+                                    labelText: "اختر البحارة",
+                                  ),
+                                  controller: controller.filterController,
+                                  onChanged: (value) {
+                                    controller.addSearchList(value);
+                                    controller.update();
+                                  },
                                 ),
-                              ],
+                              )),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          SingleChildScrollView(
+                            child: GetBuilder<DeclarationInputController>(
+                              builder: (_) {
+                                return Wrap(
+                                  alignment: WrapAlignment.spaceEvenly,
+                                  direction: Axis.horizontal,
+                                  runSpacing: 20,
+                                  spacing: 20,
+                                  children: _.marinQuery
+                                      .map((item) =>
+                                          MarinAdd(item, _.marinFinal, _))
+                                      .toList()
+                                      .cast<Widget>(),
+                                );
+                              },
                             ),
                           ),
                           SizedBox(
-                            width: 20,
+                            height: 20,
                           ),
                         ],
-                      );
-                    }),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+                      ),
+                      onPressed: null,
+                    ),
+                  ),
+                  Center(
+                    child: SizedBox(
+                        height: 70,
+                        width: 300,
+                        child: OutlinedButton(
+                            onPressed: () {
+                              DateController d = Get.put(DateController());
+
+                              controller.addDeclaration(
+                                  '${b.boatReference.replaceAll('/', '-')}',
+                                  '${d.selectedMonthText.replaceAll('/', '-')}',
+                                  '${d.firstDayOfMonthText}',
+                                  '${d.lastDayOfMonthText}',
+                                  b.boatCoopPerc);
+                            },
+                            child: ListTile(
+                              title: Text(
+                                'انتج التقرير',
+                                textAlign: TextAlign.center,
+                              ),
+                            ))),
+                  ),
+                ],
+              );
+            }));
   }
 }

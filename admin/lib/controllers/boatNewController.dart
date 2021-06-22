@@ -12,6 +12,7 @@ class BoatInputController extends GetxController {
       cniController,
       ownerController,
       imgController;
+  CollectionReference boatsCol = FirebaseFirestore.instance.collection('boats');
 
   @override
   void onInit() {
@@ -43,17 +44,11 @@ class BoatInputController extends GetxController {
     imgController.dispose();
   }
 
-  checkBoat(id) async {}
-
   addBoat() async {
     final perc = double.parse(percController.text);
     final id = referenceController.text.replaceAll('/', '-');
 
-    return await FirebaseFirestore.instance
-        .collection('boat')
-        .doc(id)
-        .get()
-        .then((value) {
+    return await boatsCol.doc(id).get().then((value) {
       if (value.exists) {
         Get.snackbar("", "",
             titleText: Text(
@@ -68,8 +63,7 @@ class BoatInputController extends GetxController {
               textAlign: TextAlign.center,
             ));
       } else {
-        return FirebaseFirestore.instance
-            .collection('boats')
+        return boatsCol
             .withConverter<Boat>(
               fromFirestore: (snapshots, _) => Boat.fromJson(snapshots.data()!),
               toFirestore: (boat, _) => boat.toJson(),

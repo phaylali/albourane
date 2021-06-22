@@ -6,44 +6,27 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BoatPage extends StatelessWidget {
+class BoatPage extends GetView<BoatsController> {
   final String id = Get.parameters['id']!;
 
   @override
   Widget build(BuildContext context) {
     return MainBody(
       title: "صفحة القارب",
-      child: GetBuilder<BoatsController>(
-        init: BoatsController(),
-        builder: (b) {
-          return FutureBuilder<DocumentSnapshot<Boat>>(
-              future: b.getBoat(id),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text(snapshot.error.toString()),
-                  );
-                }
+      child: FutureBuilder<DocumentSnapshot<Boat>>(
+        future: controller.getBoat(id),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(snapshot.error.toString()),
+            );
+          }
 
-                if (!snapshot.hasData) {
-                  return const Center(child: CircularProgressIndicator());
-                }
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-                return Row(
-                  children: [
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: SingleChildScrollView(
-                          child: BoatInfo(snapshot.data!.data()!, b)),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    )
-                  ],
-                );
-              });
+          return BoatInfo(snapshot.data!.data()!, controller);
         },
       ),
     );

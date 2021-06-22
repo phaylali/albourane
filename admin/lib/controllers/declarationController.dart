@@ -11,17 +11,11 @@ import 'package:printing/printing.dart';
 import 'package:flutter/material.dart' as d;
 
 class DeclarationController extends GetxController {
-  final String id;
-  final String month;
   late Month? monthDec;
   late Boat? boatDec;
   final doc = Document();
 
   List<Row> marinsRows = [];
-  DeclarationController(
-    this.id,
-    this.month,
-  );
   @override
   void onInit() async {
     super.onInit();
@@ -110,7 +104,7 @@ class DeclarationController extends GetxController {
         ));
   }
 
-  shareDeclaration() async {
+  shareDeclaration(id, month) async {
     await Printing.sharePdf(
         bytes: await
             // generatePDF(),
@@ -130,7 +124,7 @@ class DeclarationController extends GetxController {
         ));
   }
 
-  printDeclaration() async {
+  printDeclaration(id, month) async {
     await Printing.layoutPdf(
         name: 'CNSS|$id|$month.pdf',
         format: PdfPageFormat.a4,

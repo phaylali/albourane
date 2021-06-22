@@ -63,9 +63,9 @@ class BoatInfo extends StatelessWidget {
           ),
           SizedBox(
             width: 300,
-            height: 300,
+            height: 400,
             child: OutlinedButton(
-              child: ListView(
+              child: Column(
                 children: [
                   SizedBox(
                     height: 10,
@@ -122,7 +122,7 @@ class BoatInfo extends StatelessWidget {
                       }),
                   ListTile(
                       trailing: SizedBox(
-                        width: 80,
+                        width: 90,
                         child: Text(
                           "المنطقة",
                           textDirection: TextDirection.rtl,
@@ -180,6 +180,27 @@ class BoatInfo extends StatelessWidget {
                       onTap: () {
                         controller.getListTile(
                             boat.boatOwnerCni, "تم نسخ بطاقة المالك");
+                      }),
+                  ListTile(
+                      trailing: SizedBox(
+                        width: 80,
+                        child: Text(
+                          "هاتفه",
+                          textDirection: TextDirection.rtl,
+                        ),
+                      ),
+                      title: Center(
+                        child: Text(
+                          boat.boatOwnerPhone.isNotEmpty
+                              ? boat.boatOwnerPhone
+                              : "لايوجد",
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      onTap: () {
+                        controller.getListTile(
+                            boat.boatOwnerPhone, "تم نسخ هاتف المالك");
                       }),
                 ],
               ),
@@ -295,5 +316,66 @@ class BoatInfo extends StatelessWidget {
             ),
           )
         ]);
+  }
+}
+
+class BoatPreview extends StatelessWidget {
+  BoatPreview(this.boat);
+
+  final Boat boat;
+
+  Widget get details {
+    return OutlinedButton(
+      onPressed: () {
+        final String id = boat.boatReference.replaceAll('/', '-');
+        Get.toNamed(
+          "/Boat?id=$id",
+        );
+      },
+      child: ListTile(
+        leading: reference,
+        title: name,
+        subtitle: owner,
+      ),
+    );
+  }
+
+  Widget get name {
+    return Text(
+      '${boat.boatName}',
+      textScaleFactor: 1.3,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 2,
+    );
+  }
+
+  Widget get reference {
+    return SizedBox(
+      width: 70,
+      child: Center(
+        child: Text(
+          '${boat.boatReference}',
+          textScaleFactor: 0.8,
+        ),
+      ),
+    );
+  }
+
+  Widget get owner {
+    return Text(
+      '${boat.boatOwner}',
+      textScaleFactor: 0.75,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 2,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: details,
+      width: 300,
+      height: 100,
+    );
   }
 }

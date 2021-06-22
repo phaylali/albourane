@@ -1,11 +1,11 @@
 import 'package:admin/forms/boatNew.dart';
 import 'package:admin/forms/declarationNew.dart';
+import 'package:admin/forms/marinNew.dart';
+import 'package:admin/pages/home.dart';
 import 'package:admin/resources/bindings.dart';
 import 'package:admin/resources/error404.dart';
-import 'package:admin/home.dart';
 import 'package:admin/lists/boats.dart';
 import 'package:admin/lists/marins.dart';
-import 'package:admin/login.dart';
 import 'package:admin/pages/boatPage.dart';
 import 'package:admin/pages/declarationPage.dart';
 import 'package:admin/pages/marinPage.dart';
@@ -17,6 +17,7 @@ abstract class Routes {
   static const BOATS = _Paths.BOATS;
   static const BOAT = _Paths.BOAT;
   static const BOATNEW = _Paths.BOATNEW;
+  static const MARINNEW = _Paths.MARINNEW;
   static const SEAMEN = _Paths.SEAMEN;
   static const SEAMAN = _Paths.SEAMAN;
   static const DECLARATION = _Paths.DECLARATION;
@@ -30,6 +31,7 @@ abstract class _Paths {
   static const BOATS = '/Boats';
   static const BOAT = '/Boat';
   static const BOATNEW = '/NewBoat';
+  static const MARINNEW = '/NewSeaman';
   static const SEAMEN = '/Seamen';
   static const SEAMAN = '/Seaman';
   static const DECLARATION = '/Declaration';
@@ -45,30 +47,24 @@ class AppPages {
     GetPage(
       name: _Paths.HOME,
       page: () => HomePage(),
+      binding: HomeBinding(),
     ),
-    GetPage(
-      name: _Paths.LOGIN,
-      page: () => AdminSignIn(),
-    ),
-    GetPage(
-      name: _Paths.BOATS,
-      page: () => Boats(),
-    ),
-    GetPage(
-      name: _Paths.BOAT,
-      page: () => BoatPage(),
-    ),
+    GetPage(name: _Paths.BOATS, page: () => Boats(), binding: BoatsBinding()),
+    GetPage(name: _Paths.BOAT, page: () => BoatPage(), binding: BoatBinding()),
     GetPage(
       name: _Paths.SEAMEN,
       page: () => Marins(),
+      binding: MarinsBinding(),
     ),
     GetPage(
       name: _Paths.SEAMAN,
       page: () => MarinPage(),
+      binding: MarinsBinding(),
     ),
     GetPage(
       name: _Paths.DECLARATION,
       page: () => DeclarationPage(),
+      binding: DeclarationBinding(),
     ),
     GetPage(
       name: _Paths.UNKNOWN,
@@ -82,5 +78,9 @@ class AppPages {
         name: _Paths.BOATNEW,
         page: () => BoatInput(),
         binding: BoatInputBinding()),
+    GetPage(
+        name: _Paths.MARINNEW,
+        page: () => MarinInput(),
+        binding: MarinInputBinding()),
   ];
 }
