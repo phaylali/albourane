@@ -28,9 +28,15 @@ class DeclarationPage extends GetView<DeclarationController> {
               return const Center(child: CircularProgressIndicator());
             }
 
-            return Column(
+            return Wrap(
+              alignment: WrapAlignment.spaceEvenly,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 20,
+              runSpacing: 20,
               children: [
-                Expanded(
+                SizedBox(
+                  width: context.width * 0.8,
+                  height: context.height * 0.7,
                   child: PdfPreview(
                     initialPageFormat: PdfPageFormat.a4,
                     maxPageWidth: 700,
@@ -41,44 +47,37 @@ class DeclarationPage extends GetView<DeclarationController> {
                     allowPrinting: false,
                     allowSharing: false,
                     useActions: false,
+                    shouldRepaint: true,
                   ),
                 ),
                 SizedBox(
-                  height: 20,
-                ),
-                Wrap(
-                  alignment: WrapAlignment.spaceEvenly,
-                  spacing: 20,
-                  runSpacing: 20,
-                  children: [
-                    SizedBox(
-                        width: 300,
-                        child: OutlinedButton(
-                            onPressed: () {
-                              controller.shareDeclaration(id, month);
-                            },
-                            child: ListTile(
-                              leading: OmniIcons().share,
-                              title: Text(
-                                'انشر التقرير',
-                                textAlign: TextAlign.center,
-                              ),
-                            ))),
-                    SizedBox(
-                        width: 300,
-                        child: OutlinedButton(
-                            onPressed: () {
-                              controller.printDeclaration(id, month);
-                            },
-                            child: ListTile(
-                              leading: OmniIcons().print,
-                              title: Text(
-                                'اطبع التقرير',
-                                textAlign: TextAlign.center,
-                              ),
-                            ))),
-                  ],
-                )
+                    width: 300,
+                    height: 50,
+                    child: OutlinedButton(
+                        onPressed: () {
+                          controller.shareDeclaration(id, month);
+                        },
+                        child: ListTile(
+                          leading: OmniIcons().share,
+                          title: Text(
+                            'انشر التقرير',
+                            textAlign: TextAlign.center,
+                          ),
+                        ))),
+                SizedBox(
+                    width: 300,
+                    height: 50,
+                    child: OutlinedButton(
+                        onPressed: () {
+                          controller.printDeclaration(id, month);
+                        },
+                        child: ListTile(
+                          leading: OmniIcons().print,
+                          title: Text(
+                            'اطبع التقرير',
+                            textAlign: TextAlign.center,
+                          ),
+                        ))),
               ],
             );
           },

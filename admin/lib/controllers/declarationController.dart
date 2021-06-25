@@ -13,7 +13,7 @@ import 'package:flutter/material.dart' as d;
 class DeclarationController extends GetxController {
   late Month? monthDec;
   late Boat? boatDec;
-  final doc = Document();
+  var doc = Document();
 
   List<Row> marinsRows = [];
   @override

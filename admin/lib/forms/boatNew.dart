@@ -11,7 +11,8 @@ class BoatInput extends GetView<BoatInputController> {
     return MainBody(
       title: 'قارب جديد',
       child: Wrap(
-        //alignment: WrapAlignment.spaceEvenly,
+        alignment: WrapAlignment.spaceEvenly,
+        crossAxisAlignment: WrapCrossAlignment.center,
         spacing: 20,
         runSpacing: 20,
         children: [

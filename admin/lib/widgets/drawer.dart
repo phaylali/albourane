@@ -120,6 +120,7 @@ class CustomDrawer extends StatelessWidget {
                     Get.toNamed('/NewSeaman');
                   },
                 ),
+                /*
                 ListTile(
                   title: Text(
                     "الوثائق",
@@ -154,7 +155,7 @@ class CustomDrawer extends StatelessWidget {
                   onTap: () {
                     Get.toNamed('/NewDocument');
                   },
-                ),
+                ),*/
                 ListTile(
                   title: Text(
                     "الدخول",
@@ -181,6 +182,7 @@ class CustomDrawer extends StatelessWidget {
                     //Get.to(GotToHome());
                   },
                 ),
+                /*
                 ListTile(
                   title: Text(
                     "تصريح جديد",
@@ -191,7 +193,7 @@ class CustomDrawer extends StatelessWidget {
                   onTap: () {
                     Get.toNamed('/NewDeclaration');
                   },
-                ),
+                ),*/
               ],
             ),
           ),

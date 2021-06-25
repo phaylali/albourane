@@ -10,7 +10,8 @@ class MarinInput extends GetView<MarinInputController> {
     return MainBody(
       title: 'بحار جديد',
       child: Wrap(
-        //alignment: WrapAlignment.spaceEvenly,
+        alignment: WrapAlignment.spaceEvenly,
+        crossAxisAlignment: WrapCrossAlignment.center,
         spacing: 20,
         runSpacing: 20,
         children: [

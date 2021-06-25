@@ -30,7 +30,8 @@ class DeclarationInput extends GetView<DeclarationInputController> {
               }
               final b = snapshot.data!.data()!;
               return Wrap(
-                //alignment: WrapAlignment.spaceEvenly,
+                alignment: WrapAlignment.spaceEvenly,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 spacing: 20,
                 runSpacing: 20,
                 children: [

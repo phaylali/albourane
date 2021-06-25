@@ -1,4 +1,5 @@
 import 'package:admin/controllers/boatsController.dart';
+import 'package:admin/controllers/declarationController.dart';
 import 'package:admin/models/boatModel.dart';
 import 'package:admin/resources/icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,6 +16,7 @@ class BoatInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
         alignment: WrapAlignment.spaceEvenly,
+        crossAxisAlignment: WrapCrossAlignment.center,
         spacing: 20,
         runSpacing: 20,
         children: [
@@ -254,7 +256,9 @@ class BoatInfo extends StatelessWidget {
                                         month,
                                         textAlign: TextAlign.center,
                                       ),
-                                      onTap: () {
+                                      onTap: () async {
+                                        await Get.delete<
+                                            DeclarationController>();
                                         Get.toNamed(
                                           "/Declaration?id=$id&m=$month",
                                         );

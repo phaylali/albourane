@@ -1,6 +1,7 @@
 import 'package:admin/controllers/boatNewController.dart';
 import 'package:admin/controllers/boatsController.dart';
 import 'package:admin/controllers/dateController.dart';
+import 'package:admin/controllers/declarationController.dart';
 import 'package:admin/controllers/declarationInputController.dart';
 import 'package:admin/controllers/homeController.dart';
 import 'package:admin/controllers/marinNewController.dart';
@@ -38,8 +39,8 @@ class DeclarationInputBinding extends Bindings {
 class DeclarationBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<DeclarationInputController>(
-      () => DeclarationInputController(),
+    Get.lazyPut<DeclarationController>(
+      () => DeclarationController(),
     );
   }
 }

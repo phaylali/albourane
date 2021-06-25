@@ -1,3 +1,4 @@
+import 'package:admin/controllers/declarationController.dart';
 import 'package:admin/controllers/marinsController.dart';
 //import 'package:admin/forms/declarationNew.dart';
 import 'package:admin/models/marinModel.dart';
@@ -16,8 +17,7 @@ class MarinInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
         alignment: WrapAlignment.spaceEvenly,
-        //direction: Axis.horizontal,
-
+        crossAxisAlignment: WrapCrossAlignment.center,
         spacing: 20,
         runSpacing: 20,
         children: [
@@ -241,7 +241,9 @@ class MarinInfo extends StatelessWidget {
                                         month,
                                         textAlign: TextAlign.center,
                                       ),
-                                      onTap: () {
+                                      onTap: () async {
+                                        await Get.delete<
+                                            DeclarationController>();
                                         Get.toNamed(
                                           "/Declaration?id=$id&m=$month",
                                         );

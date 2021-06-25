@@ -28,7 +28,7 @@ class Marins extends GetView<MarinsController> {
           if (snapshot.connectionState == ConnectionState.done)
             return Wrap(
               alignment: WrapAlignment.spaceEvenly,
-              direction: Axis.horizontal,
+              crossAxisAlignment: WrapCrossAlignment.center,
               runSpacing: 20,
               spacing: 20,
               children: snapshot.data!.docs

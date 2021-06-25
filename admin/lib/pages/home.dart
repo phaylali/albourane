@@ -10,7 +10,8 @@ class HomePage extends GetView<HomeController> {
     return MainBody(
       title: 'لوحة التحكم',
       child: Wrap(
-        //alignment: WrapAlignment.spaceEvenly,
+        alignment: WrapAlignment.spaceEvenly,
+        crossAxisAlignment: WrapCrossAlignment.center,
         spacing: 20,
         runSpacing: 20,
         children: [
