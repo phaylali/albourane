@@ -3,10 +3,13 @@ import 'package:admin/resources/icons.dart';
 import 'package:admin/widgets/mainBody.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zefyrka/zefyrka.dart';
 
 class HomePage extends GetView<HomeController> {
+  final FocusNode focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
+    ZefyrController controller = ZefyrController();
     return MainBody(
       title: 'لوحة التحكم',
       child: Wrap(
@@ -57,6 +60,33 @@ class HomePage extends GetView<HomeController> {
               onPressed: () {
                 Get.toNamed('/Seamen');
               },
+            ),
+          ),
+          SizedBox(
+            width: 1000,
+            height: 1000,
+            child: OutlinedButton(
+              onPressed: null,
+              child: Column(
+                //mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  ZefyrField(
+                    controller: controller,
+                    focusNode: focusNode,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(top: 8.0),
+                      labelText: 'Description',
+                      hintText: 'Detailed description, but not too detailed',
+                    ),
+                    toolbar: ZefyrToolbar.basic(controller: controller),
+                    // minHeight: 80.0,
+                    // maxHeight: 160.0,
+                  ),
+                ],
+              ),
             ),
           ),
         ],

@@ -28,6 +28,11 @@ dependencies:
   firebase_auth: 
   cloud_firestore: 
   firebase_core: 
+
+  zefyrka:
+  
+  
+  
   
 
 flutter:
