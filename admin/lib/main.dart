@@ -35,7 +35,7 @@ class Start extends StatelessWidget {
         unknownRoute: AppPages.routes[7],
         theme: omniDarkBlueTheme(),
         navigatorKey: Get.key,
-        title: "ALBOURANE ADMIN",
+        title: "ALBOURANE",
         debugShowCheckedModeBanner: false,
         //uncomment this when the project is finished
         //home: Root(),

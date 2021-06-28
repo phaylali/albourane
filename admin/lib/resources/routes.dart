@@ -1,6 +1,9 @@
+import 'package:admin/forms/articleNew.dart';
 import 'package:admin/forms/boatNew.dart';
 import 'package:admin/forms/declarationNew.dart';
 import 'package:admin/forms/marinNew.dart';
+import 'package:admin/lists/articles.dart';
+import 'package:admin/pages/articlePage.dart';
 import 'package:admin/pages/home.dart';
 import 'package:admin/resources/bindings.dart';
 import 'package:admin/resources/error404.dart';
@@ -23,6 +26,9 @@ abstract class Routes {
   static const DECLARATION = _Paths.DECLARATION;
   static const UNKNOWN = _Paths.UNKNOWN;
   static const DECLARATIONNEW = _Paths.DECLARATIONNEW;
+  static const ARTICLE = _Paths.ARTICLE;
+  static const ARTICLENEW = _Paths.ARTICLENEW;
+  static const ARTICLES = _Paths.ARTICLES;
 }
 
 abstract class _Paths {
@@ -37,6 +43,9 @@ abstract class _Paths {
   static const DECLARATION = '/Declaration';
   static const UNKNOWN = '/Error404';
   static const DECLARATIONNEW = '/NewDeclaration';
+  static const ARTICLENEW = '/NewDeclaration';
+  static const ARTICLES = '/News';
+  static const ARTICLE = '/Article';
 }
 
 class AppPages {
@@ -62,6 +71,16 @@ class AppPages {
       binding: MarinsBinding(),
     ),
     GetPage(
+      name: _Paths.ARTICLES,
+      page: () => Articles(),
+      binding: ArticlesBinding(),
+    ),
+    GetPage(
+      name: _Paths.ARTICLE,
+      page: () => ArticlePage(),
+      binding: ArticleBinding(),
+    ),
+    GetPage(
       name: _Paths.DECLARATION,
       page: () => DeclarationPage(),
       binding: DeclarationBinding(),
@@ -82,5 +101,9 @@ class AppPages {
         name: _Paths.MARINNEW,
         page: () => MarinInput(),
         binding: MarinInputBinding()),
+    GetPage(
+        name: _Paths.ARTICLENEW,
+        page: () => ArticleInput(),
+        binding: ArticleInputBinding()),
   ];
 }

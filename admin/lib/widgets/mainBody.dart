@@ -1,6 +1,7 @@
 import 'package:admin/widgets/drawer.dart';
 import 'package:admin/widgets/fab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MainBody extends StatelessWidget {
   const MainBody({
@@ -13,6 +14,11 @@ class MainBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState>? drawerKey = GlobalKey();
+    SystemChrome.setApplicationSwitcherDescription(
+        ApplicationSwitcherDescription(
+      label: '$title | Albourane - البوران',
+      primaryColor: Theme.of(context).primaryColor.value,
+    ));
     return Scaffold(
       key: drawerKey,
       floatingActionButton: Fab(drawerKey: drawerKey),

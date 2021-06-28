@@ -120,21 +120,20 @@ class CustomDrawer extends StatelessWidget {
                     Get.toNamed('/NewSeaman');
                   },
                 ),
-                /*
                 ListTile(
                   title: Text(
-                    "الوثائق",
+                    "الاخبار",
                     textDirection: TextDirection.rtl,
                   ),
                   leading: SizedBox(
                       height: 40, width: 40, child: OmniIcons().document),
                   onTap: () {
-                    Get.toNamed('/Documents');
+                    Get.toNamed('/News');
                   },
                 ),
                 ListTile(
                   title: Text(
-                    "وثيقة جديدة",
+                    "مقال جديد",
                     textDirection: TextDirection.rtl,
                   ),
                   leading: SizedBox(
@@ -153,22 +152,18 @@ class CustomDrawer extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Get.toNamed('/NewDocument');
+                    Get.toNamed('/NewArticle');
                   },
-                ),*/
+                ),
                 ListTile(
                   title: Text(
                     "الدخول",
                     textDirection: TextDirection.rtl,
                   ),
-                  leading: SizedBox(
-                      height: 40,
-                      width: 40,
-                      child: SvgPicture.asset(
-                        'res/icons/login.svg',
-                      )),
+                  leading:
+                      SizedBox(height: 40, width: 40, child: OmniIcons().login),
                   onTap: () {
-                    Get.toNamed('/SignIn');
+                    //Get.toNamed('/SignIn');
                   },
                 ),
                 ListTile(
@@ -182,18 +177,6 @@ class CustomDrawer extends StatelessWidget {
                     //Get.to(GotToHome());
                   },
                 ),
-                /*
-                ListTile(
-                  title: Text(
-                    "تصريح جديد",
-                    textDirection: TextDirection.rtl,
-                  ),
-                  leading:
-                      SizedBox(height: 40, width: 40, child: OmniIcons().boat),
-                  onTap: () {
-                    Get.toNamed('/NewDeclaration');
-                  },
-                ),*/
               ],
             ),
           ),

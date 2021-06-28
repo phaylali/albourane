@@ -1,18 +1,17 @@
-import 'package:admin/controllers/homeController.dart';
+import 'dart:collection';
+
+import 'package:admin/controllers/articleNewController.dart';
 import 'package:admin/resources/icons.dart';
 import 'package:admin/widgets/mainBody.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 
-class HomePage extends GetView<HomeController> {
-  final FocusNode focusNode = FocusNode();
+class ArticleInput extends GetView<ArticleInputController> {
   @override
   Widget build(BuildContext context) {
-    HtmlEditorController controller = HtmlEditorController();
-    //ZefyrController controller = ZefyrController();
     return MainBody(
-      title: 'لوحة التحكم',
+      title: 'مقال جديد',
       child: Wrap(
         alignment: WrapAlignment.spaceEvenly,
         crossAxisAlignment: WrapCrossAlignment.center,
@@ -21,50 +20,35 @@ class HomePage extends GetView<HomeController> {
         children: [
           SizedBox(
             width: 300,
-            height: 300,
+            height: 70,
             child: OutlinedButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(height: 50, width: 50, child: OmniIcons().boat),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    'القوارب',
-                    textScaleFactor: 2,
-                  )
-                ],
-              ),
-              onPressed: () {
-                Get.toNamed('/Boats');
-              },
-            ),
+                onPressed: null,
+                child: ListTile(
+                  title: TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "العنوان",
+                      ),
+                      keyboardType: TextInputType.name,
+                      controller: controller.titleController),
+                )),
           ),
           SizedBox(
             width: 300,
-            height: 300,
+            height: 70,
             child: OutlinedButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(height: 50, width: 50, child: OmniIcons().seaman),
-                  SizedBox(
-                    width: 20,
+                onPressed: null,
+                child: ListTile(
+                  title: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: "الصورة",
+                    ),
+                    keyboardType: TextInputType.url,
+                    controller: controller.thumbController,
                   ),
-                  Text(
-                    'البحارة',
-                    textScaleFactor: 2,
-                  )
-                ],
-              ),
-              onPressed: () {
-                Get.toNamed('/Seamen');
-              },
-            ),
+                )),
           ),
           SizedBox(
-            width: 1000,
+            width: context.width * 0.8,
             height: 1000,
             child: OutlinedButton(
               onPressed: null,
@@ -86,30 +70,12 @@ class HomePage extends GetView<HomeController> {
                               width: 20,
                             ),
                             Text(
-                              'reload',
+                              'تحديث',
                             )
                           ],
                         ),
                         onPressed: () {
-                          controller.reloadWeb();
-                        },
-                      ),
-                      OutlinedButton(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                                height: 20, width: 20, child: OmniIcons().boat),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              'getText',
-                            )
-                          ],
-                        ),
-                        onPressed: () {
-                          controller.getText().then((value) => print(value));
+                          controller.contentController.reloadWeb();
                         },
                       ),
                     ],
@@ -136,11 +102,17 @@ class HomePage extends GetView<HomeController> {
                       ],
                     ),
 
-                    controller: controller, //required
+                    controller: controller.contentController, //required
                     htmlEditorOptions: HtmlEditorOptions(
-                      hint: "اكتب شيئا هنا",
-                      //initalText: "text content initial, if any",
-                    ),
+                        hint: "اكتب شيئا هنا",
+                        webInitialScripts: UnmodifiableListView([
+                          WebScript(
+                              name: "editorBG",
+                              script:
+                                  "document.getElementsByClassName('note-editable')[0].style.backgroundColor='blue';"),
+                        ])
+                        //initalText: "text content initial, if any",
+                        ),
                     otherOptions: OtherOptions(
                       height: 400,
                     ),
@@ -148,6 +120,21 @@ class HomePage extends GetView<HomeController> {
                 ],
               ),
             ),
+          ),
+          Center(
+            child: SizedBox(
+                height: 70,
+                width: 300,
+                child: OutlinedButton(
+                    onPressed: () {
+                      controller.addArticle()();
+                    },
+                    child: ListTile(
+                      title: Text(
+                        'اضف المقال',
+                        textAlign: TextAlign.center,
+                      ),
+                    ))),
           ),
         ],
       ),

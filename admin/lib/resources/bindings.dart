@@ -1,3 +1,5 @@
+import 'package:admin/controllers/articleNewController.dart';
+import 'package:admin/controllers/articlesController.dart';
 import 'package:admin/controllers/boatNewController.dart';
 import 'package:admin/controllers/boatsController.dart';
 import 'package:admin/controllers/dateController.dart';
@@ -99,6 +101,35 @@ class MarinsBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<MarinsController>(
       () => MarinsController(),
+    );
+  }
+}
+
+// ARTICLES
+
+class ArticleInputBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<ArticleInputController>(
+      () => ArticleInputController(),
+    );
+  }
+}
+
+class ArticleBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<ArticlesController>(
+      () => ArticlesController(),
+    );
+  }
+}
+
+class ArticlesBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<ArticlesController>(
+      () => ArticlesController(),
     );
   }
 }

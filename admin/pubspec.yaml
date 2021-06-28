@@ -23,13 +23,18 @@ dependencies:
   path_provider:
   flutter_date_pickers: 
   intl:
+  file_picker:
+  html_editor_enhanced:
+  flutter_colorpicker: 0.4.0
+  translator: 
+  flutter_html:
 
   # Firebase Packages
   firebase_auth: 
   cloud_firestore: 
   firebase_core: 
 
-  zefyrka:
+ 
   
   
   
@@ -39,6 +44,7 @@ flutter:
   uses-material-design: true
   assets:
     - res/icons/
+    
   fonts:
     - family: Tajawal
       fonts: 
