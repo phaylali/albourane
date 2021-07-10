@@ -41,7 +41,7 @@ class BoatInput extends GetView<BoatInputController> {
                     decoration: InputDecoration(
                       labelText: "التسجيل",
                     ),
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.phone,
                     controller: controller.referenceController,
                   ),
                 )),

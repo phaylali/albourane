@@ -1,11 +1,14 @@
 import 'package:admin/controllers/articleNewController.dart';
 import 'package:admin/controllers/articlesController.dart';
+import 'package:admin/controllers/boatEditController.dart';
 import 'package:admin/controllers/boatNewController.dart';
 import 'package:admin/controllers/boatsController.dart';
 import 'package:admin/controllers/dateController.dart';
 import 'package:admin/controllers/declarationController.dart';
+import 'package:admin/controllers/declarationEditController.dart';
 import 'package:admin/controllers/declarationInputController.dart';
 import 'package:admin/controllers/homeController.dart';
+import 'package:admin/controllers/marinEditController.dart';
 import 'package:admin/controllers/marinNewController.dart';
 import 'package:admin/controllers/marinsController.dart';
 import 'package:get/get.dart';
@@ -130,6 +133,33 @@ class ArticlesBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<ArticlesController>(
       () => ArticlesController(),
+    );
+  }
+}
+
+class BoatEditBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<BoatEditController>(
+      () => BoatEditController(),
+    );
+  }
+}
+
+class MarinEditBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<MarinEditController>(
+      () => MarinEditController(),
+    );
+  }
+}
+
+class DeclarationEditBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<DeclarationEditController>(
+      () => DeclarationEditController(),
     );
   }
 }

@@ -15,6 +15,11 @@ class ArticlesController extends GetxController {
     super.onClose();
   }
 
+  deleteArticle(id) async {
+    await FirebaseFirestore.instance.collection('articles').doc(id).delete();
+    Get.toNamed("/Articles");
+  }
+
   Future<QuerySnapshot<Article>> getArticles() async {
     return await FirebaseFirestore.instance
         .collection('articles')

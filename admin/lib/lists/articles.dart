@@ -31,6 +31,7 @@ class Articles extends GetView<ArticlesController> {
               crossAxisAlignment: WrapCrossAlignment.center,
               runSpacing: 20,
               spacing: 20,
+              verticalDirection: VerticalDirection.up,
               children: snapshot.data!.docs
                   .map((item) => ArticlePreview(item.data()))
                   .toList()

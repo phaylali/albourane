@@ -5,16 +5,50 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class BoatsController extends GetxController {
+  List<Boat> boatsAll = [];
+  List<Boat> boatQuery = [];
+  CollectionReference boatsCol = FirebaseFirestore.instance.collection('boats');
+  late TextEditingController filterController;
+
+  //var filter = '3'.obs;
+
   @override
   void onInit() async {
     super.onInit();
+    filterController = TextEditingController();
+
+    getAllBoats();
   }
 
   @override
   void onClose() {
     super.onClose();
+    filterController.dispose();
   }
 
+  getBoatsQuery(filtero) async {
+    boatQuery = boatsAll.where((element) {
+      return element.boatReference.contains(filtero) ||
+          element.boatName.contains(filtero);
+    }).toList();
+    notifyChildrens();
+  }
+
+  getAllBoats() async {
+    return await boatsCol
+        .withConverter<Boat>(
+          fromFirestore: (snapshots, _) => Boat.fromJson(snapshots.data()!),
+          toFirestore: (boat, _) => boat.toJson(),
+        )
+        .get()
+        .then((value) {
+      final by = value.docs;
+      by.forEach((element) {
+        boatsAll.add(element.data());
+      });
+    });
+  }
+/*
   Future<QuerySnapshot<Boat>> getBoats() async {
     return await FirebaseFirestore.instance
         .collection('boats')
@@ -23,6 +57,11 @@ class BoatsController extends GetxController {
           toFirestore: (movie, _) => movie.toJson(),
         )
         .get();
+  }*/
+
+  deleteBoat(id) async {
+    await FirebaseFirestore.instance.collection('boats').doc(id).delete();
+    Get.toNamed("/Boats");
   }
 
   Future<QuerySnapshot> getBoatRevenue(x) async {

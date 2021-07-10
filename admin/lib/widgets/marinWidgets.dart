@@ -1,6 +1,5 @@
 import 'package:admin/controllers/declarationController.dart';
 import 'package:admin/controllers/marinsController.dart';
-//import 'package:admin/forms/declarationNew.dart';
 import 'package:admin/models/marinModel.dart';
 import 'package:admin/resources/icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -47,26 +46,27 @@ class MarinInfo extends StatelessWidget {
                 ],
               ),
               onPressed: () {
-                Get.defaultDialog(
-                    title: 'كبر الصورة',
-                    content: InteractiveViewer(
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child: Image.network(
-                            marin.marinImage,
-                            width: context.width * 9 / 10,
-                            height: context.height * 7 / 10,
-                          )),
-                        ],
-                      ),
-                    ));
+                if (marin.marinImage.isNotEmpty)
+                  Get.defaultDialog(
+                      title: 'كبر الصورة',
+                      content: InteractiveViewer(
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: Image.network(
+                              marin.marinImage,
+                              width: context.width * 9 / 10,
+                              height: context.height * 7 / 10,
+                            )),
+                          ],
+                        ),
+                      ));
               },
             ),
           ),
           SizedBox(
             width: 300,
-            height: 300,
+            height: 400,
             child: OutlinedButton(
               child: ListView(
                 children: [
@@ -89,6 +89,9 @@ class MarinInfo extends StatelessWidget {
                         child: Text(
                           "النسب",
                           textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                       title: Center(
@@ -111,6 +114,9 @@ class MarinInfo extends StatelessWidget {
                         child: Text(
                           "الاسم",
                           textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                       title: Center(
@@ -133,6 +139,9 @@ class MarinInfo extends StatelessWidget {
                         child: Text(
                           "الضمان",
                           textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                       title: Center(
@@ -154,6 +163,9 @@ class MarinInfo extends StatelessWidget {
                         child: Text(
                           "البطاقة",
                           textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                       title: Center(
@@ -173,6 +185,9 @@ class MarinInfo extends StatelessWidget {
                         child: Text(
                           "اللوحة",
                           textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                       title: Center(
@@ -187,6 +202,28 @@ class MarinInfo extends StatelessWidget {
                       onTap: () {
                         controller.getListTile(marin.marinReference,
                             "تم نسخ الرقم التعريفي للبحار");
+                      }),
+                  ListTile(
+                      trailing: SizedBox(
+                        width: 80,
+                        child: Text(
+                          "الهاتف",
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                      title: Center(
+                        child: Text(
+                          marin.phone.isNotEmpty ? marin.phone : "لايوجد",
+                          maxLines: 1,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      onTap: () {
+                        controller.getListTile(
+                            marin.phone, "تم نسخ الهاتف للبحار");
                       }),
                 ],
               ),
@@ -215,8 +252,7 @@ class MarinInfo extends StatelessWidget {
                     ),
                     Expanded(
                       child: FutureBuilder<QuerySnapshot>(
-                          future: controller.getMarinRevenue(
-                              marin.marinReference.replaceAll('/', '-')),
+                          future: controller.getMarinRevenue(marin.url),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) {
                               return Center(
@@ -256,22 +292,93 @@ class MarinInfo extends StatelessWidget {
                   ],
                 )),
           ),
+          SizedBox(
+            width: 300,
+            height: 300,
+            child: OutlinedButton(
+              onPressed: null,
+              child: ListView(
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    child: Text(
+                      'اجراءات',
+                      textAlign: TextAlign.center,
+                    ),
+                    height: 20,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ListTile(
+                    leading: SizedBox(
+                      height: 40,
+                      width: 60,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: OmniIcons().document),
+                          Center(
+                              child: SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: OmniIcons().plus)),
+                        ],
+                      ),
+                    ),
+                    title: Text('حذف البحار'),
+                    onTap: () async {
+                      await controller.deleteMarin(marin.url);
+                      controller.marinsAll.clear();
+                      controller.marinQuery.clear();
+                      controller.getAllMarins();
+                    },
+                  ),
+                  ListTile(
+                    leading: SizedBox(
+                      height: 40,
+                      width: 60,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: OmniIcons().document),
+                          Center(
+                              child: SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: OmniIcons().plus)),
+                        ],
+                      ),
+                    ),
+                    title: Text('تصحيح المعلومات'),
+                    onTap: () {
+                      Get.toNamed('/MarinEdit?id=${marin.url}');
+                    },
+                  ),
+                ],
+              ),
+            ),
+          )
         ]);
   }
 }
 
 class MarinPreview extends StatelessWidget {
-  MarinPreview(this.marin);
+  MarinPreview(this.marin, this.click);
 
   final Marin marin;
+  final Function click;
 
   Widget get details {
     return OutlinedButton(
       onPressed: () {
-        final String id = marin.marinReference.replaceAll('/', '-');
-        Get.toNamed(
-          "/Seaman?id=$id",
-        );
+        click();
       },
       child: ListTile(
         leading: reference,

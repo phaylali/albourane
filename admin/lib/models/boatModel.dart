@@ -12,19 +12,20 @@ class Boat {
     required this.boatImage,
     required this.boatOwnerCni,
     required this.boatOwnerPhone,
+    required this.url,
   });
 
   Boat.fromJson(Map<String, Object?> json)
       : this(
-          boatImage: json['image']! as String,
-          boatName: json['name']! as String,
-          boatOwner: json['owner']! as String,
-          boatReference: json['reference']! as String,
-          boatRegion: json['region']! as String,
-          boatCoopPerc: json['sub']! as num,
-          boatOwnerCni: json['ownerCIN']! as String,
-          boatOwnerPhone: json['phone']! as String,
-        );
+            boatImage: json['image']! as String,
+            boatName: json['name']! as String,
+            boatOwner: json['owner']! as String,
+            boatReference: json['reference']! as String,
+            boatRegion: json['region']! as String,
+            boatCoopPerc: json['sub']! as num,
+            boatOwnerCni: json['ownerCIN']! as String,
+            boatOwnerPhone: json['phone']! as String,
+            url: json['url']! as String);
   Map<String, Object?> toJson() {
     return {
       'image': boatImage,
@@ -35,6 +36,7 @@ class Boat {
       'region': boatRegion,
       'ownerCIN': boatOwnerCni,
       'phone': boatOwnerPhone,
+      'url': url,
     };
   }
 
@@ -46,4 +48,5 @@ class Boat {
   final String boatOwnerCni;
   final num boatCoopPerc;
   final String boatOwnerPhone;
+  final String url;
 }

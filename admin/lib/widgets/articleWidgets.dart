@@ -2,13 +2,14 @@ import 'package:admin/controllers/articlesController.dart';
 import 'package:admin/models/articleModel.dart';
 import 'package:admin/resources/icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 
 class ArticlePreview extends StatelessWidget {
-  ArticlePreview(this.article);
+  ArticlePreview(
+    this.article,
+  );
 
   final Article article;
 
@@ -21,41 +22,53 @@ class ArticlePreview extends StatelessWidget {
             "/Article?id=$id",
           );
         },
-        child: Stack(
-          children: [
-            Image.network(
-              '${article.thumbnail}',
-              height: 500,
-              width: context.width * 0.8,
-            ),
-            SizedBox(
-              height: 100,
-              width: context.width * 0.8,
-              child: Container(
-                color: Colors.blue,
-                child: Column(
-                  children: [
-                    Text(
-                      '${article.title}',
-                      textScaleFactor: 1.2,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 3,
-                    ),
-                    Text(
-                      '${article.date}',
-                      textScaleFactor: 0.8,
-                    ),
-                  ],
+        child: SizedBox(
+          height: 500,
+          width: context.width * 0.8,
+          child: Column(
+            children: [
+              SizedBox(
+                //height: 100,
+                width: context.width * 0.8,
+                child: OutlinedButton(
+                  onPressed: null,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        '${article.title}',
+                        textScaleFactor: 1.5,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        textDirection: TextDirection.rtl,
+                      ),
+                      Text(
+                        '${article.date}',
+                        textScaleFactor: 0.8,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            )
-          ],
+              Image.network(
+                '${article.thumbnail}',
+                height: 400,
+                width: context.width * 0.75,
+              ),
+            ],
+          ),
         ));
   }
 }
 
 class ArticleInfo extends StatelessWidget {
-  ArticleInfo(this.article, this.controller);
+  ArticleInfo(
+    this.article,
+    this.controller,
+  );
 
   final Article article;
   final ArticlesController controller;
@@ -63,17 +76,21 @@ class ArticleInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final content = article.content;
-    return ListView(children: [
+    return ListView(shrinkWrap: true, children: [
+      SizedBox(width: context.width, height: 20),
       SizedBox(
         width: context.width,
         height: 100,
         child: OutlinedButton(
           child: ListTile(
-            trailing: SizedBox(width: 50, child: Text('العنوان')),
+            trailing: SizedBox(width: 100, child: Text('العنوان')),
             title: Text(
-              article.title.isNotEmpty ? article.title : "لايوجد",
+              '${article.title}',
               maxLines: 3,
+              textScaleFactor: 1.5,
+              overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
+              textDirection: TextDirection.rtl,
             ),
           ),
           onPressed: () {
@@ -81,17 +98,15 @@ class ArticleInfo extends StatelessWidget {
           },
         ),
       ),
-      SizedBox(
-        height: 20,
-      ),
+      SizedBox(width: context.width, height: 20),
       SizedBox(
         width: context.width,
         height: 50,
         child: OutlinedButton(
           child: ListTile(
-            trailing: SizedBox(width: 50, child: Text('تاريخ النشر')),
+            trailing: SizedBox(width: 100, child: Text('التاريخ')),
             title: Text(
-              article.date.isNotEmpty ? article.date : "لايوجد",
+              '${article.date}',
               maxLines: 1,
               textAlign: TextAlign.center,
             ),
@@ -101,11 +116,10 @@ class ArticleInfo extends StatelessWidget {
           },
         ),
       ),
-      SizedBox(
-        height: 20,
-      ),
+      SizedBox(width: context.width, height: 20),
       SizedBox(
         width: context.width,
+        height: context.height * 0.7,
         child: OutlinedButton(
           child: article.thumbnail.isNotEmpty
               ? Image.network(article.thumbnail)
@@ -128,13 +142,14 @@ class ArticleInfo extends StatelessWidget {
           },
         ),
       ),
-      SizedBox(
-        height: 20,
-      ),
+      SizedBox(width: context.width, height: 20),
       SizedBox(
           width: context.width,
-          child: Html(
-            data: """$content""",
+          child: OutlinedButton(
+            onPressed: null,
+            child: HtmlWidget(
+              '$content',
+            ),
           ))
     ]);
   }

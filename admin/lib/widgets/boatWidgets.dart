@@ -1,5 +1,6 @@
 import 'package:admin/controllers/boatsController.dart';
 import 'package:admin/controllers/declarationController.dart';
+import 'package:admin/controllers/declarationInputController.dart';
 import 'package:admin/models/boatModel.dart';
 import 'package:admin/resources/icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -88,6 +89,9 @@ class BoatInfo extends StatelessWidget {
                         child: Text(
                           "الاسم",
                           textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                       title: Center(
@@ -107,6 +111,9 @@ class BoatInfo extends StatelessWidget {
                         child: Text(
                           "اللوحة",
                           textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                       title: Center(
@@ -127,6 +134,9 @@ class BoatInfo extends StatelessWidget {
                         width: 90,
                         child: Text(
                           "المنطقة",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                           textDirection: TextDirection.rtl,
                         ),
                       ),
@@ -149,6 +159,9 @@ class BoatInfo extends StatelessWidget {
                         child: Text(
                           "المالك",
                           textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                       title: Center(
@@ -168,6 +181,9 @@ class BoatInfo extends StatelessWidget {
                         child: Text(
                           "بطاقته",
                           textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                       title: Center(
@@ -189,6 +205,9 @@ class BoatInfo extends StatelessWidget {
                         child: Text(
                           "هاتفه",
                           textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                       title: Center(
@@ -231,8 +250,7 @@ class BoatInfo extends StatelessWidget {
                     ),
                     Expanded(
                       child: FutureBuilder<QuerySnapshot>(
-                          future: controller.getBoatRevenue(
-                              boat.boatReference.replaceAll('/', '-')),
+                          future: controller.getBoatRevenue(boat.url),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) {
                               return Center(
@@ -248,8 +266,7 @@ class BoatInfo extends StatelessWidget {
                                 itemCount: snapshot.data!.size,
                                 itemBuilder: (context, index) {
                                   final month = snapshot.data!.docs[index].id;
-                                  final id =
-                                      boat.boatReference.replaceAll('/', '-');
+                                  final id = boat.url;
                                   return Center(
                                     child: ListTile(
                                       title: Text(
@@ -257,10 +274,33 @@ class BoatInfo extends StatelessWidget {
                                         textAlign: TextAlign.center,
                                       ),
                                       onTap: () async {
-                                        await Get.delete<
-                                            DeclarationController>();
-                                        Get.toNamed(
-                                          "/Declaration?id=$id&m=$month",
+                                        Get.defaultDialog(
+                                          title:
+                                              'هل تريد تصحيح التقرير ام انتاجه؟',
+                                          textConfirm: 'انتاج',
+                                          middleText: '$id : $month',
+                                          onConfirm: () async {
+                                            await Get.delete<
+                                                DeclarationController>();
+                                            Get.toNamed(
+                                              "/Declaration?id=$id&m=$month",
+                                            );
+                                          },
+                                          actions: [
+                                            OutlinedButton(
+                                                onPressed: () async {
+                                                  await Get.delete<
+                                                      DeclarationInputController>();
+                                                  Get.toNamed(
+                                                    "/DeclarationEdit?id=$id&m=$month",
+                                                  );
+                                                },
+                                                child: Text('تصحيح')),
+                                          ],
+                                          textCancel: 'الغاء',
+                                          /* onCancel: () {
+              Get.back();
+            }*/
                                         );
                                       },
                                     ),
@@ -311,8 +351,56 @@ class BoatInfo extends StatelessWidget {
                     ),
                     title: Text('تصريح جديد'),
                     onTap: () {
-                      final id = boat.boatReference.replaceAll('/', '-');
-                      Get.toNamed('/NewDeclaration?id=$id');
+                      Get.toNamed('/NewDeclaration?id=${boat.url}');
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ListTile(
+                    leading: SizedBox(
+                      height: 40,
+                      width: 60,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: OmniIcons().document),
+                          Center(
+                              child: SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: OmniIcons().plus)),
+                        ],
+                      ),
+                    ),
+                    title: Text('حذف القارب'),
+                    onTap: () {
+                      controller.deleteBoat(boat.url);
+                    },
+                  ),
+                  ListTile(
+                    leading: SizedBox(
+                      height: 40,
+                      width: 60,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: OmniIcons().document),
+                          Center(
+                              child: SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: OmniIcons().plus)),
+                        ],
+                      ),
+                    ),
+                    title: Text('تصحيح المعلومات'),
+                    onTap: () {
+                      Get.toNamed('/BoatEdit?id=${boat.url}');
                     },
                   ),
                 ],
@@ -379,7 +467,7 @@ class BoatPreview extends StatelessWidget {
     return SizedBox(
       child: details,
       width: 300,
-      height: 100,
+      height: 120,
     );
   }
 }

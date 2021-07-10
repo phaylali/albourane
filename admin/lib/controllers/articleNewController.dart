@@ -14,6 +14,17 @@ class ArticleInputController extends GetxController {
 
   final translator = GoogleTranslator();
 
+  getArticle(x) async {
+    return await FirebaseFirestore.instance
+        .collection('articles')
+        .doc(x)
+        .withConverter<Article>(
+          fromFirestore: (snapshots, _) => Article.fromJson(snapshots.data()!),
+          toFirestore: (article, _) => article.toJson(),
+        )
+        .get();
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -32,21 +43,26 @@ class ArticleInputController extends GetxController {
   void onClose() {
     thumbController.dispose();
     titleController.dispose();
+  }
 
+  void onClear() {
     contentController.clear();
+    thumbController.clear();
+    titleController.clear();
   }
 
   addArticle() async {
-    final title = translator
-        .translate(titleController.text, from: 'ar', to: 'en')
-        .toString()
-        .replaceAll(' ', '-')
-        .replaceAll(':', '-');
+    final title =
+        await translator.translate(titleController.text, from: 'ar', to: 'en');
+
     final dateNow = intl.DateFormat.yMd().add_jm().format(DateTime.now());
 
     /*DateFormat('dd/MM/yyyy : ').format(DateTime(
         DateTime.now().year, DateTime.now().month, DateTime.now().day));*/
-    return await articlesCol.doc(title).get().then((value) {
+    return await articlesCol
+        .doc(title.toString().replaceAll(' ', '-').replaceAll(':', '-'))
+        .get()
+        .then((value) {
       if (value.exists) {
         Get.snackbar("", "",
             titleText: Text(
@@ -60,6 +76,8 @@ class ArticleInputController extends GetxController {
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.center,
             ));
+        Get.toNamed(
+            "/Article?id=${title.toString().replaceAll(' ', '-').replaceAll(':', '-')}");
       } else {
         return contentController.getText().then((value) {
           articlesCol
@@ -68,13 +86,16 @@ class ArticleInputController extends GetxController {
                     Article.fromJson(snapshots.data()!),
                 toFirestore: (article, _) => article.toJson(),
               )
-              .doc(title)
+              .doc(title.toString().replaceAll(' ', '-').replaceAll(':', '-'))
               .set(Article(
                   content: value,
                   date: dateNow,
                   thumbnail: thumbController.text,
                   title: titleController.text,
-                  url: title))
+                  url: title
+                      .toString()
+                      .replaceAll(' ', '-')
+                      .replaceAll(':', '-')))
               .then((valuez) {
             Get.snackbar("", "",
                 titleText: Text(
@@ -88,6 +109,7 @@ class ArticleInputController extends GetxController {
                   textDirection: TextDirection.rtl,
                   textAlign: TextAlign.center,
                 ));
+            onClear();
           });
         });
       }

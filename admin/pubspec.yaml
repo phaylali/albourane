@@ -24,10 +24,12 @@ dependencies:
   flutter_date_pickers: 
   intl:
   file_picker:
-  html_editor_enhanced:
-  flutter_colorpicker: 0.4.0
+  html_editor_enhanced: ^2.2.0
+  flutter_colorpicker: ^0.4.0
   translator: 
-  flutter_html:
+  flutter_widget_from_html_core: 
+  pointer_interceptor:
+
 
   # Firebase Packages
   firebase_auth: 
@@ -44,6 +46,7 @@ flutter:
   uses-material-design: true
   assets:
     - res/icons/
+    - assets/
     
   fonts:
     - family: Tajawal

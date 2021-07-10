@@ -1,14 +1,17 @@
-import 'package:admin/controllers/marinNewController.dart';
+import 'package:admin/controllers/boatEditController.dart';
+
 import 'package:admin/widgets/mainBody.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class MarinInput extends GetView<MarinInputController> {
+class BoatEdit extends GetView<BoatEditController> {
+  final String id = Get.parameters['id']!;
   @override
   Widget build(BuildContext context) {
+    controller.setControllers(id);
     return MainBody(
-      title: 'بحار جديد',
+      title: 'تصحيح القارب',
       child: Wrap(
         alignment: WrapAlignment.spaceEvenly,
         crossAxisAlignment: WrapCrossAlignment.center,
@@ -22,11 +25,12 @@ class MarinInput extends GetView<MarinInputController> {
                 onPressed: null,
                 child: ListTile(
                   title: TextFormField(
-                      decoration: InputDecoration(
-                        labelText: "الاسم العائلي",
-                      ),
-                      keyboardType: TextInputType.text,
-                      controller: controller.lastNameController),
+                    decoration: InputDecoration(
+                      labelText: "الاسم",
+                    ),
+                    keyboardType: TextInputType.name,
+                    controller: controller.nameController,
+                  ),
                 )),
           ),
           SizedBox(
@@ -36,11 +40,13 @@ class MarinInput extends GetView<MarinInputController> {
                 onPressed: null,
                 child: ListTile(
                   title: TextFormField(
-                      decoration: InputDecoration(
-                        labelText: "الاسم الشخصي",
-                      ),
-                      keyboardType: TextInputType.name,
-                      controller: controller.firstNameController),
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      labelText: "التسجيل",
+                    ),
+                    keyboardType: TextInputType.number,
+                    controller: controller.referenceController,
+                  ),
                 )),
           ),
           SizedBox(
@@ -51,10 +57,25 @@ class MarinInput extends GetView<MarinInputController> {
                 child: ListTile(
                   title: TextFormField(
                     decoration: InputDecoration(
-                      labelText: "التسجيل",
+                      labelText: "المنطقة",
                     ),
-                    keyboardType: TextInputType.phone,
-                    controller: controller.referenceController,
+                    keyboardType: TextInputType.name,
+                    controller: controller.regionController,
+                  ),
+                )),
+          ),
+          SizedBox(
+            width: 300,
+            height: 70,
+            child: OutlinedButton(
+                onPressed: null,
+                child: ListTile(
+                  title: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: "نسبة الاقتطاع",
+                    ),
+                    keyboardType: TextInputType.number,
+                    controller: controller.percController,
                   ),
                 )),
           ),
@@ -81,10 +102,10 @@ class MarinInput extends GetView<MarinInputController> {
                 child: ListTile(
                   title: TextFormField(
                     decoration: InputDecoration(
-                      labelText: "الضمان الاجتماعي",
+                      labelText: "اسم المالك",
                     ),
-                    //keyboardType: TextInputType.name,
-                    controller: controller.cnssController,
+                    keyboardType: TextInputType.name,
+                    controller: controller.ownerController,
                   ),
                 )),
           ),
@@ -124,11 +145,11 @@ class MarinInput extends GetView<MarinInputController> {
                 width: 300,
                 child: OutlinedButton(
                     onPressed: () {
-                      controller.addMarin();
+                      controller.correctBoat();
                     },
                     child: ListTile(
                       title: Text(
-                        'اضف البحار',
+                        'صحح القارب',
                         textAlign: TextAlign.center,
                       ),
                     ))),

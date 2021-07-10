@@ -1,5 +1,4 @@
-import 'package:admin/controllers/dateController.dart';
-import 'package:admin/controllers/declarationInputController.dart';
+import 'package:admin/controllers/declarationEditController.dart';
 import 'package:admin/models/boatModel.dart';
 import 'package:admin/models/monthModel.dart';
 import 'package:admin/widgets/mainBody.dart';
@@ -8,14 +7,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:flutter_date_pickers/flutter_date_pickers.dart' as dp;
 
-class DeclarationInput extends GetView<DeclarationInputController> {
+class DeclarationEdit extends GetView<DeclarationEditController> {
   final String id = Get.parameters['id']!;
+  final String month = Get.parameters['m']!;
   @override
   Widget build(BuildContext context) {
+    controller.setControllers(id, month);
     return MainBody(
-        title: 'تصريح جديد',
+        title: 'تصحيح التصريح',
         child: FutureBuilder<DocumentSnapshot<Boat>>(
             future: controller.getBoat(id),
             builder: (context, snapshot) {
@@ -141,18 +141,11 @@ class DeclarationInput extends GetView<DeclarationInputController> {
                     child: OutlinedButton(
                         onPressed: null,
                         child: ListTile(
-                          trailing: Text(
-                            "تاريخ البداية",
-                            textScaleFactor: 0.9,
-                          ),
-                          title: GetX<DateController>(
-                            builder: (d) {
-                              return Text(
-                                '${d.firstDayOfMonthText}',
-                              );
-                            },
-                          ),
-                        )),
+                            trailing: Text(
+                              "تاريخ البداية",
+                              textScaleFactor: 0.9,
+                            ),
+                            title: Text(controller.start.value))),
                   ),
                   SizedBox(
                     width: 300,
@@ -160,41 +153,17 @@ class DeclarationInput extends GetView<DeclarationInputController> {
                     child: OutlinedButton(
                         onPressed: null,
                         child: ListTile(
-                          trailing: Text(
-                            "تاريخ النهاية",
-                            textScaleFactor: 0.9,
-                          ),
-                          title: GetX<DateController>(
-                            builder: (d) {
-                              return Text(
-                                '${d.lastDayOfMonthText}',
-                              );
-                            },
-                          ),
-                        )),
+                            trailing: Text(
+                              "تاريخ النهاية",
+                              textScaleFactor: 0.9,
+                            ),
+                            title: Text(controller.finish.value))),
                   ),
-                  SizedBox(
-                      width: 300,
-                      height: 300,
-                      child: OutlinedButton(
-                        onPressed: null,
-                        child: GetX<DateController>(
-                          builder: (d) {
-                            return dp.MonthPicker(
-                              selectedDate: d.dateNow.value,
-                              onChanged: d.renew,
-                              firstDate: d.firstDate.value,
-                              lastDate: d.lastDate.value,
-                              datePickerStyles: d.styles.value,
-                            );
-                          },
-                        ),
-                      )),
                   SizedBox(
                     child: OutlinedButton(
                         onPressed: null,
                         child: FutureBuilder<DocumentSnapshot<Month>>(
-                            future: controller.getOldMarins(b.url),
+                            future: controller.getOldMarins(id, month),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
                                 return Center(
@@ -272,7 +241,7 @@ class DeclarationInput extends GetView<DeclarationInputController> {
                           SizedBox(
                             height: 20,
                           ),
-                          GetBuilder<DeclarationInputController>(
+                          GetBuilder<DeclarationEditController>(
                             builder: (_) {
                               return Wrap(
                                 alignment: WrapAlignment.spaceEvenly,
@@ -325,7 +294,7 @@ class DeclarationInput extends GetView<DeclarationInputController> {
                             height: 20,
                           ),
                           SingleChildScrollView(
-                            child: GetBuilder<DeclarationInputController>(
+                            child: GetBuilder<DeclarationEditController>(
                               builder: (_) {
                                 return Wrap(
                                   alignment: WrapAlignment.spaceEvenly,
@@ -333,7 +302,6 @@ class DeclarationInput extends GetView<DeclarationInputController> {
                                   runSpacing: 20,
                                   spacing: 20,
                                   children: _.marinQuery
-                                      .take(6)
                                       .map((item) =>
                                           MarinAdd(item, _.marinFinal, _))
                                       .toList()
@@ -356,18 +324,16 @@ class DeclarationInput extends GetView<DeclarationInputController> {
                         width: 300,
                         child: OutlinedButton(
                             onPressed: () {
-                              DateController d = Get.put(DateController());
-
                               controller.addDeclaration(
-                                  '${b.url}',
-                                  '${d.selectedMonthText.replaceAll('/', '-')}',
-                                  '${d.firstDayOfMonthText}',
-                                  '${d.lastDayOfMonthText}',
+                                  '$id',
+                                  '$month',
+                                  '${controller.start.value}',
+                                  '${controller.finish.value}',
                                   b.boatCoopPerc);
                             },
                             child: ListTile(
                               title: Text(
-                                'انتج التقرير',
+                                'صحح التقرير',
                                 textAlign: TextAlign.center,
                               ),
                             ))),

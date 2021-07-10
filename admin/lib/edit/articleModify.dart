@@ -1,4 +1,4 @@
-import 'dart:collection';
+/*import 'dart:collection';
 
 import 'package:admin/controllers/articleNewController.dart';
 import 'package:admin/resources/icons.dart';
@@ -10,12 +10,11 @@ import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 // ignore: must_be_immutable
-class ArticleInput extends GetView<ArticleInputController> {
+class ArticleModify extends GetView<ArticleInputController> {
+  final String id = Get.parameters['id']!;
   @override
   Widget build(BuildContext context) {
-    /*if (!kIsWeb) {
-      controller.contentController.clearFocus();
-    }*/
+    controller.getArticle(id);
     return MainBody(
       title: 'مقال جديد',
       child: Wrap(
@@ -80,7 +79,7 @@ class ArticleInput extends GetView<ArticleInputController> {
                 width: 300,
                 child: OutlinedButton(
                     onPressed: () {
-                      controller.addArticle();
+                      controller.addArticle()();
                     },
                     child: ListTile(
                       title: Text(
@@ -239,3 +238,4 @@ class Editor extends StatelessWidget {
     );
   }
 }
+*/

@@ -42,6 +42,16 @@ class MarinInputController extends GetxController {
     imgController.dispose();
   }
 
+  void onClear() {
+    phoneController.clear();
+    firstNameController.clear();
+    lastNameController.clear();
+    referenceController.clear();
+    cnssController.clear();
+    cniController.clear();
+    imgController.clear();
+  }
+
   addMarin() async {
     final id = referenceController.text.replaceAll('/', '-');
 
@@ -59,6 +69,7 @@ class MarinInputController extends GetxController {
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.center,
             ));
+        Get.toNamed('/MarinEdit?id=$id');
       } else {
         return seamenCol
             .withConverter<Marin>(
@@ -74,20 +85,26 @@ class MarinInputController extends GetxController {
               marinLastName: lastNameController.text,
               marinImage: imgController.text,
               marinReference: referenceController.text,
+              url: id,
+              phone: phoneController.text,
             ))
             .then((value) {
-          Get.snackbar("", "",
-              titleText: Text(
-                "تم تسجيل البحار بنجاح",
-                textDirection: TextDirection.rtl,
-                textAlign: TextAlign.center,
-              ),
-              messageText: Text(
-                ' ',
-                textScaleFactor: 0.7,
-                textDirection: TextDirection.rtl,
-                textAlign: TextAlign.center,
-              ));
+          Get.snackbar(
+            "",
+            "",
+            titleText: Text(
+              "تم تسجيل البحار بنجاح",
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.center,
+            ),
+            messageText: Text(
+              ' ',
+              textScaleFactor: 0.7,
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.center,
+            ),
+          );
+          onClear();
         });
       }
     });

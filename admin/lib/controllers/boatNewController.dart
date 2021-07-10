@@ -44,6 +44,16 @@ class BoatInputController extends GetxController {
     imgController.dispose();
   }
 
+  void onClear() {
+    nameController.clear();
+    referenceController.clear();
+    ownerController.clear();
+    cniController.clear();
+    phoneController.clear();
+    percController.clear();
+    imgController.clear();
+  }
+
   addBoat() async {
     final perc = double.parse(percController.text);
     final id = referenceController.text.replaceAll('/', '-');
@@ -62,6 +72,7 @@ class BoatInputController extends GetxController {
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.center,
             ));
+        Get.toNamed('/BoatEdit?id=$id');
       } else {
         return boatsCol
             .withConverter<Boat>(
@@ -77,7 +88,8 @@ class BoatInputController extends GetxController {
                 boatOwnerPhone: phoneController.text,
                 boatRegion: regionController.text,
                 boatCoopPerc: perc,
-                boatImage: imgController.text))
+                boatImage: imgController.text,
+                url: id))
             .then((value) {
           Get.snackbar("", "",
               titleText: Text(
@@ -91,6 +103,7 @@ class BoatInputController extends GetxController {
                 textDirection: TextDirection.rtl,
                 textAlign: TextAlign.center,
               ));
+          onClear();
         });
       }
     });

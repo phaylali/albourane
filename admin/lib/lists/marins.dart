@@ -1,9 +1,9 @@
 import 'package:admin/controllers/marinsController.dart';
-import 'package:admin/models/marinModel.dart';
+
 import 'package:admin/widgets/mainBody.dart';
 import 'package:admin/widgets/marinWidgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class Marins extends GetView<MarinsController> {
@@ -12,33 +12,58 @@ class Marins extends GetView<MarinsController> {
   @override
   Widget build(BuildContext context) {
     return MainBody(
-      title: "البحارة",
-      child: FutureBuilder<QuerySnapshot<Marin>>(
-        future: controller.getMarins(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Center(
-              child: Text(snapshot.error.toString()),
-            );
-          }
-
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (snapshot.connectionState == ConnectionState.done)
-            return Wrap(
-              alignment: WrapAlignment.spaceEvenly,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              runSpacing: 20,
-              spacing: 20,
-              children: snapshot.data!.docs
-                  .map((item) => MarinPreview(item.data()))
-                  .toList()
-                  .cast<Widget>(),
-            );
-          return const Center(child: CircularProgressIndicator());
-        },
-      ),
-    );
+        title: "البحارة",
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              OutlinedButton(
+                  onPressed: null,
+                  child: ListTile(
+                    title: TextFormField(
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                            RegExp("[a-zA-Z0-9-/]")),
+                      ],
+                      decoration: InputDecoration(
+                        labelText: "اختر البحارة",
+                      ),
+                      controller: controller.filterController,
+                      onChanged: (value) {
+                        controller.getMarinsQuery(value);
+                        controller.update();
+                      },
+                    ),
+                  )),
+              SizedBox(
+                height: 20,
+              ),
+              GetBuilder<MarinsController>(
+                builder: (controller) {
+                  return Wrap(
+                    alignment: WrapAlignment.spaceEvenly,
+                    direction: Axis.horizontal,
+                    runSpacing: 20,
+                    spacing: 20,
+                    children: controller.marinQuery
+                        .take(6)
+                        .map((item) => MarinPreview(item, () {
+                              Get.toNamed(
+                                "/Seaman?id=${item.url}",
+                              );
+                            }))
+                        .toList()
+                        .cast<Widget>(),
+                  );
+                },
+              ),
+              SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
+        ));
   }
 }

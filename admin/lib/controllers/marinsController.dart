@@ -5,14 +5,54 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class MarinsController extends GetxController {
+  List<Marin> marinsAll = [];
+  List<Marin> marinQuery = [];
+  CollectionReference seamenCol =
+      FirebaseFirestore.instance.collection('seamen');
+  late TextEditingController filterController;
+
+  var filter = '3'.obs;
+
   @override
   void onInit() async {
     super.onInit();
+    filterController = TextEditingController();
+    getAllMarins();
   }
 
   @override
   void onClose() {
     super.onClose();
+    filterController.dispose();
+  }
+
+  getMarinsQuery(filtero) async {
+    marinQuery = marinsAll.where((element) {
+      return element.marinReference.contains(filtero) ||
+          element.marinFirstName.contains(filtero) ||
+          element.marinLastName.contains(filtero);
+    }).toList();
+    notifyChildrens();
+  }
+
+  getAllMarins() async {
+    return await seamenCol
+        .withConverter<Marin>(
+          fromFirestore: (snapshots, _) => Marin.fromJson(snapshots.data()!),
+          toFirestore: (marin, _) => marin.toJson(),
+        )
+        .get()
+        .then((value) {
+      final by = value.docs;
+      by.forEach((element) {
+        marinsAll.add(element.data());
+      });
+    });
+  }
+
+  deleteMarin(id) async {
+    await FirebaseFirestore.instance.collection('seamen').doc(id).delete();
+    Get.toNamed("/Seamen");
   }
 
   Future<QuerySnapshot<Marin>> getMarins() async {
@@ -20,7 +60,7 @@ class MarinsController extends GetxController {
         .collection('seamen')
         .withConverter<Marin>(
           fromFirestore: (snapshots, _) => Marin.fromJson(snapshots.data()!),
-          toFirestore: (movie, _) => movie.toJson(),
+          toFirestore: (marin, _) => marin.toJson(),
         )
         .get();
   }

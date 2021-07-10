@@ -1,17 +1,18 @@
-import 'package:admin/models/boatModel.dart';
 import 'package:admin/models/marinModel.dart';
-import 'package:admin/models/marinMonthModel.dart';
-import 'package:admin/models/monthModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:admin/models/boatModel.dart';
+import 'package:admin/models/marinMonthModel.dart';
+import 'package:admin/models/monthModel.dart';
 
-class DeclarationInputController extends GetxController {
+class DeclarationEditController extends GetxController {
   late TextEditingController revenueController,
       salesController,
       carbController,
       filterController;
-
+  var start = ''.obs;
+  var finish = ''.obs;
   RxDouble revenue = 0.0.obs;
   RxInt sales = 0.obs;
   RxDouble carb = 0.0.obs;
@@ -19,6 +20,7 @@ class DeclarationInputController extends GetxController {
   List<Marin> marinzo = [];
   List<Marin> marinQuery = [];
   List<Marin> marinFinal = [];
+  List<Marin> marinOld = [];
   var baharaz = [].obs;
 
   CollectionReference boatsCol = FirebaseFirestore.instance.collection('boats');
@@ -32,7 +34,6 @@ class DeclarationInputController extends GetxController {
     salesController = TextEditingController();
     carbController = TextEditingController();
     filterController = TextEditingController();
-
     getMarins();
   }
 
@@ -58,6 +59,34 @@ class DeclarationInputController extends GetxController {
     baharaz.clear();
   }
 
+  setControllers(boat, month) async {
+    return await boatsCol
+        .doc(boat)
+        .collection('revenue')
+        .doc(month)
+        .withConverter<Month>(
+          fromFirestore: (snapshots, _) => Month.fromJson(snapshots.data()!),
+          toFirestore: (month, _) => month.toJson(),
+        )
+        .get()
+        .then((value) {
+      final month = value.data();
+      if (month != null) {
+        revenueController.value =
+            TextEditingValue(text: month.monthRevenue.toString());
+        salesController.value =
+            TextEditingValue(text: month.monthSales.toString());
+        carbController.value =
+            TextEditingValue(text: month.monthCarb.toString());
+
+        start.value = month.monthStart;
+        finish.value = month.monthFinish;
+      } else {
+        print('fuck');
+      }
+    });
+  }
+
   getMarins() async {
     return await seamenCol
         .withConverter<Marin>(
@@ -73,13 +102,11 @@ class DeclarationInputController extends GetxController {
     });
   }
 
-  Future<DocumentSnapshot<Month>> getOldMarins(boat) async {
-    final hy = await boatsCol.doc(boat).collection('revenue').get();
-
+  Future<DocumentSnapshot<Month>> getOldMarins(boat, month) async {
     return boatsCol
         .doc(boat)
         .collection('revenue')
-        .doc(hy.docs.last.id)
+        .doc(month)
         .withConverter<Month>(
           fromFirestore: (snapshots, _) => Month.fromJson(snapshots.data()!),
           toFirestore: (month, _) => month.toJson(),
@@ -117,63 +144,43 @@ class DeclarationInputController extends GetxController {
         .doc(doc)
         .get()
         .then((value) {
-      if (value.exists) {
-        Get.snackbar("", "",
-            titleText: Text(
-              "هذا التقرير موجود",
-              textDirection: TextDirection.rtl,
-              textAlign: TextAlign.center,
-            ),
-            messageText: Text(
-              "لا يمكن اضافته مرة ثانية",
-              textScaleFactor: 0.7,
-              textDirection: TextDirection.rtl,
-              textAlign: TextAlign.center,
-            ));
-        Get.toNamed(
-          "/DeclarationEdit?id=$boat&m=$doc",
-        );
-      } else {
-        boatsCol
-            .doc(boat)
-            .collection('revenue')
-            .withConverter<Month>(
-              fromFirestore: (snapshots, _) =>
-                  Month.fromJson(snapshots.data()!),
-              toFirestore: (month, _) => month.toJson(),
-            )
-            .doc(doc)
-            .set(Month(
-                bahara: baharaz,
-                monthFinish: finish,
-                monthEquipageNumber: marinFinal.length,
-                monthRevenue: rev,
-                monthSales: salezo,
-                monthStart: start,
-                monthAmo: amo,
-                monthAutres: 0.00,
-                monthCarb: carbo,
-                monthChargesCommun: charges,
-                monthCnss: cnss,
-                monthCoop: coop,
-                monthEquipage: equipage,
-                monthEquipagePerc: 60,
-                monthNet: net,
-                monthPatron: patron,
-                monthPatronPerc: 40,
-                monthPeage: 0.00,
-                monthPie: pie,
-                monthTaxeHalle: taxehalle,
-                monthTaxeRegion: taxeregion,
-                monthTotalCnss: totalcnss,
-                monthTotalGlobal: totalglobal,
-                url: doc));
-      }
+      boatsCol
+          .doc(boat)
+          .collection('revenue')
+          .withConverter<Month>(
+            fromFirestore: (snapshots, _) => Month.fromJson(snapshots.data()!),
+            toFirestore: (month, _) => month.toJson(),
+          )
+          .doc(doc)
+          .set(Month(
+              bahara: baharaz,
+              monthFinish: finish,
+              monthEquipageNumber: marinFinal.length,
+              monthRevenue: rev,
+              monthSales: salezo,
+              monthStart: start,
+              monthAmo: amo,
+              monthAutres: 0.00,
+              monthCarb: carbo,
+              monthChargesCommun: charges,
+              monthCnss: cnss,
+              monthCoop: coop,
+              monthEquipage: equipage,
+              monthEquipagePerc: 60,
+              monthNet: net,
+              monthPatron: patron,
+              monthPatronPerc: 40,
+              monthPeage: 0.00,
+              monthPie: pie,
+              monthTaxeHalle: taxehalle,
+              monthTaxeRegion: taxeregion,
+              monthTotalCnss: totalcnss,
+              monthTotalGlobal: totalglobal,
+              url: doc));
     }).then((value) {
       marinFinal.forEach((element) async {
-        final mar = element.marinReference.replaceAll('/', '-');
         seamenCol
-            .doc(mar)
+            .doc(element.url)
             .collection('revenue')
             .withConverter<MarinMonth>(
               fromFirestore: (snapshots, _) =>
@@ -186,7 +193,7 @@ class DeclarationInputController extends GetxController {
     }).then((value) {
       Get.snackbar("", "",
           titleText: Text(
-            "تم تسجيل التقرير بنجاح",
+            "تم تصحيح التقرير بنجاح",
             textDirection: TextDirection.rtl,
             textAlign: TextAlign.center,
           ),

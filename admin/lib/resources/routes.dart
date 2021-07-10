@@ -1,3 +1,6 @@
+import 'package:admin/edit/boatEdit.dart';
+import 'package:admin/edit/declarationEdit.dart';
+import 'package:admin/edit/marinEdit.dart';
 import 'package:admin/forms/articleNew.dart';
 import 'package:admin/forms/boatNew.dart';
 import 'package:admin/forms/declarationNew.dart';
@@ -20,10 +23,13 @@ abstract class Routes {
   static const BOATS = _Paths.BOATS;
   static const BOAT = _Paths.BOAT;
   static const BOATNEW = _Paths.BOATNEW;
+  static const BOATEDIT = _Paths.BOATEDIT;
+  static const MARINEDIT = _Paths.MARINEDIT;
   static const MARINNEW = _Paths.MARINNEW;
   static const SEAMEN = _Paths.SEAMEN;
   static const SEAMAN = _Paths.SEAMAN;
   static const DECLARATION = _Paths.DECLARATION;
+  static const DECLARATIONEDIT = _Paths.DECLARATIONEDIT;
   static const UNKNOWN = _Paths.UNKNOWN;
   static const DECLARATIONNEW = _Paths.DECLARATIONNEW;
   static const ARTICLE = _Paths.ARTICLE;
@@ -43,9 +49,12 @@ abstract class _Paths {
   static const DECLARATION = '/Declaration';
   static const UNKNOWN = '/Error404';
   static const DECLARATIONNEW = '/NewDeclaration';
-  static const ARTICLENEW = '/NewDeclaration';
+  static const ARTICLENEW = '/NewArticle';
   static const ARTICLES = '/News';
   static const ARTICLE = '/Article';
+  static const BOATEDIT = '/BoatEdit';
+  static const MARINEDIT = '/MarinEdit';
+  static const DECLARATIONEDIT = '/DeclarationEdit';
 }
 
 class AppPages {
@@ -105,5 +114,17 @@ class AppPages {
         name: _Paths.ARTICLENEW,
         page: () => ArticleInput(),
         binding: ArticleInputBinding()),
+    GetPage(
+        name: _Paths.BOATEDIT,
+        page: () => BoatEdit(),
+        binding: BoatEditBinding()),
+    GetPage(
+        name: _Paths.MARINEDIT,
+        page: () => MarinEdit(),
+        binding: MarinEditBinding()),
+    GetPage(
+        name: _Paths.DECLARATIONEDIT,
+        page: () => DeclarationEdit(),
+        binding: DeclarationEditBinding()),
   ];
 }
