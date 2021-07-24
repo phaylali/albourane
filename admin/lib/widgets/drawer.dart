@@ -1,3 +1,4 @@
+import 'package:admin/controllers/homeController.dart';
 import 'package:admin/resources/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -162,7 +163,7 @@ class CustomDrawer extends StatelessWidget {
                   leading:
                       SizedBox(height: 40, width: 40, child: OmniIcons().login),
                   onTap: () {
-                    //Get.toNamed('/SignIn');
+                    Get.toNamed('/Login');
                   },
                 ),
                 ListTile(
@@ -173,7 +174,7 @@ class CustomDrawer extends StatelessWidget {
                   leading: SizedBox(
                       height: 40, width: 40, child: OmniIcons().logout),
                   onTap: () {
-                    //Get.to(GotToHome());
+                    Get.put(HomeController()).signOut();
                   },
                 ),
               ],

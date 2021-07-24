@@ -29,6 +29,7 @@ dependencies:
   translator: 
   flutter_widget_from_html_core: 
   pointer_interceptor:
+  equatable:
 
 
   # Firebase Packages

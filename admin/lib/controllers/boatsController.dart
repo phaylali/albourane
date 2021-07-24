@@ -10,7 +10,7 @@ class BoatsController extends GetxController {
   CollectionReference boatsCol = FirebaseFirestore.instance.collection('boats');
   late TextEditingController filterController;
 
-  //var filter = '3'.obs;
+  var boatsNumber = 0.obs;
 
   @override
   void onInit() async {
@@ -43,6 +43,7 @@ class BoatsController extends GetxController {
         .get()
         .then((value) {
       final by = value.docs;
+      boatsNumber.value = by.length;
       by.forEach((element) {
         boatsAll.add(element.data());
       });

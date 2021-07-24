@@ -8,6 +8,7 @@ import 'package:admin/forms/marinNew.dart';
 import 'package:admin/lists/articles.dart';
 import 'package:admin/pages/articlePage.dart';
 import 'package:admin/pages/home.dart';
+import 'package:admin/pages/login.dart';
 import 'package:admin/resources/bindings.dart';
 import 'package:admin/resources/error404.dart';
 import 'package:admin/lists/boats.dart';
@@ -39,7 +40,7 @@ abstract class Routes {
 
 abstract class _Paths {
   static const HOME = '/';
-  static const LOGIN = '/SignIn';
+  static const LOGIN = '/Login';
   static const BOATS = '/Boats';
   static const BOAT = '/Boat';
   static const BOATNEW = '/NewBoat';
@@ -65,6 +66,11 @@ class AppPages {
     GetPage(
       name: _Paths.HOME,
       page: () => HomePage(),
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.LOGIN,
+      page: () => LoginPage(),
       binding: HomeBinding(),
     ),
     GetPage(name: _Paths.BOATS, page: () => Boats(), binding: BoatsBinding()),

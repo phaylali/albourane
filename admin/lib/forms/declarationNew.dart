@@ -1,5 +1,6 @@
 import 'package:admin/controllers/dateController.dart';
 import 'package:admin/controllers/declarationInputController.dart';
+import 'package:admin/lists/marins.dart';
 import 'package:admin/models/boatModel.dart';
 import 'package:admin/models/monthModel.dart';
 import 'package:admin/widgets/mainBody.dart';
@@ -74,9 +75,6 @@ class DeclarationInput extends GetView<DeclarationInputController> {
                             onSaved: (value) {
                               controller.revenue = value! as RxDouble;
                             },
-                            /*validator: (value) {
-                                    return controller.validateEmail(value!);
-                                  },*/
                           ),
                         )),
                   ),
@@ -98,10 +96,6 @@ class DeclarationInput extends GetView<DeclarationInputController> {
                             onSaved: (value) {
                               controller.sales = value! as RxInt;
                             },
-                            /*
-                                  validator: (value) {
-                                    return controller.validateEmail(value!);
-                                  },*/
                           ),
                         )),
                   ),
@@ -118,9 +112,6 @@ class DeclarationInput extends GetView<DeclarationInputController> {
                                   RegExp("[0-9 .]")),
                             ],
                             decoration: InputDecoration(
-                              /*border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),*/
                               labelText: "المحروقات",
                             ),
                             keyboardType: TextInputType.number,
@@ -128,10 +119,6 @@ class DeclarationInput extends GetView<DeclarationInputController> {
                             onSaved: (value) {
                               controller.carb = value! as RxDouble;
                             },
-                            /*
-                                  validator: (value) {
-                                    return controller.validateEmail(value!);
-                                  },*/
                           ),
                         )),
                   ),
@@ -298,54 +285,9 @@ class DeclarationInput extends GetView<DeclarationInputController> {
                   ),
                   SizedBox(
                     child: OutlinedButton(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 20,
-                          ),
-                          OutlinedButton(
-                              onPressed: null,
-                              child: ListTile(
-                                title: TextFormField(
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp("[A-Z0-9-/]")),
-                                  ],
-                                  decoration: InputDecoration(
-                                    labelText: "اختر البحارة",
-                                  ),
-                                  controller: controller.filterController,
-                                  onChanged: (value) {
-                                    controller.addSearchList(value);
-                                    controller.update();
-                                  },
-                                ),
-                              )),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          SingleChildScrollView(
-                            child: GetBuilder<DeclarationInputController>(
-                              builder: (_) {
-                                return Wrap(
-                                  alignment: WrapAlignment.spaceEvenly,
-                                  direction: Axis.horizontal,
-                                  runSpacing: 20,
-                                  spacing: 20,
-                                  children: _.marinQuery
-                                      .take(6)
-                                      .map((item) =>
-                                          MarinAdd(item, _.marinFinal, _))
-                                      .toList()
-                                      .cast<Widget>(),
-                                );
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                        ],
+                      child: NewWidget(
+                        add: true,
+                        marins: controller.marinFinal,
                       ),
                       onPressed: null,
                     ),

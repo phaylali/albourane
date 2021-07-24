@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "albourane"
+  },
+  "targets": {
+    "albourane": {
+      "hosting": {
+        "admin": [
+          "albourane-admin"
+        ]
+      }
+    }
+  }
+}

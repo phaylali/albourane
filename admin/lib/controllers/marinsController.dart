@@ -11,7 +11,7 @@ class MarinsController extends GetxController {
       FirebaseFirestore.instance.collection('seamen');
   late TextEditingController filterController;
 
-  var filter = '3'.obs;
+  var marinsNumber = 0.obs;
 
   @override
   void onInit() async {
@@ -32,6 +32,7 @@ class MarinsController extends GetxController {
           element.marinFirstName.contains(filtero) ||
           element.marinLastName.contains(filtero);
     }).toList();
+
     notifyChildrens();
   }
 
@@ -44,6 +45,7 @@ class MarinsController extends GetxController {
         .get()
         .then((value) {
       final by = value.docs;
+      marinsNumber.value = by.length;
       by.forEach((element) {
         marinsAll.add(element.data());
       });

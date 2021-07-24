@@ -53,7 +53,7 @@ class MarinInput extends GetView<MarinInputController> {
                     decoration: InputDecoration(
                       labelText: "التسجيل",
                     ),
-                    keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.url,
                     controller: controller.referenceController,
                   ),
                 )),
