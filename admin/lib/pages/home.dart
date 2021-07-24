@@ -9,6 +9,9 @@ import 'package:get/get.dart';
 class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
+    final marinz = Get.put(MarinsController());
+    final boatz = Get.put(BoatsController());
+
     return MainBody(
         title: 'لوحة التحكم',
         child: Wrap(
@@ -35,7 +38,11 @@ class HomePage extends GetView<HomeController> {
                             'القوارب',
                             textScaleFactor: 2,
                           ),
-                          Obx(() => Text("${controller.boats}")),
+                          Obx(() => Text("${boatz.boatsNumber}")),
+                          /*Text(
+                            boatz.boatsNumber.value.toString(),
+                            textScaleFactor: 1,
+                          ),*/
                         ],
                       ),
                       SizedBox(
@@ -80,7 +87,11 @@ class HomePage extends GetView<HomeController> {
                             'البحارة',
                             textScaleFactor: 2,
                           ),
-                          Obx(() => Text("${controller.marins}")),
+                          Obx(() => Text("${marinz.marinsNumber}")),
+                          /*Text(
+                            marinz.marinsNumber.value.toString(),
+                            textScaleFactor: 1,
+                          ),*/
                         ],
                       ),
                       SizedBox(

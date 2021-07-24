@@ -18,6 +18,8 @@ class MarinsController extends GetxController {
     super.onInit();
     filterController = TextEditingController();
     getAllMarins();
+    final hy = await seamenCol.get();
+    marinsNumber.value = hy.size;
   }
 
   @override
@@ -45,7 +47,7 @@ class MarinsController extends GetxController {
         .get()
         .then((value) {
       final by = value.docs;
-      marinsNumber.value = by.length;
+      //marinsNumber.value = by.length;
       by.forEach((element) {
         marinsAll.add(element.data());
       });
@@ -53,7 +55,7 @@ class MarinsController extends GetxController {
   }
 
   deleteMarin(id) async {
-    await FirebaseFirestore.instance.collection('seamen').doc(id).delete();
+    await seamenCol.doc(id).delete();
     Get.toNamed("/Seamen");
   }
 

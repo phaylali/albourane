@@ -27,10 +27,9 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    //check();
-    getInfo();
   }
 
+/*
   check() {
     user.value != null ? Get.toNamed('/') : Get.toNamed('/Login');
 
@@ -46,7 +45,7 @@ class HomeController extends GetxController {
     print(boats + boats.value);
     notifyChildrens();
   }
-
+*/
   void signIn() async {
     try {
       await auth

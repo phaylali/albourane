@@ -18,6 +18,8 @@ class BoatsController extends GetxController {
     filterController = TextEditingController();
 
     getAllBoats();
+    final hy = await boatsCol.get();
+    boatsNumber.value = hy.size;
   }
 
   @override
