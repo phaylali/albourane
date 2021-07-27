@@ -64,7 +64,7 @@ class NewWidget extends GetView<MarinsController> {
               runSpacing: 20,
               spacing: 20,
               children: controller.marinQuery
-                  .take(6)
+                  .take(controller.items.value)
                   .map((item) => add == false
                       ? MarinPreview(item, () {
                           Get.toNamed(
@@ -102,6 +102,36 @@ class NewWidget extends GetView<MarinsController> {
             );
           },
         ),
+        SizedBox(
+          height: 20,
+        ),
+        if (controller.marinsAll.isNotEmpty)
+          OutlinedButton(
+              onPressed: () {
+                controller.items.value = controller.items.value + 10;
+                controller.update();
+              },
+              child: ListTile(
+                  title: Text(
+                'مزيد من النتائج',
+                textAlign: TextAlign.center,
+              ))),
+        if (controller.marinsAll.isNotEmpty)
+          SizedBox(
+            height: 20,
+          ),
+        if (controller.marinsAll.isNotEmpty)
+          OutlinedButton(
+              onPressed: () {
+                if (controller.items.value > 6)
+                  controller.items.value = controller.items.value - 10;
+                controller.update();
+              },
+              child: ListTile(
+                  title: Text(
+                'نتائج أقل',
+                textAlign: TextAlign.center,
+              ))),
         SizedBox(
           height: 20,
         ),

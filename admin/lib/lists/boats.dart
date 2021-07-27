@@ -47,7 +47,7 @@ class Boats extends GetView<BoatsController> {
                     runSpacing: 20,
                     spacing: 20,
                     children: controller.boatQuery
-                        .take(6)
+                        .take(controller.items.value)
                         .map((item) => BoatPreview(
                               item,
                             ))
@@ -56,6 +56,36 @@ class Boats extends GetView<BoatsController> {
                   );
                 },
               ),
+              SizedBox(
+                height: 20,
+              ),
+              if (controller.boatsAll.isNotEmpty)
+                OutlinedButton(
+                    onPressed: () {
+                      controller.items.value = controller.items.value + 10;
+                      controller.update();
+                    },
+                    child: ListTile(
+                        title: Text(
+                      'مزيد من النتائج',
+                      textAlign: TextAlign.center,
+                    ))),
+              if (controller.boatsAll.isNotEmpty)
+                SizedBox(
+                  height: 20,
+                ),
+              if (controller.boatsAll.isNotEmpty)
+                OutlinedButton(
+                    onPressed: () {
+                      if (controller.items.value > 6)
+                        controller.items.value = controller.items.value - 10;
+                      controller.update();
+                    },
+                    child: ListTile(
+                        title: Text(
+                      'نتائج أقل',
+                      textAlign: TextAlign.center,
+                    ))),
               SizedBox(
                 height: 20,
               ),

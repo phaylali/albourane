@@ -1,4 +1,6 @@
+import 'package:admin/controllers/boatsController.dart';
 import 'package:admin/controllers/homeController.dart';
+import 'package:admin/controllers/marinsController.dart';
 import 'package:admin/pages/home.dart';
 import 'package:admin/resources/routes.dart';
 import 'package:admin/resources/themes.dart';
@@ -17,6 +19,8 @@ void main() async {
 
   await Firebase.initializeApp();
   Get.lazyPut(() => HomeController());
+  Get.lazyPut(() => MarinsController());
+  Get.lazyPut(() => BoatsController());
 
   LicenseRegistry.addLicense(() async* {
     final licenseAR = await rootBundle.loadString('res/fonts/OFL.txt');

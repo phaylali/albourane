@@ -10,16 +10,14 @@ class MarinsController extends GetxController {
   CollectionReference seamenCol =
       FirebaseFirestore.instance.collection('seamen');
   late TextEditingController filterController;
-
-  var marinsNumber = 0.obs;
+  var items = 6.obs;
 
   @override
   void onInit() async {
     super.onInit();
     filterController = TextEditingController();
+
     getAllMarins();
-    final hy = await seamenCol.get();
-    marinsNumber.value = hy.size;
   }
 
   @override
@@ -46,9 +44,7 @@ class MarinsController extends GetxController {
         )
         .get()
         .then((value) {
-      final by = value.docs;
-      //marinsNumber.value = by.length;
-      by.forEach((element) {
+      value.docs.forEach((element) {
         marinsAll.add(element.data());
       });
     });

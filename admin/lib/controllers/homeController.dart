@@ -1,4 +1,5 @@
 import 'package:admin/controllers/boatsController.dart';
+import 'package:admin/controllers/declarationController.dart';
 import 'package:admin/controllers/marinsController.dart';
 import 'package:get/get.dart';
 
@@ -53,10 +54,11 @@ class HomeController extends GetxController {
               email: email.text.trim(), password: password.text.trim())
           .then((result) {
         _clearControllers();
-        Get.put(MarinsController()).update();
-        Get.put(BoatsController()).update();
-        Get.toNamed('/');
+        Get.put(MarinsController()).onInit();
+        Get.put(BoatsController()).onInit();
+        Get.put(HomeController()).onInit();
         notifyChildrens();
+        Get.toNamed('/');
       });
     } catch (e) {
       Get.snackbar("خطأ", e.toString());
@@ -65,7 +67,17 @@ class HomeController extends GetxController {
   }
 
   void signOut() async {
-    auth.signOut();
+    await auth.signOut();
+
+    Get.put(MarinsController()).marinsAll.clear();
+    Get.put(MarinsController()).marinQuery.clear();
+    Get.put(BoatsController()).boatsAll.clear();
+    Get.put(BoatsController()).boatQuery.clear();
+
+    Get.put(BoatsController()).update();
+    Get.put(MarinsController()).update();
+    Get.put(HomeController()).update();
+    notifyChildrens();
     Get.toNamed('/Login');
   }
 

@@ -7,10 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomePage extends GetView<HomeController> {
+  final marinz = Get.put(MarinsController());
+  final boatz = Get.put(BoatsController());
   @override
   Widget build(BuildContext context) {
-    final marinz = Get.put(MarinsController());
-    final boatz = Get.put(BoatsController());
+    final marinsN = marinz.marinsAll.length.toString();
+    final boatsN = boatz.boatsAll.length.toString();
 
     return MainBody(
         title: 'لوحة التحكم',
@@ -38,7 +40,7 @@ class HomePage extends GetView<HomeController> {
                             'القوارب',
                             textScaleFactor: 2,
                           ),
-                          Obx(() => Text("${boatz.boatsNumber}")),
+                          Text("${boatsN}"),
                           /*Text(
                             boatz.boatsNumber.value.toString(),
                             textScaleFactor: 1,
@@ -87,7 +89,7 @@ class HomePage extends GetView<HomeController> {
                             'البحارة',
                             textScaleFactor: 2,
                           ),
-                          Obx(() => Text("${marinz.marinsNumber}")),
+                          Text("${marinsN}"),
                           /*Text(
                             marinz.marinsNumber.value.toString(),
                             textScaleFactor: 1,
