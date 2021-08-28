@@ -1,4 +1,5 @@
 import 'package:admin/controllers/declarationEditController.dart';
+import 'package:admin/lists/marins.dart';
 import 'package:admin/models/boatModel.dart';
 import 'package:admin/models/monthModel.dart';
 import 'package:admin/widgets/mainBody.dart';
@@ -267,53 +268,10 @@ class DeclarationEdit extends GetView<DeclarationEditController> {
                   ),
                   SizedBox(
                     child: OutlinedButton(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 20,
-                          ),
-                          OutlinedButton(
-                              onPressed: null,
-                              child: ListTile(
-                                title: TextFormField(
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp("[A-Z0-9-/]")),
-                                  ],
-                                  decoration: InputDecoration(
-                                    labelText: "اختر البحارة",
-                                  ),
-                                  controller: controller.filterController,
-                                  onChanged: (value) {
-                                    controller.addSearchList(value);
-                                    controller.update();
-                                  },
-                                ),
-                              )),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          SingleChildScrollView(
-                            child: GetBuilder<DeclarationEditController>(
-                              builder: (_) {
-                                return Wrap(
-                                  alignment: WrapAlignment.spaceEvenly,
-                                  direction: Axis.horizontal,
-                                  runSpacing: 20,
-                                  spacing: 20,
-                                  children: _.marinQuery
-                                      .map((item) =>
-                                          MarinAdd(item, _.marinFinal, _))
-                                      .toList()
-                                      .cast<Widget>(),
-                                );
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                        ],
+                      child: MarinsWidgets(
+                        add: true,
+                        marins: controller.marinFinal,
+                        control: controller,
                       ),
                       onPressed: null,
                     ),

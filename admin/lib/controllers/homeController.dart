@@ -1,5 +1,5 @@
 import 'package:admin/controllers/boatsController.dart';
-import 'package:admin/controllers/declarationController.dart';
+//import 'package:admin/controllers/declarationController.dart';
 import 'package:admin/controllers/marinsController.dart';
 import 'package:get/get.dart';
 

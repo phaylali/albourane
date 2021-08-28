@@ -1,6 +1,5 @@
-import 'package:admin/controllers/declarationInputController.dart';
 import 'package:admin/controllers/marinsController.dart';
-
+import 'package:admin/controllers/nullController.dart';
 import 'package:admin/models/marinModel.dart';
 import 'package:admin/widgets/mainBody.dart';
 import 'package:admin/widgets/marinWidgets.dart';
@@ -16,19 +15,27 @@ class Marins extends GetView<MarinsController> {
     return MainBody(
         title: "البحارة",
         child: SingleChildScrollView(
-          child: NewWidget(
+          child: MarinsWidgets(
             add: false,
             marins: [],
+            control: NullController(),
           ),
         ));
   }
 }
 
-class NewWidget extends GetView<MarinsController> {
-  NewWidget({required this.add, required this.marins});
+class MarinsWidgets extends GetView<MarinsController> {
+  /// If the add boolean is false, make sure to use NullController().
+  /// If the add boolean is true, you have to use a functional GetxController.
+  MarinsWidgets({
+    required this.control,
+    required this.add,
+    required this.marins,
+  });
 
   final bool add;
   final List<Marin> marins;
+  final GetxController control;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -82,7 +89,7 @@ class NewWidget extends GetView<MarinsController> {
                                 marins.add(item);
 
                                 controller.update();
-                                Get.put(DeclarationInputController()).update();
+                                Get.put(control).update();
                               } else
                                 Get.snackbar('', '',
                                     titleText: Text(

@@ -285,9 +285,10 @@ class DeclarationInput extends GetView<DeclarationInputController> {
                   ),
                   SizedBox(
                     child: OutlinedButton(
-                      child: NewWidget(
+                      child: MarinsWidgets(
                         add: true,
                         marins: controller.marinFinal,
+                        control: controller,
                       ),
                       onPressed: null,
                     ),

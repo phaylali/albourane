@@ -61,6 +61,16 @@ class BoatsController extends GetxController {
     Get.toNamed("/Boats");
   }
 
+  deleteDeclaration(id, month) async {
+    await FirebaseFirestore.instance
+        .collection('boats')
+        .doc(id)
+        .collection('revenue')
+        .doc(month)
+        .delete();
+    Get.toNamed("/Boat?id=$id");
+  }
+
   Future<QuerySnapshot> getBoatRevenue(x) async {
     return await FirebaseFirestore.instance
         .collection('boats')

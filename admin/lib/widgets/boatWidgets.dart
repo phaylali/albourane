@@ -291,6 +291,15 @@ class BoatInfo extends StatelessWidget {
                                                 onPressed: () async {
                                                   await Get.delete<
                                                       DeclarationInputController>();
+
+                                                  controller.deleteDeclaration(
+                                                      id, month);
+                                                },
+                                                child: Text('حذف')),
+                                            OutlinedButton(
+                                                onPressed: () async {
+                                                  await Get.delete<
+                                                      DeclarationInputController>();
                                                   Get.toNamed(
                                                     "/DeclarationEdit?id=$id&m=$month",
                                                   );
@@ -412,17 +421,15 @@ class BoatInfo extends StatelessWidget {
 }
 
 class BoatPreview extends StatelessWidget {
-  BoatPreview(this.boat);
+  BoatPreview(this.boat, this.click);
 
   final Boat boat;
+  final Function click;
 
   Widget get details {
     return OutlinedButton(
       onPressed: () {
-        final String id = boat.boatReference.replaceAll('/', '-');
-        Get.toNamed(
-          "/Boat?id=$id",
-        );
+        click();
       },
       child: ListTile(
         leading: reference,
