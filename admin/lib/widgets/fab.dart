@@ -11,12 +11,13 @@ class Fab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      child: SizedBox(height: 40, width: 40, child: OmniIcons().menu),
-      onPressed: () {
-        drawerKey!.currentState!.openEndDrawer();
-      },
-    );
+    return OutlinedButton(
+        onPressed: () {
+          drawerKey!.currentState!.openEndDrawer();
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(height: 40, width: 40, child: OmniIcons().menu),
+        ));
   }
 }

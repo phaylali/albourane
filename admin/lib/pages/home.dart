@@ -40,7 +40,7 @@ class HomePage extends GetView<HomeController> {
                             'القوارب',
                             textScaleFactor: 2,
                           ),
-                          Text("${boatsN}"),
+                          Text("${boatsN}", textScaleFactor: 1.5),
                           /*Text(
                             boatz.boatsNumber.value.toString(),
                             textScaleFactor: 1,
@@ -89,7 +89,7 @@ class HomePage extends GetView<HomeController> {
                             'البحارة',
                             textScaleFactor: 2,
                           ),
-                          Text("${marinsN}"),
+                          Text("${marinsN}", textScaleFactor: 1.5),
                           /*Text(
                             marinz.marinsNumber.value.toString(),
                             textScaleFactor: 1,

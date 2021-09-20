@@ -1,101 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-    focusColor: Colors.blue[400],
-    brightness: Brightness.dark,
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
-    scaffoldBackgroundColor: Colors.blueGrey[900],
-    appBarTheme: AppBarTheme(color: Colors.blue[900]),
-    accentColor: Colors.blue[400],
-    primaryColor: Colors.blue[100],
-    secondaryHeaderColor: Colors.blueGrey[700],
-    textTheme: TextTheme(
-      headline1: TextStyle(
-          fontFamily: 'Tajawal',
-          color: Colors.blue[100],
-          fontSize: 15,
-          fontWeight: FontWeight.bold),
-      headline2: TextStyle(
-          fontFamily: 'Tajawal',
-          color: Colors.blue[100],
-          fontSize: 20,
-          fontWeight: FontWeight.bold),
-      headline3: TextStyle(
-          fontFamily: 'Tajawal',
-          color: Colors.blue[100],
-          fontSize: 25,
-          fontWeight: FontWeight.bold),
-      headline4: TextStyle(
-          fontFamily: 'Tajawal',
-          color: Colors.blue[100],
-          fontSize: 30,
-          fontWeight: FontWeight.bold),
-      headline5: TextStyle(
-          fontFamily: 'Tajawal',
-          color: Colors.blue[100],
-          fontSize: 35,
-          fontWeight: FontWeight.bold),
-      headline6: TextStyle(
-          fontFamily: 'Tajawal',
-          color: Colors.blue[100],
-          fontSize: 40,
-          fontWeight: FontWeight.bold),
-      bodyText2: TextStyle(
-          fontFamily: 'Tajawal',
-          color: Colors.blue[100],
-          fontSize: 25,
-          fontWeight: FontWeight.normal),
-      bodyText1: TextStyle(
-          fontFamily: 'Tajawal',
-          color: Colors.blue[100],
-          fontSize: 20,
-          fontWeight: FontWeight.normal),
-      subtitle2: TextStyle(
-          fontFamily: 'Tajawal',
-          color: Colors.blue[300],
-          fontSize: 25,
-          fontWeight: FontWeight.normal),
-      subtitle1: TextStyle(
-          fontFamily: 'Tajawal',
-          color: Colors.blue[300],
-          fontSize: 20,
-          fontWeight: FontWeight.normal),
-      caption: TextStyle(
-          fontFamily: 'Tajawal',
-          color: Colors.grey[700],
-          fontSize: 20,
-          fontWeight: FontWeight.normal),
-      button: TextStyle(
-          fontFamily: 'Tajawal',
-          color: Colors.grey[700],
-          fontSize: 20,
-          fontWeight: FontWeight.normal),
-      overline: TextStyle(
-          fontFamily: 'Tajawal',
-          color: Colors.grey[700],
-          fontSize: 20,
-          fontWeight: FontWeight.normal),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-            backgroundColor: MaterialStateColor.resolveWith(getDarkBlueColor),
-            foregroundColor:
-                MaterialStateColor.resolveWith(getDarkBlueOverlayColor),
-            shape: MaterialStateProperty.all<OutlinedBorder>(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30))))),
-    outlinedButtonTheme: OutlinedButtonThemeData(
-        style: ButtonStyle(
-            backgroundColor: MaterialStateColor.resolveWith(getDarkBlueColor),
-            foregroundColor:
-                MaterialStateColor.resolveWith(getDarkBlueOverlayColor),
-            shape: MaterialStateProperty.all<OutlinedBorder>(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30))))),
-    dialogBackgroundColor: Colors.blueGrey[900]);
-
+      colorScheme: ThemeData.dark().colorScheme.copyWith(
+          secondary: Colors.blue[100],
+          background: Colors.blueGrey[900],
+          primary: Colors.blue[400],
+          brightness: Brightness.dark,
+          surface: Colors.blue[400]),
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      focusColor: Colors.blue[400],
+      dialogBackgroundColor: Colors.blueGrey[900],
+      scaffoldBackgroundColor: Colors.blueGrey[900],
+      textTheme: GoogleFonts.tajawalTextTheme(TextTheme(
+          headline1: TextStyle(color: Colors.blue[100]),
+          headline2: TextStyle(color: Colors.blue[100]),
+          headline3: TextStyle(color: Colors.blue[100]),
+          headline4: TextStyle(color: Colors.blue[100]),
+          headline5: TextStyle(color: Colors.blue[100]),
+          headline6: TextStyle(color: Colors.blue[100]),
+          subtitle1: TextStyle(color: Colors.blue[100]),
+          subtitle2: TextStyle(color: Colors.blue[100]),
+          bodyText1: TextStyle(color: Colors.blue[100]),
+          bodyText2: TextStyle(color: Colors.blue[100]),
+          button: TextStyle(color: Colors.blue[100]))),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ButtonStyle(
+              elevation: MaterialStateProperty.all(10),
+              backgroundColor: MaterialStateColor.resolveWith(getDarkBlueColor),
+              foregroundColor:
+                  MaterialStateColor.resolveWith(getDarkBlueOverlayColor),
+              shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30))))),
+    );
 Color getDarkBlueColor(Set<MaterialState> states) {
   const Set<MaterialState> interactiveStates = <MaterialState>{
     MaterialState.pressed,

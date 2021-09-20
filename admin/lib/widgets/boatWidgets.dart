@@ -363,9 +363,6 @@ class BoatInfo extends StatelessWidget {
                       Get.toNamed('/NewDeclaration?id=${boat.url}');
                     },
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
                   ListTile(
                     leading: SizedBox(
                       height: 40,
@@ -442,7 +439,7 @@ class BoatPreview extends StatelessWidget {
   Widget get name {
     return Text(
       '${boat.boatName}',
-      textScaleFactor: 1.3,
+      textScaleFactor: 1.4,
       overflow: TextOverflow.ellipsis,
       maxLines: 2,
     );
@@ -454,7 +451,7 @@ class BoatPreview extends StatelessWidget {
       child: Center(
         child: Text(
           '${boat.boatReference}',
-          textScaleFactor: 0.8,
+          textScaleFactor: 1.3,
         ),
       ),
     );
@@ -463,7 +460,7 @@ class BoatPreview extends StatelessWidget {
   Widget get owner {
     return Text(
       '${boat.boatOwner}',
-      textScaleFactor: 0.75,
+      textScaleFactor: 1,
       overflow: TextOverflow.ellipsis,
       maxLines: 2,
     );

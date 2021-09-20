@@ -24,8 +24,10 @@ dependencies:
   flutter_date_pickers: 
   intl:
   file_picker:
-  html_editor_enhanced: ^2.2.0
-  flutter_colorpicker: ^0.4.0
+  google_fonts:
+ 
+  
+
   translator: 
   flutter_widget_from_html_core: 
   pointer_interceptor:
@@ -54,11 +56,14 @@ flutter:
       fonts: 
         - asset: res/fonts/Tajawal-Regular.ttf
         - asset: res/fonts/Tajawal-Bold.ttf
+          weight: 700
     - family: Carlito
       fonts: 
         - asset: res/fonts/Carlito-Regular.ttf
         - asset: res/fonts/Carlito-Bold.ttf
+          weight: 700
         - asset: res/fonts/Carlito-Italic.ttf
+          style: italic
     - family: EMComic
       fonts: 
         - asset: res/fonts/EMcomic-Bold.ttf

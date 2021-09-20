@@ -17,10 +17,11 @@ class MainBody extends StatelessWidget {
     SystemChrome.setApplicationSwitcherDescription(
         ApplicationSwitcherDescription(
       label: '$title | Albourane - البوران',
-      primaryColor: Theme.of(context).primaryColor.value,
+      primaryColor: Theme.of(context).colorScheme.primary.value,
     ));
     return Scaffold(
       key: drawerKey,
+      //backgroundColor: Theme.of(context).colorScheme.background,
       floatingActionButton: Fab(drawerKey: drawerKey),
       endDrawer: Drawer(
         child: CustomDrawer(),
@@ -37,7 +38,7 @@ class MainBody extends StatelessWidget {
             ),
             Text(title,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline6),
+                style: Theme.of(context).textTheme.headline3),
             SizedBox(
               height: 20,
             ),

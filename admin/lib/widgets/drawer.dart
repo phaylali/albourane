@@ -24,10 +24,8 @@ class CustomDrawer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
-                  title: Text(
-                    "العودة الى الخلف",
-                    textDirection: TextDirection.rtl,
-                  ),
+                  title: Text("العودة الى الخلف",
+                      textDirection: TextDirection.rtl, textScaleFactor: 1.3),
                   leading:
                       SizedBox(height: 40, width: 40, child: OmniIcons().back),
                   onTap: () {
@@ -37,10 +35,8 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text(
-                    "الصفحة الرئيسية",
-                    textDirection: TextDirection.rtl,
-                  ),
+                  title: Text("الصفحة الرئيسية",
+                      textDirection: TextDirection.rtl, textScaleFactor: 1.3),
                   leading:
                       SizedBox(height: 40, width: 40, child: OmniIcons().home),
                   onTap: () {
@@ -48,10 +44,8 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text(
-                    "القوارب",
-                    textDirection: TextDirection.rtl,
-                  ),
+                  title: Text("القوارب",
+                      textDirection: TextDirection.rtl, textScaleFactor: 1.3),
                   leading:
                       SizedBox(height: 40, width: 40, child: OmniIcons().boat),
                   onTap: () {
@@ -59,10 +53,8 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text(
-                    "قارب جديد",
-                    textDirection: TextDirection.rtl,
-                  ),
+                  title: Text("قارب جديد",
+                      textDirection: TextDirection.rtl, textScaleFactor: 1.3),
                   leading: SizedBox(
                     height: 40,
                     width: 60,
@@ -83,10 +75,8 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text(
-                    "البحارة",
-                    textDirection: TextDirection.rtl,
-                  ),
+                  title: Text("البحارة",
+                      textDirection: TextDirection.rtl, textScaleFactor: 1.3),
                   leading: SizedBox(
                     height: 40,
                     width: 40,
@@ -97,10 +87,8 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text(
-                    "بحار جديد",
-                    textDirection: TextDirection.rtl,
-                  ),
+                  title: Text("بحار جديد",
+                      textDirection: TextDirection.rtl, textScaleFactor: 1.3),
                   leading: SizedBox(
                     height: 40,
                     width: 60,
@@ -121,10 +109,8 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text(
-                    "الاخبار",
-                    textDirection: TextDirection.rtl,
-                  ),
+                  title: Text("الاخبار",
+                      textDirection: TextDirection.rtl, textScaleFactor: 1.3),
                   leading: SizedBox(
                       height: 40, width: 40, child: OmniIcons().document),
                   onTap: () {
@@ -132,10 +118,8 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text(
-                    "مقال جديد",
-                    textDirection: TextDirection.rtl,
-                  ),
+                  title: Text("مقال جديد",
+                      textDirection: TextDirection.rtl, textScaleFactor: 1.3),
                   leading: SizedBox(
                     height: 40,
                     width: 60,
@@ -156,10 +140,8 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text(
-                    "الدخول",
-                    textDirection: TextDirection.rtl,
-                  ),
+                  title: Text("الدخول",
+                      textDirection: TextDirection.rtl, textScaleFactor: 1.3),
                   leading:
                       SizedBox(height: 40, width: 40, child: OmniIcons().login),
                   onTap: () {
@@ -167,10 +149,8 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text(
-                    "الخروج",
-                    textDirection: TextDirection.rtl,
-                  ),
+                  title: Text("الخروج",
+                      textDirection: TextDirection.rtl, textScaleFactor: 1.3),
                   leading: SizedBox(
                       height: 40, width: 40, child: OmniIcons().logout),
                   onTap: () {

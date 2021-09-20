@@ -1,4 +1,4 @@
-import 'dart:collection';
+//import 'dart:collection';
 
 import 'package:admin/controllers/articleNewController.dart';
 import 'package:admin/resources/icons.dart';
@@ -6,9 +6,9 @@ import 'package:admin/widgets/mainBody.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
-import 'package:pointer_interceptor/pointer_interceptor.dart';
 
+//import 'package:html_editor_enhanced/html_editor.dart';
+//import 'package:pointer_interceptor/pointer_interceptor.dart';
 // ignore: must_be_immutable
 class ArticleInput extends GetView<ArticleInputController> {
   @override
@@ -133,11 +133,11 @@ class Editor extends StatelessWidget {
                   ),
                   onPressed: () {
                     if (kIsWeb) {
-                      controller.contentController.reloadWeb();
-                      //controllerz.reloadWeb();
+                      //controller.contentController.reloadWeb();
+
                     } else {
-                      controller.contentController.editorController!.reload();
-                      //controllerz.editorController?.reload();
+                      //controller.contentController.editorController!.reload();
+
                     }
                   },
                 ),
@@ -146,7 +146,7 @@ class Editor extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Expanded(
+            /*Expanded(
               child: HtmlEditor(
                 htmlToolbarOptions: HtmlToolbarOptions(
                   toolbarType: ToolbarType.nativeExpandable,
@@ -232,7 +232,7 @@ class Editor extends StatelessWidget {
                   height: 600,
                 ),
               ),
-            ),
+            ),*/
           ],
         ),
       ),

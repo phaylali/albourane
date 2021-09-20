@@ -2,13 +2,13 @@ import 'package:admin/models/articleModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
+//import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:translator/translator.dart';
 
 class ArticleInputController extends GetxController {
   late TextEditingController titleController, thumbController;
-  late HtmlEditorController contentController;
+  //late HtmlEditorController contentController;
   CollectionReference articlesCol =
       FirebaseFirestore.instance.collection('articles');
 
@@ -29,7 +29,7 @@ class ArticleInputController extends GetxController {
   void onInit() {
     super.onInit();
 
-    contentController = HtmlEditorController();
+    //contentController = HtmlEditorController();
     titleController = TextEditingController();
     thumbController = TextEditingController();
   }
@@ -46,7 +46,7 @@ class ArticleInputController extends GetxController {
   }
 
   void onClear() {
-    contentController.clear();
+    //contentController.clear();
     thumbController.clear();
     titleController.clear();
   }
@@ -79,7 +79,7 @@ class ArticleInputController extends GetxController {
         Get.toNamed(
             "/Article?id=${title.toString().replaceAll(' ', '-').replaceAll(':', '-')}");
       } else {
-        return contentController.getText().then((value) {
+        /*return contentController.getText().then((value) {
           articlesCol
               .withConverter<Article>(
                 fromFirestore: (snapshots, _) =>
@@ -111,7 +111,7 @@ class ArticleInputController extends GetxController {
                 ));
             onClear();
           });
-        });
+        });*/
       }
     });
   }

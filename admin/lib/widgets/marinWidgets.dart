@@ -390,7 +390,7 @@ class MarinPreview extends StatelessWidget {
   Widget get name {
     return Text(
       '${marin.marinLastName} ${marin.marinFirstName}',
-      textScaleFactor: 1.2,
+      textScaleFactor: 1.4,
       overflow: TextOverflow.ellipsis,
       maxLines: 3,
     );
@@ -402,7 +402,7 @@ class MarinPreview extends StatelessWidget {
       child: Center(
         child: Text(
           '${marin.marinReference}',
-          textScaleFactor: 0.8,
+          textScaleFactor: 1.2,
         ),
       ),
     );

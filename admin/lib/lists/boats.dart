@@ -1,6 +1,7 @@
 import 'package:admin/controllers/boatsController.dart';
 import 'package:admin/controllers/nullController.dart';
 import 'package:admin/models/boatModel.dart';
+import 'package:admin/resources/icons.dart';
 import 'package:admin/widgets/boatWidgets.dart';
 import 'package:admin/widgets/mainBody.dart';
 import 'package:flutter/material.dart';
@@ -110,31 +111,85 @@ class BoatsWidget extends GetView<BoatsController> {
         ),
         if (controller.boatsAll.isNotEmpty)
           OutlinedButton(
-              onPressed: () {
-                controller.items.value = controller.items.value + 10;
-                controller.update();
-              },
-              child: ListTile(
-                  title: Text(
-                'مزيد من النتائج',
-                textAlign: TextAlign.center,
-              ))),
+            onPressed: () {
+              controller.items.value = controller.items.value + 10;
+              controller.update();
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child:
+                      SizedBox(height: 30, width: 30, child: OmniIcons().plus),
+                ),
+                SizedBox(
+                  width: 60,
+                ),
+                SizedBox(
+                  width: 100,
+                  child: Text("نتائج أكثر",
+                      textAlign: TextAlign.center, textScaleFactor: 1.5),
+                ),
+              ],
+            ),
+          ),
         if (controller.boatsAll.isNotEmpty)
           SizedBox(
             height: 20,
           ),
         if (controller.boatsAll.isNotEmpty)
           OutlinedButton(
-              onPressed: () {
-                if (controller.items.value > 6)
-                  controller.items.value = controller.items.value - 10;
-                controller.update();
-              },
-              child: ListTile(
-                  title: Text(
-                'نتائج أقل',
-                textAlign: TextAlign.center,
-              ))),
+            onPressed: () {
+              if (controller.items.value > 6)
+                controller.items.value = controller.items.value - 10;
+              controller.update();
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child:
+                      SizedBox(height: 30, width: 30, child: OmniIcons().plus),
+                ),
+                SizedBox(
+                  width: 60,
+                ),
+                SizedBox(
+                  width: 100,
+                  child: Text("نتائج أقل",
+                      textAlign: TextAlign.center, textScaleFactor: 1.5),
+                ),
+              ],
+            ),
+          ),
+        if (controller.boatsAll.isNotEmpty)
+          SizedBox(
+            height: 20,
+          ),
+        OutlinedButton(
+          onPressed: () {
+            Get.toNamed('/NewBoat');
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SizedBox(height: 30, width: 30, child: OmniIcons().plus),
+              ),
+              SizedBox(
+                width: 60,
+              ),
+              SizedBox(
+                width: 100,
+                child: Text("قارب جديد",
+                    textAlign: TextAlign.center, textScaleFactor: 1.5),
+              ),
+            ],
+          ),
+        ),
         SizedBox(
           height: 20,
         ),

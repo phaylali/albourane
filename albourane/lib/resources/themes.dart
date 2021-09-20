@@ -8,7 +8,6 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
     scaffoldBackgroundColor: Colors.blueGrey[900],
     appBarTheme: AppBarTheme(color: Colors.blue[900]),
-    accentColor: Colors.blue[400],
     primaryColor: Colors.blue[100],
     secondaryHeaderColor: Colors.blueGrey[700],
     textTheme: TextTheme(
