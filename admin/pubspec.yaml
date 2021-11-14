@@ -25,8 +25,12 @@ dependencies:
   intl:
   file_picker:
   google_fonts:
- 
-  
+  file_saver: 
+  permission_handler:
+  code_editor:
+  monet_colors: 
+  g2x_route:
+    
 
   translator: 
   flutter_widget_from_html_core: 
@@ -49,7 +53,9 @@ flutter:
   uses-material-design: true
   assets:
     - res/icons/
-    - assets/
+    - res/fonts/
+    
+  
     
   fonts:
     - family: Tajawal

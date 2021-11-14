@@ -1,8 +1,7 @@
 import 'package:admin/controllers/boatsController.dart';
-import 'package:admin/controllers/declarationController.dart';
-import 'package:admin/controllers/declarationInputController.dart';
 import 'package:admin/models/boatModel.dart';
 import 'package:admin/resources/icons.dart';
+import 'package:admin/widgets/otherWidgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -274,11 +273,25 @@ class BoatInfo extends StatelessWidget {
                                         textAlign: TextAlign.center,
                                       ),
                                       onTap: () async {
-                                        Get.defaultDialog(
+                                        Get.dialog(DeclarationDialog(
+                                            controller: controller,
+                                            id: id,
+                                            month: month));
+                                        /*Get.defaultDialog(
                                           title:
                                               'هل تريد تصحيح التقرير ام انتاجه؟',
-                                          textConfirm: 'انتاج',
                                           middleText: '$id : $month',
+                                          confirm: OutlinedButton(
+                                              onPressed: () async {
+                                                await Get.delete<
+                                                    DeclarationInputController>();
+
+                                                controller.deleteDeclaration(
+                                                    id, month);
+                                              },
+                                              child: Text(
+                                                'انتاج',
+                                              )),
                                           onConfirm: () async {
                                             await Get.delete<
                                                 DeclarationController>();
@@ -310,7 +323,7 @@ class BoatInfo extends StatelessWidget {
                                           /* onCancel: () {
               Get.back();
             }*/
-                                        );
+                                        );*/
                                       },
                                     ),
                                   );

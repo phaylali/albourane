@@ -1,139 +1,164 @@
 import 'package:admin/controllers/marinNewController.dart';
-import 'package:admin/widgets/mainBody.dart';
+import 'package:admin/widgets/skeleton.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class MarinInput extends GetView<MarinInputController> {
   @override
   Widget build(BuildContext context) {
-    return MainBody(
+    return Skeleton(
       title: 'بحار جديد',
-      child: Wrap(
-        alignment: WrapAlignment.spaceEvenly,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: 20,
-        runSpacing: 20,
-        children: [
-          SizedBox(
-            width: 300,
-            height: 70,
-            child: OutlinedButton(
-                onPressed: null,
-                child: ListTile(
-                  title: TextFormField(
-                      decoration: InputDecoration(
-                        labelText: "الاسم العائلي",
-                      ),
-                      keyboardType: TextInputType.text,
-                      controller: controller.lastNameController),
-                )),
-          ),
-          SizedBox(
-            width: 300,
-            height: 70,
-            child: OutlinedButton(
-                onPressed: null,
-                child: ListTile(
-                  title: TextFormField(
-                      decoration: InputDecoration(
-                        labelText: "الاسم الشخصي",
-                      ),
-                      keyboardType: TextInputType.name,
-                      controller: controller.firstNameController),
-                )),
-          ),
-          SizedBox(
-            width: 300,
-            height: 70,
-            child: OutlinedButton(
-                onPressed: null,
-                child: ListTile(
-                  title: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: "التسجيل",
-                    ),
-                    keyboardType: TextInputType.url,
-                    controller: controller.referenceController,
-                  ),
-                )),
-          ),
-          SizedBox(
-            width: 300,
-            height: 70,
-            child: OutlinedButton(
-                onPressed: null,
-                child: ListTile(
-                  title: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: "الصورة",
-                    ),
-                    keyboardType: TextInputType.url,
-                    controller: controller.imgController,
-                  ),
-                )),
-          ),
-          SizedBox(
-            width: 300,
-            height: 70,
-            child: OutlinedButton(
-                onPressed: null,
-                child: ListTile(
-                  title: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: "الضمان الاجتماعي",
-                    ),
-                    //keyboardType: TextInputType.name,
-                    controller: controller.cnssController,
-                  ),
-                )),
-          ),
-          SizedBox(
-            width: 300,
-            height: 70,
-            child: OutlinedButton(
-                onPressed: null,
-                child: ListTile(
-                  title: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: "رقم البطاقة",
-                    ),
-                    //keyboardType: TextInputType.name,
-                    controller: controller.cniController,
-                  ),
-                )),
-          ),
-          SizedBox(
-            width: 300,
-            height: 70,
-            child: OutlinedButton(
-                onPressed: null,
-                child: ListTile(
-                  title: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: "الهاتف",
-                    ),
-                    keyboardType: TextInputType.phone,
-                    controller: controller.phoneController,
-                  ),
-                )),
-          ),
-          Center(
-            child: SizedBox(
-                height: 70,
-                width: 300,
-                child: OutlinedButton(
-                    onPressed: () {
-                      controller.addMarin();
-                    },
-                    child: ListTile(
-                      title: Text(
-                        'اضف البحار',
-                        textAlign: TextAlign.center,
-                      ),
-                    ))),
-          ),
-        ],
+      fab: 'تسجيل',
+      function: () {
+        controller.addMarin();
+      },
+      button: Icon(
+        Icons.save,
+        color: Theme.of(context).colorScheme.primary,
+      ),
+      child: Center(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Wrap(
+              alignment: WrapAlignment.spaceEvenly,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 20,
+              runSpacing: 20,
+              children: [
+                SizedBox(
+                  width: 500,
+                  height: 70,
+                  child: OutlinedButton(
+                      onPressed: null,
+                      child: ListTile(
+                        title: TextFormField(
+                            decoration: InputDecoration(
+                                label: Align(
+                                    child: Text(
+                                      "الاسم العائلي",
+                                    ),
+                                    alignment: Alignment.centerRight)),
+                            keyboardType: TextInputType.text,
+                            controller: controller.lastNameController),
+                      )),
+                ),
+                SizedBox(
+                  width: 500,
+                  height: 70,
+                  child: OutlinedButton(
+                      onPressed: null,
+                      child: ListTile(
+                        title: TextFormField(
+                            decoration: InputDecoration(
+                                label: Align(
+                                    child: Text(
+                                      "الاسم الشخصي",
+                                    ),
+                                    alignment: Alignment.centerRight)),
+                            keyboardType: TextInputType.name,
+                            controller: controller.firstNameController),
+                      )),
+                ),
+                SizedBox(
+                  width: 500,
+                  height: 70,
+                  child: OutlinedButton(
+                      onPressed: null,
+                      child: ListTile(
+                        title: TextFormField(
+                          decoration: InputDecoration(
+                              label: Align(
+                                  child: Text(
+                                    "التسجيل",
+                                  ),
+                                  alignment: Alignment.centerRight)),
+                          keyboardType: TextInputType.url,
+                          controller: controller.referenceController,
+                        ),
+                      )),
+                ),
+                SizedBox(
+                  width: 500,
+                  height: 70,
+                  child: OutlinedButton(
+                      onPressed: null,
+                      child: ListTile(
+                        title: TextFormField(
+                          decoration: InputDecoration(
+                              label: Align(
+                                  child: Text(
+                                    "الضمان الاجتماعي",
+                                  ),
+                                  alignment: Alignment.centerRight)),
+
+                          //keyboardType: TextInputType.name,
+                          controller: controller.cnssController,
+                        ),
+                      )),
+                ),
+                SizedBox(
+                  width: 500,
+                  height: 70,
+                  child: OutlinedButton(
+                      onPressed: null,
+                      child: ListTile(
+                        title: TextFormField(
+                          decoration: InputDecoration(
+                              label: Align(
+                                  child: Text(
+                                    "رقم البطاقة",
+                                  ),
+                                  alignment: Alignment.centerRight)),
+                          controller: controller.cniController,
+                        ),
+                      )),
+                ),
+                SizedBox(
+                  width: 500,
+                  height: 70,
+                  child: OutlinedButton(
+                      onPressed: null,
+                      child: ListTile(
+                        title: TextFormField(
+                          decoration: InputDecoration(
+                              label: Align(
+                                  child: Text(
+                                    "الهاتف",
+                                  ),
+                                  alignment: Alignment.centerRight)),
+                          keyboardType: TextInputType.phone,
+                          controller: controller.phoneController,
+                        ),
+                      )),
+                ),
+                SizedBox(
+                  width: 500,
+                  height: 70,
+                  child: OutlinedButton(
+                      onPressed: null,
+                      child: ListTile(
+                        title: TextFormField(
+                          decoration: InputDecoration(
+                              label: Align(
+                                  child: Text(
+                                    "الصورة",
+                                  ),
+                                  alignment: Alignment.centerRight)),
+                          keyboardType: TextInputType.url,
+                          controller: controller.imgController,
+                        ),
+                      )),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
       ),
     );
   }

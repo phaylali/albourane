@@ -1,12 +1,12 @@
 import 'package:admin/controllers/boatsController.dart';
-//import 'package:admin/controllers/declarationController.dart';
 import 'package:admin/controllers/marinsController.dart';
+import 'package:admin/lists/boats.dart';
+import 'package:admin/lists/marins.dart';
 import 'package:get/get.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:monet_colors/monet_colors.dart';
 
 class HomeController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -19,6 +19,37 @@ class HomeController extends GetxController {
   var marins = "".obs;
   var boats = "".obs;
   var user = FirebaseAuth.instance.currentUser.obs;
+  MonetColors? colors;
+  RxInt pageselected = 0.obs;
+  final pages = [
+    //FirstPage(),
+    Boats(),
+    Marins(),
+  ];
+  setupRoute() {
+    switch (Get.currentRoute) {
+      case '/':
+        pageselected.value = 0;
+        break;
+      case '/Boats':
+        pageselected.value = 1;
+        break;
+      case '/Boats/NewBoat':
+        pageselected.value = 1;
+        break;
+      case '/Seamen':
+        pageselected.value = 2;
+        break;
+      case '/Seamen/NewSeaman':
+        pageselected.value = 2;
+        break;
+      case '/Settings':
+        pageselected.value = 3;
+        break;
+      default:
+        pageselected.value = 0;
+    }
+  }
 
   @override
   void onReady() {
@@ -27,6 +58,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    getColors();
     super.onInit();
   }
 
@@ -47,6 +79,10 @@ class HomeController extends GetxController {
     notifyChildrens();
   }
 */
+  getColors() async {
+    colors = (await Monet.get())!;
+  }
+
   void signIn() async {
     try {
       await auth
@@ -73,12 +109,14 @@ class HomeController extends GetxController {
     Get.put(MarinsController()).marinQuery.clear();
     Get.put(BoatsController()).boatsAll.clear();
     Get.put(BoatsController()).boatQuery.clear();
-
     Get.put(BoatsController()).update();
     Get.put(MarinsController()).update();
     Get.put(HomeController()).update();
     notifyChildrens();
-    Get.toNamed('/Login');
+
+    Future.delayed(Duration(seconds: 2), () {
+      Get.toNamed('/');
+    });
   }
 
   _clearControllers() {
@@ -86,11 +124,4 @@ class HomeController extends GetxController {
     email.clear();
     password.clear();
   }
-}
-
-showLoading() {
-  Get.defaultDialog(
-      title: "Loading...",
-      content: CircularProgressIndicator(),
-      barrierDismissible: true);
 }

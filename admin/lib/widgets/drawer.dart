@@ -53,28 +53,6 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text("قارب جديد",
-                      textDirection: TextDirection.rtl, textScaleFactor: 1.3),
-                  leading: SizedBox(
-                    height: 40,
-                    width: 60,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                            height: 40, width: 40, child: OmniIcons().boat),
-                        Center(
-                            child: SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: OmniIcons().plus)),
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    Get.toNamed('/NewBoat');
-                  },
-                ),
-                ListTile(
                   title: Text("البحارة",
                       textDirection: TextDirection.rtl, textScaleFactor: 1.3),
                   leading: SizedBox(
@@ -84,28 +62,6 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   onTap: () {
                     Get.toNamed('/Seamen');
-                  },
-                ),
-                ListTile(
-                  title: Text("بحار جديد",
-                      textDirection: TextDirection.rtl, textScaleFactor: 1.3),
-                  leading: SizedBox(
-                    height: 40,
-                    width: 60,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                            height: 40, width: 40, child: OmniIcons().seaman),
-                        Center(
-                            child: SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: OmniIcons().plus)),
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    Get.toNamed('/NewSeaman');
                   },
                 ),
                 ListTile(

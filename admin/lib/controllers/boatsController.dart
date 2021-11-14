@@ -95,18 +95,16 @@ class BoatsController extends GetxController {
     if (title != null) {
       Clipboard.setData(ClipboardData(text: title!));
       Get.snackbar("", "",
-          titleText: Text(
-            message!,
-            textDirection: TextDirection.rtl,
-            textAlign: TextAlign.center,
-          ));
+          titleText: Text(message!,
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.center,
+              textScaleFactor: 2));
     } else {
       Get.snackbar("", "",
-          titleText: Text(
-            "لم يتم النسخ، الخانة فارخة",
-            textDirection: TextDirection.rtl,
-            textAlign: TextAlign.center,
-          ));
+          titleText: Text("لم يتم النسخ، الخانة فارخة",
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.center,
+              textScaleFactor: 2));
     }
   }
 }

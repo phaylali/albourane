@@ -41,9 +41,8 @@ class Start extends StatelessWidget {
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
         unknownRoute: AppPages.routes[7],
-        theme:
-            //darkTheme(),
-            omniDarkBlueTheme(),
+        theme: omniDarkBlueTheme(),
+        darkTheme: omniDarkBlueTheme(),
         navigatorKey: Get.key,
         title: "ALBOURANE",
         debugShowCheckedModeBanner: false,

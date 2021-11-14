@@ -5,10 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Brave",
+            "runtimeExecutable": "/usr/bin/brave",
+            "userDataDir": true,
+            "url": "http://localhost:8080",
+            "program": "lib/main.dart",
+            "webRoot": "${workspaceFolder}"
+        },
+
+        {
             "name": "Flutter",
             "type": "dart",
             "request": "launch",
             "program": "lib/main.dart",
+            //"runtimeExecutable": "/usr/bin/brave",
             "args": ["--no-sound-null-safety"]
         },
         {
@@ -16,6 +28,13 @@
             "request": "launch",
             "type": "dart",
             "args": ["--no-sound-null-safety"]
+        },
+        {
+            "name": "try",
+            "request": "attach",
+            "type": "dart",
+            "args": ["--web-renderer","html"],
+            "port": 6969
         }
     ]
 }

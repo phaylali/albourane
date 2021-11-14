@@ -2,122 +2,119 @@ import 'package:admin/controllers/boatsController.dart';
 import 'package:admin/controllers/homeController.dart';
 import 'package:admin/controllers/marinsController.dart';
 import 'package:admin/resources/icons.dart';
-import 'package:admin/widgets/mainBody.dart';
+import 'package:admin/widgets/skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomePage extends GetView<HomeController> {
   final marinz = Get.put(MarinsController());
   final boatz = Get.put(BoatsController());
+
   @override
   Widget build(BuildContext context) {
     final marinsN = marinz.marinsAll.length.toString();
     final boatsN = boatz.boatsAll.length.toString();
-
-    return MainBody(
-        title: 'لوحة التحكم',
-        child: Wrap(
-            alignment: WrapAlignment.spaceEvenly,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 20,
-            runSpacing: 20,
-            children: [
-              SizedBox(
-                width: 300,
-                height: 300,
-                child: OutlinedButton(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 50, width: 50, child: OmniIcons().boat),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
+    return Skeleton(
+      fab: 'جديد',
+      function: () {},
+      title: 'الصفحة الرئيسية',
+      button: Icon(
+        Icons.add,
+        color: Theme.of(context).colorScheme.primary,
+      ),
+      child: Center(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Wrap(
+                alignment: WrapAlignment.spaceEvenly,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 20,
+                runSpacing: 20,
+                children: [
+                  SizedBox(
+                      width: 300,
+                      height: 70,
+                      child: OutlinedButton(
+                        child: ListTile(
+                          title: Text(
                             'القوارب',
-                            textScaleFactor: 2,
+                            style: Theme.of(context).textTheme.headline6,
+                            textDirection: TextDirection.rtl,
                           ),
-                          Text("${boatsN}", textScaleFactor: 1.5),
-                          /*Text(
-                            boatz.boatsNumber.value.toString(),
-                            textScaleFactor: 1,
-                          ),*/
-                        ],
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      /* Text(
-                        controller.boats.value,
-                        textScaleFactor: 1,
-                      ),*/
-
-                      /*GetBuilder<HomeController>(
-                        builder: (controller) {
-                          return Text(
-                            controller.boats.value.toString(),
-                            textScaleFactor: 1,
-                          );
-                        },
-                      )*/
-                    ],
-                  ),
-                  onPressed: () {
-                    Get.toNamed('/Boats');
-                  },
-                ),
-              ),
-              SizedBox(
-                width: 300,
-                height: 300,
-                child: OutlinedButton(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                          height: 50, width: 50, child: OmniIcons().seaman),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
+                          leading: Text(
+                            '$boatsN',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ),
+                        onPressed: null,
+                      )),
+                  SizedBox(
+                      width: 300,
+                      height: 70,
+                      child: OutlinedButton(
+                        child: ListTile(
+                          title: Text(
                             'البحارة',
-                            textScaleFactor: 2,
+                            style: Theme.of(context).textTheme.headline6,
+                            textDirection: TextDirection.rtl,
                           ),
-                          Text("${marinsN}", textScaleFactor: 1.5),
-                          /*Text(
-                            marinz.marinsNumber.value.toString(),
-                            textScaleFactor: 1,
-                          ),*/
-                        ],
+                          leading: Text(
+                            '$marinsN',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ),
+                        onPressed: null,
+                      )),
+                  SizedBox(
+                    width: 300,
+                    height: 300,
+                    child: OutlinedButton(
+                      child: ListTile(
+                        title: Text(
+                          'الاخبار',
+                          style: Theme.of(context).textTheme.headline6,
+                          textDirection: TextDirection.rtl,
+                        ),
+                        leading: Text(
+                          '$marinsN',
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
                       ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      /* Text(
-                        controller.marins.value,
-                        textScaleFactor: 1,
-                      ),*/
-                      /* GetBuilder<HomeController>(
-                        builder: (controller) {
-                          return Text(
-                            controller.marins.value.toString(),
-                            textScaleFactor: 1,
-                          );
-                        },
-                      )*/
-                    ],
+                      onPressed: () {
+                        Get.toNamed('/News');
+                      },
+                    ),
                   ),
-                  onPressed: () {
-                    Get.toNamed('/Seamen');
-                  },
-                ),
-              ),
-            ]));
+                  SizedBox(
+                    width: 300,
+                    height: 300,
+                    child: OutlinedButton(
+                      child: ListTile(
+                        title: Text(
+                          'اخبار جديدة',
+                          style: Theme.of(context).textTheme.headline6,
+                          textDirection: TextDirection.rtl,
+                        ),
+                        leading: Text(
+                          '$marinsN',
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                      ),
+                      onPressed: () {
+                        Get.toNamed('/NewArticle');
+                      },
+                    ),
+                  ),
+                ]),
+            SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
