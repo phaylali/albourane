@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ERROR404 extends StatelessWidget {
+  const ERROR404({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -80,7 +82,7 @@ class ERROR404 extends StatelessWidget {
 }
 
 class NoProduct extends StatelessWidget {
-  NoProduct({required this.title, required this.subtitle});
+  const NoProduct({super.key, required this.title, required this.subtitle});
   final String title;
   final String subtitle;
 

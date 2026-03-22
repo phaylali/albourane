@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class Fab extends StatelessWidget {
   const Fab({
-    Key? key,
+    super.key,
     required this.drawerKey,
-  }) : super(key: key);
+  });
 
   final GlobalKey<ScaffoldState>? drawerKey;
 

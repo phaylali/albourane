@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
       colorScheme: ThemeData.dark().colorScheme.copyWith(
           secondary: Colors.blueGrey[800],
-          background: Colors.blueGrey[900],
           primary: Colors.blueGrey[200],
           brightness: Brightness.dark,
           surface: Colors.blueGrey[700]),
@@ -14,27 +13,26 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
           backgroundColor: Colors.blueGrey[700],
           extendedTextStyle: TextStyle(
               inherit: false, color: Colors.blueGrey[100], fontSize: 14)),
-      dialogBackgroundColor: Colors.blueGrey[900],
       scaffoldBackgroundColor: Colors.blueGrey[900],
       textTheme: GoogleFonts.tajawalTextTheme(TextTheme(
-          headline1: TextStyle(color: Colors.blueGrey[100]),
-          headline2: TextStyle(color: Colors.blueGrey[100]),
-          headline3: TextStyle(color: Colors.blueGrey[100]),
-          headline4: TextStyle(color: Colors.blueGrey[100]),
-          headline5: TextStyle(color: Colors.blueGrey[100]),
-          headline6: TextStyle(color: Colors.blueGrey[100]),
-          subtitle1: TextStyle(color: Colors.blueGrey[300]),
-          subtitle2: TextStyle(color: Colors.blueGrey[500]),
-          bodyText1: TextStyle(color: Colors.blueGrey[100]),
-          bodyText2: TextStyle(color: Colors.blueGrey[100]),
-          button: TextStyle(color: Colors.blueGrey[900]),
-          overline: TextStyle(color: Colors.blueGrey[100]),
-          caption: TextStyle(color: Colors.blueGrey[100]))),
+          displayLarge: TextStyle(color: Colors.blueGrey[100]),
+          displayMedium: TextStyle(color: Colors.blueGrey[100]),
+          displaySmall: TextStyle(color: Colors.blueGrey[100]),
+          headlineMedium: TextStyle(color: Colors.blueGrey[100]),
+          headlineSmall: TextStyle(color: Colors.blueGrey[100]),
+          titleLarge: TextStyle(color: Colors.blueGrey[100]),
+          titleMedium: TextStyle(color: Colors.blueGrey[300]),
+          titleSmall: TextStyle(color: Colors.blueGrey[500]),
+          bodyLarge: TextStyle(color: Colors.blueGrey[100]),
+          bodyMedium: TextStyle(color: Colors.blueGrey[100]),
+          labelLarge: TextStyle(color: Colors.blueGrey[900]),
+          labelSmall: TextStyle(color: Colors.blueGrey[100]),
+          bodySmall: TextStyle(color: Colors.blueGrey[100]))),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: Colors.blueGrey[900],
         indicatorColor: Colors.blueGrey[100],
-        iconTheme: MaterialStateProperty.resolveWith(getDarkBlueOverlayIcon),
-        labelTextStyle: MaterialStateProperty.all(
+        iconTheme: WidgetStateProperty.resolveWith(getDarkBlueOverlayIcon),
+        labelTextStyle: WidgetStateProperty.all(
           TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
         ),
       ),
@@ -42,27 +40,28 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
       outlinedButtonTheme: OutlinedButtonThemeData(
           style: ButtonStyle(
               //elevation: MaterialStateProperty.all(10),
-              backgroundColor: MaterialStateColor.resolveWith(getDarkBlueColor),
+              backgroundColor: WidgetStateColor.resolveWith(getDarkBlueColor),
               foregroundColor:
-                  MaterialStateColor.resolveWith(getDarkBlueOverlayColor),
-              shape: MaterialStateProperty.all<OutlinedBorder>(
+                  WidgetStateColor.resolveWith(getDarkBlueOverlayColor),
+              shape: WidgetStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30))))),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
               //elevation: MaterialStateProperty.all(10),
-              backgroundColor: MaterialStateColor.resolveWith(getDarkBlueColor),
+              backgroundColor: WidgetStateColor.resolveWith(getDarkBlueColor),
               foregroundColor:
-                  MaterialStateColor.resolveWith(getDarkBlueOverlayColor),
-              shape: MaterialStateProperty.all<OutlinedBorder>(
+                  WidgetStateColor.resolveWith(getDarkBlueOverlayColor),
+              shape: WidgetStateProperty.all<OutlinedBorder>(
                   RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30))))),
+      dialogTheme: DialogThemeData(backgroundColor: Colors.blueGrey[900]),
     );
-Color getDarkBlueColor(Set<MaterialState> states) {
-  const Set<MaterialState> interactiveStates = <MaterialState>{
-    MaterialState.pressed,
-    MaterialState.hovered,
-    MaterialState.focused,
+Color getDarkBlueColor(Set<WidgetState> states) {
+  const Set<WidgetState> interactiveStates = <WidgetState>{
+    WidgetState.pressed,
+    WidgetState.hovered,
+    WidgetState.focused,
   };
   if (states.any(interactiveStates.contains)) {
     return Colors.blueGrey[700]!;
@@ -70,11 +69,11 @@ Color getDarkBlueColor(Set<MaterialState> states) {
   return Colors.blueGrey[800]!;
 }
 
-Color getDarkBlueOverlayColor(Set<MaterialState> states) {
-  const Set<MaterialState> interactiveStates = <MaterialState>{
-    MaterialState.pressed,
-    MaterialState.hovered,
-    MaterialState.focused,
+Color getDarkBlueOverlayColor(Set<WidgetState> states) {
+  const Set<WidgetState> interactiveStates = <WidgetState>{
+    WidgetState.pressed,
+    WidgetState.hovered,
+    WidgetState.focused,
   };
   if (states.any(interactiveStates.contains)) {
     return Colors.blue[100]!;
@@ -82,11 +81,11 @@ Color getDarkBlueOverlayColor(Set<MaterialState> states) {
   return Colors.blue[100]!;
 }
 
-TextStyle getDarkBlueOverlayTextStyle(Set<MaterialState> states) {
-  const Set<MaterialState> interactiveStates = <MaterialState>{
-    MaterialState.pressed,
-    MaterialState.hovered,
-    MaterialState.focused,
+TextStyle getDarkBlueOverlayTextStyle(Set<WidgetState> states) {
+  const Set<WidgetState> interactiveStates = <WidgetState>{
+    WidgetState.pressed,
+    WidgetState.hovered,
+    WidgetState.focused,
   };
   if (states.any(interactiveStates.contains)) {
     return TextStyle(color: Colors.blue[100]!);
@@ -94,11 +93,11 @@ TextStyle getDarkBlueOverlayTextStyle(Set<MaterialState> states) {
   return TextStyle(color: Colors.blue[100]!);
 }
 
-IconThemeData getDarkBlueOverlayIcon(Set<MaterialState> states) {
-  const Set<MaterialState> interactiveStates = <MaterialState>{
-    MaterialState.pressed,
-    MaterialState.hovered,
-    MaterialState.focused,
+IconThemeData getDarkBlueOverlayIcon(Set<WidgetState> states) {
+  const Set<WidgetState> interactiveStates = <WidgetState>{
+    WidgetState.pressed,
+    WidgetState.hovered,
+    WidgetState.focused,
   };
   if (states.any(interactiveStates.contains)) {
     return IconThemeData(color: Colors.blue[900]!);

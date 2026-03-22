@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 
 class MainBody extends StatelessWidget {
   const MainBody({
-    Key? key,
+    super.key,
     required this.title,
     required this.child,
-  }) : super(key: key);
+  });
   final String title;
   final Widget child;
   @override
@@ -31,7 +31,7 @@ class MainBody extends StatelessWidget {
             ),
             Text(title,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline6),
+                style: Theme.of(context).textTheme.titleLarge),
             SizedBox(
               height: 20,
             ),

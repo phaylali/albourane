@@ -131,12 +131,12 @@ class BoatsWidget extends GetView<BoatsController> {
                 child: ListTile(
                   title: Text(
                     'عدد القوارب',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                     textDirection: TextDirection.rtl,
                   ),
                   leading: Text(
                     controller.boatsAll.length.toString(),
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 )),
           ),

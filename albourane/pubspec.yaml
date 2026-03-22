@@ -6,28 +6,29 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '^3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
   
-  get: 
-  url_launcher:
-  url_strategy:
-  flutter_svg:
-  cross_connectivity: 
-  pdf:
-  printing:
-  open_file:
-  path_provider:
-  flutter_date_pickers: 
-  intl:
+  get: ^4.7.3
+  url_launcher: ^6.3.0
+  flutter_svg: ^2.0.0
+  cross_connectivity: ^3.3.0
+  pdf: ^3.12.0
+  printing: ^5.14.0
+  open_file: ^3.5.0
+  path_provider: ^2.1.0
+  flutter_date_pickers: ^0.4.3
+  intl: ^0.20.0
 
   # Firebase Packages
-  firebase_auth: 
-  cloud_firestore: 
-  firebase_core: 
+  firebase_auth: ^6.2.0
+  cloud_firestore: ^6.1.0
+  firebase_core: ^4.5.0
 
 flutter:
   uses-material-design: true
@@ -46,4 +47,6 @@ flutter:
     - family: EMComic
       fonts: 
         - asset: res/fonts/EMcomic-Bold.ttf
+dev_dependencies:
+  flutter_lints: ^6.0.0
          

@@ -35,7 +35,7 @@ class Settings extends GetView<HomeController> {
                     child: ListTile(
                       title: Text(
                         "تسجيل الدخول",
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge,
                         textDirection: TextDirection.rtl,
                       ),
                       leading: Icon(Icons.login),
@@ -44,7 +44,7 @@ class Settings extends GetView<HomeController> {
                       Get.defaultDialog(
                           titlePadding: EdgeInsets.all(20),
                           title: "تسجيل الدخول",
-                          titleStyle: Theme.of(context).textTheme.headline6,
+                          titleStyle: Theme.of(context).textTheme.titleLarge,
                           content: Center(
                               child: Column(
                             children: [
@@ -103,7 +103,7 @@ class Settings extends GetView<HomeController> {
                                             textAlign: TextAlign.center,
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline6),
+                                                .titleLarge),
                                       )),
                                 ),
                               ),
@@ -123,7 +123,7 @@ class Settings extends GetView<HomeController> {
                     child: ListTile(
                       title: Text(
                         "الخروج",
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge,
                         textDirection: TextDirection.rtl,
                       ),
                       leading: Icon(Icons.logout),
@@ -140,7 +140,7 @@ class Settings extends GetView<HomeController> {
                     child: ListTile(
                       title: Text(
                         "Licenses",
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge,
                         textDirection: TextDirection.rtl,
                       ),
                       leading: Icon(Icons.document_scanner),

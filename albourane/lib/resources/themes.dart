@@ -7,71 +7,71 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
     floatingActionButtonTheme: FloatingActionButtonThemeData(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
     scaffoldBackgroundColor: Colors.blueGrey[900],
-    appBarTheme: AppBarTheme(color: Colors.blue[900]),
+    appBarTheme: AppBarTheme(backgroundColor: Colors.blue[900]),
     primaryColor: Colors.blue[100],
     secondaryHeaderColor: Colors.blueGrey[700],
     textTheme: TextTheme(
-      headline1: TextStyle(
+      displayLarge: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[100],
           fontSize: 15,
           fontWeight: FontWeight.bold),
-      headline2: TextStyle(
+      displayMedium: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[100],
           fontSize: 20,
           fontWeight: FontWeight.bold),
-      headline3: TextStyle(
+      displaySmall: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[100],
           fontSize: 25,
           fontWeight: FontWeight.bold),
-      headline4: TextStyle(
+      headlineMedium: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[100],
           fontSize: 30,
           fontWeight: FontWeight.bold),
-      headline5: TextStyle(
+      headlineSmall: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[100],
           fontSize: 35,
           fontWeight: FontWeight.bold),
-      headline6: TextStyle(
+      titleLarge: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[100],
           fontSize: 40,
           fontWeight: FontWeight.bold),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[100],
           fontSize: 25,
           fontWeight: FontWeight.normal),
-      bodyText1: TextStyle(
+      bodyLarge: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[100],
           fontSize: 20,
           fontWeight: FontWeight.normal),
-      subtitle2: TextStyle(
+      titleSmall: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[300],
           fontSize: 25,
           fontWeight: FontWeight.normal),
-      subtitle1: TextStyle(
+      titleMedium: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.blue[300],
           fontSize: 20,
           fontWeight: FontWeight.normal),
-      caption: TextStyle(
+      bodySmall: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.grey[700],
           fontSize: 20,
           fontWeight: FontWeight.normal),
-      button: TextStyle(
+      labelLarge: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.grey[700],
           fontSize: 20,
           fontWeight: FontWeight.normal),
-      overline: TextStyle(
+      labelSmall: TextStyle(
           fontFamily: 'Tajawal',
           color: Colors.grey[700],
           fontSize: 20,
@@ -79,27 +79,27 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-            backgroundColor: MaterialStateColor.resolveWith(getDarkBlueColor),
+            backgroundColor: WidgetStateColor.resolveWith(getDarkBlueColor),
             foregroundColor:
-                MaterialStateColor.resolveWith(getDarkBlueOverlayColor),
-            shape: MaterialStateProperty.all<OutlinedBorder>(
+                WidgetStateColor.resolveWith(getDarkBlueOverlayColor),
+            shape: WidgetStateProperty.all<OutlinedBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30))))),
     outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
-            backgroundColor: MaterialStateColor.resolveWith(getDarkBlueColor),
+            backgroundColor: WidgetStateColor.resolveWith(getDarkBlueColor),
             foregroundColor:
-                MaterialStateColor.resolveWith(getDarkBlueOverlayColor),
-            shape: MaterialStateProperty.all<OutlinedBorder>(
+                WidgetStateColor.resolveWith(getDarkBlueOverlayColor),
+            shape: WidgetStateProperty.all<OutlinedBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30))))),
-    dialogBackgroundColor: Colors.blueGrey[900]);
+    dialogTheme: DialogThemeData(backgroundColor: Colors.blueGrey[900]));
 
-Color getDarkBlueColor(Set<MaterialState> states) {
-  const Set<MaterialState> interactiveStates = <MaterialState>{
-    MaterialState.pressed,
-    MaterialState.hovered,
-    MaterialState.focused,
+Color getDarkBlueColor(Set<WidgetState> states) {
+  const Set<WidgetState> interactiveStates = <WidgetState>{
+    WidgetState.pressed,
+    WidgetState.hovered,
+    WidgetState.focused,
   };
   if (states.any(interactiveStates.contains)) {
     return Colors.blueGrey[700]!;
@@ -107,11 +107,11 @@ Color getDarkBlueColor(Set<MaterialState> states) {
   return Colors.blueGrey[900]!;
 }
 
-Color getDarkBlueOverlayColor(Set<MaterialState> states) {
-  const Set<MaterialState> interactiveStates = <MaterialState>{
-    MaterialState.pressed,
-    MaterialState.hovered,
-    MaterialState.focused,
+Color getDarkBlueOverlayColor(Set<WidgetState> states) {
+  const Set<WidgetState> interactiveStates = <WidgetState>{
+    WidgetState.pressed,
+    WidgetState.hovered,
+    WidgetState.focused,
   };
   if (states.any(interactiveStates.contains)) {
     return Colors.blue[100]!;

@@ -117,12 +117,12 @@ class MarinsWidgets extends GetView<MarinsController> {
               child: ListTile(
                 title: Text(
                   'عدد البحارة',
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                   textDirection: TextDirection.rtl,
                 ),
                 leading: Text(
                   controller.marinsAll.length.toString(),
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               )),
         ),

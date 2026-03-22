@@ -7,11 +7,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter_web_plugins/url_strategy.dart' show usePathUrlStrategy;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setPathUrlStrategy();
+  if (kIsWeb) {
+    usePathUrlStrategy();
+  }
   initializeDateFormatting();
 
   await Firebase.initializeApp();
@@ -27,6 +29,8 @@ void main() async {
 }
 
 class Start extends StatelessWidget {
+  const Start({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

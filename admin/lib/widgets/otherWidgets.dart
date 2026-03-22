@@ -37,7 +37,7 @@ class DeclarationDialog extends StatelessWidget {
                         child: Center(
                             child: Text(
                           'ماذا تريد أن تفعل بالتقرير؟',
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                         )),
                         height: 50,
                         width: 300,
@@ -57,7 +57,7 @@ class DeclarationDialog extends StatelessWidget {
                             },
                             child: Text(
                               'طبع',
-                              style: Theme.of(context).textTheme.subtitle1,
+                              style: Theme.of(context).textTheme.titleMedium,
                             )),
                       ),
                     ),
@@ -75,7 +75,7 @@ class DeclarationDialog extends StatelessWidget {
                             },
                             child: Text(
                               'تصحيح',
-                              style: Theme.of(context).textTheme.subtitle1,
+                              style: Theme.of(context).textTheme.titleMedium,
                             )),
                       ),
                     ),
@@ -92,7 +92,7 @@ class DeclarationDialog extends StatelessWidget {
                             },
                             child: Text(
                               'حذف',
-                              style: Theme.of(context).textTheme.subtitle2,
+                              style: Theme.of(context).textTheme.titleSmall,
                             )),
                       ),
                     ),
@@ -108,7 +108,7 @@ class DeclarationDialog extends StatelessWidget {
                             },
                             child: Text(
                               'رجوع',
-                              style: Theme.of(context).textTheme.subtitle2,
+                              style: Theme.of(context).textTheme.titleSmall,
                             )),
                       ),
                     ),
@@ -153,7 +153,7 @@ class MarinDialog extends StatelessWidget {
                         child: Center(
                             child: Text(
                           'هل أنت متؤكد من إضافة هذا البحار؟',
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                         )),
                         height: 50,
                         width: 300,
@@ -165,7 +165,7 @@ class MarinDialog extends StatelessWidget {
                         child: Center(
                             child: Text(
                           '${item.marinLastName} ${item.marinFirstName} : ${item.marinReference}',
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                         )),
                         height: 50,
                         width: 300,
@@ -194,7 +194,7 @@ class MarinDialog extends StatelessWidget {
                             },
                             child: Text(
                               'تأكيد',
-                              style: Theme.of(context).textTheme.subtitle1,
+                              style: Theme.of(context).textTheme.titleMedium,
                             )),
                       ),
                     ),
@@ -209,7 +209,7 @@ class MarinDialog extends StatelessWidget {
                             },
                             child: Text(
                               'رجوع',
-                              style: Theme.of(context).textTheme.subtitle2,
+                              style: Theme.of(context).textTheme.titleSmall,
                             )),
                       ),
                     ),

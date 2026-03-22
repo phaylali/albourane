@@ -41,12 +41,12 @@ class HomePage extends GetView<HomeController> {
                         child: ListTile(
                           title: Text(
                             'القوارب',
-                            style: Theme.of(context).textTheme.headline6,
+                            style: Theme.of(context).textTheme.titleLarge,
                             textDirection: TextDirection.rtl,
                           ),
                           leading: Text(
                             '$boatsN',
-                            style: Theme.of(context).textTheme.headline6,
+                            style: Theme.of(context).textTheme.titleLarge,
                           ),
                         ),
                         onPressed: null,
@@ -58,12 +58,12 @@ class HomePage extends GetView<HomeController> {
                         child: ListTile(
                           title: Text(
                             'البحارة',
-                            style: Theme.of(context).textTheme.headline6,
+                            style: Theme.of(context).textTheme.titleLarge,
                             textDirection: TextDirection.rtl,
                           ),
                           leading: Text(
                             '$marinsN',
-                            style: Theme.of(context).textTheme.headline6,
+                            style: Theme.of(context).textTheme.titleLarge,
                           ),
                         ),
                         onPressed: null,
@@ -75,12 +75,12 @@ class HomePage extends GetView<HomeController> {
                       child: ListTile(
                         title: Text(
                           'الاخبار',
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                           textDirection: TextDirection.rtl,
                         ),
                         leading: Text(
                           '$marinsN',
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ),
                       onPressed: () {
@@ -95,12 +95,12 @@ class HomePage extends GetView<HomeController> {
                       child: ListTile(
                         title: Text(
                           'اخبار جديدة',
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                           textDirection: TextDirection.rtl,
                         ),
                         leading: Text(
                           '$marinsN',
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ),
                       onPressed: () {

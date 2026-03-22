@@ -1,16 +1,38 @@
-# albourane
+# Albourane (البوران)
 
-A new Flutter project.
+A high-performance Flutter application designed for maritime tracking and management. This project provides a robust, cross-platform experience with specialized support for Web, Linux, and Android.
 
-## Getting Started
+## 🚢 About the Project
 
-This project is a starting point for a Flutter application.
+**Albourane** (Arabic: البوران) is a modern Flutter application built to provide information and management tools, likely centered around maritime activities (boats) as suggested by its core UI components.
 
-A few resources to get you started if this is your first Flutter project:
+### Features
+- **Cross-Platform**: Fully compatible with Web, Linux Desktop, and Android.
+- **Cloud Integration**: Powered by Firebase (Auth and Firestore) for real-time data storage and user management.
+- **Connectivity Monitoring**: Real-time detection of network status (WiFi, Mobile, Ethernet).
+- **Reporting**: Native support for PDF generation and document printing.
+- **Localized UI**: Designed with Arabic support using high-quality typography (Tajawal).
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## 🚀 Getting Started
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Prerequisites
+
+To successfully build and run the application, especially for Android, you must provide your own Firebase configuration:
+
+- **Android**: Place your `google-services.json` file in the `android/app/` directory. **The project will not build properly for Android without this file.**
+- **Web**: Configure the Firebase configuration for web in the initialization flow.
+
+### Installation
+
+1. Clone the repository.
+2. Run `flutter pub get` to install dependencies.
+3. Building for Linux: `flutter build linux`.
+4. Building for Web: `flutter build web`.
+5. Building for Android: `flutter build apk` (Ensure `google-services.json` is present).
+
+## 🛠️ Tech Stack
+- **Framework**: Flutter (v3.12+ compatible)
+- **State Management**: GetX
+- **Backend**: Firebase (Auth, Firestore)
+- **PDF/Print**: `pdf`, `printing`
+- **Networking**: `cross_connectivity`

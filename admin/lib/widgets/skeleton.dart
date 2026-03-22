@@ -24,13 +24,13 @@ class Skeleton extends GetView<HomeController> {
     SystemChrome.setApplicationSwitcherDescription(
         ApplicationSwitcherDescription(
       label: '$title | Albourane - البوران',
-      primaryColor: Theme.of(context).colorScheme.primary.value,
+      primaryColor: Theme.of(context).colorScheme.primary.toARGB32(),
     ));
     controller.setupRoute();
 
     return Scaffold(
         key: key,
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         floatingActionButton: FloatingActionButton(
             backgroundColor: Theme.of(context).colorScheme.secondary,
             tooltip: '$fab',
@@ -51,7 +51,7 @@ class Skeleton extends GetView<HomeController> {
               ),
               Text(title,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline3),
+                  style: Theme.of(context).textTheme.displaySmall),
               SizedBox(
                 height: 20,
               ),
@@ -107,7 +107,7 @@ class Skeleton extends GetView<HomeController> {
                   label: 'البوابة',
                   selectedIcon: Icon(
                     Icons.bus_alert_outlined,
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ),
                 NavigationDestination(
@@ -118,7 +118,7 @@ class Skeleton extends GetView<HomeController> {
                   label: 'القوارب',
                   selectedIcon: Icon(
                     Icons.bus_alert_outlined,
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ),
                 NavigationDestination(
@@ -129,7 +129,7 @@ class Skeleton extends GetView<HomeController> {
                   label: 'البحارة',
                   selectedIcon: Icon(
                     Icons.person,
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ),
                 NavigationDestination(
@@ -140,7 +140,7 @@ class Skeleton extends GetView<HomeController> {
                   label: 'الإعدادات',
                   selectedIcon: Icon(
                     Icons.settings,
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ),
               ],

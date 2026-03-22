@@ -2,6 +2,8 @@ import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/material.dart';
 
 class ConnectionIndicator extends StatelessWidget {
+  const ConnectionIndicator({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -36,11 +38,6 @@ class ConnectionIndicator extends StatelessWidget {
                 Text(
                   "غير متصل بالأنترنت",
                   style: TextStyle(color: Colors.red[400]),
-                ),
-              if (status == ConnectivityStatus.unknown)
-                Text(
-                  "متصل بالأنترنت",
-                  style: TextStyle(color: Colors.green[400]),
                 ),
               if (status == ConnectivityStatus.wifi)
                 Text(
