@@ -452,7 +452,7 @@ class BoatPreview extends StatelessWidget {
   Widget get name {
     return Text(
       '${boat.boatName}',
-      textScaleFactor: 1.4,
+      textScaler: TextScaler.linear(1.4),
       overflow: TextOverflow.ellipsis,
       maxLines: 2,
     );
@@ -464,7 +464,7 @@ class BoatPreview extends StatelessWidget {
       child: Center(
         child: Text(
           '${boat.boatReference}',
-          textScaleFactor: 1.3,
+          textScaler: TextScaler.linear(1.3),
         ),
       ),
     );
@@ -473,7 +473,7 @@ class BoatPreview extends StatelessWidget {
   Widget get owner {
     return Text(
       '${boat.boatOwner}',
-      textScaleFactor: 1,
+      textScaler: TextScaler.linear(1),
       overflow: TextOverflow.ellipsis,
       maxLines: 2,
     );

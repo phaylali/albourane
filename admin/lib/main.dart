@@ -10,11 +10,11 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setPathUrlStrategy();
+  usePathUrlStrategy();
   initializeDateFormatting();
 
   await Firebase.initializeApp();
@@ -46,9 +46,6 @@ class Start extends StatelessWidget {
         navigatorKey: Get.key,
         title: "ALBOURANE",
         debugShowCheckedModeBanner: false,
-        //uncomment this when the project is finished
-        //home: Root(),
-        //comment this when the debug is finished
         home: HomePage());
   }
 }

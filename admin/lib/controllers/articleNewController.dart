@@ -126,12 +126,11 @@ class ArticleInputController extends GetxController {
     Uint8List data = Uint8List.fromList(code.codeUnits);
 
     String path = await FileSaver.instance.saveFile(
-        titleController.text == ""
-            ? "File1.html"
-            : titleController.text + ".html",
-        data,
-        "html",
-        mimeType: MimeType.TEXT);
+        name: titleController.text == ""
+            ? "File1"
+            : titleController.text,
+        bytes: data,
+        mimeType: MimeType.text);
     print(contentController.text);
     print(path);
   }
@@ -157,7 +156,7 @@ class ArticleInputController extends GetxController {
             ),
             messageText: Text(
               "لا يمكن اضافته مرة ثانية",
-              textScaleFactor: 0.7,
+              textScaler: TextScaler.linear(0.7),
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.center,
             ));
@@ -190,7 +189,7 @@ class ArticleInputController extends GetxController {
                 ),
                 messageText: Text(
                   ' ',
-                  textScaleFactor: 0.7,
+                  textScaler: TextScaler.linear(0.7),
                   textDirection: TextDirection.rtl,
                   textAlign: TextAlign.center,
                 ));

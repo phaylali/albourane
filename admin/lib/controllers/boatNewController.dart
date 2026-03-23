@@ -68,7 +68,7 @@ class BoatInputController extends GetxController {
             ),
             messageText: Text(
               "لا يمكن اضافته مرة ثانية",
-              textScaleFactor: 0.7,
+              textScaler: TextScaler.linear(0.7),
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.center,
             ));
@@ -99,7 +99,7 @@ class BoatInputController extends GetxController {
               ),
               messageText: Text(
                 ' ',
-                textScaleFactor: 0.7,
+                textScaler: TextScaler.linear(0.7),
                 textDirection: TextDirection.rtl,
                 textAlign: TextAlign.center,
               ));

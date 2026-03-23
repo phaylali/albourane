@@ -125,7 +125,7 @@ class DeclarationInput extends GetView<DeclarationInputController> {
                     child: ListTile(
                       trailing: Text(
                         "تاريخ البداية",
-                        textScaleFactor: 0.9,
+                        textScaler: TextScaler.linear(0.9),
                       ),
                       title: GetX<DateController>(
                         builder: (d) {
@@ -144,7 +144,7 @@ class DeclarationInput extends GetView<DeclarationInputController> {
                     child: ListTile(
                       trailing: Text(
                         "تاريخ النهاية",
-                        textScaleFactor: 0.9,
+                        textScaler: TextScaler.linear(0.9),
                       ),
                       title: GetX<DateController>(
                         builder: (d) {

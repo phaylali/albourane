@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class ArticleInput extends GetView<ArticleInputController> {
   @override
   Widget build(BuildContext context) {
-    final myController = TextEditingController(text: 'hello!');
+
     return Wrap(
       alignment: WrapAlignment.spaceEvenly,
       crossAxisAlignment: WrapCrossAlignment.center,
@@ -67,13 +67,11 @@ class ArticleInput extends GetView<ArticleInputController> {
                 //].join("\n"),
               ),
             ]),
-            edit: true,
             disableNavigationbar: false,
             onSubmit: (String? language, String? value) {
               print("language = $language");
               print("value = '$value'");
             },
-            textEditingController: myController,
           ),
         ),
         Center(

@@ -166,7 +166,7 @@ class BoatsWidget extends GetView<BoatsController> {
                     SizedBox(
                       width: 100,
                       child: Text("نتائج أكثر",
-                          textAlign: TextAlign.center, textScaleFactor: 1.5),
+                          textAlign: TextAlign.center, textScaler: TextScaler.linear(1.5)),
                     ),
                   ],
                 ),
@@ -200,7 +200,7 @@ class BoatsWidget extends GetView<BoatsController> {
                     SizedBox(
                       width: 100,
                       child: Text("نتائج أقل",
-                          textAlign: TextAlign.center, textScaleFactor: 1.5),
+                          textAlign: TextAlign.center, textScaler: TextScaler.linear(1.5)),
                     ),
                   ],
                 ),

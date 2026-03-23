@@ -139,7 +139,7 @@ class DeclarationEdit extends GetView<DeclarationEditController> {
                     child: ListTile(
                         trailing: Text(
                           "تاريخ البداية",
-                          textScaleFactor: 0.9,
+                          textScaler: TextScaler.linear(0.9),
                         ),
                         title: Text(controller.start.value))),
               ),
@@ -151,7 +151,7 @@ class DeclarationEdit extends GetView<DeclarationEditController> {
                     child: ListTile(
                         trailing: Text(
                           "تاريخ النهاية",
-                          textScaleFactor: 0.9,
+                          textScaler: TextScaler.linear(0.9),
                         ),
                         title: Text(controller.finish.value))),
               ),

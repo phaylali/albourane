@@ -6,48 +6,46 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   
-  get: 
-  url_launcher:
-  url_strategy:
-  flutter_svg:
-  cross_connectivity: 
-  pdf:
-  printing:
-  open_file:
-  path_provider:
-  flutter_date_pickers: 
-  intl:
-  file_picker:
-  google_fonts:
-  file_saver: 
-  permission_handler:
-  code_editor:
-  monet_colors: 
-  g2x_route:
+  get: ^4.7.3
+  url_launcher: ^6.3.1
+  flutter_svg: ^2.2.4
+  cross_connectivity: ^3.3.0
+  pdf: ^3.12.0
+  printing: ^5.14.3
+  open_file: ^3.5.11
+  path_provider: ^2.1.5
+  flutter_date_pickers: ^0.4.3
+  intl: ^0.20.2
+  file_picker: ^10.3.10
+  google_fonts: ^8.0.2
+  file_saver: ^0.3.1
+  permission_handler: ^12.0.1
+  code_editor: ^2.1.0
+  g2x_route: ^0.0.1
     
 
-  translator: 
-  flutter_widget_from_html_core: 
-  pointer_interceptor:
-  equatable:
+  translator: ^1.0.4+1 
+  flutter_widget_from_html_core: ^0.17.0
+  pointer_interceptor: ^0.10.1+2
+  equatable: ^2.0.8
 
 
   # Firebase Packages
-  firebase_auth: 
-  cloud_firestore: 
-  firebase_core: 
+  firebase_auth: ^6.2.0
+  cloud_firestore: ^6.1.3
+  firebase_core: ^4.5.0
 
  
-  
-  
-  
-  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true

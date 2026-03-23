@@ -97,7 +97,7 @@ class MarinEditController extends GetxController {
             ),
             messageText: Text(
               ' ',
-              textScaleFactor: 0.7,
+              textScaler: TextScaler.linear(0.7),
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.center,
             ));

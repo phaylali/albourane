@@ -37,7 +37,7 @@ class ConnectionIndicator extends StatelessWidget {
                   "غير متصل بالأنترنت",
                   style: TextStyle(color: Colors.red[400]),
                 ),
-              if (status == ConnectivityStatus.unknown)
+              if (status == null)
                 Text(
                   "متصل بالأنترنت",
                   style: TextStyle(color: Colors.green[400]),

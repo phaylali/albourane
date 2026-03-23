@@ -98,13 +98,13 @@ class BoatsController extends GetxController {
           titleText: Text(message!,
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.center,
-              textScaleFactor: 2));
+              textScaler: TextScaler.linear(2)));
     } else {
       Get.snackbar("", "",
           titleText: Text("لم يتم النسخ، الخانة فارخة",
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.center,
-              textScaleFactor: 2));
+              textScaler: TextScaler.linear(2)));
     }
   }
 }

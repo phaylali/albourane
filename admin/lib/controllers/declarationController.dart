@@ -83,7 +83,7 @@ class DeclarationController extends GetxController {
         ),
         messageText: d.Text(
           " ",
-          textScaleFactor: 0.7,
+          textScaler: d.TextScaler.linear(0.7),
           textDirection: d.TextDirection.rtl,
           textAlign: d.TextAlign.center,
         ));
@@ -98,7 +98,7 @@ class DeclarationController extends GetxController {
         ),
         messageText: d.Text(
           " ",
-          textScaleFactor: 0.7,
+          textScaler: d.TextScaler.linear(0.7),
           textDirection: d.TextDirection.rtl,
           textAlign: d.TextAlign.center,
         ));
@@ -118,7 +118,7 @@ class DeclarationController extends GetxController {
         ),
         messageText: d.Text(
           " ",
-          textScaleFactor: 0.7,
+          textScaler: d.TextScaler.linear(0.7),
           textDirection: d.TextDirection.rtl,
           textAlign: d.TextAlign.center,
         ));
@@ -137,7 +137,7 @@ class DeclarationController extends GetxController {
         ),
         messageText: d.Text(
           " ",
-          textScaleFactor: 0.7,
+          textScaler: d.TextScaler.linear(0.7),
           textDirection: d.TextDirection.rtl,
           textAlign: d.TextAlign.center,
         ));

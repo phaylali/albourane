@@ -1,7 +1,6 @@
 import 'package:admin/controllers/boatsController.dart';
 import 'package:admin/controllers/homeController.dart';
 import 'package:admin/controllers/marinsController.dart';
-import 'package:admin/resources/icons.dart';
 import 'package:admin/widgets/skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,7 +48,9 @@ class HomePage extends GetView<HomeController> {
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                         ),
-                        onPressed: null,
+                        onPressed: () {
+                          Get.toNamed('/Boats');
+                        },
                       )),
                   SizedBox(
                       width: 300,
@@ -66,7 +67,9 @@ class HomePage extends GetView<HomeController> {
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                         ),
-                        onPressed: null,
+                        onPressed: () {
+                          Get.toNamed('/Seamen');
+                        },
                       )),
                   SizedBox(
                     width: 300,

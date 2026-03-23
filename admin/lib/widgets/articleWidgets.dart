@@ -40,14 +40,14 @@ class ArticlePreview extends StatelessWidget {
                       ),
                       Text(
                         '${article.title}',
-                        textScaleFactor: 1.5,
+                        textScaler: TextScaler.linear(1.5),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         textDirection: TextDirection.rtl,
                       ),
                       Text(
                         '${article.date}',
-                        textScaleFactor: 0.8,
+                        textScaler: TextScaler.linear(0.8),
                       ),
                     ],
                   ),
@@ -87,7 +87,7 @@ class ArticleInfo extends StatelessWidget {
             title: Text(
               '${article.title}',
               maxLines: 3,
-              textScaleFactor: 1.5,
+              textScaler: TextScaler.linear(1.5),
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               textDirection: TextDirection.rtl,

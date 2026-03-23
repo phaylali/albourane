@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:monet_colors/monet_colors.dart';
 
 class HomeController extends GetxController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -19,7 +18,6 @@ class HomeController extends GetxController {
   var marins = "".obs;
   var boats = "".obs;
   var user = FirebaseAuth.instance.currentUser.obs;
-  MonetColors? colors;
   RxInt pageselected = 0.obs;
   final pages = [
     //FirstPage(),
@@ -80,7 +78,7 @@ class HomeController extends GetxController {
   }
 */
   getColors() async {
-    colors = (await Monet.get())!;
+    // colors = (await Monet.get())!;
   }
 
   void signIn() async {
