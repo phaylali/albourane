@@ -1,4 +1,4 @@
-import 'package:admin/controllers/homeController.dart';
+import 'package:admin/controllers/home_controller.dart';
 import 'package:admin/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,13 +6,12 @@ import 'package:get/get.dart';
 
 class Skeleton extends GetView<HomeController> {
   const Skeleton(
-      {Key? key,
+      {super.key,
       required this.function,
       required this.fab,
       required this.title,
       required this.child,
-      required this.button})
-      : super(key: key);
+      required this.button});
   final String title;
   final Widget child;
   final String fab;
@@ -33,42 +32,42 @@ class Skeleton extends GetView<HomeController> {
         backgroundColor: Theme.of(context).colorScheme.surface,
         floatingActionButton: FloatingActionButton(
             backgroundColor: Theme.of(context).colorScheme.secondary,
-            tooltip: '$fab',
+            tooltip: fab,
             child: button,
             onPressed: () => function()),
-        endDrawer: Drawer(
+        endDrawer: const Drawer(
           child: CustomDrawer(),
         ),
         body: SafeArea(
             child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Text(title,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.displaySmall),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Center(
                 child: Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     Expanded(child: child),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
             ],
@@ -79,7 +78,6 @@ class Skeleton extends GetView<HomeController> {
               backgroundColor: Theme.of(context).colorScheme.secondary,
               onDestinationSelected: (pageindex) {
                 controller.pageselected.value = pageindex;
-                print(pageindex);
 
                 switch (pageindex) {
                   case 0:
@@ -96,7 +94,7 @@ class Skeleton extends GetView<HomeController> {
                     break;
                 }
               },
-              animationDuration: Duration(seconds: 1),
+              animationDuration: const Duration(seconds: 1),
               selectedIndex: controller.pageselected.value,
               destinations: [
                 NavigationDestination(

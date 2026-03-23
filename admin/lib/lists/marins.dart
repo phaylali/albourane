@@ -1,16 +1,16 @@
-import 'package:admin/controllers/marinsController.dart';
-import 'package:admin/controllers/nullController.dart';
-import 'package:admin/models/marinModel.dart';
+import 'package:admin/controllers/marins_controller.dart';
+import 'package:admin/controllers/null_controller.dart';
+import 'package:admin/models/marin_model.dart';
 import 'package:admin/resources/icons.dart';
 import 'package:admin/widgets/skeleton.dart';
-import 'package:admin/widgets/marinWidgets.dart';
-import 'package:admin/widgets/otherWidgets.dart';
+import 'package:admin/widgets/marin_widgets.dart';
+import 'package:admin/widgets/other_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class Marins extends GetView<MarinsController> {
-  const Marins({Key? key}) : super(key: key);
+  const Marins({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class Marins extends GetView<MarinsController> {
       ),
       child: MarinsWidgets(
         add: false,
-        marins: [],
+        marins: const [],
         control: NullController(),
       ),
     );
@@ -34,7 +34,7 @@ class Marins extends GetView<MarinsController> {
 }
 
 class MarinsWidgets extends GetView<MarinsController> {
-  MarinsWidgets({
+  const MarinsWidgets({super.key, 
     required this.control,
     required this.add,
     required this.marins,
@@ -47,7 +47,7 @@ class MarinsWidgets extends GetView<MarinsController> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         SizedBox(
@@ -60,7 +60,7 @@ class MarinsWidgets extends GetView<MarinsController> {
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp("[a-zA-Z0-9-/]")),
                   ],
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       label: Align(
                     alignment: Alignment.centerRight,
                     child: Text(
@@ -75,7 +75,7 @@ class MarinsWidgets extends GetView<MarinsController> {
                 ),
               )),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         GetBuilder<MarinsController>(
@@ -106,7 +106,7 @@ class MarinsWidgets extends GetView<MarinsController> {
           },
         ),
         if (controller.marinsAll.isNotEmpty)
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
         SizedBox(
@@ -126,7 +126,7 @@ class MarinsWidgets extends GetView<MarinsController> {
                 ),
               )),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         if (controller.marinsAll.isNotEmpty)
@@ -146,10 +146,10 @@ class MarinsWidgets extends GetView<MarinsController> {
                     child: SizedBox(
                         height: 30, width: 30, child: OmniIcons().plus),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 60,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 100,
                     child: Text("نتائج أكثر",
                         textAlign: TextAlign.center, textScaler: TextScaler.linear(1.5)),
@@ -159,7 +159,7 @@ class MarinsWidgets extends GetView<MarinsController> {
             ),
           ),
         if (controller.marinsAll.isNotEmpty)
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
         if (controller.marinsAll.isNotEmpty)
@@ -168,8 +168,9 @@ class MarinsWidgets extends GetView<MarinsController> {
             height: 500,
             child: OutlinedButton(
               onPressed: () {
-                if (controller.items.value > 6)
+                if (controller.items.value > 6) {
                   controller.items.value = controller.items.value - 10;
+                }
                 controller.update();
               },
               child: Row(
@@ -180,10 +181,10 @@ class MarinsWidgets extends GetView<MarinsController> {
                     child: SizedBox(
                         height: 30, width: 30, child: OmniIcons().plus),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 60,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 100,
                     child: Text("نتائج أقل",
                         textAlign: TextAlign.center, textScaler: TextScaler.linear(1.5)),
@@ -192,7 +193,7 @@ class MarinsWidgets extends GetView<MarinsController> {
               ),
             ),
           ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
       ],

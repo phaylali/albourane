@@ -1,6 +1,6 @@
-import 'package:admin/controllers/boatsController.dart';
-import 'package:admin/controllers/homeController.dart';
-import 'package:admin/controllers/marinsController.dart';
+import 'package:admin/controllers/boats_controller.dart';
+import 'package:admin/controllers/home_controller.dart';
+import 'package:admin/controllers/marins_controller.dart';
 import 'package:admin/widgets/skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 class HomePage extends GetView<HomeController> {
   final marinz = Get.put(MarinsController());
   final boatz = Get.put(BoatsController());
+
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class HomePage extends GetView<HomeController> {
       child: Center(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Wrap(
@@ -44,7 +46,7 @@ class HomePage extends GetView<HomeController> {
                             textDirection: TextDirection.rtl,
                           ),
                           leading: Text(
-                            '$boatsN',
+                            boatsN,
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                         ),
@@ -63,7 +65,7 @@ class HomePage extends GetView<HomeController> {
                             textDirection: TextDirection.rtl,
                           ),
                           leading: Text(
-                            '$marinsN',
+                            marinsN,
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                         ),
@@ -82,7 +84,7 @@ class HomePage extends GetView<HomeController> {
                           textDirection: TextDirection.rtl,
                         ),
                         leading: Text(
-                          '$marinsN',
+                          marinsN,
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ),
@@ -102,7 +104,7 @@ class HomePage extends GetView<HomeController> {
                           textDirection: TextDirection.rtl,
                         ),
                         leading: Text(
-                          '$marinsN',
+                          marinsN,
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ),
@@ -112,7 +114,7 @@ class HomePage extends GetView<HomeController> {
                     ),
                   ),
                 ]),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
           ],

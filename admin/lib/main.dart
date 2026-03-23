@@ -1,6 +1,6 @@
-import 'package:admin/controllers/boatsController.dart';
-import 'package:admin/controllers/homeController.dart';
-import 'package:admin/controllers/marinsController.dart';
+import 'package:admin/controllers/boats_controller.dart';
+import 'package:admin/controllers/home_controller.dart';
+import 'package:admin/controllers/marins_controller.dart';
 import 'package:admin/pages/home.dart';
 import 'package:admin/resources/routes.dart';
 import 'package:admin/resources/themes.dart';
@@ -21,10 +21,10 @@ void main() async {
     if (kIsWeb || (defaultTargetPlatform != TargetPlatform.linux)) {
       await Firebase.initializeApp();
     } else {
-      print("Firebase is not supported on Linux yet. Skipping initialization.");
+      debugPrint("Firebase is not supported on Linux yet. Skipping initialization.");
     }
   } catch (e) {
-    print("Firebase initialization failed: $e");
+    debugPrint("Firebase initialization failed: $e");
   }
   Get.lazyPut(() => HomeController());
   Get.lazyPut(() => MarinsController());
@@ -37,18 +37,23 @@ void main() async {
     yield LicenseEntryWithLineBreaks(['fonts'], licenseEN);
   });
   SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: Colors.black));
+      const SystemUiOverlayStyle(statusBarColor: Colors.black));
 
-  runApp(Start());
+  runApp(const Start());
 }
 
 class Start extends StatelessWidget {
+  const Start({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        initialRoute: AppPages.INITIAL,
+        initialRoute: AppPages.initial,
         getPages: AppPages.routes,
-        unknownRoute: AppPages.routes[7],
+        unknownRoute: AppPages.routes.firstWhere(
+          (page) => page.name == AppPages.unknown,
+          orElse: () => AppPages.routes.first,
+        ),
         theme: omniDarkBlueTheme(),
         darkTheme: omniDarkBlueTheme(),
         navigatorKey: Get.key,

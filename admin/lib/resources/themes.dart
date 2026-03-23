@@ -33,10 +33,10 @@ ThemeData omniDarkBlueTheme() => ThemeData.dark().copyWith(
         indicatorColor: Colors.blueGrey[100],
         iconTheme: WidgetStateProperty.resolveWith(getDarkBlueOverlayIcon),
         labelTextStyle: WidgetStateProperty.all(
-          TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+          const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
         ),
       ),
-      listTileTheme: ListTileThemeData(),
+      listTileTheme: const ListTileThemeData(),
       outlinedButtonTheme: OutlinedButtonThemeData(
           style: ButtonStyle(
               //elevation: MaterialStateProperty.all(10),

@@ -10,13 +10,12 @@ This document contains "boring" technical details, architecture decisions, and n
 - **Internationalization**: `intl` for dates and number formatting.
 - **Exports**: `printing` and `pdf` for generating maritime reports.
 
-## Project Structure
+## Project Standards (March 2026 Update)
 
-- `lib/controllers/`: Contains GetxControllers that manage business logic.
-- `lib/models/`: Data models used throughout the app (Boat, Marin, Month, etc.).
-- `lib/pages/`: Main UI screens.
-- `lib/widgets/`: Reusable UI components.
-- `lib/resources/`: Routing, themes, and global constants.
+1. **Naming Convention**: All files now follow the official Dart `lower_case_with_underscores` convention.
+2. **Linting**: The project is 100% compliant with `flutter analyze` ("No issues found!").
+3. **Production Standards**: `print` statements have been removed or replaced with `debugPrint`.
+4. **Widgets**: All widgets use modern `super.key` parameters.
 
 ## Modernization (March 2026)
 

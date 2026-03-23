@@ -1,18 +1,18 @@
-import 'package:admin/controllers/homeController.dart';
+import 'package:admin/controllers/home_controller.dart';
 import 'package:admin/resources/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
+        const SizedBox(
           width: 20,
         ),
         SizedBox(
@@ -24,8 +24,9 @@ class CustomDrawer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
-                  title: Text("العودة الى الخلف",
-                      textDirection: TextDirection.rtl, textScaler: TextScaler.linear(1.3)),
+                  title: const Text("العودة الى الخلف",
+                      textDirection: TextDirection.rtl,
+                      textScaler: TextScaler.linear(1.3)),
                   leading:
                       SizedBox(height: 40, width: 40, child: OmniIcons().back),
                   onTap: () {
@@ -35,8 +36,9 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text("الصفحة الرئيسية",
-                      textDirection: TextDirection.rtl, textScaler: TextScaler.linear(1.3)),
+                  title: const Text("الصفحة الرئيسية",
+                      textDirection: TextDirection.rtl,
+                      textScaler: TextScaler.linear(1.3)),
                   leading:
                       SizedBox(height: 40, width: 40, child: OmniIcons().home),
                   onTap: () {
@@ -44,8 +46,9 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text("القوارب",
-                      textDirection: TextDirection.rtl, textScaler: TextScaler.linear(1.3)),
+                  title: const Text("القوارب",
+                      textDirection: TextDirection.rtl,
+                      textScaler: TextScaler.linear(1.3)),
                   leading:
                       SizedBox(height: 40, width: 40, child: OmniIcons().boat),
                   onTap: () {
@@ -53,8 +56,9 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text("البحارة",
-                      textDirection: TextDirection.rtl, textScaler: TextScaler.linear(1.3)),
+                  title: const Text("البحارة",
+                      textDirection: TextDirection.rtl,
+                      textScaler: TextScaler.linear(1.3)),
                   leading: SizedBox(
                     height: 40,
                     width: 40,
@@ -65,8 +69,9 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text("الاخبار",
-                      textDirection: TextDirection.rtl, textScaler: TextScaler.linear(1.3)),
+                  title: const Text("الاخبار",
+                      textDirection: TextDirection.rtl,
+                      textScaler: TextScaler.linear(1.3)),
                   leading: SizedBox(
                       height: 40, width: 40, child: OmniIcons().document),
                   onTap: () {
@@ -74,8 +79,9 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text("مقال جديد",
-                      textDirection: TextDirection.rtl, textScaler: TextScaler.linear(1.3)),
+                  title: const Text("مقال جديد",
+                      textDirection: TextDirection.rtl,
+                      textScaler: TextScaler.linear(1.3)),
                   leading: SizedBox(
                     height: 40,
                     width: 60,
@@ -96,8 +102,9 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text("الدخول",
-                      textDirection: TextDirection.rtl, textScaler: TextScaler.linear(1.3)),
+                  title: const Text("الدخول",
+                      textDirection: TextDirection.rtl,
+                      textScaler: TextScaler.linear(1.3)),
                   leading:
                       SizedBox(height: 40, width: 40, child: OmniIcons().login),
                   onTap: () {
@@ -105,8 +112,9 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text("الخروج",
-                      textDirection: TextDirection.rtl, textScaler: TextScaler.linear(1.3)),
+                  title: const Text("الخروج",
+                      textDirection: TextDirection.rtl,
+                      textScaler: TextScaler.linear(1.3)),
                   leading: SizedBox(
                       height: 40, width: 40, child: OmniIcons().logout),
                   onTap: () {
@@ -117,7 +125,7 @@ class CustomDrawer extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 20,
         ),
       ],

@@ -1,10 +1,10 @@
-import 'package:admin/controllers/homeController.dart';
+import 'package:admin/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:admin/widgets/skeleton.dart';
 import 'package:get/get.dart';
 
 class Settings extends GetView<HomeController> {
-  const Settings({Key? key}) : super(key: key);
+  const Settings({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class Settings extends GetView<HomeController> {
       child: Center(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Wrap(
@@ -38,11 +38,11 @@ class Settings extends GetView<HomeController> {
                         style: Theme.of(context).textTheme.titleLarge,
                         textDirection: TextDirection.rtl,
                       ),
-                      leading: Icon(Icons.login),
+                      leading: const Icon(Icons.login),
                     ),
                     onPressed: () {
                       Get.defaultDialog(
-                          titlePadding: EdgeInsets.all(20),
+                          titlePadding: const EdgeInsets.all(20),
                           title: "تسجيل الدخول",
                           titleStyle: Theme.of(context).textTheme.titleLarge,
                           content: Center(
@@ -56,7 +56,7 @@ class Settings extends GetView<HomeController> {
                                       onPressed: null,
                                       child: ListTile(
                                         title: TextFormField(
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             labelText: "البريد الالكتروني",
                                           ),
                                           keyboardType:
@@ -66,7 +66,7 @@ class Settings extends GetView<HomeController> {
                                       )),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 30,
                               ),
                               Center(
@@ -77,7 +77,7 @@ class Settings extends GetView<HomeController> {
                                       onPressed: null,
                                       child: ListTile(
                                         title: TextFormField(
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             labelText: "كلمة السر",
                                           ),
                                           keyboardType:
@@ -87,7 +87,7 @@ class Settings extends GetView<HomeController> {
                                       )),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 30,
                               ),
                               Center(
@@ -107,7 +107,7 @@ class Settings extends GetView<HomeController> {
                                       )),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                             ],
@@ -126,7 +126,7 @@ class Settings extends GetView<HomeController> {
                         style: Theme.of(context).textTheme.titleLarge,
                         textDirection: TextDirection.rtl,
                       ),
-                      leading: Icon(Icons.logout),
+                      leading: const Icon(Icons.logout),
                     ),
                     onPressed: () {
                       controller.signOut();
@@ -143,7 +143,7 @@ class Settings extends GetView<HomeController> {
                         style: Theme.of(context).textTheme.titleLarge,
                         textDirection: TextDirection.rtl,
                       ),
-                      leading: Icon(Icons.document_scanner),
+                      leading: const Icon(Icons.document_scanner),
                     ),
                     onPressed: () {
                       showLicensePage(context: context);
@@ -152,7 +152,7 @@ class Settings extends GetView<HomeController> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
           ],

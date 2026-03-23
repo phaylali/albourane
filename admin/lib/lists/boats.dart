@@ -1,15 +1,15 @@
-import 'package:admin/controllers/boatsController.dart';
-import 'package:admin/controllers/nullController.dart';
-import 'package:admin/models/boatModel.dart';
+import 'package:admin/controllers/boats_controller.dart';
+import 'package:admin/controllers/null_controller.dart';
+import 'package:admin/models/boat_model.dart';
 import 'package:admin/resources/icons.dart';
-import 'package:admin/widgets/boatWidgets.dart';
+import 'package:admin/widgets/boat_widgets.dart';
 import 'package:admin/widgets/skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 
 class Boats extends GetView<BoatsController> {
-  const Boats({Key? key}) : super(key: key);
+  const Boats({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class Boats extends GetView<BoatsController> {
       title: 'القوارب',
       child: BoatsWidget(
         add: false,
-        boats: [],
+        boats: const [],
         control: NullController(),
       ),
     );
@@ -33,7 +33,7 @@ class Boats extends GetView<BoatsController> {
 }
 
 class BoatsWidget extends GetView<BoatsController> {
-  BoatsWidget({required this.add, required this.boats, required this.control});
+  const BoatsWidget({super.key, required this.add, required this.boats, required this.control});
   final bool add;
   final List<Boat> boats;
   final GetxController control;
@@ -43,7 +43,7 @@ class BoatsWidget extends GetView<BoatsController> {
     return Center(
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           SizedBox(
@@ -57,12 +57,12 @@ class BoatsWidget extends GetView<BoatsController> {
                       FilteringTextInputFormatter.allow(
                           RegExp("[a-zA-Z0-9-/]")),
                     ],
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         label: Align(
+                            alignment: Alignment.centerRight,
                             child: Text(
                               "اختر القارب",
-                            ),
-                            alignment: Alignment.centerRight)),
+                            ))),
                     controller: controller.filterController,
                     onChanged: (value) {
                       controller.getBoatsQuery(value);
@@ -71,7 +71,7 @@ class BoatsWidget extends GetView<BoatsController> {
                   ),
                 )),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           GetBuilder<BoatsController>(
@@ -103,13 +103,14 @@ class BoatsWidget extends GetView<BoatsController> {
 
                                   controller.update();
                                   Get.put(control).update();
-                                } else
+                                } else {
                                   Get.snackbar('', '',
-                                      titleText: Text(
+                                      titleText: const Text(
                                         "القارب موجود في الائحة",
                                         textDirection: TextDirection.rtl,
                                         textAlign: TextAlign.center,
                                       ));
+                                }
                               },
                               textCancel: 'الغاء',
                             );
@@ -120,7 +121,7 @@ class BoatsWidget extends GetView<BoatsController> {
             },
           ),
           if (controller.boatsAll.isNotEmpty)
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
           SizedBox(
@@ -140,7 +141,7 @@ class BoatsWidget extends GetView<BoatsController> {
                   ),
                 )),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           if (controller.boatsAll.isNotEmpty)
@@ -160,10 +161,10 @@ class BoatsWidget extends GetView<BoatsController> {
                       child: SizedBox(
                           height: 30, width: 30, child: OmniIcons().plus),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 60,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 100,
                       child: Text("نتائج أكثر",
                           textAlign: TextAlign.center, textScaler: TextScaler.linear(1.5)),
@@ -173,7 +174,7 @@ class BoatsWidget extends GetView<BoatsController> {
               ),
             ),
           if (controller.boatsAll.isNotEmpty)
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
           if (controller.boatsAll.isNotEmpty)
@@ -182,8 +183,9 @@ class BoatsWidget extends GetView<BoatsController> {
               height: 70,
               child: OutlinedButton(
                 onPressed: () {
-                  if (controller.items.value > 6)
+                  if (controller.items.value > 6) {
                     controller.items.value = controller.items.value - 10;
+                  }
                   controller.update();
                 },
                 child: Row(
@@ -194,10 +196,10 @@ class BoatsWidget extends GetView<BoatsController> {
                       child: SizedBox(
                           height: 30, width: 30, child: OmniIcons().plus),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 60,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 100,
                       child: Text("نتائج أقل",
                           textAlign: TextAlign.center, textScaler: TextScaler.linear(1.5)),
@@ -206,7 +208,7 @@ class BoatsWidget extends GetView<BoatsController> {
                 ),
               ),
             ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
         ],

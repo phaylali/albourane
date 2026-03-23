@@ -1,0 +1,57 @@
+Analyzing admin...                                              
+
+   info • The file name 'articleNewController.dart' isn't a lower_case_with_underscores identifier • lib/controllers/articleNewController.dart:1:1 • file_names
+   info • Don't invoke 'print' in production code • lib/controllers/articleNewController.dart:134:5 • avoid_print
+   info • Don't invoke 'print' in production code • lib/controllers/articleNewController.dart:135:5 • avoid_print
+   info • The file name 'articlesController.dart' isn't a lower_case_with_underscores identifier • lib/controllers/articlesController.dart:1:1 • file_names
+   info • The file name 'boatEditController.dart' isn't a lower_case_with_underscores identifier • lib/controllers/boatEditController.dart:1:1 • file_names
+   info • Don't invoke 'print' in production code • lib/controllers/boatEditController.dart:59:9 • avoid_print
+   info • The file name 'boatNewController.dart' isn't a lower_case_with_underscores identifier • lib/controllers/boatNewController.dart:1:1 • file_names
+   info • The file name 'boatsController.dart' isn't a lower_case_with_underscores identifier • lib/controllers/boatsController.dart:1:1 • file_names
+   info • The file name 'dateController.dart' isn't a lower_case_with_underscores identifier • lib/controllers/dateController.dart:1:1 • file_names
+   info • The file name 'declarationController.dart' isn't a lower_case_with_underscores identifier • lib/controllers/declarationController.dart:1:1 • file_names
+   info • Don't invoke 'print' in production code • lib/controllers/declarationController.dart:64:5 • avoid_print
+   info • The file name 'declarationEditController.dart' isn't a lower_case_with_underscores identifier • lib/controllers/declarationEditController.dart:1:1 • file_names
+   info • Don't invoke 'print' in production code • lib/controllers/declarationEditController.dart:85:9 • avoid_print
+   info • Function literals shouldn't be passed to 'forEach' • lib/controllers/declarationEditController.dart:181:18 • avoid_function_literals_in_foreach_calls
+   info • The file name 'declarationInputController.dart' isn't a lower_case_with_underscores identifier • lib/controllers/declarationInputController.dart:1:1 • file_names
+   info • Function literals shouldn't be passed to 'forEach' • lib/controllers/declarationInputController.dart:173:18 • avoid_function_literals_in_foreach_calls
+   info • The file name 'homeController.dart' isn't a lower_case_with_underscores identifier • lib/controllers/homeController.dart:1:1 • file_names
+   info • Don't invoke 'print' in production code • lib/controllers/homeController.dart:105:7 • avoid_print
+   info • The file name 'marinEditController.dart' isn't a lower_case_with_underscores identifier • lib/controllers/marinEditController.dart:1:1 • file_names
+   info • Don't invoke 'print' in production code • lib/controllers/marinEditController.dart:58:9 • avoid_print
+   info • The file name 'marinNewController.dart' isn't a lower_case_with_underscores identifier • lib/controllers/marinNewController.dart:1:1 • file_names
+   info • The file name 'marinsController.dart' isn't a lower_case_with_underscores identifier • lib/controllers/marinsController.dart:1:1 • file_names
+   info • The file name 'nullController.dart' isn't a lower_case_with_underscores identifier • lib/controllers/nullController.dart:1:1 • file_names
+   info • The file name 'passwordController.dart' isn't a lower_case_with_underscores identifier • lib/controllers/passwordController.dart:1:1 • file_names
+   info • The file name 'articleModify.dart' isn't a lower_case_with_underscores identifier • lib/edit/articleModify.dart:1:1 • file_names
+   info • The file name 'boatEdit.dart' isn't a lower_case_with_underscores identifier • lib/edit/boatEdit.dart:1:1 • file_names
+   info • The file name 'declarationEdit.dart' isn't a lower_case_with_underscores identifier • lib/edit/declarationEdit.dart:1:1 • file_names
+   info • The file name 'marinEdit.dart' isn't a lower_case_with_underscores identifier • lib/edit/marinEdit.dart:1:1 • file_names
+   info • The file name 'articleNew.dart' isn't a lower_case_with_underscores identifier • lib/forms/articleNew.dart:1:1 • file_names
+   info • Don't invoke 'print' in production code • lib/forms/articleNew.dart:74:15 • avoid_print
+   info • Don't invoke 'print' in production code • lib/forms/articleNew.dart:75:15 • avoid_print
+   info • The file name 'boatNew.dart' isn't a lower_case_with_underscores identifier • lib/forms/boatNew.dart:1:1 • file_names
+   info • The file name 'declarationNew.dart' isn't a lower_case_with_underscores identifier • lib/forms/declarationNew.dart:1:1 • file_names
+   info • The file name 'marinNew.dart' isn't a lower_case_with_underscores identifier • lib/forms/marinNew.dart:1:1 • file_names
+   info • Don't invoke 'print' in production code • lib/main.dart:24:7 • avoid_print
+   info • Don't invoke 'print' in production code • lib/main.dart:27:5 • avoid_print
+   info • The file name 'articleModel.dart' isn't a lower_case_with_underscores identifier • lib/models/articleModel.dart:1:1 • file_names
+   info • The file name 'boatModel.dart' isn't a lower_case_with_underscores identifier • lib/models/boatModel.dart:1:1 • file_names
+   info • The file name 'marinModel.dart' isn't a lower_case_with_underscores identifier • lib/models/marinModel.dart:1:1 • file_names
+   info • The file name 'marinMonthModel.dart' isn't a lower_case_with_underscores identifier • lib/models/marinMonthModel.dart:1:1 • file_names
+   info • The file name 'monthModel.dart' isn't a lower_case_with_underscores identifier • lib/models/monthModel.dart:1:1 • file_names
+   info • The file name 'tractorRevenueModel.dart' isn't a lower_case_with_underscores identifier • lib/models/tractorRevenueModel.dart:1:1 • file_names
+   info • The file name 'articlePage.dart' isn't a lower_case_with_underscores identifier • lib/pages/articlePage.dart:1:1 • file_names
+   info • The file name 'boatPage.dart' isn't a lower_case_with_underscores identifier • lib/pages/boatPage.dart:1:1 • file_names
+   info • The file name 'declarationPage.dart' isn't a lower_case_with_underscores identifier • lib/pages/declarationPage.dart:1:1 • file_names
+   info • The file name 'marinPage.dart' isn't a lower_case_with_underscores identifier • lib/pages/marinPage.dart:1:1 • file_names
+   info • The file name 'articleWidgets.dart' isn't a lower_case_with_underscores identifier • lib/widgets/articleWidgets.dart:1:1 • file_names
+  error • Expected to find ')' • lib/widgets/articleWidgets.dart:11:30 • expected_token
+  error • Expected to find ')' • lib/widgets/articleWidgets.dart:70:33 • expected_token
+   info • The file name 'boatWidgets.dart' isn't a lower_case_with_underscores identifier • lib/widgets/boatWidgets.dart:1:1 • file_names
+   info • The file name 'declarationWidgets.dart' isn't a lower_case_with_underscores identifier • lib/widgets/declarationWidgets.dart:1:1 • file_names
+   info • The file name 'marinWidgets.dart' isn't a lower_case_with_underscores identifier • lib/widgets/marinWidgets.dart:1:1 • file_names
+   info • The file name 'otherWidgets.dart' isn't a lower_case_with_underscores identifier • lib/widgets/otherWidgets.dart:1:1 • file_names
+   info • Don't invoke 'print' in production code • lib/widgets/skeleton.dart:81:17 • avoid_print
+

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ERROR404 extends StatelessWidget {
+  const ERROR404({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -11,9 +13,9 @@ class ERROR404 extends StatelessWidget {
           child: Expanded(
             child: Column(
               children: [
-                Spacer(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Spacer(),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Text(
                     "لا يوجد شيء هنا",
                     textAlign: TextAlign.center,
@@ -22,35 +24,35 @@ class ERROR404 extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Text(
                     "هناك خطأ في الرابط او الصفحة قد تم حذفها",
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Text(
                     "عد إلى الخلف او ادخل للصفحة الرئيسية",
                   ),
                 ),
                 Row(
                   children: [
-                    Spacer(),
+                    const Spacer(),
                     SizedBox(
                       height: 100,
                       width: 200,
                       child: OutlinedButton(
                         child: ListTile(
                           leading: OmniIcons().back,
-                          title: Text('إلى الخلف'),
+                          title: const Text('إلى الخلف'),
                         ),
                         onPressed: () {
                           Get.back();
                         },
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     SizedBox(
@@ -59,17 +61,17 @@ class ERROR404 extends StatelessWidget {
                       child: OutlinedButton(
                         child: ListTile(
                           leading: OmniIcons().home,
-                          title: Text('الصفحة الرئيسية'),
+                          title: const Text('الصفحة الرئيسية'),
                         ),
                         onPressed: () {
                           Get.toNamed('/');
                         },
                       ),
                     ),
-                    Spacer()
+                    const Spacer()
                   ],
                 ),
-                Spacer()
+                const Spacer()
               ],
             ),
           ),
@@ -80,7 +82,7 @@ class ERROR404 extends StatelessWidget {
 }
 
 class NoProduct extends StatelessWidget {
-  NoProduct({required this.title, required this.subtitle});
+  const NoProduct({super.key, required this.title, required this.subtitle});
   final String title;
   final String subtitle;
 
@@ -99,13 +101,13 @@ class NoProduct extends StatelessWidget {
                   Expanded(
                     child: Column(
                       children: [
-                        Spacer(),
+                        const Spacer(),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             title,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 30,
                             ),
                           ),
@@ -116,7 +118,7 @@ class NoProduct extends StatelessWidget {
                             subtitle,
                           ),
                         ),
-                        Spacer()
+                        const Spacer()
                       ],
                     ),
                   ),
