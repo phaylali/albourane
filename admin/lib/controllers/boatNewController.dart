@@ -1,5 +1,6 @@
 import 'package:admin/models/boatModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,11 +13,14 @@ class BoatInputController extends GetxController {
       cniController,
       ownerController,
       imgController;
-  CollectionReference boatsCol = FirebaseFirestore.instance.collection('boats');
+  late CollectionReference boatsCol;
 
   @override
   void onInit() {
     super.onInit();
+    if (Firebase.apps.isNotEmpty) {
+      boatsCol = FirebaseFirestore.instance.collection('boats');
+    }
     phoneController = TextEditingController();
     percController = TextEditingController();
     nameController = TextEditingController();
@@ -58,6 +62,7 @@ class BoatInputController extends GetxController {
     final perc = double.parse(percController.text);
     final id = referenceController.text.replaceAll('/', '-');
 
+    if (Firebase.apps.isEmpty) return;
     return await boatsCol.doc(id).get().then((value) {
       if (value.exists) {
         Get.snackbar("", "",

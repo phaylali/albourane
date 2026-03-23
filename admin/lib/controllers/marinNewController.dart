@@ -1,5 +1,6 @@
 import 'package:admin/models/marinModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,12 +12,14 @@ class MarinInputController extends GetxController {
       cnssController,
       cniController,
       imgController;
-  CollectionReference seamenCol =
-      FirebaseFirestore.instance.collection('seamen');
+  late CollectionReference seamenCol;
 
   @override
   void onInit() {
     super.onInit();
+    if (Firebase.apps.isNotEmpty) {
+      seamenCol = FirebaseFirestore.instance.collection('seamen');
+    }
     phoneController = TextEditingController();
     lastNameController = TextEditingController();
     firstNameController = TextEditingController();
@@ -55,6 +58,7 @@ class MarinInputController extends GetxController {
   addMarin() async {
     final id = referenceController.text.replaceAll('/', '-');
 
+    if (Firebase.apps.isEmpty) return;
     return await seamenCol.doc(id).get().then((value) {
       if (value.exists) {
         Get.snackbar("", "",

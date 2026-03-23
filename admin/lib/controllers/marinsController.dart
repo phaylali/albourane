@@ -1,5 +1,6 @@
 import 'package:admin/models/marinModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -7,17 +8,18 @@ import 'package:get/get.dart';
 class MarinsController extends GetxController {
   List<Marin> marinsAll = [];
   List<Marin> marinQuery = [];
-  CollectionReference seamenCol =
-      FirebaseFirestore.instance.collection('seamen');
+  CollectionReference? seamenCol;
   late TextEditingController filterController;
   var items = 6.obs;
 
   @override
   void onInit() async {
     super.onInit();
+    if (Firebase.apps.isNotEmpty) {
+      seamenCol = FirebaseFirestore.instance.collection('seamen');
+      getAllMarins();
+    }
     filterController = TextEditingController();
-
-    getAllMarins();
   }
 
   @override
@@ -37,7 +39,8 @@ class MarinsController extends GetxController {
   }
 
   getAllMarins() async {
-    return await seamenCol
+    if (seamenCol == null) return;
+    return await seamenCol!
         .withConverter<Marin>(
           fromFirestore: (snapshots, _) => Marin.fromJson(snapshots.data()!),
           toFirestore: (marin, _) => marin.toJson(),
@@ -51,7 +54,7 @@ class MarinsController extends GetxController {
   }
 
   deleteMarin(id) async {
-    await seamenCol.doc(id).delete();
+    await seamenCol?.doc(id).delete();
     Get.toNamed("/Seamen");
   }
 

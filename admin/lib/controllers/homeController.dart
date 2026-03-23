@@ -5,11 +5,12 @@ import 'package:admin/lists/marins.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class HomeController extends GetxController {
-  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFirestore? firebaseFirestore;
+  FirebaseAuth? auth;
   RxBool isLoggedIn = false.obs;
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -17,7 +18,7 @@ class HomeController extends GetxController {
   String usersCollection = "users";
   var marins = "".obs;
   var boats = "".obs;
-  var user = FirebaseAuth.instance.currentUser.obs;
+  Rxn<User> user = Rxn<User>();
   RxInt pageselected = 0.obs;
   final pages = [
     //FirstPage(),
@@ -56,6 +57,11 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    if (Firebase.apps.isNotEmpty) {
+      firebaseFirestore = FirebaseFirestore.instance;
+      auth = FirebaseAuth.instance;
+      user.value = auth?.currentUser;
+    }
     getColors();
     super.onInit();
   }
@@ -83,17 +89,21 @@ class HomeController extends GetxController {
 
   void signIn() async {
     try {
-      await auth
-          .signInWithEmailAndPassword(
-              email: email.text.trim(), password: password.text.trim())
-          .then((result) {
-        _clearControllers();
-        Get.put(MarinsController()).onInit();
-        Get.put(BoatsController()).onInit();
-        Get.put(HomeController()).onInit();
-        notifyChildrens();
-        Get.toNamed('/');
-      });
+      if (auth != null) {
+        await auth!
+            .signInWithEmailAndPassword(
+                email: email.text.trim(), password: password.text.trim())
+            .then((result) {
+          _clearControllers();
+          Get.put(MarinsController()).onInit();
+          Get.put(BoatsController()).onInit();
+          Get.put(HomeController()).onInit();
+          notifyChildrens();
+          Get.toNamed('/');
+        });
+      } else {
+        Get.snackbar("خطأ", "Firebase not initialized");
+      }
     } catch (e) {
       Get.snackbar("خطأ", e.toString());
       print(email.text.trim() + password.text.trim());
@@ -101,7 +111,9 @@ class HomeController extends GetxController {
   }
 
   void signOut() async {
-    await auth.signOut();
+    if (auth != null) {
+      await auth!.signOut();
+    }
 
     Get.put(MarinsController()).marinsAll.clear();
     Get.put(MarinsController()).marinQuery.clear();

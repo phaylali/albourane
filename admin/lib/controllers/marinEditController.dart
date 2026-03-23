@@ -1,11 +1,11 @@
 import 'package:admin/models/marinModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MarinEditController extends GetxController {
-  CollectionReference seamenCol =
-      FirebaseFirestore.instance.collection('seamen');
+  late CollectionReference seamenCol;
 
   late TextEditingController phoneController,
       nameFirstController,
@@ -20,6 +20,9 @@ class MarinEditController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    if (Firebase.apps.isNotEmpty) {
+      seamenCol = FirebaseFirestore.instance.collection('seamen');
+    }
     phoneController = TextEditingController();
 
     nameFirstController = TextEditingController();

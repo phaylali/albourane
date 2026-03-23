@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:admin/models/articleModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 //import 'package:code_editor/code_editor.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:flutter/foundation.dart';
@@ -17,12 +18,12 @@ class ArticleInputController extends GetxController {
       thumbController,
       contentController;
   //late HtmlEditorController contentController;
-  CollectionReference articlesCol =
-      FirebaseFirestore.instance.collection('articles');
+  late CollectionReference articlesCol;
 
   final translator = GoogleTranslator();
 
   getArticle(x) async {
+    if (Firebase.apps.isEmpty) return null;
     return await FirebaseFirestore.instance
         .collection('articles')
         .doc(x)
@@ -36,6 +37,9 @@ class ArticleInputController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    if (Firebase.apps.isNotEmpty) {
+      articlesCol = FirebaseFirestore.instance.collection('articles');
+    }
 
     contentController = TextEditingController();
     titleController = TextEditingController();

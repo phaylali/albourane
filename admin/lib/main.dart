@@ -17,7 +17,15 @@ void main() async {
   usePathUrlStrategy();
   initializeDateFormatting();
 
-  await Firebase.initializeApp();
+  try {
+    if (kIsWeb || (defaultTargetPlatform != TargetPlatform.linux)) {
+      await Firebase.initializeApp();
+    } else {
+      print("Firebase is not supported on Linux yet. Skipping initialization.");
+    }
+  } catch (e) {
+    print("Firebase initialization failed: $e");
+  }
   Get.lazyPut(() => HomeController());
   Get.lazyPut(() => MarinsController());
   Get.lazyPut(() => BoatsController());

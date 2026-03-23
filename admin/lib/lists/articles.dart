@@ -10,7 +10,7 @@ class Articles extends GetView<ArticlesController> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<QuerySnapshot<Article>>(
+    return FutureBuilder<QuerySnapshot<Article>?>(
       future: controller.getArticles(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {

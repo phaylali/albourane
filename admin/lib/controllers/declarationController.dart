@@ -3,6 +3,7 @@ import 'package:admin/models/marinModel.dart';
 import 'package:admin/models/monthModel.dart';
 import 'package:admin/widgets/declarationWidgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pdf/pdf.dart';
@@ -27,6 +28,7 @@ class DeclarationController extends GetxController {
   }
 
   void getMarins(ido, month) async {
+    if (Firebase.apps.isEmpty) return;
     await FirebaseFirestore.instance
         .collection('seamen')
         .doc(ido)
@@ -41,6 +43,7 @@ class DeclarationController extends GetxController {
   }
 
   Future getData(boat, month) async {
+    if (Firebase.apps.isEmpty) return;
     final boatRef = FirebaseFirestore.instance
         .collection('boats')
         .doc(boat)

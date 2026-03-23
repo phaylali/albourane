@@ -1,10 +1,11 @@
 import 'package:admin/models/boatModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BoatEditController extends GetxController {
-  CollectionReference boatsCol = FirebaseFirestore.instance.collection('boats');
+  late CollectionReference boatsCol;
 
   late TextEditingController phoneController,
       percController,
@@ -18,8 +19,11 @@ class BoatEditController extends GetxController {
   var filter = '3'.obs;
 
   @override
-  void onInit() async {
+  void onInit() {
     super.onInit();
+    if (Firebase.apps.isNotEmpty) {
+      boatsCol = FirebaseFirestore.instance.collection('boats');
+    }
     phoneController = TextEditingController();
     percController = TextEditingController();
     nameController = TextEditingController();

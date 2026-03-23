@@ -10,7 +10,7 @@ class ArticlePage extends GetView<ArticlesController> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<DocumentSnapshot<Article>>(
+    return FutureBuilder<DocumentSnapshot<Article>?>(
       future: controller.getArticle(id),
       builder: (context, snapshot) {
         if (snapshot.hasError) {

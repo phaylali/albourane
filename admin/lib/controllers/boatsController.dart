@@ -1,5 +1,6 @@
 import 'package:admin/models/boatModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -7,15 +8,18 @@ import 'package:get/get.dart';
 class BoatsController extends GetxController {
   List<Boat> boatsAll = [];
   List<Boat> boatQuery = [];
-  CollectionReference boatsCol = FirebaseFirestore.instance.collection('boats');
+  CollectionReference? boatsCol;
   late TextEditingController filterController;
   var items = 6.obs;
 
   @override
   void onInit() async {
     super.onInit();
+    if (Firebase.apps.isNotEmpty) {
+      boatsCol = FirebaseFirestore.instance.collection('boats');
+      getAllBoats();
+    }
     filterController = TextEditingController();
-    getAllBoats();
   }
 
   @override
@@ -33,7 +37,8 @@ class BoatsController extends GetxController {
   }
 
   getAllBoats() async {
-    return await boatsCol
+    if (boatsCol == null) return;
+    return await boatsCol!
         .withConverter<Boat>(
           fromFirestore: (snapshots, _) => Boat.fromJson(snapshots.data()!),
           toFirestore: (boat, _) => boat.toJson(),

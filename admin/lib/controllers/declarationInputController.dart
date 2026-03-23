@@ -3,6 +3,7 @@ import 'package:admin/models/marinModel.dart';
 import 'package:admin/models/marinMonthModel.dart';
 import 'package:admin/models/monthModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,13 +22,16 @@ class DeclarationInputController extends GetxController {
   List<Marin> marinFinal = [];
   var baharaz = [].obs;
 
-  CollectionReference boatsCol = FirebaseFirestore.instance.collection('boats');
-  CollectionReference seamenCol =
-      FirebaseFirestore.instance.collection('seamen');
+  late CollectionReference boatsCol;
+  late CollectionReference seamenCol;
 
   @override
   void onInit() {
     super.onInit();
+    if (Firebase.apps.isNotEmpty) {
+      boatsCol = FirebaseFirestore.instance.collection('boats');
+      seamenCol = FirebaseFirestore.instance.collection('seamen');
+    }
     revenueController = TextEditingController();
     salesController = TextEditingController();
     carbController = TextEditingController();
