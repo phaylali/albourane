@@ -11,11 +11,13 @@ A complete maritime management ecosystem for the Artisanal Fishing Cooperative A
 This repository contains two Flutter applications:
 
 ### 1. Albourane (Client App)
+
 A cross-platform application for maritime tracking and information.
 
 **Platforms**: Web, Linux Desktop, Android
 
 **Features**:
+
 - Maritime tracking and boat information management
 - Real-time connectivity monitoring
 - PDF generation and document printing
@@ -23,6 +25,7 @@ A cross-platform application for maritime tracking and information.
 - Firebase backend (Auth & Firestore)
 
 **Tech Stack**:
+
 - Flutter (v3.12+)
 - GetX (State Management)
 - Firebase (Auth, Firestore)
@@ -30,17 +33,20 @@ A cross-platform application for maritime tracking and information.
 - `cross_connectivity`
 
 ### 2. Albourane Admin
+
 Administrative dashboard for cooperative management.
 
 **Platforms**: Web, Android, Linux Desktop
 
 **Features**:
+
 - Boat management (create, edit, track)
 - Seamen directory (maritime personnel profiles)
 - Financial declarations (CNSS/financial reports)
 - Multi-platform support with modernized UI
 
 **Tech Stack**:
+
 - Flutter
 - GetX
 - Firebase (Firestore, Authentication)
@@ -72,11 +78,13 @@ Administrative dashboard for cooperative management.
 ### Running the App
 
 **Client App (albourane)**:
+
 - Web: `flutter run -d chrome`
 - Linux: `flutter run -d linux`
 - Android: `flutter run -d <device_id>`
 
 **Admin Dashboard**:
+
 - Web: `flutter run -d chrome`
 - Linux: `flutter run -d linux`
 - Android: `flutter run -d <device_id>`
@@ -92,10 +100,27 @@ Administrative dashboard for cooperative management.
 ## Architecture
 
 Both projects follow **GetX** modular architecture:
+
 - **Routing**: Centralized path-based routing
 - **State Management**: GetView + GetxController
 - **Bindings**: Dependency injection via GetX bindings
 
-## License
+## Support Us
 
-<a href="https://www.buymeacoffee.com/omniversify" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<p align="center">
+  <a href="https://ko-fi.com/omniversify">
+    <img src="https://raw.githubusercontent.com/phaylali/Omniversify/main/public/images/kofi_logo.svg" width="200" alt="Ko-Fi" />
+  </a>
+</p>
+
+<p align="center">
+  <strong>Keep us going</strong>
+</p>
+
+---
+
+&copy; 2026 [Omniversify](https://omniversify.com). All rights reserved.
+
+_Made by Moroccans, for the Omniverse_
+
+[![ReadMeSupportPalestine](https://raw.githubusercontent.com/Safouene1/support-palestine-banner/master/banner-project.svg)](https://donate.unrwa.org/-landing-page/en_EN)
