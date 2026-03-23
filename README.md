@@ -1,22 +1,101 @@
-# albourane ألبوران
+# Albourane (البوران)
 
+A complete maritime management ecosystem for the Artisanal Fishing Cooperative Albourane Ouedlaou.
 
-Who are we?
-The Artisanal Fishing Cooperative Albourane Ouedlaou, which began its activity with the opening of the equipped disembarkation point Ouedlaou, its head office.
-The cooperative seeks to develop the traditional maritime fishing sector in Ouedlaou and improve the working conditions of seamen in the region, as well as to create new markets and opportunities to increase their income and regularize their status, as well as training. new seamen to fill the shortage of manpower in this field and many other services and activities.
+## About
 
-من نحن؟
-تعاونية ألبوران للصيد البحري التقليدي بوادلو، بدأت نشاطها مع افتتاح نقطة التفريغ المجهزة بوادلو والتي تتخذها مقرا لها
-تسعى التعاونية الى تطوير قطاع الصيد البحري التقليدي بوادلو وتحسين ظروف عمل بحارة المنطقة وكذا إيجاد أسواق جديدة و فرص للرفع من مدخولهم و تسوية أوضاعهم، فضلا عن تكوين بحارة جدد لسد الخصاص الحاصل في هذا المجال و عدة خدمات و أنشطة أخرى
+**Albourane** is a multi-application platform designed to support traditional maritime fishing operations in Ouedlaou, Morocco. It provides tools for boat management, seamen tracking, financial declarations, and reporting.
 
-Qui Sommes-Nous?
-La Coopérative Albourane de Pêche Artisanale Ouedlaou, qui a commencé son activité avec l'ouverture du point de débarquement équipé Ouedlaou, sa siège social.
-La coopérative cherche à développer le secteur traditionnel de la pêche maritime à Ouedlaou et à améliorer les conditions de travail des marins de la région, ainsi qu'à créer de nouveaux marchés et opportunités pour augmenter leurs revenus et régulariser leur statut, ainsi que la formation de nouveaux marins pour combler la pénurie de main-d'œuvre dans ce domaine et de nombreux autres services et activités.
+## Projects
 
-Quienes somos?
-La Cooperativa de Pesca Artesanal Albourane Ouedlaou, que inició su actividad con la apertura del punto de desembarque equipado Ouedlaou, su sede.
-La cooperativa busca desarrollar el sector de la pesca marítima tradicional en Ouedlaou y mejorar las condiciones laborales de la gente de mar en la región, así como crear nuevos mercados y oportunidades para aumentar sus ingresos y regularizar su estatus, así como capacitar a nuevos marinos para cubrir el escasez de mano de obra en este campo y muchos otros servicios y actividades.
+This repository contains two Flutter applications:
 
+### 1. Albourane (Client App)
+A cross-platform application for maritime tracking and information.
 
+**Platforms**: Web, Linux Desktop, Android
+
+**Features**:
+- Maritime tracking and boat information management
+- Real-time connectivity monitoring
+- PDF generation and document printing
+- Arabic language support with Tajawal font
+- Firebase backend (Auth & Firestore)
+
+**Tech Stack**:
+- Flutter (v3.12+)
+- GetX (State Management)
+- Firebase (Auth, Firestore)
+- `pdf` & `printing` packages
+- `cross_connectivity`
+
+### 2. Albourane Admin
+Administrative dashboard for cooperative management.
+
+**Platforms**: Web, Android, Linux Desktop
+
+**Features**:
+- Boat management (create, edit, track)
+- Seamen directory (maritime personnel profiles)
+- Financial declarations (CNSS/financial reports)
+- Multi-platform support with modernized UI
+
+**Tech Stack**:
+- Flutter
+- GetX
+- Firebase (Firestore, Authentication)
+- `intl` for internationalization
+- `printing` & `pdf` for reports
+
+## Getting Started
+
+### Prerequisites
+
+- Flutter SDK (latest stable)
+- Firebase CLI
+
+### Installation
+
+1. Clone the repository
+2. Navigate to the desired project:
+   - `cd albourane` (client app)
+   - `cd admin` (admin dashboard)
+3. Install dependencies:
+   ```bash
+   flutter pub get
+   ```
+4. Configure Firebase:
+   ```bash
+   flutterfire configure
+   ```
+
+### Running the App
+
+**Client App (albourane)**:
+- Web: `flutter run -d chrome`
+- Linux: `flutter run -d linux`
+- Android: `flutter run -d <device_id>`
+
+**Admin Dashboard**:
+- Web: `flutter run -d chrome`
+- Linux: `flutter run -d linux`
+- Android: `flutter run -d <device_id>`
+
+### Firebase Configuration
+
+- **Android**: Place `google-services.json` in `android/app/` directory
+- **Web**: Configure Firebase via initialization flow
+
+> [!WARNING]
+> The Android build will fail without `google-services.json`.
+
+## Architecture
+
+Both projects follow **GetX** modular architecture:
+- **Routing**: Centralized path-based routing
+- **State Management**: GetView + GetxController
+- **Bindings**: Dependency injection via GetX bindings
+
+## License
 
 <a href="https://www.buymeacoffee.com/omniversify" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
